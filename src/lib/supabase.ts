@@ -46,81 +46,39 @@ export type Database = {
       applications: {
         Row: {
           id: string
+          application_id: string
           user_id: string
           position_title: string
-          position_type: 'job' | 'internship'
-          application_data: any
-          status: 'pending' | 'reviewed' | 'accepted' | 'rejected'
+          applicant_details: any
+          resume_url: string | null
+          status: 'Submitted' | 'Reviewed' | 'Accepted' | 'Rejected'
           created_at: string
           updated_at: string
         }
         Insert: {
           id?: string
+          application_id?: string
           user_id: string
           position_title: string
-          position_type: 'job' | 'internship'
-          application_data: any
-          status?: 'pending' | 'reviewed' | 'accepted' | 'rejected'
+          applicant_details?: any
+          resume_url?: string | null
+          status?: 'Submitted' | 'Reviewed' | 'Accepted' | 'Rejected'
           created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
+          application_id?: string
           user_id?: string
           position_title?: string
-          position_type?: 'job' | 'internship'
-          application_data?: any
-          status?: 'pending' | 'reviewed' | 'accepted' | 'rejected'
+          applicant_details?: any
+          resume_url?: string | null
+          status?: 'Submitted' | 'Reviewed' | 'Accepted' | 'Rejected'
           created_at?: string
           updated_at?: string
         }
       }
-      blog_likes: {
-        Row: {
-          id: string
-          user_id: string
-          blog_id: string
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          user_id: string
-          blog_id: string
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          blog_id?: string
-          created_at?: string
-        }
-      }
-      blog_comments: {
-        Row: {
-          id: string
-          user_id: string
-          blog_id: string
-          content: string
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          user_id: string
-          blog_id: string
-          content: string
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          user_id?: string
-          blog_id?: string
-          content?: string
-          created_at?: string
-          updated_at?: string
-        }
-      }
+
       user_activities: {
         Row: {
           id: string

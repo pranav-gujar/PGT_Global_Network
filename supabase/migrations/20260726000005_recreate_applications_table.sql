@@ -1,0 +1,10 @@
+-- SUPERSEDED MIGRATION
+-- 
+-- The original code in this migration drop-and-recreated the applications table
+-- which could delete production data. 
+--
+-- This file has been neutralized to prevent data loss.
+-- The schema changes have been safely applied in non-destructive migration:
+-- 20260726000008_non_destructive_applications_update.sql
+--
+-- DO NOT add DROP TABLE statements to this file.

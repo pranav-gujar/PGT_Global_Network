@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import AuthModal from './AuthModal'
 
 interface ProtectedActionProps {
   children: React.ReactNode
@@ -16,7 +16,8 @@ const ProtectedAction: React.FC<ProtectedActionProps> = ({
   onAction 
 }) => {
   const { user, loading } = useAuth()
-  const [showAuthModal, setShowAuthModal] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const handleClick = (e: React.MouseEvent) => {
     if (loading) {
@@ -26,7 +27,7 @@ const ProtectedAction: React.FC<ProtectedActionProps> = ({
 
     if (requireAuth && !user) {
       e.preventDefault()
-      setShowAuthModal(true)
+      navigate(`/signin?redirect=${encodeURIComponent(location.pathname + location.search)}`)
     } else if (onAction) {
       onAction()
     }
@@ -35,23 +36,18 @@ const ProtectedAction: React.FC<ProtectedActionProps> = ({
   // While loading, keep UI stable (don’t flash fallback)
   if (loading) {
     return (
-      <div className="opacity-50 cursor-not-allowed">
+      <div className="opacity-50 cursor-not-allowed w-full">
         {children}
       </div>
     )
   }
 
   return (
-    <>
-      <div onClick={handleClick}>
-        {requireAuth && !user && fallback ? fallback : children}
-      </div>
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-      />
-    </>
+    <div onClick={handleClick} className="w-full">
+      {requireAuth && !user && fallback ? fallback : children}
+    </div>
   )
 }
 
 export default ProtectedAction
+

@@ -185,100 +185,140 @@ const Timeline = () => {
   //   }
   // ];
 
-   if (loading) {
+  if (loading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <div className="pt-16">
+    <div className="pt-28 bg-slate-50/30 overflow-x-hidden">
+      <style>
+        {`
+          @keyframes reveal-up {
+            0% { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+          }
+          .animate-reveal-up {
+            animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+          }
+        `}
+      </style>
+
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-  <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 overflow-hidden">
-    <HeroBackground />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Journey</h1>
-      <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
-        Six years of growth, transformation, and impact - from a vision to a global network
-      </p>
-    </div>
-  </section>
-</AnimatedCard>
+        <section className="relative overflow-hidden py-24 sm:py-32">
+          <HeroBackground />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            {/* Tagline Badge */}
+            <div 
+              className="inline-flex items-center gap-2 bg-white/95 border border-slate-200/60 px-4 py-1.5 rounded-full shadow-[0_2px_8px_rgba(99,102,241,0.03)] mb-8 animate-reveal-up backdrop-blur-md hover:shadow-[0_4px_16px_rgba(99,102,241,0.1)] hover:border-indigo-400/40 hover:-translate-y-[1px] transform transition-all duration-300 pointer-events-auto cursor-pointer"
+              style={{ animationDelay: '100ms' }}
+            >
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+              </span>
+              <span className="text-xs font-bold text-slate-700 tracking-wide uppercase">PGT Global Milestones</span>
+            </div>
 
+            <h1 
+              className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.08] mb-6 font-sans max-w-4xl mx-auto animate-reveal-up"
+              style={{ animationDelay: '250ms' }}
+            >
+              Our Journey
+            </h1>
+            <p 
+              className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal animate-reveal-up"
+              style={{ animationDelay: '400ms' }}
+            >
+              Six years of growth, transformation, and impact - from a vision to a global network
+            </p>
+          </div>
+        </section>
+      </AnimatedCard>
 
       {/* Timeline */}
-      <section className="py-20">
+      <section className="py-24 bg-white border-b border-slate-100 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-24">
+              <span className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">history</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4 tracking-tight">
                 Timeline of Transformation
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
                 Every milestone in our journey represents lives transformed and communities empowered
               </p>
             </div>
           </AnimatedCard>
 
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-200 hidden lg:block"></div>
+            {/* Visual Gradient Connector Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-gradient-to-b from-indigo-500/20 via-blue-500/20 to-purple-500/10 hidden lg:block"></div>
 
-            <div className="space-y-12">
+            <div className="space-y-20 relative">
               {timelineEvents.map((event, index) => (
-                <AnimatedCard key={event.year} animation="slideUp" delay={index * 200}>
-                  <div className={`flex flex-col lg:flex-row items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8`}>
-                    <div className="flex-1 lg:max-w-md">
-                      <div className={`bg-white p-8 rounded-xl shadow-lg ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
-                        <div className="flex items-center space-x-4 mb-4">
-                          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                            <event.icon className="h-6 w-6 text-blue-600" />
+                <AnimatedCard key={event.year} animation="slideUp" delay={index * 150}>
+                  <div className={`flex flex-col lg:flex-row items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 relative group`}>
+                    
+                    {/* Milestone Card */}
+                    <div className="flex-1 lg:max-w-xl w-full">
+                      <div className={`relative overflow-hidden bg-white/60 border border-slate-200/50 backdrop-blur-sm p-8 rounded-2xl shadow-xl shadow-slate-100/30 hover:border-indigo-500/20 hover:shadow-2xl hover:shadow-indigo-500/[0.02] hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer ${index % 2 === 0 ? 'lg:mr-10' : 'lg:ml-10'}`}>
+                        {/* Subtle theme radial glow */}
+                        <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.03] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                        <div className="flex items-center space-x-4 mb-6 relative z-10">
+                          <div className="w-12 h-12 bg-slate-50 flex items-center justify-center rounded-xl text-indigo-600 group-hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(99,102,241,0.04)]">
+                            <event.icon className="h-6 w-6" />
                           </div>
                           <div>
-                            <h3 className="text-2xl font-bold text-gray-900">{event.year}</h3>
-                            <h4 className="text-lg font-semibold text-blue-600">{event.title}</h4>
+                            <span className="text-xs font-bold text-indigo-600 bg-indigo-50/70 border border-indigo-100/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">{event.year}</span>
+                            <h4 className="text-xl font-bold text-slate-900 mt-1">{event.title}</h4>
                           </div>
                         </div>
 
-                        <p className="text-gray-700 mb-6 leading-relaxed">{event.description}</p>
+                        <p className="text-slate-600 text-sm leading-relaxed mb-6 relative z-10">{event.description}</p>
 
-                        <div className="space-y-2 mb-6">
+                        <div className="space-y-3 mb-8 relative z-10">
                           {event.achievements.map((achievement, achievementIndex) => (
-                            <div key={achievementIndex} className="flex items-start space-x-2">
-                              <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                              <span className="text-gray-700 text-sm">{achievement}</span>
+                            <div key={achievementIndex} className="flex items-start space-x-2.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 mt-2 flex-shrink-0" />
+                              <span className="text-slate-600 text-sm leading-relaxed">{achievement}</span>
                             </div>
                           ))}
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200">
+                        {/* Metric Subgrid Dashboard */}
+                        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100 relative z-10 bg-slate-50/50 p-4 rounded-xl group-hover:bg-white group-hover:border-slate-200/50 transition-all duration-300">
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-blue-600">
+                            <div className="text-lg sm:text-xl font-black text-indigo-600">
                               <CountUpNumber end={event.stats.participants} suffix="+" duration={2000} />
                             </div>
-                            <div className="text-xs text-gray-500">Participants</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase mt-1">Participants</div>
                           </div>
-                          <div className="text-center">
-                            <div className="text-2xl font-bold text-green-600">
+                          <div className="text-center border-x border-slate-200/60">
+                            <div className="text-lg sm:text-xl font-black text-emerald-600">
                               <CountUpNumber end={event.stats.programs} duration={2000} />
                             </div>
-                            <div className="text-xs text-gray-500">Programs</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase mt-1">Programs</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-2xl font-bold text-purple-600">
+                            <div className="text-lg sm:text-xl font-black text-purple-600">
                               <CountUpNumber end={event.stats.successStories} suffix="+" duration={2000} />
                             </div>
-                            <div className="text-xs text-gray-500">Success Stories</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase mt-1">Stories</div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="relative">
-                      <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
-                        <span className="text-white font-bold text-lg">{event.year.slice(-2)}</span>
+                    {/* Timeline Node Ring */}
+                    <div className="relative z-20">
+                      <div className="w-14 h-14 bg-white border border-slate-200 shadow-[0_4px_16px_rgba(99,102,241,0.06)] rounded-full flex items-center justify-center lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 group-hover:scale-110 group-hover:border-indigo-400 transition-all duration-300 select-none">
+                        <span className="text-slate-800 font-extrabold text-sm font-mono">{event.year}</span>
                       </div>
                     </div>
 
-                    <div className="flex-1 lg:max-w-md hidden lg:block"></div>
+                    <div className="flex-1 lg:max-w-xl hidden lg:block"></div>
                   </div>
                 </AnimatedCard>
               ))}
@@ -288,41 +328,47 @@ const Timeline = () => {
       </section>
 
       {/* Future Vision */}
-<AnimatedCard animation="fadeIn">
-  <section className="relative py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white overflow-hidden">
-    <Background />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12">Looking Ahead</h2>
+      <AnimatedCard animation="fadeIn">
+        <section className="relative py-28 bg-slate-950 text-white overflow-hidden z-10">
+          <Background />
+          
+          {/* Spotlight glowing gradients */}
+          <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-indigo-500/10 blur-[130px] pointer-events-none"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {/* Impact Target */}
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md">
-          <div className="text-4xl font-bold text-white mb-2">
-            <CountUpNumber end={100000} suffix="+" duration={3000} />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-12 tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">Looking Ahead</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {/* Impact Target */}
+              <div className="relative bg-white/[0.01] border border-white/[0.06] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.03] hover:border-indigo-500/35 hover:shadow-[0_20px_40px_rgba(99,102,241,0.06)] hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer text-center">
+                <div className="absolute -inset-[1px] bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl pointer-events-none" />
+                <div className="text-4xl sm:text-5xl font-black text-indigo-400 mb-2 tracking-tight">
+                  <CountUpNumber end={100000} suffix="+" duration={3000} />
+                </div>
+                <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-2">Lives to Impact</p>
+              </div>
+
+              {/* Countries to Reach */}
+              <div className="relative bg-white/[0.01] border border-white/[0.06] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.03] hover:border-emerald-500/35 hover:shadow-[0_20px_40px_rgba(16,185,129,0.06)] hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer text-center">
+                <div className="absolute -inset-[1px] bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl pointer-events-none" />
+                <div className="text-4xl sm:text-5xl font-black text-emerald-400 mb-2 tracking-tight">
+                  <CountUpNumber end={100} suffix="+" duration={3000} />
+                </div>
+                <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-2">Countries to Reach</p>
+              </div>
+
+              {/* Target Year */}
+              <div className="relative bg-white/[0.01] border border-white/[0.06] backdrop-blur-md p-8 rounded-2xl hover:bg-white/[0.03] hover:border-purple-500/35 hover:shadow-[0_20px_40px_rgba(139,92,246,0.06)] hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer text-center">
+                <div className="absolute -inset-[1px] bg-gradient-to-br from-white/[0.04] to-transparent rounded-2xl pointer-events-none" />
+                <div className="text-4xl sm:text-5xl font-black text-purple-400 mb-2 tracking-tight">
+                  <CountUpNumber end={2030} duration={3000} />
+                </div>
+                <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-2">Target Year</p>
+              </div>
+            </div>
           </div>
-          <p className="text-lg text-green-100">Lives to Impact</p>
-        </div>
-
-        {/* Countries to Reach */}
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md">
-          <div className="text-4xl font-bold text-white mb-2">
-            <CountUpNumber end={100} suffix="+" duration={3000} />
-          </div>
-          <p className="text-lg text-green-100">Countries to Reach</p>
-        </div>
-
-        {/* Target Year */}
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-lg shadow-md">
-          <div className="text-4xl font-bold text-white mb-2">
-            <CountUpNumber end={2030} duration={3000} />
-          </div>
-          <p className="text-lg text-green-100">Target Year</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</AnimatedCard>
-
+        </section>
+      </AnimatedCard>
     </div>
   );
 };

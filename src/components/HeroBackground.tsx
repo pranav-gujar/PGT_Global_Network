@@ -2,42 +2,71 @@ import React from 'react';
 
 const HeroBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 animate-gradient-flow"></div>
-      
-      {/* Floating particles */}
-      <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white/30 rounded-full animate-float-hero"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 20}s`,
-              animationDuration: `${10 + Math.random() * 15}s`
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Wave animation */}
-      {/* Single wave at bottom */}
-<div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
-  <svg
-    className="relative w-[200%] h-24 animate-wave"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1440 320"
-    preserveAspectRatio="none"
-  >
-    <path
-      fill="rgba(255,255,255,0.2)"   // 75% opacity, more visible
-      d="M0,192L30,186.7C60,181,120,171,180,181.3C240,192,300,224,360,240C420,256,480,256,540,234.7C600,213,660,171,720,154.7C780,139,840,149,900,170.7C960,192,1020,224,1080,229.3C1140,235,1200,213,1260,192C1320,171,1380,149,1410,138.7L1440,128L1440,320L0,320Z"
-    />
-  </svg>
-</div>
+    <div className="absolute inset-0 overflow-hidden bg-slate-50/50 pointer-events-none">
+      {/* Aurora Nodes - Shifting soft color glows */}
+      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[70%] rounded-full bg-indigo-200/20 blur-[120px] animate-pulse-slow"></div>
+      <div className="absolute top-[10%] right-[-10%] w-[50%] h-[60%] rounded-full bg-blue-200/20 blur-[100px] animate-pulse-slow" style={{ animationDelay: '2.5s' }}></div>
+      <div className="absolute bottom-[-10%] left-[20%] w-[55%] h-[50%] rounded-full bg-purple-200/15 blur-[110px] animate-pulse-slow" style={{ animationDelay: '5s' }}></div>
 
+      {/* Vector Grid Mesh Overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #000 1px, transparent 1px),
+            linear-gradient(to bottom, #000 1px, transparent 1px)
+          `,
+          backgroundSize: '56px 56px',
+        }}
+      ></div>
+
+      {/* Abstract Concentric Glass Rings (Network Blueprint) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] rounded-full border border-indigo-500/[0.04] animate-spin-slow pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full border border-dashed border-blue-500/[0.03] animate-spin-reverse pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[960px] h-[960px] rounded-full border border-indigo-500/[0.02] animate-spin-slow pointer-events-none" style={{ animationDuration: '60s' }}></div>
+
+      {/* Radial Gradient Mask to fade grid at the edges */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#f8fafc_95%)] opacity-85"></div>
+      
+      {/* Shimmer line effect (Linear/Stripe style) */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent animate-shimmer-line"></div>
+
+      {/* Bottom fade mask to transition smoothly to page body */}
+      <div className="absolute bottom-0 left-0 right-0 h-42 bg-gradient-to-t from-white to-transparent"></div>
+
+      <style>
+        {`
+          @keyframes pulse-slow {
+            0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.8; }
+            33% { transform: scale(1.08) translate(20px, -15px); opacity: 1; }
+            66% { transform: scale(0.92) translate(-15px, 10px); opacity: 0.7; }
+          }
+          @keyframes shimmer-line {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          @keyframes spin-slow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+          }
+          @keyframes spin-reverse {
+            from { transform: translate(-50%, -50%) rotate(360deg); }
+            to { transform: translate(-50%, -50%) rotate(0deg); }
+          }
+          .animate-pulse-slow {
+            animation: pulse-slow 24s ease-in-out infinite;
+          }
+          .animate-shimmer-line {
+            animation: shimmer-line 9s linear infinite;
+          }
+          .animate-spin-slow {
+            animation: spin-slow 40s linear infinite;
+          }
+          .animate-spin-reverse {
+            animation: spin-reverse 50s linear infinite;
+          }
+        `}
+      </style>
     </div>
   );
 };

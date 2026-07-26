@@ -1,8 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Users, Clock, Globe, Target, CheckCircle, Star } from 'lucide-react';
+import { ArrowLeft, Users, Clock, Globe, Target, CheckCircle, Star, Sparkles } from 'lucide-react';
 import AnimatedCard from '../components/AnimatedCard';
 import CountUpNumber from '../components/CountUpNumber';
+import Background from '../components/Background';
+import HeroBackground from '../components/HeroBackground';
 
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
@@ -302,99 +304,154 @@ const ProgramDetail = () => {
     }
 
   return (
-    <div className="pt-16 min-h-screen bg-gray-50">
+    <div className="pt-28 bg-slate-50/30 overflow-x-hidden min-h-screen">
+      <style>
+        {`
+          @keyframes reveal-up {
+            0% { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+          }
+          .animate-reveal-up {
+            animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+          }
+        `}
+      </style>
+
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
-        <section className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <img
-            src={program.image}
-            alt={program.name}
-            className="w-full h-full object-cover mix-blend-overlay"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white max-w-4xl px-4">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
-                {program.name}
-              </h1>
-              <p className="text-xl md:text-2xl text-blue-100 mb-6">
-                {program.fullName}
-              </p>
-              <p className="text-lg text-blue-100 max-w-2xl mx-auto">
-                {program.description}
-              </p>
+        <section className="relative overflow-hidden py-20 sm:py-28 border-b border-slate-100">
+          <HeroBackground />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              
+              {/* Left Column Content */}
+              <div className="lg:col-span-7 text-left">
+                {/* Tagline Badge */}
+                <div 
+                  className="inline-flex items-center gap-2 bg-white/95 border border-slate-200/60 px-4 py-1.5 rounded-full shadow-[0_2px_8px_rgba(99,102,241,0.03)] mb-6 animate-reveal-up backdrop-blur-md hover:shadow-[0_4px_16px_rgba(99,102,241,0.1)] hover:border-indigo-400/40 hover:-translate-y-[1px] transform transition-all duration-300 pointer-events-auto cursor-pointer"
+                  style={{ animationDelay: '100ms' }}
+                >
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                  </span>
+                  <span className="text-xs font-bold text-slate-700 tracking-wide uppercase">PGT Program Highlight</span>
+                </div>
+
+                <h1 
+                  className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-4 font-sans animate-reveal-up"
+                  style={{ animationDelay: '250ms' }}
+                >
+                  {program.name}
+                </h1>
+                        <p 
+                  className="text-xl font-semibold text-indigo-600 mb-6 animate-reveal-up"
+                  style={{ animationDelay: '350ms' }}
+                >
+                  {program.fullName}
+                </p>
+
+                <p 
+                  className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8 max-w-2xl animate-reveal-up"
+                  style={{ animationDelay: '450ms' }}
+                >
+                  {program.description}
+                </p>
+
+                <div className="flex flex-wrap gap-4 animate-reveal-up" style={{ animationDelay: '550ms' }}>
+                  <a
+                    href="#details"
+                    className="bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 hover:shadow-indigo-700/30 px-6 py-2.5 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5"
+                  >
+                    Explore Overview
+                  </a>
+                  <Link
+                    to="/programs"
+                    className="group inline-flex items-center justify-center bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-800 px-6 py-2.5 rounded-xl font-bold transition-all duration-300 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:-translate-y-0.5"
+                  >
+                    All Programs
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column Logo Widget */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div 
+                  className="relative w-72 sm:w-80 h-72 sm:h-80 bg-white/70 border border-slate-200/50 backdrop-blur-md rounded-3xl shadow-2xl flex items-center justify-center group hover:scale-[1.02] transform transition-transform duration-500 animate-reveal-up cursor-pointer overflow-hidden"
+                  style={{ animationDelay: '300ms' }}
+                >
+                  <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-indigo-500/[0.03] blur-[60px] pointer-events-none"></div>
+                  
+                  {/* Subtle Orbit Line */}
+                  <div className="absolute w-60 h-60 border border-dashed border-slate-200/60 rounded-full animate-[spin_30s_linear_infinite]" />
+
+                  <img
+                    src={program.image}
+                    alt={program.name}
+                    className="w-40 h-40 object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 filter drop-shadow-lg"
+                  />
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
       </AnimatedCard>
 
-      {/* Back Button */}
-      <section className="py-8">
+      {/* Back Button Navigation Bar */}
+      <section className="py-6 border-b border-slate-100 bg-white/40 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             to="/programs"
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+            className="group inline-flex items-center text-slate-500 hover:text-indigo-600 text-sm font-semibold tracking-wide transition-colors"
           >
-            <ArrowLeft className="h-4 w-4 mr-2" />
+            <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
             Back to Programs
           </Link>
         </div>
       </section>
 
       {/* Stats Section */}
-            {/* Stats Section */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white relative z-10 border-b border-slate-100" id="details">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Duration */}
             <AnimatedCard animation="slideUp" delay={0}>
-              <div>
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-8 w-8 text-blue-600" />
+              <div className="bg-slate-50/50 border border-slate-100 p-6 rounded-2xl flex items-center gap-5 hover:bg-white hover:shadow-xl hover:shadow-slate-100/50 hover:border-indigo-500/20 hover:-translate-y-0.5 transform transition-all duration-300 group cursor-pointer">
+                <div className="w-12 h-12 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 group-hover:scale-105 transition-transform duration-300">
+                  <Clock className="h-5 w-5" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900 mb-2">
-                  {program.duration}
+                <div>
+                  <div className="text-sm font-bold text-slate-400 font-mono tracking-wider uppercase">Duration</div>
+                  <div className="text-xl font-bold text-slate-800 mt-1">{program.duration}</div>
                 </div>
-                <div className="text-gray-600">Duration</div>
               </div>
             </AnimatedCard>
 
             {/* Participants */}
-            <AnimatedCard animation="slideUp" delay={200}>
-              <div>
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-green-600" />
+            <AnimatedCard animation="slideUp" delay={150}>
+              <div className="bg-slate-50/50 border border-slate-100 p-6 rounded-2xl flex items-center gap-5 hover:bg-white hover:shadow-xl hover:shadow-slate-100/50 hover:border-indigo-500/20 hover:-translate-y-0.5 transform transition-all duration-300 group cursor-pointer">
+                <div className="w-12 h-12 bg-green-50 border border-green-100 rounded-xl flex items-center justify-center text-green-600 group-hover:scale-105 transition-transform duration-300">
+                  <Users className="h-5 w-5" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900 mb-2">
-                  {program.participants}
+                <div>
+                  <div className="text-sm font-bold text-slate-400 font-mono tracking-wider uppercase">Lives Impacted</div>
+                  <div className="text-xl font-bold text-slate-800 mt-1">{program.participants}</div>
                 </div>
-                <div className="text-gray-600">Lives Impacted</div>
               </div>
             </AnimatedCard>
-
-            {/* <AnimatedCard animation="slideUp" delay={400}>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Globe className="h-8 w-8 text-purple-600" />
-                </div>
-                <div className="text-2xl font-bold text-gray-900 mb-2">
-                  <CountUpNumber end={25} duration={2000} />
-                </div>
-                <div className="text-gray-600">Countries</div>
-              </div>
-            </AnimatedCard> */}
 
             {/* Success Rate */}
-            <AnimatedCard animation="slideUp" delay={400}>
-              <div>
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-8 w-8 text-orange-600" />
+            <AnimatedCard animation="slideUp" delay={300}>
+              <div className="bg-slate-50/50 border border-slate-100 p-6 rounded-2xl flex items-center gap-5 hover:bg-white hover:shadow-xl hover:shadow-slate-100/50 hover:border-indigo-500/20 hover:-translate-y-0.5 transform transition-all duration-300 group cursor-pointer">
+                <div className="w-12 h-12 bg-orange-50 border border-orange-100 rounded-xl flex items-center justify-center text-orange-600 group-hover:scale-105 transition-transform duration-300">
+                  <Target className="h-5 w-5" />
                 </div>
-                <div className="text-2xl font-bold text-gray-900 mb-2">
-                  {program.successRate}
+                <div>
+                  <div className="text-sm font-bold text-slate-400 font-mono tracking-wider uppercase">Success Rate</div>
+                  <div className="text-xl font-bold text-slate-800 mt-1">{program.successRate}</div>
                 </div>
-                <div className="text-gray-600">Success Rate</div>
               </div>
             </AnimatedCard>
 
@@ -402,78 +459,104 @@ const ProgramDetail = () => {
         </div>
       </section>
 
-
-      {/* Program Overview */}
-      <section className="py-16">
+      {/* Program Overview & Bento Details */}
+      <section className="py-24 bg-slate-50/10 border-b border-slate-100 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            {/* Left Box: Overview & Objectives */}
             <AnimatedCard animation="slideLeft">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Program Overview</h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              <div className="bg-white border border-slate-200/50 p-8 rounded-2xl shadow-xl shadow-slate-100/30">
+                <div className="flex items-center gap-3.5 mb-6">
+                  <span className="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
+                  <h2 className="text-2xl font-extrabold text-slate-800 tracking-tight">Program Overview</h2>
+                </div>
+                
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8">
                   {program.overview}
                 </p>
-                
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Learning Objectives</h3>
-                <ul className="space-y-3">
+
+                <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                  <Sparkles className="h-4.5 w-4.5 text-indigo-600" />
+                  Learning Objectives
+                </h3>
+                <ul className="space-y-3.5 pl-1">
                   {program.objectives.map((objective: string, index: number) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{objective}</span>
+                    <li key={index} className="flex items-start gap-3 group">
+                      <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0 group-hover:scale-105 transition-transform" />
+                      <span className="text-slate-600 text-sm sm:text-base leading-relaxed">{objective}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </AnimatedCard>
 
+            {/* Right Box: Requirements & Outcomes */}
             <AnimatedCard animation="slideRight">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Requirements</h2>
-                <ul className="space-y-3 mb-8">
+              <div className="bg-white border border-slate-200/50 p-8 rounded-2xl shadow-xl shadow-slate-100/30">
+                <div className="flex items-center gap-3.5 mb-6">
+                  <span className="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
+                  <h2 className="text-2xl font-extrabold text-slate-800 tracking-tight">Requirements</h2>
+                </div>
+
+                <ul className="space-y-3.5 mb-8 pl-1">
                   {program.requirements.map((requirement: string, index: number) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-gray-700">{requirement}</span>
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mt-2.5 flex-shrink-0"></div>
+                      <span className="text-slate-600 text-sm sm:text-base leading-relaxed">{requirement}</span>
                     </li>
                   ))}
                 </ul>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Expected Outcomes</h3>
-                <ul className="space-y-3">
+                <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                  <Star className="h-4.5 w-4.5 text-yellow-500" />
+                  Expected Outcomes
+                </h3>
+                <ul className="space-y-3.5 pl-1">
                   {program.outcomes.map((outcome: string, index: number) => (
-                    <li key={index} className="flex items-start space-x-3">
-                      <Star className="h-5 w-5 text-yellow-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{outcome}</span>
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full mt-2.5 flex-shrink-0"></div>
+                      <span className="text-slate-605 text-sm sm:text-base leading-relaxed">{outcome}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </AnimatedCard>
+
           </div>
         </div>
       </section>
 
-      {/* Curriculum */}
-      <section className="py-16 bg-white">
+      {/* Curriculum Section */}
+      <section className="py-24 bg-white relative z-10 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Curriculum</h2>
-              <p className="text-xl text-gray-600">Comprehensive learning modules designed for maximum impact</p>
+            <div className="text-center mb-16">
+              <span className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">Structure</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4 tracking-tight">Curriculum</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                Comprehensive learning modules designed for maximum impact
+              </p>
             </div>
           </AnimatedCard>
 
-          <div className="space-y-6">
+          <div className="space-y-8 max-w-4xl mx-auto">
             {program.curriculum.map((module: any, index: number) => (
-              <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <h3 className="text-xl font-bold text-gray-900">{module.module}</h3>
-                    <span className="text-blue-600 font-medium">{module.duration}</span>
+              <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
+                <div className="bg-slate-50/40 border border-slate-150/60 rounded-2xl p-8 hover:bg-white hover:shadow-2xl hover:shadow-slate-100/50 hover:border-indigo-500/20 transform transition-all duration-300 group cursor-pointer relative overflow-hidden">
+                  <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.01] to-transparent rounded-2xl pointer-events-none" />
+                  
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 relative z-10">
+                    <h3 className="text-xl font-bold text-slate-800">{module.module}</h3>
+                    <span className="inline-flex bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold px-3 py-1 rounded-full">{module.duration}</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 relative z-10">
                     {module.topics.map((topic: string, topicIndex: number) => (
-                      <div key={topicIndex} className="bg-white px-3 py-2 rounded-lg text-sm text-gray-700">
+                      <div 
+                        key={topicIndex} 
+                        className="bg-white border border-slate-100/60 px-4 py-2.5 rounded-xl text-xs sm:text-sm text-slate-600 font-medium hover:border-indigo-500/20 hover:bg-indigo-500/[0.01] transition-all duration-300"
+                      >
                         {topic}
                       </div>
                     ))}
@@ -485,73 +568,42 @@ const ProgramDetail = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      {/* <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedCard animation="slideUp">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Success Stories</h2>
-              <p className="text-xl text-gray-600">Hear from our program graduates</p>
-            </div>
-          </AnimatedCard>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {program.testimonials.map((testimonial: any, index: number) => (
-              <AnimatedCard key={index} animation="slideUp" delay={index * 200}>
-                <div className="bg-white p-8 rounded-xl shadow-lg">
-                  <div className="flex items-center space-x-4 mb-6">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{testimonial.name}</h3>
-                      <p className="text-gray-600">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <blockquote className="text-gray-700 italic leading-relaxed">
-                    "{testimonial.quote}"
-                  </blockquote>
-                </div>
-              </AnimatedCard>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <AnimatedCard animation="fadeIn">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6">
-        Ready to Transform Your Future?
-      </h2>
-      <p className="text-xl mb-8 max-w-2xl mx-auto text-blue-100">
-        Join thousands of individuals who have experienced growth through the {program.name}.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        {/* Apply Button */}
-        <a
-          href="/contact"
-          className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-        >
-          Apply Now
-        </a>
+      <AnimatedCard animation="fadeIn">
+        <section className="relative py-28 bg-slate-950 text-white overflow-hidden z-10 border-t border-white/[0.04]">
+          <Background />
+          <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-indigo-500/10 blur-[130px] pointer-events-none"></div>
 
-        {/* Free Session Button */}
-        <a
-        href="https://topmate.io/pranav_gujar/1355631?utm_source=public_profile&utm_campaign=pranav_gujar"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-flex items-center justify-center"
-        >
-          Schedule Free Session
-        </a>
-      </div>
-    </AnimatedCard>
-  </div>
-</section>
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+              Ready to Transform Your Future?
+            </h2>
+            <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-slate-400 leading-relaxed font-normal">
+              Join thousands of individuals who have experienced growth through the {program.name}.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
+              {/* Apply Button */}
+              <a
+                href="/contact"
+                className="w-48 bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 hover:shadow-indigo-700/35 px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center"
+              >
+                Apply Now
+              </a>
+
+              {/* Free Session Button */}
+              <a
+                href="https://topmate.io/pranav_gujar/1355631?utm_source=public_profile&utm_campaign=pranav_gujar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-56 border border-white/20 hover:border-white/50 text-white hover:bg-white/10 px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center"
+              >
+                Schedule Free Session
+              </a>
+            </div>
+          </div>
+        </section>
+      </AnimatedCard>
 
     </div>
   );

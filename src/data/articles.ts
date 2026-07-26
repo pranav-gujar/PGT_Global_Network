@@ -1,10 +1,18 @@
-import { BlogPost } from "../pages/Blog";
-// import LoadingSpinner from '../components/LoadingSpinner'; 
-// import { usePageLoading } from '../hooks/usePageLoading';
+export interface Article {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  category: string;
+  readTime: string;
+  image: string;
+  tags: string[];
+}
 
-
-export const blogPosts: BlogPost[] = [
-  
+export const articles: Article[] = [
   {
     id: '1',
     slug: 'transforming-youth-with-technology-learning',

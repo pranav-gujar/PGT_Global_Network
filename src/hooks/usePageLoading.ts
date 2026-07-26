@@ -17,34 +17,31 @@
 //   return loading;
 // };
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export const usePageLoading = () => {
-  const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const [loading, setLoading] = useState(true);
+  const prevPathname = useRef(location.pathname);
+
+  // Synchronously update loading state to true when location.pathname changes during render.
+  if (prevPathname.current !== location.pathname) {
+    prevPathname.current = location.pathname;
+    setLoading(true);
+  }
 
   useEffect(() => {
-    let showTimer: NodeJS.Timeout;
-    let hideTimer: NodeJS.Timeout;
-
-    // Start a timer — only show loader if page takes longer than 200ms to load
-    showTimer = setTimeout(() => {
-      setLoading(true);
-    }, 200);
-
-    // Hide loader after navigation completes (or after a max wait)
-    hideTimer = setTimeout(() => {
+    // Show loader for a fixed duration to let the page transition smoothly
+    const timer = setTimeout(() => {
       setLoading(false);
-      clearTimeout(showTimer); // Cancel showing if page loaded too fast
-    }, 2000); // max wait time (you can adjust)
+    }, 600); // 600ms transition time
 
     return () => {
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
-      setLoading(false);
+      clearTimeout(timer);
     };
   }, [location.pathname]);
 
   return loading;
 };
+
