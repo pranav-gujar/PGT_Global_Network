@@ -1,8 +1,32 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      colors: {
+        background: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--background-rgb), ${opacityValue})` : `rgb(var(--background-rgb))`,
+        foreground: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--foreground-rgb), ${opacityValue})` : `rgb(var(--foreground-rgb))`,
+        card: {
+          DEFAULT: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--card-rgb), ${opacityValue})` : `rgb(var(--card-rgb))`,
+          foreground: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--card-foreground-rgb), ${opacityValue})` : `rgb(var(--card-foreground-rgb))`,
+        },
+        popover: {
+          DEFAULT: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--popover-rgb), ${opacityValue})` : `rgb(var(--popover-rgb))`,
+          foreground: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--popover-foreground-rgb), ${opacityValue})` : `rgb(var(--popover-foreground-rgb))`,
+        },
+        muted: {
+          DEFAULT: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--muted-rgb), ${opacityValue})` : `rgb(var(--muted-rgb))`,
+          foreground: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--muted-foreground-rgb), ${opacityValue})` : `rgb(var(--muted-foreground-rgb))`,
+        },
+        accent: {
+          DEFAULT: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--accent-rgb), ${opacityValue})` : `rgb(var(--accent-rgb))`,
+          foreground: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--accent-foreground-rgb), ${opacityValue})` : `rgb(var(--accent-foreground-rgb))`,
+        },
+        border: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--border-rgb), ${opacityValue})` : `rgb(var(--border-rgb))`,
+        input: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--input-rgb), ${opacityValue})` : `rgb(var(--input-rgb))`,
+        ring: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--ring-rgb), ${opacityValue})` : `rgb(var(--ring-rgb))`,
+      },
       animation: {
         'marquee': 'marquee 25s linear infinite',
         'gradient-shift': 'gradient-shift 15s ease infinite',

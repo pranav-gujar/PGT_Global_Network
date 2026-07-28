@@ -2,19 +2,19 @@ import React from 'react';
 
 const HeroBackground = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden bg-slate-50/50 pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden bg-slate-50/50 dark:bg-slate-950/30 pointer-events-none">
       {/* Aurora Nodes - Shifting soft color glows */}
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[70%] rounded-full bg-indigo-200/20 blur-[120px] animate-pulse-slow"></div>
-      <div className="absolute top-[10%] right-[-10%] w-[50%] h-[60%] rounded-full bg-blue-200/20 blur-[100px] animate-pulse-slow" style={{ animationDelay: '2.5s' }}></div>
-      <div className="absolute bottom-[-10%] left-[20%] w-[55%] h-[50%] rounded-full bg-purple-200/15 blur-[110px] animate-pulse-slow" style={{ animationDelay: '5s' }}></div>
+      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[70%] rounded-full bg-indigo-200/20 dark:bg-indigo-900/10 blur-[120px] animate-pulse-slow"></div>
+      <div className="absolute top-[10%] right-[-10%] w-[50%] h-[60%] rounded-full bg-blue-200/20 dark:bg-blue-900/10 blur-[100px] animate-pulse-slow" style={{ animationDelay: '2.5s' }}></div>
+      <div className="absolute bottom-[-10%] left-[20%] w-[55%] h-[50%] rounded-full bg-purple-200/15 dark:bg-purple-900/8 blur-[110px] animate-pulse-slow" style={{ animationDelay: '5s' }}></div>
 
       {/* Vector Grid Mesh Overlay */}
       <div 
         className="absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #000 1px, transparent 1px),
-            linear-gradient(to bottom, #000 1px, transparent 1px)
+            linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px)
           `,
           backgroundSize: '56px 56px',
         }}
@@ -26,13 +26,13 @@ const HeroBackground = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[960px] h-[960px] rounded-full border border-indigo-500/[0.02] animate-spin-slow pointer-events-none" style={{ animationDuration: '60s' }}></div>
 
       {/* Radial Gradient Mask to fade grid at the edges */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#f8fafc_95%)] opacity-85"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--radial-fade)_95%)] opacity-85"></div>
       
       {/* Shimmer line effect (Linear/Stripe style) */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent animate-shimmer-line"></div>
 
       {/* Bottom fade mask to transition smoothly to page body */}
-      <div className="absolute bottom-0 left-0 right-0 h-42 bg-gradient-to-t from-white to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-42 bg-gradient-to-t from-background to-transparent"></div>
 
       <style>
         {`

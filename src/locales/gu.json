@@ -1,0 +1,726 @@
+{
+  "navbar": {
+    "home": "હોમ",
+    "about": "અમારા વિશે",
+    "programs": "કાર્યક્રમો",
+    "ventures": "સાહસો",
+    "timeline": "સમયરેખા",
+    "impact": "અસર",
+    "gallery": "ગૅલરી",
+    "articles": "લેખો",
+    "careers": "કારકિર્દી",
+    "contact": "સંપર્ક",
+    "more": "વધુ",
+    "signIn": "સાઇન ઇન",
+    "signOut": "સાઇન આઉટ",
+    "account": "ખાતું",
+    "dashboard": "ડૅશબોર્ડ",
+    "theme": "થીમ",
+    "language": "ભાષા",
+    "themeLight": "હળવું",
+    "themeDark": "ઘાટું",
+    "themeSystem": "સિસ્ટમ",
+    "announcementArticle": "નવો લેખ પ્રકાશિત — હમણાં વાંચો! અહીં ક્લિક કરો",
+    "announcementCareers": "ભરતી અભિયાન ચાલુ — હમણાં અરજી કરો! અહીં ક્લિક કરો"
+  },
+  "footer": {
+    "tagline": "PGT ગ્લોબલ નેટવર્ક એ વૈશ્વિક યુવા-નેતૃત્વ ધરાવતું નેટવર્ક છે.",
+    "quickLinks": "ઝડપી લિંક્સ",
+    "legal": "કાનૂની",
+    "contactUs": "અમારો સંપર્ક કરો",
+    "rights": "સર્વ અધિકાર અક્ષુણ્ણ.",
+    "privacy": "ગોપનીયતા નીતિ",
+    "terms": "નિયમો અને શરતો",
+    "faq": "વારંવાર પૂછાતા પ્રશ્નો",
+    "email": "ઈમેઇલ",
+    "phone": "ફોન"
+  },
+  "common": {
+    "loading": "લોડ થઈ રહ્યું છે...",
+    "submitting": "સબમિટ થઈ રહ્યું છે...",
+    "error": "ભૂલ",
+    "success": "સફળ",
+    "back": "પાછળ",
+    "required": "જરૂરી",
+    "learnMore": "વધુ જાણો",
+    "readMore": "વધુ વાંચો",
+    "applyNow": "હમણાં અરજી કરો",
+    "explore": "અન્વેષણ",
+    "submit": "સબમિટ",
+    "cancel": "રદ",
+    "save": "સાચવો",
+    "edit": "ફેરફાર",
+    "search": "શોધ",
+    "backToHome": "વેબસાઇટ પર પાછા જાઓ",
+    "goHome": "હોમ પેજ પર જાઓ",
+    "refresh": "પૃષ્ઠ તાજું કરો",
+    "returnHome": "ઘરે પાછા જાઓ"
+  },
+  "home": {
+    "tagline": "વૈશ્વિક ઇકોસિસ્ટમ",
+    "titlePrefix": "જીવન બદલી રહ્યા છીએ",
+    "titleGlow": "સકારાત્મકતા, વૃદ્ધિ અને પરિવર્તન",
+    "subtitle": "નવીન કાર્યક્રમો, ટકાઉ વૃદ્ધિ અને હેતુપૂર્ણ પરિવર્તન દ્વારા વ્યક્તિઓ અને સંસ્થાઓને સક્ષમ બનાવવા.",
+    "exploreBtn": "કાર્યક્રમો જુઓ",
+    "learnBtn": "વધુ જાણો",
+    "valuesTag": "ફિલોસોફી",
+    "valuesTitle": "આપણા મૂળ મૂલ્યો",
+    "valuesSubtitle": "જે સ્તંભો PGT ની વ્યાખ્યા કરે છે",
+    "impactTag": "વૈશ્વિક પહોંચ",
+    "impactTitle": "આપણો વૈશ્વિક પ્રભાવ",
+    "impactSubtitle": "સમર્પણ, નવીનીકરણ અને પરિવર્તનના સાત વર્ષ",
+    "stats": {
+      "lives": "અસ્ત્રગ્રસ્ત જીવન",
+      "stories": "સફળ કથાઓ",
+      "programs": "કાર્યક્રમો અને ઝુંબેશ",
+      "years": "ઉત્કૃષ્ટ વર્ષ"
+    },
+    "programsTag": "ઉપક્રમ",
+    "programsTitle": "આપણા કાર્યક્રમો",
+    "programsSubtitle": "કાયમી અસર ઊભી કરવા માટે ડિઝાઇન કરેલ નવીન ઉપક્રમ",
+    "insightsTag": "આંતરદૃષ્ટિ",
+    "insightsTitle": "નવીનતમ લેખ",
+    "insightsSubtitle": "અમારા નવીનતમ લેખ, સામુદાયિક પરિવર્તન અને યુવા ટેક્નોલૉજી ઉપક્રમ સાથે અપ-ટૂ-ડેટ રહો.",
+    "coreValues": {
+      "positivity": {
+        "title": "સકારાત્મકતા",
+        "description": "દરેક ઉપક્રમ સ્પષ્ટ હેતુ સાથે શરૂ થાય છે."
+      },
+      "growth": {
+        "title": "વૃદ્ધિ",
+        "description": "અમે સતત શીખવા અને નેતૃત્વ પ્રોત્સાહિત કરીએ છીએ."
+      },
+      "transformation": {
+        "title": "પરિવર્તન",
+        "description": "અમે સકારાત્મક ફેરફારને પ્રેરણા આપીએ છીએ."
+      }
+    }
+  },
+  "about": {
+    "tagline": "આપણે કોણ છીએ",
+    "title": "આગળ આવતી પેઢીને સક્ષમ બનાવવી",
+    "description": "PGT ગ્લોબલ નેટવર્ક એ વિદ્યાર્થી-નેતૃત્વ ધરાવતું આંતરરાષ્ટ્રીય નેટવર્ક છે.",
+    "leadershipTag": "નેતૃત્વ સંદેશ",
+    "leadershipTitle": "અમારા સ્થાપક તરફથી",
+    "quote": "PGT ગ્લોબલ નેટવર્ક સ્થાપ્યા ત્યારે, ઉદ્દેશ સ્પષ્ટ હતો: એક જગ્યા જ્યાં ઉદ્દેશ ક્રિયામાં ફેરવાય.",
+    "p1": "નાના વિદ્યાર્થી ઉપક્રમ તરીકે શરૂ થઈ, 15+ દેશોમાં ફેલાઈ ગઈ.",
+    "p2": "PGT આજે સશક્તિકરણ, જાગૃતિ અને ક્રિયા માટે ઊભું છે.",
+    "p3": "આ પ્રવાસનો ભાગ બનવા બદલ આભાર.",
+    "CEO": "સ્થાપક અને CEO, PGT ગ્લોબલ નેટવર્ક",
+    "gratitude": "કૃતજ્ઞતા સાથે,",
+    "philosophyTag": "ફિલોસોફી",
+    "philosophyTitle": "આપણા સ્થાપના સિદ્ધાંત",
+    "philosophySubtitle": "જે મૂળ વિશ્વાસ આપણને પ્રથમ દિવસથી માર્ગ બતાવ્યો",
+    "principles": {
+      "purpose": {
+        "title": "ઉદ્દેશ-સંચાલિત",
+        "description": "દરેક ઉપક્રમ વાસ્તવિક અસર ઊભી કરવાના ઉદ્દેશ સાથે."
+      },
+      "people": {
+        "title": "લોક-કેન્દ્રિત",
+        "description": "અમે માનવ સ્ત્રોત પર ભરોસો કરીએ છીએ."
+      },
+      "global": {
+        "title": "વૈશ્વિક દ્રષ્ટિ",
+        "description": "ખંડ-ખંડ સમુદાયોને જોડવા."
+      },
+      "excellence": {
+        "title": "ઉત્કૃષ્ટતા",
+        "description": "ઉચ્ચ ધોરણો માટે પ્રયત્ન."
+      },
+      "sustainability": {
+        "title": "ટકાઉ",
+        "description": "સ્થાયી અસર ઊભી કરવામાં અમારી સાથે જોડાઓ."
+      }
+    }
+  },
+  "programs": {
+    "tagline": "PGT ગ્લોબલ મૂળ ઉપક્રમ",
+    "title": "આપણા કાર્યક્રમો",
+    "description": "હેતુપૂર્ણ વૃદ્ધિ દ્વારા જીવન અને સમુદાય બદલવા",
+    "portfolioTag": "પોર્ટફૉલિઓ",
+    "portfolioTitle": "દરેક પ્રવાસ માટે",
+    "portfolioSubtitle": "ડિજિટલ પ્રદ્ધેય થી વ્યક્તિગત વિકાસ સુધી.",
+    "learnMore": "વધુ જાણો",
+    "timelineTitle": "મુખ્ય ઘટકો",
+    "impactTitle": "મૂળ અસર",
+    "durationTitle": "સમયગાળો",
+    "applyBtn": "હમણાં અરજી",
+    "scheduleBtn": "મફત સ્ત્ર Schedule",
+    "d3": {
+      "name": "D3 કાર્યક્રમ",
+      "fullName": "ડૅઇલી ડિસ્કવરી ડાઇજેસ્ટ",
+      "description": "દૈનિક પ્રેરણા શ્રેણી.",
+      "features": [
+        "દૈનિક Instagram & Facebook Stories",
+        "રાષ્ટ્રીય & આંતરરાષ્ટ્રીય દિવસ",
+        "ઐતિહાસિક માઇલ",
+        "મહાન વ્યક્તિઓ",
+        "વાસ્તવિક અસર",
+        "અસાધારણ"
+      ],
+      "impact": "10,000+ દૈનિક દર્શકો",
+      "duration": "સતત"
+    },
+    "voa": {
+      "name": "VoA ઉપક્રમ",
+      "fullName": "વૉઇઝ ઑફ ઍબિલિટી",
+      "description": "વ્યક્તિઓ ની કથા.",
+      "features": [
+        "જીવન પ્રવાસ",
+        "સ્ટોરીઝ",
+        "જાગૃતિ",
+        "Videos",
+        "સશક્તિકરણ",
+        "પ્રેરણા"
+      ],
+      "impact": "ઘણી કથાઓ",
+      "duration": "સતત"
+    },
+    "seminarix": {
+      "name": "Seminarix",
+      "fullName": "Seminar Series",
+      "description": "ઓન-ગ્રાઉન્ડ Seminars.",
+      "features": [
+        "પ્રેરણા",
+        "Academic",
+        "Mental Wellness",
+        "Exam Prep",
+        "School Sessions",
+        "Real Stories"
+      ],
+      "impact": "સેકડો",
+      "duration": "સતત"
+    },
+    "motivminds": {
+      "name": "MotiVMinds",
+      "fullName": "One-Minute",
+      "description": "Virtual Sessions.",
+      "features": [
+        "One-Minute Videos",
+        "Growth",
+        "Motivation",
+        "Wisdom",
+        "Short Content",
+        "Empowerment"
+      ],
+      "impact": "Engaged Community",
+      "duration": "સતત"
+    },
+    "hed": {
+      "name": "HED Campaign",
+      "fullName": "Happy Eco Diwali",
+      "description": "Annual Green Campaign.",
+      "features": [
+        "Awareness",
+        "Innovation",
+        "Tree Plantation",
+        "ENOSAVE",
+        "Community"
+      ],
+      "impact": "Thousands",
+      "duration": "Annual"
+    }
+  },
+  "timeline": {
+    "tagline": "PGT ગ્લોબલ માઇલ",
+    "title": "અમારી સફર",
+    "description": "વૃદ્ધિ, પ્રભાવ અને ૭ વર્ષ",
+    "historyTag": "ઇતિહાસ",
+    "historyTitle": "પરિવર્તન",
+    "historySubtitle": "અમારી સ્ટ્રાઈ.",
+    "milestones": {
+      "2019": {
+        "title": "ચિંગારી",
+        "description": "નાના School ઉપક્રમ.",
+        "achievements": [
+          "HED Campaign",
+          "Quizzes",
+          "Eco",
+          "PGT"
+        ]
+      },
+      "2020": {
+        "title": "પ્રારંભ",
+        "description": "Educational Activities.",
+        "achievements": [
+          "Quizzes",
+          "Eco Awareness",
+          "Students",
+          "Experiences"
+        ]
+      },
+      "2021": {
+        "title": "Action",
+        "description": "Awareness Campaigns.",
+        "achievements": [
+          "Events",
+          "HED 3rd",
+          "Discussions",
+          "Engagement"
+        ]
+      },
+      "2022": {
+        "title": "Foundation",
+        "description": "Continuity.",
+        "achievements": [
+          "HED 4th",
+          "Online Posts",
+          "Formats",
+          "Identity"
+        ]
+      },
+      "2023": {
+        "title": "Impact Prep",
+        "description": "New Formats.",
+        "achievements": [
+          "HED 5th",
+          "Mini Campaigns",
+          "Vision",
+          "Structure"
+        ]
+      },
+      "2024": {
+        "title": "Global",
+        "description": "Rebranded.",
+        "achievements": [
+          "Flagship Programs",
+          "Seminarix",
+          "Stories",
+          "10,000+"
+        ]
+      },
+      "2025": {
+        "title": "Continuing",
+        "description": "Scaling.",
+        "achievements": [
+          "HED 7th",
+          "Expanding",
+          "Collaborations",
+          "Empowerment"
+        ]
+      }
+    }
+  },
+  "ventures": {
+    "tagline": "PGT છત્ર",
+    "title": "PGT ઇકોસિસ્ટમ",
+    "description": "PGT ગ્લોબલ નેટવર્ક વૈવિધ્ય ક્ષેત્રોમાં ઉપક્રમ ઇકોસિસ્ટમ બનાવી રહ્યું છે.",
+    "heading": "આપણા ઉપક્રમ",
+    "launchingSoon": "ટૂંક સમયમાં",
+    "comingSoon": "ટૂંક",
+    "launchDate": "{launchDate} ને",
+    "target": "Target: {target}",
+    "visitWebsite": "Website",
+    "futureTitle": "ભાવિ",
+    "futureDesc": "વધુ ઉપક્રમ ટૂંક સમયમાં."
+  },
+  "impact": {
+    "tagline": "PGT ગ્લોબલ",
+    "title": "આપણી અસર",
+    "description": "PGT સમુદાય બદલી રહ્યા છે",
+    "metricsTag": "Metrics",
+    "metricsTitle": "મોજવા",
+    "metricsSubtitle": "Numbers reflect growth.",
+    "areas": {
+      "education": {
+        "title": "ગુણવત્તા શિક્ષણ",
+        "description": "Bridging gaps."
+      },
+      "leadership": {
+        "title": "Leadership",
+        "description": "Nurturing skills."
+      },
+      "community": {
+        "title": "Community",
+        "description": "Driving campaigns."
+      }
+    },
+    "storiesTag": "Stories",
+    "storiesTitle": "Transformations",
+    "storiesSubtitle": "Read how PGT impacted globally."
+  },
+  "gallery": {
+    "tagline": "PGT Media Archive",
+    "title": "Media Gallery",
+    "description": "Snapshots of our global impact.",
+    "categories": {
+      "all": "All Photos",
+      "seminars": "Seminars",
+      "campaigns": "Campaigns",
+      " summits": "Summits",
+      "outreach": "Outreach"
+    },
+    "viewImage": "View Image",
+    "close": "Close"
+  },
+  "articles": {
+    "tagline": "Insights",
+    "title": "Insights & Stories",
+    "description": "Discover resources and stories.",
+    "searchPlaceholder": "Search articles...",
+    "noArticles": "No articles found.",
+    "tags": "Tags:",
+    "back": "Back to Articles",
+    "share": "Share",
+    "readTime": "{time}",
+    "list": {
+      "1": {
+        "title": "Transforming Youth with Technology",
+        "excerpt": "Digital programs equip youth.",
+        "content": "<p>Technology shapes the way youth learn and grow. Digital tools connect students in rural areas to high-quality resources.</p>"
+      },
+      "2": {
+        "title": "Sustainable Communities",
+        "excerpt": "Eco-campaigns build communities.",
+        "content": "<p>Students worldwide are building eco-conscious communities through awareness and action.</p>"
+      },
+      "3": {
+        "title": "Global Development Trends",
+        "excerpt": "Student leadership reshapes development.",
+        "content": "<p>Students are redefining global development with innovation and digital advocacy.</p>"
+      },
+      "4": {
+        "title": "Graduate Journeys",
+        "excerpt": "Graduates inspire communities.",
+        "content": "<p>Graduates use their skills to inspire meaningful change in communities worldwide.</p>"
+      },
+      "5": {
+        "title": "Innovating Classrooms",
+        "excerpt": "Innovation makes learning impactful.",
+        "content": "<p>Classrooms are transforming into interactive digital spaces with gamification and AI-driven learning.</p>"
+      }
+    }
+  },
+  "careers": {
+    "tagline": "JOIN US",
+    "title": "Build with PGT",
+    "description": "Global community of innovators.",
+    "benefitsTag": "Perks",
+    "benefitsTitle": "Why Join PGT?",
+    "benefitsSubtitle": "Flexible ecosystem.",
+    "list": {
+      "remote": "Remote-first",
+      "growth": "Leadership mentorship",
+      "scale": "Impact millions",
+      "network": "Global network"
+    },
+    "positionsTag": "Opportunities",
+    "positionsTitle": "Open Positions",
+    "positionsSubtitle": "Explore roles.",
+    "role": "Role:",
+    "type": "Type:",
+    "hours": "Commitment:",
+    "apply": "Apply Now",
+    "positions": {
+      "cod": {
+        "title": "Chief Operations Director (COD)",
+        "department": "Operations",
+        "responsibilities": [
+          "Manage operations",
+          "Track tasks",
+          "Collaborate"
+        ]
+      },
+      "cco": {
+        "title": "Chief Communications Officer (CCO)",
+        "department": "Communications",
+        "responsibilities": [
+          "Write content",
+          "Maintain voice",
+          "Collaborate"
+        ]
+      },
+      "cd": {
+        "title": "Creative Director (CD)",
+        "department": "Creative",
+        "responsibilities": [
+          "Design assets",
+          "Maintain identity",
+          "Support teams"
+        ]
+      },
+      "cso": {
+        "title": "Chief Strategy Officer (CSO)",
+        "department": "Strategy",
+        "responsibilities": [
+          "Lead campaigns",
+          "Analyze",
+          "Build strategies"
+        ]
+      },
+      "prh": {
+        "title": "Public Relations Head (PRH)",
+        "department": "Public Relations",
+        "responsibilities": [
+          "Represent PGT",
+          "Handle outreach",
+          "Support visibility"
+        ]
+      },
+      "cap": {
+        "title": "Campus Director (CAP)",
+        "department": "Campus Relations",
+        "responsibilities": [
+          "Act as liaison",
+          "Organize activities",
+          "Promote awareness"
+        ]
+      },
+      "ctd": {
+        "title": "Chief Technical Director (CTD)",
+        "department": "Technology",
+        "responsibilities": [
+          "Build website",
+          "Create pages",
+          "Maintain tools"
+        ]
+      },
+      "gsec": {
+        "title": "General Secretary (GSEC)",
+        "department": "Administration",
+        "responsibilities": [
+          "Handle documentation",
+          "Support founder",
+          "Track workflows"
+        ]
+      }
+    }
+  },
+  "apply": {
+    "title": "Join PGT Core Team",
+    "subtitle": "Fill in application details.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "position": "Position",
+      "selectPosition": "Select position",
+      "resume": "Resume Link",
+      "resumePlaceholder": "Enter URL",
+      "coverLetter": "Why join PGT?",
+      "coverLetterPlaceholder": "Tell us...",
+      "submit": "Submit",
+      "successTitle": "Submitted!",
+      "successDesc": "Thank you. We will contact you in 5-7 days.",
+      "backToCareers": "Back to Careers"
+    }
+  },
+  "contact": {
+    "tagline": "GET IN TOUCH",
+    "title": "We'd Love to Hear",
+    "description": "Contact our team.",
+    "details": {
+      "email": "office@pgtglobalnetwork.com",
+      "phone": "+91 8999902805",
+      "address": "Daryapur, Maharashtra, India"
+    },
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "subject": "Subject",
+      "subjectPlaceholder": "Subject",
+      "message": "Message",
+      "messagePlaceholder": "Write message...",
+      "send": "Send",
+      "successToast": "Sent!",
+      "errorToast": "Failed. Try again."
+    }
+  },
+  "faq": {
+    "tagline": "SUPPORT",
+    "title": "FAQ",
+    "description": "Quick answers.",
+    "categories": {
+      "all": "All",
+      "programs": "Programs",
+      "ventures": "Ventures",
+      "involvement": "Involvement"
+    },
+    "contactTitle": "Still have questions?",
+    "contactDesc": "Contact our support team.",
+    "contactBtn": "Contact Support",
+    "list": {
+      "1": {
+        "question": "What is PGT Global Network?",
+        "answer": "PGT is a student-led network empowering individuals."
+      },
+      "2": {
+        "question": "What programs does PGT offer?",
+        "answer": "D3, VoA, Seminarix, MotivMinds, HED."
+      },
+      "3": {
+        "question": "How can I participate?",
+        "answer": "Each program has its own participation mode."
+      },
+      "4": {
+        "question": "Are programs free?",
+        "answer": "Yes, almost all initiatives are free."
+      },
+      "5": {
+        "question": "Where is PGT based?",
+        "answer": "Daryapur, Maharashtra, India."
+      },
+      "6": {
+        "question": "Who can benefit?",
+        "answer": "Anyone interested in leadership and learning."
+      },
+      "7": {
+        "question": "Can organizations partner?",
+        "answer": "Yes, contact office@pgtglobalnetwork.com."
+      },
+      "8": {
+        "question": "How to stay updated?",
+        "answer": "Follow on social media or visit pgtglobalnetwork.com."
+      },
+      "9": {
+        "question": "How to report technical issues?",
+        "answer": "Email office@pgtglobalnetwork.com."
+      }
+    }
+  },
+  "privacy": {
+    "tagline": "LEGAL",
+    "title": "Privacy Policy",
+    "description": "Last updated: July 27, 2026.",
+    "heading": "Privacy & Data Terms",
+    "bullets": {
+      "1": "Data Collection: Name and email only.",
+      "2": "Security: Passwords encrypted.",
+      "3": "Third-Parties: No data selling."
+    }
+  },
+  "terms": {
+    "tagline": "LEGAL",
+    "title": "Terms & Conditions",
+    "description": "Last updated: July 27, 2026.",
+    "heading": "Standard Site Terms",
+    "bullets": {
+      "1": "Usage Rights: Copyrighted content.",
+      "2": "User Code: Positive engagement required.",
+      "3": "Liability: Not responsible for outcomes."
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {name}!",
+    "status": "Status: Active",
+    "bioLabel": "Short Bio",
+    "bioPlaceholder": "Tell the community...",
+    "emailLabel": "Email",
+    "emailLocked": "Email cannot be changed.",
+    "saveSuccess": "Updated!",
+    "saveError": "Failed.",
+    "logsTitle": "Activity Logs",
+    "logsEmpty": "No activity.",
+    "noName": "Member"
+  },
+  "errors": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "This page does not exist.",
+      "btnHome": "Go Home",
+      "btnExplore": "Explore Programs"
+    },
+    "general": {
+      "title": "Something Went Wrong",
+      "description": "An error occurred. Please refresh.",
+      "diagnostics": "Error:",
+      "btnRefresh": "Refresh",
+      "btnHome": "Return Home"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Sign In",
+      "subtitle": "Access your portal",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter password",
+      "forgot": "Forgot Password?",
+      "remember": "Remember email",
+      "btn": "Sign In",
+      "authenticating": "Authenticating...",
+      "divider": "Or continue with",
+      "google": "Continue with Google",
+      "noAccount": "No account?",
+      "create": "Create account",
+      "requiredEmail": "Email required",
+      "requiredPassword": "Password required"
+    },
+    "signUp": {
+      "title": "Create Account",
+      "subtitle": "Join the network",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter name",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "password": "Password",
+      "passwordPlaceholder": "Create password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "btn": "Create Account",
+      "creating": "Creating...",
+      "divider": "Or continue with",
+      "google": "Continue with Google",
+      "hasAccount": "Have account?",
+      "signIn": "Sign In",
+      "match": "Passwords match",
+      "noMatch": "Passwords do not match",
+      "strength": "Strength:",
+      "strengthWeek": "Weak",
+      "strengthFair": "Fair",
+      "strengthStrong": "Strong",
+      "requirements": "Requirements",
+      "reqLength": "8+ chars",
+      "reqUpper": "Uppercase",
+      "reqLower": "Lowercase",
+      "reqNum": "Number",
+      "reqSpecial": "Special char",
+      "requiredName": "Name required",
+      "requiredEmail": "Email required",
+      "requiredPassword": "Password required"
+    },
+    "forgot": {
+      "title": "Recover Password",
+      "subtitle": "Get reset link",
+      "email": "Email",
+      "emailPlaceholder": "Enter email",
+      "btn": "Send Link",
+      "sending": "Sending...",
+      "successTitle": "Email Sent",
+      "successDesc": "Reset link sent to {email}.",
+      "btnBack": "Back to Sign In",
+      "requiredEmail": "Email required"
+    },
+    "reset": {
+      "title": "Reset Password",
+      "subtitle": "Set new password",
+      "password": "New Password",
+      "passwordPlaceholder": "Enter new password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm password",
+      "btn": "Update Password",
+      "updating": "Updating...",
+      "noSession": "No session found.",
+      "hasAccount": "Know password?",
+      "signIn": "Sign In",
+      "requiredPassword": "Password required"
+    },
+    "verify": {
+      "title": "Verify Email",
+      "subtitle": "Confirm your account",
+      "pending": "Pending",
+      "desc": "We sent a link to {email}.",
+      "btnResend": "Resend",
+      "resending": "Resending...",
+      "cooldown": "Resend in {seconds}s",
+      "btnSignOut": "Sign Out",
+      "alreadyVerified": "Already verified?",
+      "refresh": "Click to refresh"
+    }
+  }
+}

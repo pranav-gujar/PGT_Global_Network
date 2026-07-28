@@ -1,0 +1,726 @@
+{
+  "navbar": {
+    "home": "Início",
+    "about": "Sobre Nós",
+    "programs": "Programas",
+    "ventures": "Empreendimentos",
+    "timeline": "Linha do Tempo",
+    "impact": "Impacto",
+    "gallery": "Galeria",
+    "articles": "Artigos",
+    "careers": "Carreiras",
+    "contact": "Contato",
+    "more": "Mais",
+    "signIn": "Entrar",
+    "signOut": "Sair",
+    "account": "Conta",
+    "dashboard": "Painel de Controle",
+    "theme": "Tema",
+    "language": "Idioma",
+    "themeLight": "Claro",
+    "themeDark": "Escuro",
+    "themeSystem": "Sistema",
+    "announcementArticle": "Novo Artigo Publicado — Leia Agora! Clique aqui",
+    "announcementCareers": "Campanha de Recrutamento ao Vivo — Candidate-se Agora! Clique aqui"
+  },
+  "footer": {
+    "tagline": "PGT Global Network é uma rede global liderada por jovens que impulsiona crescimento, empoderamento e transformação.",
+    "quickLinks": "Links Rápidos",
+    "legal": "Legal",
+    "contactUs": "Fale Conosco",
+    "rights": "Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos e Condições",
+    "faq": "Perguntas Frequentes",
+    "email": "E-mail",
+    "phone": "Telefone"
+  },
+  "common": {
+    "loading": "Carregando...",
+    "submitting": "Enviando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "back": "Voltar",
+    "required": "Obrigatório",
+    "learnMore": "Saber Mais",
+    "readMore": "Ler Mais",
+    "applyNow": "Candidatar-se Agora",
+    "explore": "Explorar",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "edit": "Editar",
+    "search": "Pesquisar",
+    "backToHome": "Voltar ao Site",
+    "goHome": "Ir para a Página Inicial",
+    "refresh": "Atualizar Página",
+    "returnHome": "Voltar ao Início"
+  },
+  "home": {
+    "tagline": "Ecossistema Global",
+    "titlePrefix": "Transformando Vidas Através de",
+    "titleGlow": "Positividade, Crescimento e Transformação",
+    "subtitle": "Capacitando indivíduos e organizações em todo o mundo por meio de programas inovadores, crescimento sustentável e transformação com propósito.",
+    "exploreBtn": "Explorar Programas",
+    "learnBtn": "Saber Mais",
+    "valuesTag": "FILOSOFIA",
+    "valuesTitle": "Nossos Valores Fundamentais",
+    "valuesSubtitle": "Os pilares que definem a PGT e moldam nossa rede de impacto global",
+    "impactTag": "ALCANCE GLOBAL",
+    "impactTitle": "Nosso Impacto Global",
+    "impactSubtitle": "Sete anos de dedicação, inovação e transformação",
+    "stats": {
+      "lives": "Vidas Impactadas",
+      "stories": "Histórias de Sucesso",
+      "programs": "Programas e Campanhas",
+      "years": "Anos de Excelência"
+    },
+    "programsTag": "INICIATIVAS",
+    "programsTitle": "Nossos Programas",
+    "programsSubtitle": "Iniciativas inovadoras projetadas para criar impacto duradouro",
+    "insightsTag": "PERSPECTIVAS",
+    "insightsTitle": "Artigos Recentes",
+    "insightsSubtitle": "Fique atualizado com nossos artigos mais recentes, transformações comunitárias e iniciativas de tecnologia jovem.",
+    "coreValues": {
+      "positivity": {
+        "title": "Positividade",
+        "description": "Cada iniciativa começa com um propósito claro e uma vontade apaixonada de criar mudanças significativas."
+      },
+      "growth": {
+        "title": "Crescimento",
+        "description": "Cultivamos aprendizado contínuo e liderança, ajudando indivíduos e organizações a alcançar seu potencial."
+      },
+      "transformation": {
+        "title": "Transformação",
+        "description": "Inspiramos mudanças positivas que elevam vidas, fortalecem comunidades e moldam um mundo melhor."
+      }
+    }
+  },
+  "about": {
+    "tagline": "QUEM SOMOS",
+    "title": "Capacitando a Próxima Geração",
+    "description": "PGT Global Network é uma rede internacional liderada por estudantes dedicada a impulsionar a educação digital, a transformação comunitária e a liderança juvenil global.",
+    "leadershipTag": "MENSAGEM DA LIDERANÇA",
+    "leadershipTitle": "Uma Nota do Nosso Fundador",
+    "quote": "Quando fundei a PGT Global Network, a visão era simples, mas poderosa: construir um espaço onde o propósito se transforma em ação, onde o crescimento é cultivado e onde a transformação se torna uma jornada compartilhada.",
+    "p1": "O que começou como uma pequena iniciativa liderada por estudantes cresceu para se tornar uma rede global que tocou vidas em mais de 15 países.",
+    "p2": "Hoje, a PGT continua a defender o empoderamento, a conscientização e a ação. Cada programa que lançamos nos aproxima de um mundo onde o crescimento com propósito não é uma exceção, mas um modo de vida.",
+    "p3": "Obrigado por fazer parte desta jornada. Juntos, não estamos apenas mudando vidas — estamos transformando o mundo, um propósito de cada vez.",
+    "CEO": "Fundador e CEO, PGT Global Network",
+    "gratitude": "Com gratidão e entusiasmo pelo que está por vir,",
+    "philosophyTag": "FILOSOFIA",
+    "philosophyTitle": "Nossos Princípios Fundadores",
+    "philosophySubtitle": "As crenças fundamentais que nos guiaram desde o primeiro dia",
+    "principles": {
+      "purpose": {
+        "title": "Orientado por Propósito",
+        "description": "Cada iniciativa começa com a missão de criar impacto real e duradouro."
+      },
+      "people": {
+        "title": "Centrado nas Pessoas",
+        "description": "Acreditamos no potencial humano e investimos no desenvolvimento dos indivíduos."
+      },
+      "global": {
+        "title": "Visão Global",
+        "description": "Conectando comunidades em todos os continentes, construindo um mundo unido de aprendizes e líderes."
+      },
+      "excellence": {
+        "title": "Excelência",
+        "description": "Buscando os mais altos padrões em nossos programas, parcerias e impacto."
+      },
+      "sustainability": {
+        "title": "Sustentabilidade",
+        "description": "Junte-se a nós em nossa missão de impulsionar mudanças positivas e criar um impacto duradouro em comunidades de todo o mundo."
+      }
+    }
+  },
+  "programs": {
+    "tagline": "Iniciativas Fundamentais da PGT Global",
+    "title": "Nossos Programas",
+    "description": "Iniciativas abrangentes projetadas para transformar vidas e comunidades por meio de crescimento com propósito",
+    "portfolioTag": "PORTFÓLIO",
+    "portfolioTitle": "Programas Transformadores para Cada Jornada",
+    "portfolioSubtitle": "Da transformação digital ao desenvolvimento pessoal, nossos programas são projetados para atender diversas necessidades.",
+    "learnMore": "Saber Mais",
+    "timelineTitle": "Componentes-Chave",
+    "impactTitle": "Impacto Central",
+    "durationTitle": "Duração e Escala",
+    "applyBtn": "Candidatar-se Agora",
+    "scheduleBtn": "Agendar Sessão Gratuita",
+    "d3": {
+      "name": "Programa D3",
+      "fullName": "Daily Discovery Digest",
+      "description": "Uma série de inspiração diária que entrega conhecimento, conscientização e histórias impactantes aos estudantes.",
+      "features": [
+        "Stories diários do Instagram e Facebook",
+        "Destaques de Dias Nacionais e Internacionais",
+        "Marcos Históricos",
+        "Aniversários de Grandes Personalidades",
+        "Histórias de Impacto da Vida Real",
+        "Descubra o Extraordinário Todo Dia"
+      ],
+      "impact": "Mais de 10.000 leitores e aprendizes diários engajados",
+      "duration": "Programa diário contínuo"
+    },
+    "voa": {
+      "name": "Iniciativa VoA",
+      "fullName": "Voices of Ability",
+      "description": "Uma série de narrativas destacando indivíduos que transformaram desafios em mudança e impacto.",
+      "features": [
+        "Gravações de Jornadas de Vida",
+        "Histórias de Construção de Empatia",
+        "Conscientização sobre Deficiência e Habilidade",
+        "Episódios de Vídeo Publicados Online",
+        "Empoderamento Através da Narrativa",
+        "Inspiração para a Mudança Social"
+      ],
+      "impact": "Dezenas de jornadas poderosas compartilhadas e celebradas",
+      "duration": "Iniciativa de narrativa contínua"
+    },
+    "seminarix": {
+      "name": "Seminarix",
+      "fullName": "Série de Seminários para Estudantes",
+      "description": "Sessões de seminários presenciais capacitando estudantes com ferramentas acadêmicas, motivacionais e de bem-estar.",
+      "features": [
+        "Palestras Motivacionais",
+        "Estratégias Acadêmicas",
+        "Orientação em Bem-Estar Mental",
+        "Técnicas de Preparação para Provas",
+        "Sessões Interativas em Escolas e Alojamentos",
+        "Compartilhamento de Histórias da Vida Real"
+      ],
+      "impact": "Centenas de estudantes orientados por meio de sessões escolares e em alojamentos",
+      "duration": "Série de seminários contínua"
+    },
+    "motivminds": {
+      "name": "MotiVMinds",
+      "fullName": "Empoderamento de Um Minuto",
+      "description": "Sessões virtuais interativas abordando saúde mental jovem, bem-estar emocional e desenvolvimento pessoal.",
+      "features": [
+        "Vídeos de Um Minuto",
+        "Perspectivas de Crescimento Pessoal",
+        "Motivação para Estudantes e Voluntários",
+        "Sabedoria do Mundo Real",
+        "Formatos de Mensagens Curtas e Cativantes",
+        "Conteúdo de Empoderamento Contínuo"
+      ],
+      "impact": "Comunidade jovem engajada e empoderada",
+      "duration": "Série de vídeos contínua"
+    },
+    "hed": {
+      "name": "Campanha HED",
+      "fullName": "Campanha Happy Eco Diwali",
+      "description": "Uma campanha anual de celebração ecológica defendendo práticas ambientalmente responsáveis durante festivais.",
+      "features": [
+        "Campanhas de Conscientização",
+        "Concurso de Inovação",
+        "Ações de Plantio de Árvores",
+        "Iniciativa Missão ENOSAVE",
+        "Participação de Estudantes e Comunidade"
+      ],
+      "impact": "Milhares engajados anualmente em celebrações ecológicas de Diwali",
+      "duration": "Campanha anual recorrente"
+    }
+  },
+  "timeline": {
+    "tagline": "Marcos da PGT Global",
+    "title": "Nossa Jornada",
+    "description": "Sete anos de crescimento, transformação e impacto — de uma visão a uma rede global",
+    "historyTag": "HISTÓRIA",
+    "historyTitle": "Linha do Tempo da Transformação",
+    "historySubtitle": "Explore os principais marcos que marcaram nosso caminho e definiram nosso crescimento.",
+    "milestones": {
+      "2019": {
+        "title": "A Faísca",
+        "description": "A PGT começou como uma pequena iniciativa escolar focada em conscientização e ação ecológica.",
+        "achievements": [
+          "Lançou a primeira campanha Happy Eco Diwali (HED)",
+          "Organizou questionários para apoiar colegas durante a preparação para provas",
+          "Incentivou celebrações ecológicas na comunidade local",
+          "Plantou a ideia de Propósito, Crescimento e Transformação"
+        ]
+      },
+      "2020": {
+        "title": "Crescimento Inicial",
+        "description": "Expandiu pequenas iniciativas com atividades educacionais e de conscientização.",
+        "achievements": [
+          "Realizou questionários de conscientização educacional",
+          "Manteve campanhas de conscientização ecológica apesar dos desafios da pandemia",
+          "Engajou estudantes em formatos locais e online",
+          "Inspirou as primeiras experiências de sucesso estudantil documentadas"
+        ]
+      },
+      "2021": {
+        "title": "Ação Consistente",
+        "description": "A PGT continuou por meio de campanhas de conscientização e eco-campanhas anuais.",
+        "achievements": [
+          "Realizou pequenos eventos de conscientização em escolas",
+          "Expandiu a campanha HED para sua 3ª edição",
+          "Organizou discussões motivacionais entre pares",
+          "Manteve o engajamento estudantil apesar da escala limitada"
+        ]
+      },
+      "2022": {
+        "title": "Construção de Fundamentos",
+        "description": "Focou em manter a continuidade com eco-iniciativas e atividades educacionais.",
+        "achievements": [
+          "Executou a 4ª edição da campanha HED com novos voluntários",
+          "Realizou publicações e concursos de conscientização online em pequena escala",
+          "Começou a experimentar formatos estruturados para impacto",
+          "Fortaleceu a identidade da PGT como movimento liderado por estudantes"
+        ]
+      },
+      "2023": {
+        "title": "Preparando para o Impacto",
+        "description": "A PGT testou novos formatos e fortaleceu as bases.",
+        "achievements": [
+          "Celebrou a 5ª edição do HED com maior alcance",
+          "Participou de mini-campanhas para testar a resposta dos estudantes",
+          "Moldou a visão para uma identidade global maior",
+          "Preparou a estrutura para os programas futuros"
+        ]
+      },
+      "2024": {
+        "title": "Rumo ao Impacto Global",
+        "description": "Rebatizado como PGT Global Network e lançou grandes programas emblemáticos.",
+        "achievements": [
+          "Lançou VoA, MotivMinds, D3 e Seminarix como programas emblemáticos",
+          "Seminarix retornou à antiga escola do fundador com grande sucesso",
+          "VoA e MotivMinds inspiraram públicos com histórias reais",
+          "Ultrapassou o marco de 10.000 participantes no primeiro ano"
+        ]
+      },
+      "2025": {
+        "title": "Continuando a Jornada",
+        "description": "A PGT Global Network está escalando ativamente programas e construindo novas oportunidades.",
+        "achievements": [
+          "Realizará a 7ª edição do Happy Eco Diwali com forte engajamento",
+          "Expandindo o alcance de VoA, MotivMinds, D3 e Seminarix",
+          "Construindo colaborações com escolas, faculdades e redes globais",
+          "Focado em empoderar milhares mais de estudantes este ano"
+        ]
+      }
+    }
+  },
+  "ventures": {
+    "tagline": "Guarda-chuva PGT",
+    "title": "O Ecossistema PGT",
+    "description": "A PGT Global Network está construindo um ecossistema de empreendimentos em diferentes domínios, cada um trabalhando em direção à missão mais ampla de criar impacto positivo.",
+    "heading": "Nossos Empreendimentos",
+    "launchingSoon": "Lançamento Em Breve",
+    "comingSoon": "Em Breve",
+    "launchDate": "Lançando em {launchDate}",
+    "target": "Alvo: {target}",
+    "visitWebsite": "Visitar Site",
+    "futureTitle": "Empreendimentos Futuros",
+    "futureDesc": "Mais empreendimentos estão em desenvolvimento e serão anunciados em breve. Estamos projetando ativamente soluções nas áreas de educação, mídia criativa e networking."
+  },
+  "impact": {
+    "tagline": "Resultados de Crescimento Global da PGT",
+    "title": "Nosso Impacto",
+    "description": "Como a PGT está transformando comunidades, capacitando líderes jovens e criando oportunidades globais",
+    "metricsTag": "MÉTRICAS",
+    "metricsTitle": "Progresso Medido, Sucesso Compartilhado",
+    "metricsSubtitle": "Nossos números refletem nosso compromisso com o crescimento real e o desenvolvimento sustentável da comunidade.",
+    "areas": {
+      "education": {
+        "title": "Educação de Qualidade",
+        "description": "Preenchendo lacunas de aprendizado por meio de recursos digitais, orientação de carreira e ferramentas de suporte acadêmico."
+      },
+      "leadership": {
+        "title": "Desenvolvimento de Liderança",
+        "description": "Cultivando habilidades de gestão, tecnologia e oratória em jovens agentes de mudança."
+      },
+      "community": {
+        "title": "Elevação Comunitária",
+        "description": "Impulsionando eco-campanhas locais, webinars motivacionais e atos de serviço voluntário."
+      }
+    },
+    "storiesTag": "HISTÓRIAS",
+    "storiesTitle": "Transformações Comunitárias",
+    "storiesSubtitle": "Leia como o ecossistema digital da PGT impactou estudantes, voluntários e parceiros globalmente."
+  },
+  "gallery": {
+    "tagline": "Arquivo de Mídia da PGT Global",
+    "title": "Galeria de Mídia",
+    "description": "Instantâneos do nosso impacto global, seminários escolares, cúpulas estudantis e campanhas de extensão comunitária",
+    "categories": {
+      "all": "Todas as Fotos",
+      "seminars": "Seminários",
+      "campaigns": "Campanhas",
+      " summits": "Cúpulas",
+      "outreach": "Extensão"
+    },
+    "viewImage": "Ver Imagem",
+    "close": "Fechar"
+  },
+  "articles": {
+    "tagline": "PERSPECTIVAS",
+    "title": "Perspectivas e Histórias",
+    "description": "Descubra recursos, guias de especialistas e histórias de estudantes que moldam o empoderamento jovem.",
+    "searchPlaceholder": "Pesquisar artigos por título, conteúdo, tags...",
+    "noArticles": "Nenhum artigo encontrado correspondendo aos seus critérios.",
+    "tags": "Tags:",
+    "back": "Voltar aos Artigos",
+    "share": "Compartilhar",
+    "readTime": "{time}",
+    "list": {
+      "1": {
+        "title": "Transformando Jovens com Aprendizado Tecnológico",
+        "excerpt": "Programas digitais equipam jovens com habilidades, confiança e oportunidades.",
+        "content": "<p>Technology has rapidly become the foundation of modern society, shaping the way people learn, work, and interact. For today's youth, digital learning is not just a privilege but a necessity. In communities across the globe, students are increasingly embracing digital tools that equip them with knowledge, confidence, and life-changing opportunities.</p><br><p>One of the greatest advantages of technology in education is accessibility. Online platforms, mobile applications, and interactive tools allow students in rural or underserved areas to connect with high-quality learning resources. This democratization of knowledge ensures that no young person is left behind, regardless of geography or socio-economic background.</p><br><p>Beyond accessibility, technology also fosters creativity and critical thinking. Through project-based learning, coding programs, and digital collaboration, youth can solve real-world problems and innovate with confidence. These skills extend beyond the classroom, empowering them to become leaders, entrepreneurs, and changemakers in their communities.</p><br><p>Moreover, technology is reshaping career paths. With industries demanding digital literacy, coding, data analysis, and AI knowledge, young people who embrace technology stand out in the workforce. By equipping youth with these future-ready skills, we prepare them for sustainable careers and enable them to contribute meaningfully to global development.</p><br><p>However, the journey is not without challenges. Many regions face issues such as limited internet connectivity, lack of devices, or inadequate training for educators. Overcoming these hurdles requires a collaborative effort between governments, NGOs, and private sectors to build infrastructure, provide training, and ensure equitable access.</p><br><p>Ultimately, transforming youth through technology learning is about more than just academic success. It's about building resilience, nurturing confidence, and creating opportunities for young people to thrive in an interconnected world. As we invest in digital education, we invest in a brighter, more inclusive future for all.</p>"
+      },
+      "2": {
+        "title": "Comunidades Sustentáveis e Impacto Estudantil",
+        "excerpt": "Eco-campanhas e conscientização constroem comunidades estudantis sustentáveis globalmente.",
+        "content": "<p>Sustainability is no longer a buzzword; it is a call to action. Around the world, students are leading the charge in building eco-conscious communities and reshaping the way we think about the environment. From reducing plastic use to spearheading renewable energy campaigns, young people are proving that small steps can create meaningful global change.</p><br><p>One of the most powerful tools for sustainability lies in awareness. Students organizing campaigns, workshops, and green clubs are raising awareness about pressing issues such as climate change, waste reduction, and conservation. This peer-to-peer learning not only educates but also inspires entire communities to adopt eco-friendly practices.</p><br><p>Beyond awareness, action is critical. Many student-led initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment.</p><br><p>Technology also plays a significant role. Social media allows young activists to amplify their messages, connect with global networks, and advocate for systemic changes. Building sustainable communities requires collaboration. Students who work hand-in-hand with educators, local governments, and NGOs can scale their impact and create lasting change.</p><br><p>The ultimate impact of student-led sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>"
+      },
+      "3": {
+        "title": "Desenvolvimento Global: Tendências Lideradas por Estudantes",
+        "excerpt": "Tendências de liderança estudantil reformulam o desenvolvimento com inovação e impacto.",
+        "content": "<p>The future of global development is being shaped not only by policymakers and organizations but also by students. With innovation, determination, and digital fluency, today's youth are redefining the way societies address issues such as poverty, education, and equality. Their leadership is setting new trends that promise long-lasting impact worldwide.</p><br><p>One trend is the rise of social entrepreneurship. Students are launching startups that address local and global challenges, from clean water initiatives to sustainable farming solutions. These ventures not only solve pressing issues but also generate employment and foster innovation at the grassroots level.</p><br><p>Another trend is digital advocacy. Students are using online platforms to voice concerns about climate change, human rights, and gender equality. Their ability to mobilize audiences quickly has turned grassroots movements into global campaigns, influencing decision-makers and shaping public opinion.</p><br><p>Collaborative learning is also gaining traction. International student exchange programs, hackathons, and global forums are giving young people platforms to share ideas, challenge perspectives, and co-create solutions. Technology plays a central role in amplifying these trends.</p><br><p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is undeniably student-led.</p>"
+      },
+      "4": {
+        "title": "Jornadas de Graduados: Histórias de Mudança Inspiradoras",
+        "excerpt": "A resiliência dos graduados inspira comunidades e gera mudanças positivas.",
+        "content": "<p>Graduating is more than earning a degree; it's the beginning of a journey that often inspires change within communities. Around the world, graduates are using their skills, resilience, and stories of perseverance to spark meaningful transformation, proving that education is one of the most powerful tools for change.</p><br><p>Many graduates return to their hometowns with a vision to uplift their communities. Some open schools to provide better education for local children, while others launch social enterprises that address pressing issues like unemployment or healthcare. Their actions showcase how education extends beyond personal growth to collective advancement.</p><br><p>Stories of resilience also inspire others. Graduates who overcame poverty, discrimination, or other challenges often share their journeys, encouraging younger students to dream big and pursue education. These narratives not only motivate but also build a culture of persistence and hope.</p><br><p>Moreover, graduates play a crucial role in mentoring. By guiding younger students through internships, workshops, and volunteer programs, they ensure that the next generation has the tools and confidence to succeed. Ultimately, graduate stories highlight that success is not measured solely by personal achievement but by the positive change one brings to society.</p>"
+      },
+      "5": {
+        "title": "Inovando Salas de Aula para o Aprendizado Futuro",
+        "excerpt": "Combinar inovação e tecnologia torna o aprendizado inclusivo e impactante.",
+        "content": "<p>Education is undergoing a paradigm shift, driven by technology and progressive teaching models. The traditional classroom layout is transforming into an interactive, digital space where learning is personalized, inclusive, and tailored for the future.</p><br><p>At the center of classroom innovation is gamification. Integrating educational games, quizzes, and simulations makes complex concepts engaging and memorable. Students are no longer passive listeners; they become active participants who explore ideas, solve challenges, and collaborate dynamically.</p><br><p>Another breakthrough is personalized learning. AI-driven platforms can analyze student performance and adjust learning paths accordingly. This ensures that fast learners remain challenged while students who need more support receive targeted guidance, creating a balanced and supportive classroom environment.</p><br><p>Virtual and augmented reality (VR/AR) are also expanding horizons. Students can now embark on virtual field trips to historic sites, dive deep into human anatomy, or explore molecular chemistry, turning abstract concepts into tangible experiences.</p><br><p>Fostering this shift requires empowering educators. Providing training, modern equipment, and support allows teachers to lead innovative classrooms with confidence. When schools and communities invest in progressive education, they open pathways for students to achieve their potential and solve future global challenges.</p>"
+      }
+    }
+  },
+  "careers": {
+    "tagline": "JUNTE-SE AO ECOSSISTEMA",
+    "title": "Construa o Futuro com a PGT",
+    "description": "Somos uma comunidade global de inovadores, construtores e líderes. Explore oportunidades abertas para contribuir com nossos empreendimentos.",
+    "benefitsTag": "BENEFÍCIOS",
+    "benefitsTitle": "Por que se juntar à PGT?",
+    "benefitsSubtitle": "Oferecemos um ecossistema flexível e de suporte projetado para nutrir seu crescimento profissional e pessoal.",
+    "list": {
+      "remote": "Fluxos de trabalho remotos prioritários",
+      "growth": "Mentoria de liderança contínua",
+      "scale": "Impactar milhões de estudantes em todo o mundo",
+      "network": "Acesso a uma rede global de pares"
+    },
+    "positionsTag": "OPORTUNIDADES",
+    "positionsTitle": "Posições Principais Abertas",
+    "positionsSubtitle": "Explore funções em tecnologia, mídia criativa, extensão e gestão.",
+    "role": "Função:",
+    "type": "Tipo:",
+    "hours": "Compromisso:",
+    "apply": "Candidatar-se Agora",
+    "positions": {
+      "cod": {
+        "title": "Chief Operations Director (COD)",
+        "department": "Operações",
+        "responsibilities": [
+          "Gerenciar operações diárias da equipe, cronogramas e coordenação interna",
+          "Acompanhar tarefas e garantir execução fluida dos programas",
+          "Colaborar com todos os departamentos para manter projetos no prazo"
+        ]
+      },
+      "cco": {
+        "title": "Chief Communications Officer (CCO)",
+        "department": "Comunicações",
+        "responsibilities": [
+          "Escrever e revisar todo o conteúdo: legendas, publicações, documentos internos e roteiros",
+          "Manter o tom e a voz da PGT em todas as plataformas",
+          "Colaborar com as equipes de PR e Design para campanhas"
+        ]
+      },
+      "cd": {
+        "title": "Creative Director (CD)",
+        "department": "Criativo",
+        "responsibilities": [
+          "Projetar cartazes, carrosséis, editar vídeos, reels, miniaturas e todos os criativos da marca",
+          "Manter identidade visual e consistência em todas as plataformas",
+          "Apoiar todos os departamentos com conteúdo de design e mídia"
+        ]
+      },
+      "cso": {
+        "title": "Chief Strategy Officer (CSO)",
+        "department": "Estratégia",
+        "responsibilities": [
+          "Liderar ideias de campanha, inovação e planejamento",
+          "Analisar o que está funcionando e sugerir melhorias",
+          "Auxiliar na construção de estratégias de longo prazo para programas da PGT"
+        ]
+      },
+      "prh": {
+        "title": "Public Relations Head (PRH)",
+        "department": "Relações Públicas",
+        "responsibilities": [
+          "Representar publicamente a PGT e construir colaborações",
+          "Gerenciar extensão para faculdades, ONGs, mídia e influenciadores",
+          "Apoiar visibilidade e networking da marca"
+        ]
+      },
+      "cap": {
+        "title": "Campus Director (CAP)",
+        "department": "Relações com Campus",
+        "responsibilities": [
+          "Atuar como ligação oficial entre a PGT e o campus universitário",
+          "Organizar atividades presenciais e representar a PGT em eventos",
+          "Promover conscientização e engajamento dentro do campus"
+        ]
+      },
+      "ctd": {
+        "title": "Chief Technical Director (CTD)",
+        "department": "Tecnologia",
+        "responsibilities": [
+          "Construir e gerenciar o site oficial da PGT",
+          "Criar páginas de registro de eventos e páginas de destino",
+          "Manter integrações de formulários, análises e ferramentas digitais"
+        ]
+      },
+      "gsec": {
+        "title": "General Secretary (GSEC)",
+        "department": "Administração",
+        "responsibilities": [
+          "Gerenciar documentação oficial, cartas e anúncios internos",
+          "Apoiar o Fundador na manutenção da estrutura e acompanhamentos",
+          "Acompanhar fluxos de trabalho internos e registros de comunicação"
+        ]
+      }
+    }
+  },
+  "apply": {
+    "title": "Junte-se à Equipe Principal da PGT",
+    "subtitle": "Preencha os detalhes da candidatura abaixo para se candidatar à posição desejada.",
+    "form": {
+      "fullName": "Nome Completo",
+      "fullNamePlaceholder": "Insira seu nome completo",
+      "email": "Endereço de E-mail",
+      "emailPlaceholder": "Insira seu endereço de e-mail",
+      "position": "Posição Desejada",
+      "selectPosition": "Selecione uma posição",
+      "resume": "Link do Currículo (Google Drive, Dropbox, etc.)",
+      "resumePlaceholder": "Insira a URL do seu currículo",
+      "coverLetter": "Por que você quer se juntar à PGT?",
+      "coverLetterPlaceholder": "Conte-nos sobre sua motivação, habilidades e como planeja contribuir...",
+      "submit": "Enviar Candidatura",
+      "successTitle": "Candidatura Enviada!",
+      "successDesc": "Obrigado por se candidatar. Nossa equipe de liderança revisará sua candidatura e entrará em contato em 5-7 dias úteis.",
+      "backToCareers": "Voltar às Carreiras"
+    }
+  },
+  "contact": {
+    "tagline": "ENTRE EM CONTATO",
+    "title": "Adoraríamos Ouvir de Você",
+    "description": "Tem perguntas sobre nossos programas, consultas de parceria ou quer ser voluntário? Contate nossa equipe diretamente.",
+    "details": {
+      "email": "office@pgtglobalnetwork.com",
+      "phone": "+91 8999902805",
+      "address": "Daryapur, Maharashtra, Índia"
+    },
+    "form": {
+      "name": "Seu Nome",
+      "namePlaceholder": "Insira seu nome",
+      "email": "Endereço de E-mail",
+      "emailPlaceholder": "Insira seu endereço de e-mail",
+      "subject": "Assunto",
+      "subjectPlaceholder": "Insira o assunto da mensagem",
+      "message": "Mensagem",
+      "messagePlaceholder": "Escreva os detalhes da sua mensagem aqui...",
+      "send": "Enviar Mensagem",
+      "successToast": "Mensagem enviada com sucesso!",
+      "errorToast": "Falha ao enviar mensagem. Por favor, tente novamente."
+    }
+  },
+  "faq": {
+    "tagline": "SUPORTE",
+    "title": "Perguntas Frequentes",
+    "description": "Encontre respostas rápidas para perguntas comuns sobre nossos programas, associações e operações globais.",
+    "categories": {
+      "all": "Todas as Perguntas",
+      "programs": "Programas",
+      "ventures": "Empreendimentos",
+      "involvement": "Envolvimento"
+    },
+    "contactTitle": "Ainda tem perguntas?",
+    "contactDesc": "Não consegue encontrar as respostas que procura? Entre em contato com nossa equipe de suporte voluntário.",
+    "contactBtn": "Contatar Suporte",
+    "list": {
+      "1": {
+        "question": "O que é a PGT Global Network?",
+        "answer": "PGT Global Network é uma organização liderada por estudantes e orientada por propósito que capacita indivíduos por meio de liderança, conscientização, educação e programas orientados pela comunidade. Fundada em 2019, cresceu para se tornar uma plataforma onde estudantes descobrem aprendizado real e impacto significativo."
+      },
+      "2": {
+        "question": "Quais programas a PGT oferece?",
+        "answer": "Executamos iniciativas emblemáticas incluindo D3 (Daily Discovery Digest), VoA (Voices of Ability), workshops do Seminarix, a série de vídeos MotivMinds e a campanha anual HED – Happy Eco Diwali."
+      },
+      "3": {
+        "question": "Como posso participar de um programa?",
+        "answer": "Cada programa tem seu próprio modo de participação. MotivMinds e D3 são publicados em nossas plataformas sociais, Seminarix é entregue diretamente em escolas e alojamentos, e VoA aceita narradores convidados por convite ou candidatura."
+      },
+      "4": {
+        "question": "Os programas são gratuitos?",
+        "answer": "Sim, quase todas as iniciativas da PGT Global Network são oferecidas gratuitamente. Nosso objetivo é tornar a conscientização, o aprendizado e o empoderamento acessíveis a todos."
+      },
+      "5": {
+        "question": "Onde a PGT está sediada?",
+        "answer": "A PGT Global Network está sediada em Daryapur, Maharashtra, Índia. Embora operemos de nossa cidade natal, nosso alcance se estende globalmente por meio de plataformas digitais."
+      },
+      "6": {
+        "question": "Quem pode se juntar ou se beneficiar dos programas da PGT?",
+        "answer": "Qualquer pessoa interessada em liderança, aprendizado e crescimento pessoal pode se beneficiar de nossos programas."
+      },
+      "7": {
+        "question": "Organizações ou indivíduos podem fazer parceria com a PGT?",
+        "answer": "Sim, damos boas-vindas a parcerias. Para colaborações, entre em contato em office@pgtglobalnetwork.com."
+      },
+      "8": {
+        "question": "Como posso me manter atualizado sobre as iniciativas da PGT?",
+        "answer": "Você pode nos seguir no Instagram, LinkedIn e YouTube, ou visitar nosso site pgtglobalnetwork.com."
+      },
+      "9": {
+        "question": "Como posso reportar um problema técnico?",
+        "answer": "Se encontrar problemas técnicos, entre em contato em office@pgtglobalnetwork.com com detalhes ou capturas de tela do problema."
+      }
+    }
+  },
+  "privacy": {
+    "tagline": "INFORMAÇÕES LEGAIS",
+    "title": "Política de Privacidade",
+    "description": "Última atualização: 27 de julho de 2026. Esta política detalha como a PGT Global Network lida com dados de usuários, segurança e privacidade.",
+    "heading": "Termos de Privacidade e Dados",
+    "bullets": {
+      "1": "Coleta de Dados: Coletamos apenas detalhes necessários (nome, e-mail) para registro e envios de programas.",
+      "2": "Segurança: Senhas de usuários são criptografadas. Mantemos filtros de segurança padrão para prevenir vazamentos de dados.",
+      "3": "Terceiros: Não vendemos nem negociamos informações de usuários com profissionais de marketing externos. Dados analíticos são mantidos estritamente anônimos."
+    }
+  },
+  "terms": {
+    "tagline": "TERMOS LEGAIS",
+    "title": "Termos e Condições",
+    "description": "Última atualização: 27 de julho de 2026. Ao acessar o portal da PGT Global Network, você concorda em cumprir nossos padrões comunitários e termos de serviço.",
+    "heading": "Termos Padrão do Site",
+    "bullets": {
+      "1": "Direitos de Uso: Conteúdo, códigos, designs e materiais da plataforma são protegidos por direitos autorais. O uso pessoal não comercial é permitido.",
+      "2": "Código do Usuário: Membros do portal devem manter engajamento positivo, evitando ações tóxicas, spam ou maliciosas.",
+      "3": "Limite de Responsabilidade: A PGT opera como uma rede de impacto. Fornecemos ferramentas motivacionais como estão e não somos responsáveis por resultados diretos."
+    }
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo de volta, {name}!",
+    "status": "Status da Conta: Ativo",
+    "bioLabel": "Breve Biografia",
+    "bioPlaceholder": "Fale à comunidade sobre você...",
+    "emailLabel": "Endereço de E-mail",
+    "emailLocked": "O endereço de e-mail não pode ser alterado.",
+    "saveSuccess": "Perfil atualizado com sucesso!",
+    "saveError": "Falha ao salvar perfil.",
+    "logsTitle": "Registros de Atividade",
+    "logsEmpty": "Nenhuma atividade registrada ainda.",
+    "noName": "Membro"
+  },
+  "errors": {
+    "404": {
+      "title": "Página Não Encontrada",
+      "description": "A página que você está procurando não existe, pode ter sido movida ou o link está incorreto.",
+      "btnHome": "Ir para a Página Inicial",
+      "btnExplore": "Explorar Programas"
+    },
+    "general": {
+      "title": "Algo Deu Errado",
+      "description": "Ocorreu um erro inesperado ao processar sua solicitação. Por favor, atualize a página ou tente novamente.",
+      "diagnostics": "Diagnósticos de Erro:",
+      "btnRefresh": "Atualizar Página",
+      "btnHome": "Voltar ao Início"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Entrar",
+      "subtitle": "Acesse o painel da sua conta no portal",
+      "email": "Endereço de E-mail",
+      "emailPlaceholder": "Insira seu endereço de e-mail",
+      "password": "Senha",
+      "passwordPlaceholder": "Insira sua senha",
+      "forgot": "Esqueceu a Senha?",
+      "remember": "Lembrar meu endereço de e-mail",
+      "btn": "Entrar",
+      "authenticating": "Autenticando...",
+      "divider": "Ou continue com",
+      "google": "Continuar com Google",
+      "noAccount": "Não tem uma conta?",
+      "create": "Criar conta",
+      "requiredEmail": "E-mail é obrigatório",
+      "requiredPassword": "Senha é obrigatória"
+    },
+    "signUp": {
+      "title": "Criar Conta",
+      "subtitle": "Junte-se à rede global e inicie sua jornada",
+      "fullName": "Nome Completo",
+      "fullNamePlaceholder": "Insira seu nome completo",
+      "email": "Endereço de E-mail",
+      "emailPlaceholder": "Insira seu endereço de e-mail",
+      "password": "Senha",
+      "passwordPlaceholder": "Crie uma senha segura",
+      "confirmPassword": "Confirmar Senha",
+      "confirmPasswordPlaceholder": "Confirme sua senha segura",
+      "btn": "Criar Conta",
+      "creating": "Criando conta...",
+      "divider": "Ou continue com",
+      "google": "Continuar com Google",
+      "hasAccount": "Já tem uma conta?",
+      "signIn": "Entrar",
+      "match": "As senhas coincidem",
+      "noMatch": "As senhas não coincidem",
+      "strength": "Força da senha:",
+      "strengthWeek": "Fraca",
+      "strengthFair": "Razoável",
+      "strengthStrong": "Forte",
+      "requirements": "Requisitos",
+      "reqLength": "8+ Caracteres",
+      "reqUpper": "Letra Maiúscula",
+      "reqLower": "Letra Minúscula",
+      "reqNum": "Número",
+      "reqSpecial": "Caractere Especial",
+      "requiredName": "Nome completo é obrigatório",
+      "requiredEmail": "E-mail é obrigatório",
+      "requiredPassword": "Senha é obrigatória"
+    },
+    "forgot": {
+      "title": "Recuperar Senha",
+      "subtitle": "Receba um link de redefinição seguro na sua caixa de entrada",
+      "email": "Endereço de E-mail",
+      "emailPlaceholder": "Insira seu endereço de e-mail",
+      "btn": "Enviar Link de Recuperação",
+      "sending": "Enviando link...",
+      "successTitle": "E-mail de Recuperação Enviado",
+      "successDesc": "Enviamos um link seguro de redefinição de senha para {email}. Por favor, verifique sua caixa de entrada e pasta de spam.",
+      "btnBack": "Voltar ao Login",
+      "requiredEmail": "E-mail é obrigatório"
+    },
+    "reset": {
+      "title": "Redefinir Senha",
+      "subtitle": "Defina uma nova senha segura para seu perfil do portal",
+      "password": "Nova Senha",
+      "passwordPlaceholder": "Insira sua nova senha",
+      "confirmPassword": "Confirmar Nova Senha",
+      "confirmPasswordPlaceholder": "Confirme sua nova senha",
+      "btn": "Atualizar Senha",
+      "updating": "Atualizando senha...",
+      "noSession": "Nenhuma sessão de recuperação ativa foi detectada. Por favor, solicite um novo link de redefinição.",
+      "hasAccount": "Sabe sua senha?",
+      "signIn": "Entrar",
+      "requiredPassword": "Senha é obrigatória"
+    },
+    "verify": {
+      "title": "Verificar Seu E-mail",
+      "subtitle": "Por favor, confirme sua conta para acessar os recursos da PGT",
+      "pending": "Verificação Pendente",
+      "desc": "Enviamos um link de verificação para {email}. Por favor, clique no link dentro do e-mail para completar seu registro.",
+      "btnResend": "Reenviar E-mail de Verificação",
+      "resending": "Reenviando...",
+      "cooldown": "Reenviar Link em {seconds}s",
+      "btnSignOut": "Sair / Usar Conta Diferente",
+      "alreadyVerified": "Já verificou?",
+      "refresh": "Clique aqui para atualizar"
+    }
+  }
+}

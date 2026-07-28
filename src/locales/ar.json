@@ -1,0 +1,726 @@
+{
+  "navbar": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "programs": "البرامج",
+    "ventures": "المشاريع",
+    "timeline": "الجدول الزمني",
+    "impact": "التأثير",
+    "gallery": "المعرض",
+    "articles": "المقالات",
+    "careers": "الوظائف",
+    "contact": "تواصل معنا",
+    "more": "المزيد",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "account": "الحساب",
+    "dashboard": "لوحة التحكم",
+    "theme": "المظهر",
+    "language": "اللغة",
+    "themeLight": "فاتح",
+    "themeDark": "داكن",
+    "themeSystem": "النظام",
+    "announcementArticle": "مقال جديد منشور — اقرأه الآن! انقر هنا",
+    "announcementCareers": "حملة التوظيف مفتوحة — قدِّم الآن! انقر هنا"
+  },
+  "footer": {
+    "tagline": "شبكة PGT العالمية هي شبكة عالمية يقودها الشباب لتعزيز النمو والتمكين والتحول الهادف.",
+    "quickLinks": "روابط سريعة",
+    "legal": "قانوني",
+    "contactUs": "اتصل بنا",
+    "rights": "جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "الشروط والأحكام",
+    "faq": "الأسئلة الشائعة",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف"
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "submitting": "جارٍ الإرسال...",
+    "error": "خطأ",
+    "success": "نجاح",
+    "back": "رجوع",
+    "required": "مطلوب",
+    "learnMore": "اعرف المزيد",
+    "readMore": "اقرأ المزيد",
+    "applyNow": "تقدم الآن",
+    "explore": "استكشف",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "search": "بحث",
+    "backToHome": "العودة إلى الموقع",
+    "goHome": "اذهب إلى الصفحة الرئيسية",
+    "refresh": "تحديث الصفحة",
+    "returnHome": "العودة للرئيسية"
+  },
+  "home": {
+    "tagline": "النظام البيئي العالمي",
+    "titlePrefix": "تحويل الحياة من خلال",
+    "titleGlow": "الإيجابية والنمو والتحول",
+    "subtitle": "تمكين الأفراد والمنظمات في جميع أنحاء العالم من خلال البرامج المبتكرة والنمو المستدام والتحول الهادف.",
+    "exploreBtn": "استكشف البرامج",
+    "learnBtn": "اعرف المزيد",
+    "valuesTag": "الفلسفة",
+    "valuesTitle": "قيمنا الأساسية",
+    "valuesSubtitle": "الركائز التي تحدد PGT وتشكل شبكة تأثيرنا العالمية",
+    "impactTag": "الوصول العالمي",
+    "impactTitle": "تأثيرنا العالمي",
+    "impactSubtitle": "سبع سنوات من التفاني والابتكار والتحول",
+    "stats": {
+      "lives": "الأرواح المتأثرة",
+      "stories": "قصص النجاح",
+      "programs": "البرامج والحملات",
+      "years": "سنوات التميز"
+    },
+    "programsTag": "المبادرات",
+    "programsTitle": "برامجنا",
+    "programsSubtitle": "مبادرات مبتكرة مصممة لإحداث تأثير دائم",
+    "insightsTag": "رؤى",
+    "insightsTitle": "أحدث المقالات",
+    "insightsSubtitle": "ابقَ محدثاً بأحدث مقالاتنا وتحولات المجتمع ومبادرات تكنولوجيا الشباب.",
+    "coreValues": {
+      "positivity": {
+        "title": "الإيجابية",
+        "description": "كل مبادرة تبدأ بهدف واضح ودافع متحمس لإحداث تغيير حقيقي."
+      },
+      "growth": {
+        "title": "النمو",
+        "description": "نحن نرعى التعلم المستمر والقيادة، مما يساعد الأفراد والمنظمات على تحقيق إمكاناتهم."
+      },
+      "transformation": {
+        "title": "التحول",
+        "description": "نحن نلهم التغيير الإيجابي الذي يرفع الحياة ويقوي المجتمعات ويشكل عالماً أفضل."
+      }
+    }
+  },
+  "about": {
+    "tagline": "من نحن",
+    "title": "تمكين الجيل القادم",
+    "description": "شبكة PGT العالمية هي شبكة دولية يقودها الطلاب مكرسة لدفع التعليم الرقمي وتحول المجتمع وقيادة الشباب عالمياً.",
+    "leadershipTag": "رسالة القيادة",
+    "leadershipTitle": "ملاحظة من مؤسسنا",
+    "quote": "عندما أسست شبكة PGT العالمية، كانت الرؤية بسيطة لكنها قوية: بناء مساحة حيث يتحول الهدف إلى عمل، ويُنمَّى النمو من خلال التعلم الواقعي، ويصبح التحول رحلة مشتركة.",
+    "p1": "ما بدأ كمبادرة صغيرة يقودها الطلاب أصبح الآن شبكة عالمية لمست الحياة في أكثر من 15 دولة.",
+    "p2": "اليوم، تواصل PGT الوقوف من أجل التمكين والتوعية والعمل. كل برنامج نطلقه يقربنا من عالم يكون فيه النمو الهادف طريقة حياة.",
+    "p3": "شكراً لك على أن تكون جزءاً من هذه الرحلة. معاً، لا نغير الحياة فحسب — بل نحول العالم، هدفاً واحداً في كل مرة.",
+    "CEO": "المؤسس والرئيس التنفيذي، شبكة PGT العالمية",
+    "gratitude": "بالامتنان والحماس لما هو قادم،",
+    "philosophyTag": "الفلسفة",
+    "philosophyTitle": "مبادئنا التأسيسية",
+    "philosophySubtitle": "المعتقدات الأساسية التي وجهتنا منذ اليوم الأول",
+    "principles": {
+      "purpose": {
+        "title": "موجه بالهدف",
+        "description": "كل مبادرة تبدأ بمهمة لإحداث تأثير حقيقي ودائم."
+      },
+      "people": {
+        "title": "متمحور حول الناس",
+        "description": "نؤمن بالإمكانات البشرية ونستثمر في تطوير الأفراد."
+      },
+      "global": {
+        "title": "رؤية عالمية",
+        "description": "ربط المجتمعات عبر القارات، وبناء عالم موحد من المتعلمين والقادة."
+      },
+      "excellence": {
+        "title": "التميز",
+        "description": "السعي لأعلى المعايير في برامجنا وشراكاتنا وتأثيرنا."
+      },
+      "sustainability": {
+        "title": "الاستدامة",
+        "description": "انضم إلينا في مهمتنا لدفع التغيير الإيجابي وإحداث تأثير دائم في المجتمعات حول العالم."
+      }
+    }
+  },
+  "programs": {
+    "tagline": "مبادرات PGT العالمية الأساسية",
+    "title": "برامجنا",
+    "description": "مبادرات شاملة مصممة لتحويل الحياة والمجتمعات من خلال النمو الهادف",
+    "portfolioTag": "المحفظة",
+    "portfolioTitle": "برامج تحويلية لكل رحلة",
+    "portfolioSubtitle": "من التحول الرقمي إلى التطوير الشخصي، صُممت برامجنا لتلبية الاحتياجات المتنوعة.",
+    "learnMore": "اعرف المزيد",
+    "timelineTitle": "المكونات الرئيسية",
+    "impactTitle": "التأثير الجوهري",
+    "durationTitle": "المدة والنطاق",
+    "applyBtn": "تقدم الآن",
+    "scheduleBtn": "جدولة جلسة مجانية",
+    "d3": {
+      "name": "برنامج D3",
+      "fullName": "Daily Discovery Digest",
+      "description": "سلسلة إلهام يومية رائدة تقدم المعرفة والتوعية والقصص المؤثرة للطلاب.",
+      "features": [
+        "قصص يومية على Instagram وFacebook",
+        "أبرز الأيام الوطنية والدولية",
+        "المعالم التاريخية",
+        "ذكريات الشخصيات العظيمة",
+        "قصص تأثير حقيقية",
+        "اكتشف الاستثنائي كل يوم"
+      ],
+      "impact": "أكثر من 10,000 قارئ ومتعلم يومي منخرط",
+      "duration": "برنامج يومي مستمر"
+    },
+    "voa": {
+      "name": "مبادرة VoA",
+      "fullName": "Voices of Ability",
+      "description": "سلسلة رواية تسلط الضوء على الأفراد الذين حولوا التحديات إلى تغيير وتأثير.",
+      "features": [
+        "تسجيلات رحلات الحياة",
+        "قصص بناء التعاطف",
+        "الوعي بالإعاقة والقدرة",
+        "حلقات فيديو منشورة عبر الإنترنت",
+        "التمكين من خلال رواية القصص",
+        "الإلهام للتغيير الاجتماعي"
+      ],
+      "impact": "عشرات الرحلات القوية مشتركة ومحتفى بها",
+      "duration": "مبادرة رواية مستمرة"
+    },
+    "seminarix": {
+      "name": "Seminarix",
+      "fullName": "سلسلة ندوات للطلاب",
+      "description": "جلسات ندوات ميدانية تمكّن الطلاب بأدوات أكاديمية وتحفيزية وصحية.",
+      "features": [
+        "محاضرات تحفيزية",
+        "استراتيجيات أكاديمية",
+        "إرشادات الصحة النفسية",
+        "تقنيات التحضير للامتحانات",
+        "جلسات تفاعلية في المدارس والمساكن",
+        "مشاركة قصص حقيقية"
+      ],
+      "impact": "مئات من الطلاب تمت توجيههم من خلال جلسات مدرسية وسكنية",
+      "duration": "سلسلة ندوات مستمرة"
+    },
+    "motivminds": {
+      "name": "MotiVMinds",
+      "fullName": "التمكين بدقيقة واحدة",
+      "description": "جلسات افتراضية تفاعلية تتناول الصحة النفسية للشباب والرفاه العاطفي والتطوير الشخصي.",
+      "features": [
+        "مقاطع فيديو مدة دقيقة",
+        "رؤى النمو الشخصي",
+        "تحفيز الطلاب والمتطوعين",
+        "حكمة العالم الحقيقي",
+        "تنسيقات رسائل قصيرة وجذابة",
+        "محتوى تمكيني مستمر"
+      ],
+      "impact": "مجتمع شبابي منخرط ومُمكَّن",
+      "duration": "سلسلة فيديو مستمرة"
+    },
+    "hed": {
+      "name": "حملة HED",
+      "fullName": "حملة Happy Eco Diwali",
+      "description": "حملة احتفالية خضراء سنوية تدعو إلى ممارسات صديقة للبيئة خلال المهرجانات.",
+      "features": [
+        "حملات توعية",
+        "مسابقة الابتكار",
+        "حملات زراعة الأشجار",
+        "مبادرة مهمة ENOSAVE",
+        "مشاركة الطلاب والمجتمع"
+      ],
+      "impact": "آلاف منخرطون سنوياً في احتفالات Diwali الصديقة للبيئة",
+      "duration": "حملة سنوية متكررة"
+    }
+  },
+  "timeline": {
+    "tagline": "معالم PGT العالمية",
+    "title": "رحلتنا",
+    "description": "سبع سنوات من النمو والتحول والتأثير — من رؤية إلى شبكة عالمية",
+    "historyTag": "التاريخ",
+    "historyTitle": "جدول زمني للتحول",
+    "historySubtitle": "استكشف المعالم الرئيسية التي وسمت مسيرتنا وحددت نموّنا.",
+    "milestones": {
+      "2019": {
+        "title": "الشرارة",
+        "description": "بدأت PGT كمبادرة مدرسية صغيرة تركز على التوعية والعمل البيئي.",
+        "achievements": [
+          "أطلقت أول حملة Happy Eco Diwali (HED)",
+          "نظمت اختبارات لدعم الزملاء خلال التحضير للامتحانات",
+          "شجعت الاحتفالات البيئية في المجتمع المحلي",
+          "زرعت فكرة الهدف والنمو والتحول"
+        ]
+      },
+      "2020": {
+        "title": "النمو المبكر",
+        "description": "توسعت المبادرات الصغيرة بأنشطة تعليمية وتوعوية.",
+        "achievements": [
+          "أجرت اختبارات توعية تعليمية",
+          "حافظت على حملات التوعية البيئية رغم تحديات الجائحة",
+          "أشركت الطلاب في صيغ محلية وعبر الإنترنت",
+          "ألهمت أول تجارب نجاح طلابية موثقة"
+        ]
+      },
+      "2021": {
+        "title": "العمل المتسق",
+        "description": "واصلت PGT من خلال حملات التوعية والحملات البيئية السنوية.",
+        "achievements": [
+          "أقامت فعاليات توعية صغيرة في المدارس",
+          "وسّعت حملة HED إلى طبعتها الثالثة",
+          "نظمت نقاشات تحفيزية بين الأقران",
+          "حافظت على مشاركة الطلاب رغم النطاق المحدود"
+        ]
+      },
+      "2022": {
+        "title": "بناء الأسس",
+        "description": "ركزت على الحفاظ على الاستمرارية مع المبادرات البيئية.",
+        "achievements": [
+          "نفذت الطبعة الرابعة من حملة HED مع متطوعين جدد",
+          "أجرت منشورات ومسابقات توعية عبر الإنترنت على نطاق صغير",
+          "بدأت التجريب بصيغ منظمة للتأثير",
+          "عززت هوية PGT كحركة يقودها الطلاب"
+        ]
+      },
+      "2023": {
+        "title": "الاستعداد للتأثير",
+        "description": "اختبرت PGT صيغاً جديدة وعززت الأسس.",
+        "achievements": [
+          "احتفلت بالطبعة الخامسة من HED بوصول أوسع",
+          "شاركت في حملات مصغرة لاختبار استجابة الطلاب",
+          "شكّلت رؤية لهوية عالمية أكبر",
+          "جهّزت هيكلاً للبرامج القادمة"
+        ]
+      },
+      "2024": {
+        "title": "نحو التأثير العالمي",
+        "description": "أعيد تسميتها كشبكة PGT العالمية وأطلقت برامج رائدة كبرى.",
+        "achievements": [
+          "أطلقت VoA وMotivMinds وD3 وSeminarix كبرامج رائدة",
+          "Seminarix عاد إلى مدرسة المؤسس السابقة بنجاح كبير",
+          "VoA وMotivMinds ألهمت الجماهير بقصص حقيقية",
+          "تجاوزت 10,000 مشارك في السنة الأولى"
+        ]
+      },
+      "2025": {
+        "title": "مواصلة الرحلة",
+        "description": "شبكة PGT العالمية تتوسع بنشاط في البرامج وتبني فرصاً جديدة.",
+        "achievements": [
+          "ستنظم الطبعة السابعة من Happy Eco Diwali بمشاركة قوية",
+          "توسيع نطاق VoA وMotivMinds وD3 وSeminarix عبر المنصات",
+          "بناء تعاونات مع المدارس والجامعات والشبكات العالمية",
+          "التركيز على تمكين آلاف الطلاب الإضافيين هذا العام"
+        ]
+      }
+    }
+  },
+  "ventures": {
+    "tagline": "مظلة PGT",
+    "title": "نظام PGT البيئي",
+    "description": "تبني شبكة PGT العالمية نظاماً بيئياً من المشاريع عبر مجالات مختلفة، تعمل كل منها نحو المهمة الأشمل لإحداث تأثير إيجابي.",
+    "heading": "مشاريعنا",
+    "launchingSoon": "الإطلاق قريباً",
+    "comingSoon": "قريباً",
+    "launchDate": "الإطلاق في {launchDate}",
+    "target": "الهدف: {target}",
+    "visitWebsite": "زيارة الموقع",
+    "futureTitle": "مشاريع مستقبلية",
+    "futureDesc": "مشاريع إضافية قيد التطوير حالياً وسيتم الإعلان عنها قريباً."
+  },
+  "impact": {
+    "tagline": "نتائج نمو PGT العالمي",
+    "title": "تأثيرنا",
+    "description": "كيف تحول PGT المجتمعات وتمكن قادة الشباب وتخلق فرصاً عالمية",
+    "metricsTag": "المقاييس",
+    "metricsTitle": "تقدم مقيس ونجاح مشترك",
+    "metricsSubtitle": "أرقامنا تعكس التزامنا بالنمو الواقعي والتنمية المجتمعية المستدامة.",
+    "areas": {
+      "education": {
+        "title": "تعليم جيد",
+        "description": "سد فجوات التعلم من خلال الموارد الرقمية والإرشاد المهني وأدوات الدعم الأكاديمي."
+      },
+      "leadership": {
+        "title": "تطوير القيادة",
+        "description": "تنمية مهارات الإدارة والتكنولوجيا والخطابة عند الشباب المغيِّر."
+      },
+      "community": {
+        "title": "النهوض بالمجتمع",
+        "description": "قيادة الحملات البيئية المحلية والندوات التحفيزية وأعمال الخدمة التطوعية."
+      }
+    },
+    "storiesTag": "القصص",
+    "storiesTitle": "تحولات المجتمع",
+    "storiesSubtitle": "اقرأ كيف أثّر النظام البيئي الرقمي لـ PGT في الطلاب والمتطوعين والشركاء عالمياً."
+  },
+  "gallery": {
+    "tagline": "أرشيف وسائط PGT العالمية",
+    "title": "معرض الوسائط",
+    "description": "لقطات من تأثيرنا العالمي والندوات المدرسية وقمم الطلاب وحملات التواصل المجتمعي",
+    "categories": {
+      "all": "جميع الصور",
+      "seminars": "الندوات",
+      "campaigns": "الحملات",
+      " summits": "القمم",
+      "outreach": "التواصل"
+    },
+    "viewImage": "عرض الصورة",
+    "close": "إغلاق"
+  },
+  "articles": {
+    "tagline": "رؤى",
+    "title": "رؤى وقصص",
+    "description": "اكتشف الموارد والأدلة التخصصية وقصص الطلاب التي تشكل تمكين الشباب.",
+    "searchPlaceholder": "ابحث في المقالات بالعنوان والمحتوى والوسوم...",
+    "noArticles": "لم يتم العثور على مقالات تطابق معاييرك.",
+    "tags": "الوسوم:",
+    "back": "العودة إلى المقالات",
+    "share": "مشاركة",
+    "readTime": "{time}",
+    "list": {
+      "1": {
+        "title": "تحويل الشباب من خلال التعلم التكنولوجي",
+        "excerpt": "البرامج الرقمية تزود الشباب بالمهارات والثقة والفرص.",
+        "content": "<p>Technology has rapidly become the foundation of modern society, shaping the way people learn, work, and interact. For today's youth, digital learning is not just a privilege but a necessity. In communities across the globe, students are increasingly embracing digital tools that equip them with knowledge, confidence, and life-changing opportunities.</p><br><p>One of the greatest advantages of technology in education is accessibility. Online platforms, mobile applications, and interactive tools allow students in rural or underserved areas to connect with high-quality learning resources. This democratization of knowledge ensures that no young person is left behind, regardless of geography or socio-economic background.</p><br><p>Beyond accessibility, technology also fosters creativity and critical thinking. Through project-based learning, coding programs, and digital collaboration, youth can solve real-world problems and innovate with confidence. These skills extend beyond the classroom, empowering them to become leaders, entrepreneurs, and changemakers in their communities.</p><br><p>Moreover, technology is reshaping career paths. With industries demanding digital literacy, coding, data analysis, and AI knowledge, young people who embrace technology stand out in the workforce. By equipping youth with these future-ready skills, we prepare them for sustainable careers and enable them to contribute meaningfully to global development.</p><br><p>However, the journey is not without challenges. Many regions face issues such as limited internet connectivity, lack of devices, or inadequate training for educators. Overcoming these hurdles requires a collaborative effort between governments, NGOs, and private sectors to build infrastructure, provide training, and ensure equitable access.</p><br><p>Ultimately, transforming youth through technology learning is about more than just academic success. It's about building resilience, nurturing confidence, and creating opportunities for young people to thrive in an interconnected world. As we invest in digital education, we invest in a brighter, more inclusive future for all.</p>"
+      },
+      "2": {
+        "title": "المجتمعات المستدامة وتأثير الطلاب",
+        "excerpt": "الحملات البيئية والتوعية تبني مجتمعات طلابية مستدامة عالمياً.",
+        "content": "<p>Sustainability is no longer a buzzword; it is a call to action. Around the world, students are leading the charge in building eco-conscious communities and reshaping the way we think about the environment. From reducing plastic use to spearheading renewable energy campaigns, young people are proving that small steps can create meaningful global change.</p><br><p>One of the most powerful tools for sustainability lies in awareness. Students organizing campaigns, workshops, and green clubs are raising awareness about pressing issues such as climate change, waste reduction, and conservation. This peer-to-peer learning not only educates but also inspires entire communities to adopt eco-friendly practices.</p><br><p>Beyond awareness, action is critical. Many student-led initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment.</p><br><p>Technology also plays a significant role. Social media allows young activists to amplify their messages, connect with global networks, and advocate for systemic changes. Building sustainable communities requires collaboration. Students who work hand-in-hand with educators, local governments, and NGOs can scale their impact and create lasting change.</p><br><p>The ultimate impact of student-led sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>"
+      },
+      "3": {
+        "title": "التطوير العالمي: اتجاهات يقودها الطلاب",
+        "excerpt": "اتجاهات قيادة الطلاب تعيد تشكيل التطوير بالابتكار والتأثير.",
+        "content": "<p>The future of global development is being shaped not only by policymakers and organizations but also by students. With innovation, determination, and digital fluency, today's youth are redefining the way societies address issues such as poverty, education, and equality. Their leadership is setting new trends that promise long-lasting impact worldwide.</p><br><p>One trend is the rise of social entrepreneurship. Students are launching startups that address local and global challenges, from clean water initiatives to sustainable farming solutions. These ventures not only solve pressing issues but also generate employment and foster innovation at the grassroots level.</p><br><p>Another trend is digital advocacy. Students are using online platforms to voice concerns about climate change, human rights, and gender equality. Their ability to mobilize audiences quickly has turned grassroots movements into global campaigns, influencing decision-makers and shaping public opinion.</p><br><p>Collaborative learning is also gaining traction. International student exchange programs, hackathons, and global forums are giving young people platforms to share ideas, challenge perspectives, and co-create solutions. Technology plays a central role in amplifying these trends.</p><br><p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is undeniably student-led.</p>"
+      },
+      "4": {
+        "title": "رحلات الخريجين: قصص تغيير ملهمة",
+        "excerpt": "صمود الخريجين يلهم المجتمعات ويحدث تغييراً إيجابياً.",
+        "content": "<p>Graduating is more than earning a degree; it's the beginning of a journey that often inspires change within communities. Around the world, graduates are using their skills, resilience, and stories of perseverance to spark meaningful transformation, proving that education is one of the most powerful tools for change.</p><br><p>Many graduates return to their hometowns with a vision to uplift their communities. Some open schools to provide better education for local children, while others launch social enterprises that address pressing issues like unemployment or healthcare. Their actions showcase how education extends beyond personal growth to collective advancement.</p><br><p>Stories of resilience also inspire others. Graduates who overcame poverty, discrimination, or other challenges often share their journeys, encouraging younger students to dream big and pursue education. These narratives not only motivate but also build a culture of persistence and hope.</p><br><p>Moreover, graduates play a crucial role in mentoring. By guiding younger students through internships, workshops, and volunteer programs, they ensure that the next generation has the tools and confidence to succeed. Ultimately, graduate stories highlight that success is not measured solely by personal achievement but by the positive change one brings to society.</p>"
+      },
+      "5": {
+        "title": "الابتكار في الفصول الدراسية للتعلم المستقبلي",
+        "excerpt": "دمج الابتكار والتكنولوجيا يجعل التعلم شاملاً ومؤثراً.",
+        "content": "<p>Education is undergoing a paradigm shift, driven by technology and progressive teaching models. The traditional classroom layout is transforming into an interactive, digital space where learning is personalized, inclusive, and tailored for the future.</p><br><p>At the center of classroom innovation is gamification. Integrating educational games, quizzes, and simulations makes complex concepts engaging and memorable. Students are no longer passive listeners; they become active participants who explore ideas, solve challenges, and collaborate dynamically.</p><br><p>Another breakthrough is personalized learning. AI-driven platforms can analyze student performance and adjust learning paths accordingly. This ensures that fast learners remain challenged while students who need more support receive targeted guidance, creating a balanced and supportive classroom environment.</p><br><p>Virtual and augmented reality (VR/AR) are also expanding horizons. Students can now embark on virtual field trips to historic sites, dive deep into human anatomy, or explore molecular chemistry, turning abstract concepts into tangible experiences.</p><br><p>Fostering this shift requires empowering educators. Providing training, modern equipment, and support allows teachers to lead innovative classrooms with confidence. When schools and communities invest in progressive education, they open pathways for students to achieve their potential and solve future global challenges.</p>"
+      }
+    }
+  },
+  "careers": {
+    "tagline": "انضم إلى النظام البيئي",
+    "title": "ابنِ المستقبل مع PGT",
+    "description": "نحن مجتمع عالمي من المبتكرين والبنّائين والقادة. استكشف الفرص المفتوحة للمساهمة في مشاريعنا.",
+    "benefitsTag": "المزايا",
+    "benefitsTitle": "لماذا تنضم إلى PGT؟",
+    "benefitsSubtitle": "نقدم نظاماً بيئياً مرناً وداعماً مصمماً لرعاية نموك المهني والشخصي.",
+    "list": {
+      "remote": "سير عمل عن بُعد أولاً",
+      "growth": "إرشاد قيادي مستمر",
+      "scale": "التأثير في ملايين الطلاب حول العالم",
+      "network": "الوصول إلى شبكة أقران عالمية"
+    },
+    "positionsTag": "الفرص",
+    "positionsTitle": "المناصب الجوهرية المفتوحة",
+    "positionsSubtitle": "استكشف الأدوار في التكنولوجيا والإعلام الإبداعي والتواصل والإدارة.",
+    "role": "الدور:",
+    "type": "النوع:",
+    "hours": "الالتزام:",
+    "apply": "تقدم الآن",
+    "positions": {
+      "cod": {
+        "title": "Chief Operations Director (COD)",
+        "department": "العمليات",
+        "responsibilities": [
+          "إدارة عمليات الفريق اليومية والجداول الزمنية والتنسيق الداخلي",
+          "تتبع المهام وضمان التنفيذ السلس للبرامج",
+          "التعاون مع جميع الأقسام للحفاظ على مسار المشاريع في الوقت المحدد"
+        ]
+      },
+      "cco": {
+        "title": "Chief Communications Officer (CCO)",
+        "department": "الاتصالات",
+        "responsibilities": [
+          "كتابة ومراجعة جميع المحتويات: تعليقات ومنشورات ووثائق داخلية ونصوص",
+          "الحفاظ على نبرة وصوت PGT عبر جميع المنصات",
+          "التعاون مع فريقي العلاقات العامة والتصميم للحملات"
+        ]
+      },
+      "cd": {
+        "title": "Creative Director (CD)",
+        "department": "الإبداعي",
+        "responsibilities": [
+          "تصميم الملصقات والكاروسيلات وتحرير مقاطع الفيديو والريلز والصور المصغرة وجميع إبداعات العلامة التجارية",
+          "الحفاظ على الهوية البصرية والاتساق عبر جميع المنصات",
+          "دعم جميع الأقسام بمحتوى التصميم والوسائط"
+        ]
+      },
+      "cso": {
+        "title": "Chief Strategy Officer (CSO)",
+        "department": "الاستراتيجية",
+        "responsibilities": [
+          "قيادة أفكار الحملات والابتكار والتخطيط",
+          "تحليل ما يعمل واقتراح التحسينات",
+          "المساعدة في بناء استراتيجيات طويلة المدى لبرامج PGT"
+        ]
+      },
+      "prh": {
+        "title": "Public Relations Head (PRH)",
+        "department": "العلاقات العامة",
+        "responsibilities": [
+          "تمثيل PGT علناً وبناء التعاونات",
+          "التعامل مع التواصل مع الجامعات والمنظمات غير الحكومية والإعلام والمؤثرين",
+          "دعم رؤية وتواصل العلامة التجارية"
+        ]
+      },
+      "cap": {
+        "title": "Campus Director (CAP)",
+        "department": "علاقات الحرم الجامعي",
+        "responsibilities": [
+          "العمل كحلقة الوصل الرسمية بين PGT والحرم الجامعي",
+          "تنظيم الأنشطة الميدانية وتمثيل PGT في الفعاليات",
+          "تعزيز الوعي والمشاركة داخل الحرم الجامعي"
+        ]
+      },
+      "ctd": {
+        "title": "Chief Technical Director (CTD)",
+        "department": "التكنولوجيا",
+        "responsibilities": [
+          "بناء وإدارة الموقع الرسمي لـ PGT",
+          "إنشاء صفحات تسجيل الفعاليات وصفحات الهبوط",
+          "الحفاظ على تكاملات النماذج والتحليلات والأدوات الرقمية"
+        ]
+      },
+      "gsec": {
+        "title": "General Secretary (GSEC)",
+        "department": "الإدارة",
+        "responsibilities": [
+          "التعامل مع الوثائق الرسمية والرسائل والإعلانات الداخلية",
+          "دعم المؤسس في الحفاظ على الهيكل والمتابعات",
+          "تتبع سير العمل الداخلي وسجلات التواصل"
+        ]
+      }
+    }
+  },
+  "apply": {
+    "title": "انضم إلى فريق PGT الأساسي",
+    "subtitle": "أكمل تفاصيل الطلب أدناه للتقدم للمنصب المرغوب.",
+    "form": {
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أدخل اسمك الكامل",
+      "email": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+      "position": "المنصب المرغوب",
+      "selectPosition": "اختر منصباً",
+      "resume": "رابط السيرة الذاتية (Google Drive، Dropbox، إلخ.)",
+      "resumePlaceholder": "أدخل رابط URL لسيرتك الذاتية",
+      "coverLetter": "لماذا تريد الانضمام إلى PGT؟",
+      "coverLetterPlaceholder": "أخبرنا عن دوافعك ومهاراتك وكيف تخطط للمساهمة...",
+      "submit": "إرسال الطلب",
+      "successTitle": "تم إرسال الطلب!",
+      "successDesc": "شكراً لتقديمك. سيراجع فريق القيادة طلبك ويتواصل معك في غضون 5-7 أيام عمل.",
+      "backToCareers": "العودة إلى الوظائف"
+    }
+  },
+  "contact": {
+    "tagline": "تواصل معنا",
+    "title": "يسعدنا سماعك",
+    "description": "هل لديك أسئلة حول برامجنا، استفسارات شراكة، أو تريد التطوع؟ تواصل مع فريقنا مباشرة.",
+    "details": {
+      "email": "office@pgtglobalnetwork.com",
+      "phone": "+91 8999902805",
+      "address": "داريابور، ماهاراشترا، الهند"
+    },
+    "form": {
+      "name": "اسمك",
+      "namePlaceholder": "أدخل اسمك",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+      "subject": "الموضوع",
+      "subjectPlaceholder": "أدخل موضوع الرسالة",
+      "message": "الرسالة",
+      "messagePlaceholder": "اكتب تفاصيل رسالتك هنا...",
+      "send": "إرسال الرسالة",
+      "successToast": "تم إرسال الرسالة بنجاح!",
+      "errorToast": "فشل إرسال الرسالة. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "faq": {
+    "tagline": "الدعم",
+    "title": "الأسئلة الشائعة",
+    "description": "ابحث عن إجابات سريعة للأسئلة الشائعة حول برامجنا وعضوياتنا وعملياتنا العالمية.",
+    "categories": {
+      "all": "جميع الأسئلة",
+      "programs": "البرامج",
+      "ventures": "المشاريع",
+      "involvement": "المشاركة"
+    },
+    "contactTitle": "هل لا تزال لديك أسئلة؟",
+    "contactDesc": "لا تجد الإجابات التي تبحث عنها؟ تواصل مع فريق الدعم المتطوع لدينا.",
+    "contactBtn": "اتصل بالدعم",
+    "list": {
+      "1": {
+        "question": "ما هي شبكة PGT العالمية؟",
+        "answer": "شبكة PGT العالمية هي منظمة يقودها الطلاب وموجهة بالهدف تمكّن الأفراد من خلال القيادة والتوعية والتعليم والبرامج المجتمعية. تأسست في 2019، ونمت لتصبح منصة يكتشف فيها الطلاب التعلم الواقعي والتأثير الهادف."
+      },
+      "2": {
+        "question": "ما البرامج التي تقدمها PGT؟",
+        "answer": "ندير مبادرات رائدة تشمل D3 (Daily Discovery Digest) وVoA (Voices of Ability) وورش Seminarix وسلسلة فيديو MotivMinds وحملة HED السنوية – Happy Eco Diwali."
+      },
+      "3": {
+        "question": "كيف يمكنني المشاركة في برنامج؟",
+        "answer": "لكل برنامج طريقة مشاركته الخاصة. يتم نشر MotivMinds وD3 على منصاتنا الاجتماعية، وSeminarix يُقدَّم مباشرة في المدارس والمساكن، وVoA يقبل الرواة الضيوف بالدعوة أو التقديم."
+      },
+      "4": {
+        "question": "هل البرامج مجانية؟",
+        "answer": "نعم، تُقدَّم جميع مبادرات شبكة PGT العالمية تقريباً مجاناً. هدفنا جعل التوعية والتعلم والتمكين في متناول الجميع."
+      },
+      "5": {
+        "question": "أين مقر PGT؟",
+        "answer": "مقر شبكة PGT العالمية في دارياپور، ماهاراشترا، الهند. رغم أننا نعمل من مدينتنا الأصلية، تمتد وصولنا عالمياً من خلال المنصات الرقمية."
+      },
+      "6": {
+        "question": "من يمكنه الانضمام إلى برامج PGT أو الاستفادة منها؟",
+        "answer": "يمكن لأي شخص مهتم بالقيادة والتعلم والنمو الشخصي الاستفادة من برامجنا."
+      },
+      "7": {
+        "question": "هل يمكن للمنظمات أو الأفراد الشراكة مع PGT؟",
+        "answer": "نعم، نرحب بالشراكات. للتعاون، يمكنك التواصل على office@pgtglobalnetwork.com."
+      },
+      "8": {
+        "question": "كيف يمكنني البقاء على اطلاع بمبادرات PGT؟",
+        "answer": "يمكنك متابعتنا على Instagram وLinkedIn وYouTube، أو زيارة موقعنا pgtglobalnetwork.com."
+      },
+      "9": {
+        "question": "كيف يمكنني الإبلاغ عن مشكلة تقنية؟",
+        "answer": "إذا واجهت مشاكل تقنية، يمكنك التواصل معنا على office@pgtglobalnetwork.com مع التفاصيل أو لقطات الشاشة."
+      }
+    }
+  },
+  "privacy": {
+    "tagline": "معلومات قانونية",
+    "title": "سياسة الخصوصية",
+    "description": "آخر تحديث: 27 يوليو 2026. توضح هذه السياسة كيفية تعامل شبكة PGT العالمية مع بيانات المستخدمين والأمان والخصوصية.",
+    "heading": "شروط الخصوصية والبيانات",
+    "bullets": {
+      "1": "جمع البيانات: نجمع فقط التفاصيل الضرورية (الاسم والبريد الإلكتروني) للتسجيل وتحديثات النشرة الإخبارية وتقديمات البرامج.",
+      "2": "الأمان: تُشفَّر كلمات مرور المستخدمين. نحافظ على فلاتر أمان قياسية لمنع تسرب البيانات والوصول غير المصرح به.",
+      "3": "الأطراف الثالثة: نحن لا نبيع أو نتاجر بمعلومات المستخدم مع جهات تسويق خارجية. تُبقَى بيانات التحليلات مجهولة الهوية."
+    }
+  },
+  "terms": {
+    "tagline": "الشروط القانونية",
+    "title": "الشروط والأحكام",
+    "description": "آخر تحديث: 27 يوليو 2026. بالوصول إلى بوابة شبكة PGT العالمية، فأنت توافق على الامتثال لمعايير مجتمعنا وشروط الخدمة.",
+    "heading": "شروط الموقع القياسية",
+    "bullets": {
+      "1": "حقوق الاستخدام: محتوى المنصة والرموز والتصاميم والمواد محمية بحقوق الملكية الفكرية. يُسمح بالاستخدام الشخصي غير التجاري.",
+      "2": "قواعد المستخدم: يجب على أعضاء البوابة الحفاظ على تفاعل إيجابي وتجنب الإجراءات السامة والبريد العشوائي والضارة.",
+      "3": "حد المسؤولية: تعمل PGT كشبكة تأثير. نقدم أدوات تحفيزية كما هي ولسنا مسؤولين عن النتائج المباشرة."
+    }
+  },
+  "dashboard": {
+    "welcome": "مرحباً بعودتك، {name}!",
+    "status": "حالة الحساب: نشط",
+    "bioLabel": "نبذة قصيرة",
+    "bioPlaceholder": "أخبر المجتمع عن نفسك...",
+    "emailLabel": "عنوان البريد الإلكتروني",
+    "emailLocked": "لا يمكن تغيير عنوان البريد الإلكتروني.",
+    "saveSuccess": "تم تحديث الملف الشخصي بنجاح!",
+    "saveError": "فشل حفظ الملف الشخصي.",
+    "logsTitle": "سجلات النشاط",
+    "logsEmpty": "لم يتم تسجيل أي نشاط بعد.",
+    "noName": "عضو"
+  },
+  "errors": {
+    "404": {
+      "title": "الصفحة غير موجودة",
+      "description": "الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها أو الرابط غير صحيح.",
+      "btnHome": "اذهب إلى الصفحة الرئيسية",
+      "btnExplore": "استكشف البرامج"
+    },
+    "general": {
+      "title": "حدث خطأ ما",
+      "description": "حدث خطأ غير متوقع أثناء معالجة طلبك. يرجى تحديث الصفحة أو المحاولة مرة أخرى.",
+      "diagnostics": "تشخيصات الخطأ:",
+      "btnRefresh": "تحديث الصفحة",
+      "btnHome": "العودة للرئيسية"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "تسجيل الدخول",
+      "subtitle": "الوصول إلى لوحة تحكم حساب البوابة",
+      "email": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة مرورك",
+      "forgot": "هل نسيت كلمة المرور؟",
+      "remember": "تذكر عنوان بريدي الإلكتروني",
+      "btn": "تسجيل الدخول",
+      "authenticating": "جارٍ المصادقة...",
+      "divider": "أو المتابعة مع",
+      "google": "المتابعة مع Google",
+      "noAccount": "ليس لديك حساب؟",
+      "create": "إنشاء حساب",
+      "requiredEmail": "البريد الإلكتروني مطلوب",
+      "requiredPassword": "كلمة المرور مطلوبة"
+    },
+    "signUp": {
+      "title": "إنشاء حساب",
+      "subtitle": "انضم إلى الشبكة العالمية وابدأ رحلتك",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أدخل اسمك الكامل",
+      "email": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أنشئ كلمة مرور آمنة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أكد كلمة مرورك الآمنة",
+      "btn": "إنشاء حساب",
+      "creating": "جارٍ إنشاء الحساب...",
+      "divider": "أو المتابعة مع",
+      "google": "المتابعة مع Google",
+      "hasAccount": "هل لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "match": "كلمتا المرور متطابقتان",
+      "noMatch": "كلمتا المرور غير متطابقتين",
+      "strength": "قوة كلمة المرور:",
+      "strengthWeek": "ضعيفة",
+      "strengthFair": "متوسطة",
+      "strengthStrong": "قوية",
+      "requirements": "المتطلبات",
+      "reqLength": "8+ أحرف",
+      "reqUpper": "حرف كبير",
+      "reqLower": "حرف صغير",
+      "reqNum": "رقم",
+      "reqSpecial": "حرف خاص",
+      "requiredName": "الاسم الكامل مطلوب",
+      "requiredEmail": "البريد الإلكتروني مطلوب",
+      "requiredPassword": "كلمة المرور مطلوبة"
+    },
+    "forgot": {
+      "title": "استعادة كلمة المرور",
+      "subtitle": "احصل على رابط إعادة تعيين آمن في صندوق البريد المسجل",
+      "email": "عنوان البريد الإلكتروني",
+      "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني",
+      "btn": "إرسال رابط الاستعادة",
+      "sending": "جارٍ إرسال الرابط...",
+      "successTitle": "تم إرسال بريد الاستعادة",
+      "successDesc": "لقد أرسلنا رابط إعادة تعيين آمن لكلمة المرور إلى {email}. يرجى التحقق من صندوق الوارد ومجلد الرسائل غير المرغوب فيها.",
+      "btnBack": "العودة إلى تسجيل الدخول",
+      "requiredEmail": "البريد الإلكتروني مطلوب"
+    },
+    "reset": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "حدد كلمة مرور آمنة جديدة لملف البوابة",
+      "password": "كلمة المرور الجديدة",
+      "passwordPlaceholder": "أدخل كلمة مرورك الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "confirmPasswordPlaceholder": "أكد كلمة مرورك الجديدة",
+      "btn": "تحديث كلمة المرور",
+      "updating": "جارٍ تحديث كلمة المرور...",
+      "noSession": "لم يتم الكشف عن جلسة استعادة نشطة. يرجى طلب رابط إعادة تعيين جديد.",
+      "hasAccount": "هل تعرف كلمة مرورك؟",
+      "signIn": "تسجيل الدخول",
+      "requiredPassword": "كلمة المرور مطلوبة"
+    },
+    "verify": {
+      "title": "التحقق من بريدك الإلكتروني",
+      "subtitle": "يرجى تأكيد حسابك للوصول إلى ميزات PGT",
+      "pending": "التحقق معلق",
+      "desc": "لقد أرسلنا رابط التحقق إلى {email}. يرجى النقر على الرابط في البريد الإلكتروني لإكمال التسجيل.",
+      "btnResend": "إعادة إرسال بريد التحقق",
+      "resending": "جارٍ إعادة الإرسال...",
+      "cooldown": "إعادة إرسال الرابط في {seconds}ث",
+      "btnSignOut": "تسجيل الخروج / استخدام حساب آخر",
+      "alreadyVerified": "تم التحقق بالفعل؟",
+      "refresh": "انقر هنا للتحديث"
+    }
+  }
+}

@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff, User, ArrowRight, Loader2, Check, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
+import { useTheme } from '../../contexts/ThemeContext'
 import HeroBackground from '../../components/HeroBackground'
 import AnimatedCard from '../../components/AnimatedCard'
+import { useLanguage } from '../../contexts/LanguageContext'
 
 const SignUp: React.FC = () => {
   const { signUp, signInWithGoogle, user } = useAuth()
+  const { resolvedTheme } = useTheme()
+  const { t } = useLanguage()
   const navigate = useNavigate()
 
   const [fullName, setFullName] = useState('')
@@ -49,11 +53,11 @@ const SignUp: React.FC = () => {
 
   const getStrengthLabelAndColor = () => {
     if (password.length === 0) return { label: '', color: 'bg-transparent', text: '' }
-    if (strengthScore <= 2) return { label: 'Weak', color: 'bg-red-500 w-1/5', text: 'text-red-500' }
-    if (strengthScore === 3) return { label: 'Fair', color: 'bg-orange-500 w-2/5', text: 'text-orange-500' }
+    if (strengthScore <= 2) return { label: t('auth.signUp.strengthWeek') === 'auth.signUp.strengthWeek' ? 'Weak' : t('auth.signUp.strengthWeek'), color: 'bg-red-500 w-1/5', text: 'text-red-500' }
+    if (strengthScore === 3) return { label: t('auth.signUp.strengthFair') === 'auth.signUp.strengthFair' ? 'Fair' : t('auth.signUp.strengthFair'), color: 'bg-orange-500 w-2/5', text: 'text-orange-500' }
     if (strengthScore === 4) return { label: 'Good', color: 'bg-yellow-500 w-3/5', text: 'text-yellow-600' }
-    if (strengthScore === 5) return { label: 'Strong', color: 'bg-indigo-500 w-4/5', text: 'text-indigo-600' }
-    return { label: 'Excellent', color: 'bg-green-500 w-full', text: 'text-green-600' }
+    if (strengthScore === 5) return { label: t('auth.signUp.strengthStrong') === 'auth.signUp.strengthStrong' ? 'Strong' : t('auth.signUp.strengthStrong'), color: 'bg-indigo-500 w-4/5', text: 'text-indigo-655 dark:text-indigo-400' }
+    return { label: 'Excellent', color: 'bg-green-500 w-full', text: 'text-green-600 dark:text-green-400' }
   }
 
   const strength = getStrengthLabelAndColor()
@@ -67,14 +71,13 @@ const SignUp: React.FC = () => {
     const initializeTurnstile = () => {
       if (window.turnstile && turnstileContainerRef.current) {
         try {
-          // Remove any existing widget to prevent container duplication errors
           try {
             window.turnstile.remove(turnstileContainerRef.current)
           } catch (e) {}
           
           window.turnstile.render(turnstileContainerRef.current, {
             sitekey: siteKey,
-            theme: 'light',
+            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
             callback: (token: string) => {
               setTurnstileToken(token)
             },
@@ -97,7 +100,6 @@ const SignUp: React.FC = () => {
     } else if (window.turnstile) {
       initializeTurnstile()
     } else {
-      // If script is injected but window.turnstile is not loaded yet, poll
       interval = setInterval(() => {
         if (window.turnstile) {
           initializeTurnstile()
@@ -113,7 +115,7 @@ const SignUp: React.FC = () => {
         } catch (e) {}
       }
     }
-  }, [])
+  }, [resolvedTheme])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -121,21 +123,20 @@ const SignUp: React.FC = () => {
 
     // Validate fields
     if (!fullName.trim()) {
-      setError('Full Name is required.')
+      setError(t('auth.signUp.requiredName') === 'auth.signUp.requiredName' ? 'Full name is required' : t('auth.signUp.requiredName'))
       return
     }
 
     if (strengthScore < 4) {
-      setError('Please choose a stronger password that meets most requirements.')
+      setError('Please choose a stronger password.')
       return
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match.')
+      setError(t('auth.signUp.noMatch') === 'auth.signUp.noMatch' ? 'Passwords do not match' : t('auth.signUp.noMatch'))
       return
     }
 
-    // Require human verification
     if (!turnstileToken) {
       setError('Please complete the security check.')
       return
@@ -146,9 +147,6 @@ const SignUp: React.FC = () => {
     try {
       const { data, error } = await signUp(email, password, fullName, turnstileToken)
       
-      console.log("SIGNUP DATA", data)
-      console.log("SIGNUP ERROR", error)
-
       const isDuplicate = (error && (
         error.message.toLowerCase().includes('already') ||
         error.message.toLowerCase().includes('exist') ||
@@ -158,7 +156,7 @@ const SignUp: React.FC = () => {
       )
 
       if (isDuplicate) {
-        setError('An account with this email address already exists. Please sign in or reset your password.')
+        setError('An account with this email address already exists.')
         if (window.turnstile && turnstileContainerRef.current) {
           window.turnstile.reset(turnstileContainerRef.current)
           setTurnstileToken(null)
@@ -202,19 +200,19 @@ const SignUp: React.FC = () => {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden transition-colors duration-300">
       <HeroBackground />
 
       {/* Back to Website Button */}
       <Link 
         to="/" 
-        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors duration-300 z-20 group"
+        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-indigo-505 transition-colors duration-300 z-20 group"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 duration-300" />
-        Back to Website
+        {t('auth.forgot.btnBack') === 'auth.forgot.btnBack' ? 'Back to Website' : t('auth.forgot.btnBack')}
       </Link>
 
-      <div className="max-w-lg w-full z-10">
+      <div className="max-w-md w-full z-10">
         <AnimatedCard animation="fadeIn">
           {/* Logo Heading */}
           <div className="text-center mb-8">
@@ -224,35 +222,31 @@ const SignUp: React.FC = () => {
                 alt="PGT Logo" 
                 className="w-11 h-11 object-contain filter drop-shadow-sm"
               />
-              <span className="font-extrabold text-2xl tracking-tight text-slate-900">
+              <span className="font-extrabold text-2xl tracking-tight text-foreground">
                 PGT Global Network
               </span>
             </Link>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              Create Account
+            <h2 className="text-3xl font-extrabold tracking-tight text-foreground">
+              {t('auth.signUp.title')}
             </h2>
-            <p className="mt-2 text-sm text-slate-500">
-              Join PGT Global Network today and begin your journey
+            <p className="mt-2 text-sm text-muted-foreground">
+              {t('auth.signUp.subtitle')}
             </p>
           </div>
 
-          <div className="bg-white/80 border border-slate-200/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-indigo-100/30">
+          <div className="bg-card/90 border border-border backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-slate-100/10 dark:shadow-none text-left">
             {error && (
-              <div className="mb-5 bg-red-50 border border-red-200 text-red-700 text-xs py-3 px-4 rounded-xl flex items-start gap-2.5 shadow-sm">
+              <div className="mb-5 bg-red-50/10 dark:bg-red-950/20 border border-red-200/25 text-red-755 dark:text-red-400 text-xs py-3 px-4 rounded-xl flex items-start gap-2.5 shadow-sm">
                 <span className="font-bold flex-shrink-0">Error:</span>
                 <span>{error}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              <p className="text-xs text-slate-455">
-                Fields marked with <span className="text-red-500 font-bold">*</span> are required.
-              </p>
-
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-bold text-slate-550 uppercase tracking-widest mb-1.5">
-                  Full Name <span className="text-red-500 ml-0.5">*</span>
+                <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
+                  {t('auth.signUp.fullName')} <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <div className="relative">
                   <User className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -260,8 +254,8 @@ const SignUp: React.FC = () => {
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
-                    placeholder="Enter your full name"
+                    className="w-full pl-11 pr-4 py-3 bg-background border border-border rounded-xl text-foreground placeholder-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                    placeholder={t('auth.signUp.fullNamePlaceholder')}
                     required
                   />
                 </div>
@@ -269,8 +263,8 @@ const SignUp: React.FC = () => {
 
               {/* Email */}
               <div>
-                <label className="block text-xs font-bold text-slate-550 uppercase tracking-widest mb-1.5">
-                  Email Address <span className="text-red-500 ml-0.5">*</span>
+                <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
+                  {t('auth.signUp.email')} <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -278,8 +272,8 @@ const SignUp: React.FC = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
-                    placeholder="Enter your email address"
+                    className="w-full pl-11 pr-4 py-3 bg-background border border-border rounded-xl text-foreground placeholder-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                    placeholder={t('auth.signUp.emailPlaceholder')}
                     required
                   />
                 </div>
@@ -287,8 +281,8 @@ const SignUp: React.FC = () => {
 
               {/* Password */}
               <div>
-                <label className="block text-xs font-bold text-slate-550 uppercase tracking-widest mb-1.5">
-                  Password <span className="text-red-500 ml-0.5">*</span>
+                <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
+                  {t('auth.signUp.password')} <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -296,14 +290,14 @@ const SignUp: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-11 pr-11 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
-                    placeholder="Create a secure password"
+                    className="w-full pl-11 pr-11 py-3 bg-background border border-border rounded-xl text-foreground placeholder-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                    placeholder={t('auth.signUp.passwordPlaceholder')}
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-455 hover:text-slate-605 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-455 hover:text-slate-605 dark:text-muted-foreground dark:hover:text-foreground transition-colors"
                   >
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
@@ -313,60 +307,60 @@ const SignUp: React.FC = () => {
                 {password.length > 0 && (
                   <div className="mt-2.5">
                     <div className="flex justify-between items-center text-xs mb-1.5">
-                      <span className="text-slate-500 font-semibold">Password strength:</span>
+                      <span className="text-muted-foreground font-semibold">{t('auth.signUp.strength')}</span>
                       <span className={`font-bold ${strength.text}`}>{strength.label}</span>
                     </div>
-                    <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200/50">
+                    <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden border border-border/80">
                       <div className={`h-full transition-all duration-500 ${strength.color}`} />
                     </div>
                   </div>
                 )}
 
                 {/* Live Checklist */}
-                <div className="mt-4 bg-slate-50 border border-slate-200/60 rounded-xl p-3.5 space-y-2">
-                  <span className="block text-[10px] font-bold text-slate-450 uppercase tracking-widest mb-1">
-                    Requirements
+                <div className="mt-4 bg-muted/60 border border-border rounded-xl p-3.5 space-y-2">
+                  <span className="block text-[10px] font-bold text-muted-foreground/75 uppercase tracking-widest mb-1">
+                    {t('auth.signUp.requirements')}
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold">
                     <div className="flex items-center gap-2">
                       {hasMinLength ? (
-                        <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                       ) : (
                         <span className="w-1.5 h-1.5 bg-slate-400 rounded-full mx-1 flex-shrink-0" />
                       )}
-                      <span className={hasMinLength ? 'text-green-700' : 'text-slate-500'}>8+ Characters</span>
+                      <span className={hasMinLength ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground/80'}>{t('auth.signUp.reqLength')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       {hasUppercase ? (
-                        <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                       ) : (
                         <span className="w-1.5 h-1.5 bg-slate-400 rounded-full mx-1 flex-shrink-0" />
                       )}
-                      <span className={hasUppercase ? 'text-green-700' : 'text-slate-500'}>Uppercase Letter</span>
+                      <span className={hasUppercase ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground/80'}>{t('auth.signUp.reqUpper')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       {hasLowercase ? (
-                        <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                       ) : (
                         <span className="w-1.5 h-1.5 bg-slate-400 rounded-full mx-1 flex-shrink-0" />
                       )}
-                      <span className={hasLowercase ? 'text-green-700' : 'text-slate-500'}>Lowercase Letter</span>
+                      <span className={hasLowercase ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground/80'}>{t('auth.signUp.reqLower')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       {hasNumber ? (
-                        <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                       ) : (
                         <span className="w-1.5 h-1.5 bg-slate-400 rounded-full mx-1 flex-shrink-0" />
                       )}
-                      <span className={hasNumber ? 'text-green-700' : 'text-slate-500'}>Number</span>
+                      <span className={hasNumber ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground/80'}>{t('auth.signUp.reqNum')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       {hasSpecial ? (
-                        <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0" />
                       ) : (
                         <span className="w-1.5 h-1.5 bg-slate-400 rounded-full mx-1 flex-shrink-0" />
                       )}
-                      <span className={hasSpecial ? 'text-green-700' : 'text-slate-500'}>Special Character</span>
+                      <span className={hasSpecial ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground/80'}>{t('auth.signUp.reqSpecial')}</span>
                     </div>
                   </div>
                 </div>
@@ -374,8 +368,8 @@ const SignUp: React.FC = () => {
 
               {/* Confirm Password */}
               <div>
-                <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                  Confirm Password <span className="text-red-500 ml-0.5">*</span>
+                <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
+                  {t('auth.signUp.confirmPassword')} <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <div className="relative">
                   <Lock className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -383,29 +377,29 @@ const SignUp: React.FC = () => {
                     type={showConfirmPassword ? 'text' : 'password'}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className={`w-full pl-11 pr-11 py-3 bg-white border rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 ${
+                    className={`w-full pl-11 pr-11 py-3 bg-background border rounded-xl text-foreground placeholder-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 ${
                       confirmPassword.length > 0
                         ? passwordsMatch
                           ? 'border-green-500 focus:ring-green-550/50'
                           : 'border-red-400 focus:ring-red-450/50'
-                        : 'border-slate-200'
+                        : 'border-border'
                     }`}
-                    placeholder="Confirm your secure password"
+                    placeholder={t('auth.signUp.confirmPasswordPlaceholder')}
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-455 hover:text-slate-655 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-455 hover:text-slate-655 dark:text-muted-foreground dark:hover:text-foreground transition-colors"
                   >
                     {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
                 {confirmPassword.length > 0 && (
                   <span className={`block text-xs mt-1.5 font-bold ${
-                    passwordsMatch ? 'text-green-600' : 'text-red-500'
+                    passwordsMatch ? 'text-green-600 dark:text-green-400' : 'text-red-500'
                   }`}>
-                    {passwordsMatch ? '✓ Passwords match' : '✗ Passwords do not match'}
+                    {passwordsMatch ? `✓ ${t('auth.signUp.match')}` : `✗ ${t('auth.signUp.noMatch')}`}
                   </span>
                 )}
               </div>
@@ -424,11 +418,11 @@ const SignUp: React.FC = () => {
                 {loading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Creating account...
+                    {t('auth.signUp.creating')}
                   </>
                 ) : (
                   <>
-                    Create Account
+                    {t('auth.signUp.btn')}
                     <ArrowRight className="h-4 w-4" />
                   </>
                 )}
@@ -438,11 +432,11 @@ const SignUp: React.FC = () => {
             {/* Divider */}
             <div className="relative my-5">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white/90 px-3 text-slate-400 font-semibold tracking-wider">
-                  Or continue with
+                <span className="bg-card px-3 text-muted-foreground font-semibold tracking-wider transition-colors duration-300">
+                  {t('auth.signUp.divider')}
                 </span>
               </div>
             </div>
@@ -452,27 +446,37 @@ const SignUp: React.FC = () => {
               type="button"
               onClick={handleGoogleSignIn}
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 active:scale-[0.98] cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-3 bg-card hover:bg-muted border border-border text-foreground font-bold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 active:scale-[0.98] cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <img 
                 src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
                 alt="Google Logo" 
                 className="h-5 w-5" 
               />
-              Continue with Google
+              {t('auth.signUp.google')}
             </button>
 
-            <div className="mt-6 text-center text-xs text-slate-500">
-              Already have an account?{' '}
+            <div className="mt-6 text-center text-xs text-muted-foreground">
+              {t('auth.signUp.hasAccount')}{' '}
               <Link 
                 to="/signin" 
-                className="font-bold text-indigo-600 hover:text-indigo-500 transition-colors underline decoration-dotted"
+                className="font-bold text-indigo-650 hover:text-indigo-500 transition-colors underline decoration-dotted"
               >
-                Sign In
+                {t('auth.signUp.signIn')}
               </Link>
             </div>
           </div>
         </AnimatedCard>
+
+        {/* Minimalist Footer */}
+        <div className="mt-8 text-center text-[11px] text-muted-foreground/60 select-none animate-reveal-up" style={{ animationDelay: '500ms' }}>
+          <p>© {new Date().getFullYear()} PGT Global Network</p>
+          <div className="mt-1.5 flex justify-center gap-3">
+            <Link to="/privacy" className="hover:text-indigo-600 hover:underline transition-colors">Privacy Policy</Link>
+            <span>•</span>
+            <Link to="/terms" className="hover:text-indigo-600 hover:underline transition-colors">Terms & Conditions</Link>
+          </div>
+        </div>
       </div>
     </div>
   )

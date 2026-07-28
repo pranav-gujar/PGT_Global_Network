@@ -71,20 +71,20 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl max-w-md w-full p-6 relative">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-card border border-border rounded-xl max-w-md w-full p-6 relative shadow-2xl">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
         >
           <X className="h-6 w-6" />
         </button>
 
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-foreground mb-2">
             Update Profile Photo
           </h2>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Upload a new profile photo or update your existing one
           </p>
         </div>
@@ -96,10 +96,10 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
               <img
                 src={previewUrl}
                 alt="Preview"
-                className="w-full h-full object-cover rounded-full border-4 border-gray-200"
+                className="w-full h-full object-cover rounded-full border-4 border-border"
               />
             </div>
-            <p className="text-sm text-gray-600">Preview</p>
+            <p className="text-sm text-muted-foreground">Preview</p>
           </div>
         )}
 
@@ -107,8 +107,8 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
             dragActive
-              ? 'border-blue-500 bg-blue-50'
-              : 'border-gray-300 hover:border-gray-400'
+              ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/20'
+              : 'border-border hover:border-slate-400 dark:hover:border-slate-600'
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -116,24 +116,24 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
           onDrop={handleDrop}
         >
           <div className="flex flex-col items-center">
-            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mb-4">
               {previewUrl ? (
-                <Camera className="h-6 w-6 text-gray-600" />
+                <Camera className="h-6 w-6 text-muted-foreground" />
               ) : (
-                <Upload className="h-6 w-6 text-gray-600" />
+                <Upload className="h-6 w-6 text-muted-foreground" />
               )}
             </div>
-            <p className="text-gray-600 mb-2">
+            <p className="text-muted-foreground mb-2">
               {previewUrl ? 'Choose a different photo' : 'Drag and drop your photo here'}
             </p>
-            <p className="text-sm text-gray-500 mb-4">or</p>
+            <p className="text-sm text-muted-foreground/60 mb-4">or</p>
             <button
               onClick={() => fileInputRef.current?.click()}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
             >
               Browse Files
             </button>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-muted-foreground/60 mt-2">
               Supports: JPG, PNG, GIF (max 5MB)
             </p>
           </div>
@@ -151,7 +151,7 @@ const ImageUploadModal: React.FC<ImageUploadModalProps> = ({
         <div className="flex space-x-3 mt-6">
           <button
             onClick={handleClose}
-            className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+            className="flex-1 px-4 py-2 border border-border text-foreground rounded-lg font-medium hover:bg-accent transition-colors"
           >
             Cancel
           </button>

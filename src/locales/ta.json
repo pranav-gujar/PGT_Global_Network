@@ -1,0 +1,726 @@
+{
+  "navbar": {
+    "home": "[TA] Home",
+    "about": "[TA] About",
+    "programs": "[TA] Programs",
+    "ventures": "[TA] Ventures",
+    "timeline": "[TA] Timeline",
+    "impact": "[TA] Impact",
+    "gallery": "[TA] Gallery",
+    "articles": "[TA] Articles",
+    "careers": "[TA] Careers",
+    "contact": "[TA] Contact",
+    "more": "[TA] More",
+    "signIn": "[TA] Sign In",
+    "signOut": "[TA] Sign Out",
+    "account": "[TA] Account",
+    "dashboard": "[TA] Dashboard",
+    "theme": "[TA] Theme",
+    "language": "Language",
+    "themeLight": "[TA] Light",
+    "themeDark": "[TA] Dark",
+    "themeSystem": "[TA] System",
+    "announcementArticle": "[TA] New Article Posted — Read Now! Click here",
+    "announcementCareers": "[TA] Recruitment Drive Live — Apply Now! Click here"
+  },
+  "footer": {
+    "tagline": "[TA] PGT Global Network is a global youth-led network driving growth, empowerment, and purposeful transformation.",
+    "quickLinks": "[TA] Quick Links",
+    "legal": "[TA] Legal",
+    "contactUs": "[TA] Contact Us",
+    "rights": "[TA] All rights reserved.",
+    "privacy": "[TA] Privacy Policy",
+    "terms": "[TA] Terms & Conditions",
+    "faq": "[TA] FAQ",
+    "email": "[TA] Email",
+    "phone": "[TA] Phone"
+  },
+  "common": {
+    "loading": "[TA] Loading...",
+    "submitting": "[TA] Submitting...",
+    "error": "[TA] Error",
+    "success": "[TA] Success",
+    "back": "[TA] Back",
+    "required": "[TA] Required",
+    "learnMore": "[TA] Learn More",
+    "readMore": "[TA] Read More",
+    "applyNow": "[TA] Apply Now",
+    "explore": "[TA] Explore",
+    "submit": "[TA] Submit",
+    "cancel": "[TA] Cancel",
+    "save": "[TA] Save",
+    "edit": "[TA] Edit",
+    "search": "[TA] Search",
+    "backToHome": "[TA] Back to Website",
+    "goHome": "[TA] Go to Homepage",
+    "refresh": "[TA] Refresh Page",
+    "returnHome": "[TA] Return Home"
+  },
+  "home": {
+    "tagline": "[TA] Global Ecosystem",
+    "titlePrefix": "[TA] Transforming Lives Through",
+    "titleGlow": "[TA] Positivity, Growth & Transformation",
+    "subtitle": "[TA] Empowering individuals and organizations worldwide through innovative programs, sustainable growth, and purposeful transformation.",
+    "exploreBtn": "[TA] Explore Programs",
+    "learnBtn": "[TA] Learn More",
+    "valuesTag": "[TA] PHILOSOPHY",
+    "valuesTitle": "[TA] Our Core Values",
+    "valuesSubtitle": "[TA] The pillars that define PGT and shape our impact global network",
+    "impactTag": "[TA] GLOBAL REACH",
+    "impactTitle": "[TA] Our Global Impact",
+    "impactSubtitle": "[TA] Seven years of dedication, innovation, and transformation",
+    "stats": {
+      "lives": "[TA] Lives Impacted",
+      "stories": "[TA] Success Stories",
+      "programs": "[TA] Programs & Campaigns",
+      "years": "[TA] Years of Excellence"
+    },
+    "programsTag": "[TA] INITIATIVES",
+    "programsTitle": "[TA] Our Programs",
+    "programsSubtitle": "[TA] Innovative initiatives designed to create lasting impact",
+    "insightsTag": "[TA] insights",
+    "insightsTitle": "[TA] Latest Articles",
+    "insightsSubtitle": "[TA] Stay updated with our latest articles, community transformations, and youth technology initiatives.",
+    "coreValues": {
+      "positivity": {
+        "title": "[TA] Positivity",
+        "description": "[TA] Every initiative starts with a clear purpose and a passionate drive to create meaningful change."
+      },
+      "growth": {
+        "title": "[TA] Growth",
+        "description": "[TA] We nurture continuous learning and leadership, helping individuals and organizations reach their potential."
+      },
+      "transformation": {
+        "title": "[TA] Transformation",
+        "description": "[TA] We inspire positive change that uplifts lives, strengthens communities, and shapes a better world."
+      }
+    }
+  },
+  "about": {
+    "tagline": "[TA] WHO WE ARE",
+    "title": "[TA] Empowering the Next Generation",
+    "description": "[TA] PGT Global Network is a student-led international network dedicated to driving digital education, community transformation, and global youth leadership.",
+    "leadershipTag": "[TA] MESSAGE FROM LEADERSHIP",
+    "leadershipTitle": "[TA] A Note from Our Founder",
+    "quote": "[TA] When I founded PGT Global Network, the vision was simple yet powerful: to build a space where purpose turns into action, where growth is cultivated through real-world learning, and where transformation becomes a shared journey.",
+    "p1": "[TA] What began as a small student-led initiative has now grown into a global network that has touched lives across 15+ countries. Along the way, we’ve learned, adapted, and stayed true to our core belief — that real change starts with empowering people.",
+    "p2": "[TA] Today, PGT continues to stand for empowerment, awareness, and action. Every program we launch, every partnership we form, and every step we take brings us closer to a world where purposeful growth is not an exception, but a way of life.",
+    "p3": "[TA] Thank you for being part of this journey. Together, we’re not just changing lives — we’re transforming the world, one purpose at a time.",
+    "CEO": "[TA] Founder & CEO, PGT Global Network",
+    "gratitude": "[TA] With gratitude and excitement for what's ahead,",
+    "philosophyTag": "[TA] PHILOSOPHY",
+    "philosophyTitle": "[TA] Our Founding Principles",
+    "philosophySubtitle": "[TA] The core beliefs that have guided us from day one",
+    "principles": {
+      "purpose": {
+        "title": "[TA] Purpose-Driven",
+        "description": "[TA] Every initiative begins with a mission to create real and lasting impact."
+      },
+      "people": {
+        "title": "[TA] People-Centered",
+        "description": "[TA] We believe in human potential and invest in developing individuals."
+      },
+      "global": {
+        "title": "[TA] Global Vision",
+        "description": "[TA] Connecting communities across continents, building a united world of learners and leaders."
+      },
+      "excellence": {
+        "title": "[TA] Excellence",
+        "description": "[TA] Striving for the highest standards in our programs, partnerships, and impact."
+      },
+      "sustainability": {
+        "title": "[TA] Sustainability",
+        "description": "[TA] Join us in our mission to drive positive change and create a lasting impact in communities worldwide."
+      }
+    }
+  },
+  "programs": {
+    "tagline": "[TA] PGT Global Core Initiatives",
+    "title": "[TA] Our Programs",
+    "description": "[TA] Comprehensive initiatives designed to transform lives and communities through purposeful growth",
+    "portfolioTag": "[TA] PORTFOLIO",
+    "portfolioTitle": "[TA] Transformative Programs for Every Journey",
+    "portfolioSubtitle": "[TA] From digital transformation to personal development, our programs are designed to meet diverse needs and create lasting impact.",
+    "learnMore": "[TA] Learn More",
+    "timelineTitle": "[TA] Key Components",
+    "impactTitle": "[TA] Core Impact",
+    "durationTitle": "[TA] Duration & Scale",
+    "applyBtn": "[TA] Apply Now",
+    "scheduleBtn": "[TA] Schedule Free Session",
+    "d3": {
+      "name": "[TA] D3 Program",
+      "fullName": "[TA] Daily Discovery Digest",
+      "description": "[TA] A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.",
+      "features": [
+        "[TA] Daily Instagram & Facebook Stories",
+        "[TA] National & International Day Highlights",
+        "[TA] Historical Milestones",
+        "[TA] Great Personalities’ Anniversaries",
+        "[TA] Real-Life Impact Stories",
+        "[TA] Discover the Extraordinary Everyday"
+      ],
+      "impact": "[TA] 10,000+ daily story viewers and learners engaged",
+      "duration": "[TA] Continuous daily program"
+    },
+    "voa": {
+      "name": "[TA] VoA Initiative",
+      "fullName": "[TA] Voices of Ability",
+      "description": "[TA] A storytelling series highlighting individuals who turned challenges into change and built impact.",
+      "features": [
+        "[TA] Life Journey Recordings",
+        "[TA] Empathy Building Stories",
+        "[TA] Disability & Ability Awareness",
+        "[TA] Video Episodes Published Online",
+        "[TA] Empowerment Through Storytelling",
+        "[TA] Inspiration for Social Change"
+      ],
+      "impact": "[TA] Dozens of powerful journeys shared and celebrated",
+      "duration": "[TA] Continuous storytelling initiative"
+    },
+    "seminarix": {
+      "name": "[TA] Seminarix",
+      "fullName": "[TA] Seminar Series for Students",
+      "description": "[TA] On-ground seminar sessions empowering students with academics, motivation, and wellness tools",
+      "features": [
+        "[TA] Motivational Talks",
+        "[TA] Academic Strategies",
+        "[TA] Mental Wellness Guidance",
+        "[TA] Exam Preparation Techniques",
+        "[TA] Interactive School & Hostel Sessions",
+        "[TA] Real-Life Stories Sharing"
+      ],
+      "impact": "[TA] Hundreds of students guided through school and hostel sessions",
+      "duration": "[TA] Continuous seminar series"
+    },
+    "motivminds": {
+      "name": "[TA] MotiVMinds",
+      "fullName": "[TA] One-Minute Empowerment",
+      "description": "[TA] Interactive virtual sessions addressing youth mental health, emotional wellness, and personal development.",
+      "features": [
+        "[TA] One-Minute Videos",
+        "[TA] Personal Growth Insights",
+        "[TA] Student & Volunteer Motivation",
+        "[TA] Real-World Wisdom",
+        "[TA] Short & Catchy Message Formats",
+        "[TA] Continuous Empowerment Content"
+      ],
+      "impact": "[TA] Engaged and empowered youth community",
+      "duration": "[TA] Continuous video series"
+    },
+    "hed": {
+      "name": "[TA] HED Campaign",
+      "fullName": "[TA] Happy Eco Diwali Campaign",
+      "description": "[TA] An annual green celebration campaign advocating for eco-friendly practices during festivals.",
+      "features": [
+        "[TA] Awareness Campaigns",
+        "[TA] Innovation Contest",
+        "[TA] Tree Plantation Drives",
+        "[TA] Mission ENOSAVE Initiative",
+        "[TA] Student & Community Participation"
+      ],
+      "impact": "[TA] Thousands engaged annually in eco-friendly Diwali celebrations",
+      "duration": "[TA] Annual recurring campaign"
+    }
+  },
+  "timeline": {
+    "tagline": "[TA] PGT Global Milestones",
+    "title": "[TA] Our Journey",
+    "description": "[TA] Seven years of growth, transformation, and impact - from a vision to a global network",
+    "historyTag": "[TA] HISTORY",
+    "historyTitle": "[TA] Timeline of Transformation",
+    "historySubtitle": "[TA] Explore the key milestones that marked our path and defined our growth.",
+    "milestones": {
+      "2019": {
+        "title": "[TA] The Spark",
+        "description": "[TA] PGT began as a small school initiative focused on awareness and eco-friendly action.",
+        "achievements": [
+          "[TA] Launched the first Happy Eco Diwali (HED) campaign",
+          "[TA] Organized quizzes to support classmates during board exam prep",
+          "[TA] Encouraged eco-conscious celebrations in local community",
+          "[TA] Planted the idea of Purpose, Growth, and Transformation"
+        ]
+      },
+      "2020": {
+        "title": "[TA] Early Growth",
+        "description": "[TA] Expanded small initiatives with educational and awareness activities during board and community events.",
+        "achievements": [
+          "[TA] Conducted educational awareness quizzes and small drives",
+          "[TA] Sustained eco-awareness campaigns despite pandemic challenges",
+          "[TA] Engaged students in local and online formats",
+          "[TA] Inspired first few documented student success experiences"
+        ]
+      },
+      "2021": {
+        "title": "[TA] Consistent Action",
+        "description": "[TA] PGT continued through awareness drives and annual eco-campaigns, keeping the vision alive.",
+        "achievements": [
+          "[TA] Held small awareness events in schools and college groups",
+          "[TA] Expanded HED campaign into its 3rd edition",
+          "[TA] Organized peer-to-peer motivational discussions",
+          "[TA] Maintained student engagement despite limited scale"
+        ]
+      },
+      "2022": {
+        "title": "[TA] Foundation Building",
+        "description": "[TA] Focused on maintaining continuity with eco-initiatives and light educational activities.",
+        "achievements": [
+          "[TA] Executed HED campaign 4th edition with new volunteers",
+          "[TA] Ran small-scale online awareness posts and contests",
+          "[TA] Started experimenting with structured formats for impact",
+          "[TA] Strengthened the identity of PGT as a student-led movement"
+        ]
+      },
+      "2023": {
+        "title": "[TA] Preparing for Impact",
+        "description": "[TA] PGT tested new formats and strengthened groundwork for upcoming transformation.",
+        "achievements": [
+          "[TA] Celebrated HED 5th edition with wider outreach",
+          "[TA] Engaged in mini-campaigns to test student response",
+          "[TA] Shaped vision for larger global identity",
+          "[TA] Prepared structure for upcoming programs"
+        ]
+      },
+      "2024": {
+        "title": "[TA] Towards Global Impact",
+        "description": "[TA] Rebranded as PGT Global Network and launched major flagship programs with massive reach.",
+        "achievements": [
+          "[TA] Launched VoA, MotivMinds, D3, and Seminarix as flagship programs",
+          "[TA] Seminarix returned to founder’s former school with great success",
+          "[TA] VoA and MotivMinds inspired audiences with real stories",
+          "[TA] Crossed 10,000 participants milestone in the very first year"
+        ]
+      },
+      "2025": {
+        "title": "[TA] Continuing the Journey",
+        "description": "[TA] PGT Global Network is actively scaling programs and building new opportunities for student leadership.",
+        "achievements": [
+          "[TA] Going to run Happy Eco Diwali 7th edition with strong engagement",
+          "[TA] Expanding VoA, MotivMinds, D3, and Seminarix reach across platforms",
+          "[TA] Building collaborations with schools, colleges, and global networks",
+          "[TA] Focusing on empowering thousands more students this year"
+        ]
+      }
+    }
+  },
+  "ventures": {
+    "tagline": "[TA] PGT Umbrella",
+    "title": "[TA] The PGT Ecosystem",
+    "description": "[TA] PGT Global Network is building an ecosystem of ventures across different domains, each working toward the broader mission of creating positive impact and driving global community transformation.",
+    "heading": "[TA] Our Ventures",
+    "launchingSoon": "[TA] Launching Soon",
+    "comingSoon": "[TA] Coming Soon",
+    "launchDate": "[TA] Launching {launchDate}",
+    "target": "[TA] Target: {target}",
+    "visitWebsite": "[TA] Visit Website",
+    "futureTitle": "[TA] Future Ventures",
+    "futureDesc": "[TA] More ventures are currently under development and will be announced soon. We are actively designing solutions in education, creative media, and networking domains."
+  },
+  "impact": {
+    "tagline": "[TA] PGT Global Growth Outcomes",
+    "title": "[TA] Our Impact",
+    "description": "[TA] How PGT is transforming communities, empowering youth leaders, and building global opportunities",
+    "metricsTag": "[TA] METRICS",
+    "metricsTitle": "[TA] Measured Progress, Shared Success",
+    "metricsSubtitle": "[TA] Our numbers reflect our commitment to real-world growth and sustainable community development.",
+    "areas": {
+      "education": {
+        "title": "[TA] Quality Education",
+        "description": "[TA] Bridging learning gaps through digital resources, career counseling, and academic support tools."
+      },
+      "leadership": {
+        "title": "[TA] Leadership Development",
+        "description": "[TA] Nurturing management, tech, and public speaking skills in young change-makers."
+      },
+      "community": {
+        "title": "[TA] Community Upliftment",
+        "description": "[TA] Driving local eco-campaigns, motivational webinars, and volunteer service acts."
+      }
+    },
+    "storiesTag": "[TA] STORIES",
+    "storiesTitle": "[TA] Community Transformations",
+    "storiesSubtitle": "[TA] Read how PGT's digital ecosystem has impacted students, volunteers, and partners globally."
+  },
+  "gallery": {
+    "tagline": "[TA] PGT Global Media Archive",
+    "title": "[TA] Media Gallery",
+    "description": "[TA] Snapshots of our global impact, school seminars, student summits, and community outreach drives",
+    "categories": {
+      "all": "[TA] All Photos",
+      "seminars": "[TA] Seminars",
+      "campaigns": "[TA] Campaigns",
+      " summits": "[TA] Summits",
+      "outreach": "[TA] Outreach"
+    },
+    "viewImage": "[TA] View Image",
+    "close": "[TA] Close"
+  },
+  "articles": {
+    "tagline": "[TA] insights",
+    "title": "[TA] Insights & Stories",
+    "description": "[TA] Discover resources, expert guides, and student stories shaping youth empowerment.",
+    "searchPlaceholder": "[TA] Search articles by title, content, tags...",
+    "noArticles": "[TA] No articles found matching your criteria. Try adjusting your query.",
+    "tags": "[TA] Tags:",
+    "back": "[TA] Back to Articles",
+    "share": "[TA] Share",
+    "readTime": "[TA] {time}",
+    "list": {
+      "1": {
+        "title": "[TA] Transforming Youth with Technology Learning",
+        "excerpt": "[TA] Digital programs equip youth with skills, confidence, and opportunities.",
+        "content": "<p>[TA] Technology has rapidly become the foundation of modern society, shaping the way people learn, work, and interact. For today’s youth, digital learning is not just a privilege but a necessity. In communities across the globe, students are increasingly embracing digital tools that equip them with knowledge, confidence, and life-changing opportunities.</p><br><p>[TA] One of the greatest advantages of technology in education is accessibility. Online platforms, mobile applications, and interactive tools allow students in rural or underserved areas to connect with high-quality learning resources. This democratization of knowledge ensures that no young person is left behind, regardless of geography or socio-economic background.</p><br><p>[TA] Beyond accessibility, technology also fosters creativity and critical thinking. Through project-based learning, coding programs, and digital collaboration, youth can solve real-world problems and innovate with confidence. These skills extend beyond the classroom, empowering them to become leaders, entrepreneurs, and changemakers in their communities.</p><br><p>[TA] Moreover, technology is reshaping career paths. With industries demanding digital literacy, coding, data analysis, and AI knowledge, young people who embrace technology stand out in the workforce. By equipping youth with these future-ready skills, we prepare them for sustainable careers and enable them to contribute meaningfully to global development.</p><br><p>[TA] However, the journey is not without challenges. Many regions face issues such as limited internet connectivity, lack of devices, or inadequate training for educators. Overcoming these hurdles requires a collaborative effort between governments, NGOs, and private sectors to build infrastructure, provide training, and ensure equitable access.</p><br><p>[TA] Ultimately, transforming youth through technology learning is about more than just academic success. It’s about building resilience, nurturing confidence, and creating opportunities for young people to thrive in an interconnected world. As we invest in digital education, we invest in a brighter, more inclusive future for all.</p>"
+      },
+      "2": {
+        "title": "[TA] Sustainable Communities and Student Impact",
+        "excerpt": "[TA] Eco-campaigns and awareness build sustainable student communities globally.",
+        "content": "<p>[TA] Sustainability is no longer a buzzword; it is a call to action. Around the world, students are leading the charge in building eco-conscious communities and reshaping the way we think about the environment. From reducing plastic use to spearheading renewable energy campaigns, young people are proving that small steps can create meaningful global change.</p><br><p>[TA] One of the most powerful tools for sustainability lies in awareness. Students organizing campaigns, workshops, and green clubs are raising awareness about pressing issues such as climate change, waste reduction, and conservation. This peer-to-peer learning not only educates but also inspires entire communities to adopt eco-friendly practices.</p><br><p>[TA] Beyond awareness, action is critical. Many student-led initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment. These grassroots projects ripple outward, influencing families, neighborhoods, and policy discussions.</p><br><p>[TA] Technology also plays a significant role. Social media allows young activists to amplify their messages, connect with global networks, and advocate for systemic changes. Platforms like Instagram and TikTok have become spaces where sustainability movements gain momentum, empowering youth voices to reach policymakers and businesses alike.</p><br><p>[TA] Building sustainable communities requires collaboration. Students who work hand-in-hand with educators, local governments, and NGOs can scale their impact and create lasting change. Whether through eco-hackathons, clean energy prototypes, or awareness campaigns, their contributions highlight the creativity and determination of the next generation.</p><br><p>[TA] The ultimate impact of student-led sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>"
+      },
+      "3": {
+        "title": "[TA] Global Development: Student-Led Trends Ahead",
+        "excerpt": "[TA] Student leadership trends reshape development with innovation and impact.",
+        "content": "<p>[TA] The future of global development is being shaped not only by policymakers and organizations but also by students. With innovation, determination, and digital fluency, today’s youth are redefining the way societies address issues such as poverty, education, and equality. Their leadership is setting new trends that promise long-lasting impact worldwide.</p><br><p>[TA] One trend is the rise of social entrepreneurship. Students are launching startups that address local and global challenges, from clean water initiatives to sustainable farming solutions. These ventures not only solve pressing issues but also generate employment and foster innovation at the grassroots level.</p><br><p>[TA] Another trend is digital advocacy. Students are using online platforms to voice concerns about climate change, human rights, and gender equality. Their ability to mobilize audiences quickly has turned grassroots movements into global campaigns, influencing decision-makers and shaping public opinion.</p><br><p>[TA] Collaborative learning is also gaining traction. International student exchange programs, hackathons, and global forums are giving young people platforms to share ideas, challenge perspectives, and co-create solutions. These experiences broaden their worldview and prepare them to be inclusive leaders in diverse communities.</p><br><p>[TA] Technology plays a central role in amplifying these trends. With access to AI, data analysis, and virtual learning, students are building tools that predict problems and propose innovative solutions. Their ability to merge technology with social impact is redefining what development looks like in the 21st century.</p><br><p>[TA] As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is undeniably student-led.</p>"
+      },
+      "4": {
+        "title": "[TA] Graduate Journeys: Inspiring Change Stories",
+        "excerpt": "[TA] Graduates’ resilience sparks community inspiration and positive change.",
+        "content": "<p>[TA] Graduating is more than earning a degree; it’s the beginning of a journey that often inspires change within communities. Around the world, graduates are using their skills, resilience, and stories of perseverance to spark meaningful transformation, proving that education is one of the most powerful tools for change.</p><br><p>[TA] Many graduates return to their hometowns with a vision to uplift their communities. Some open schools to provide better education for local children, while others launch social enterprises that address pressing issues like unemployment or healthcare. Their actions showcase how education extends beyond personal growth to collective advancement.</p><br><p>[TA] Stories of resilience also inspire others. Graduates who overcame poverty, discrimination, or other challenges often share their journeys, encouraging younger students to dream big and pursue education. These narratives not only motivate but also build a culture of persistence and hope.</p><br><p>[TA] Moreover, graduates play a crucial role in mentoring. By guiding younger students through internships, workshops, and volunteer programs, they ensure that the next generation has the tools and confidence to succeed. This cycle of mentorship strengthens community bonds and creates a ripple effect of progress.</p><br><p>[TA] In many cases, graduate journeys also contribute to global networks. By joining international organizations or research collaborations, they bring back knowledge and connections that further enrich local communities. Their ability to bridge the local and global fosters innovation and inclusion.</p><br><p>[TA] Ultimately, graduate stories highlight that success is not measured solely by personal achievement but by the positive change one brings to society. Their journeys inspire us to believe in the transformative power of education and to continue supporting learners at every stage of their path.</p>"
+      },
+      "5": {
+        "title": "[TA] Innovating Classrooms for Future Learning",
+        "excerpt": "[TA] Blending innovation and tech makes learning inclusive and impactful.",
+        "content": "<p>[TA] Education is undergoing a paradigm shift, driven by technology and progressive teaching models. The traditional classroom layout is transforming into an interactive, digital space where learning is personalized, inclusive, and tailored for the future.</p><br><p>[TA] At the center of classroom innovation is gamification. Integrating educational games, quizzes, and simulations makes complex concepts engaging and memorable. Students are no longer passive listeners; they become active participants who explore ideas, solve challenges, and collaborate dynamically.</p><br><p>[TA] Another breakthrough is personalized learning. AI-driven platforms can analyze student performance and adjust learning paths accordingly. This ensures that fast learners remain challenged while students who need more support receive targeted guidance, creating a balanced and supportive classroom environment.</p><br><p>[TA] Virtual and augmented reality (VR/AR) are also expanding horizons. Students can now embark on virtual field trips to historic sites, dive deep into human anatomy, or explore molecular chemistry, turning abstract concepts into tangible experiences. This immersive approach deepens understanding and sparks curiosity.</p><br><p>[TA] Additionally, classroom innovation values digital literacy and ethics. Teaching students how to evaluate online sources, protect privacy, and engage respectfully online is as vital as academic content. This builds digital citizens prepared for the opportunities and responsibilities of the modern world.</p><br><p>[TA] Fostering this shift requires empowering educators. Providing training, modern equipment, and support allows teachers to lead innovative classrooms with confidence. When schools and communities invest in progressive education, they open pathways for students to achieve their potential and solve future global challenges.</p>"
+      }
+    }
+  },
+  "careers": {
+    "tagline": "[TA] JOIN THE ECOSYSTEM",
+    "title": "[TA] Build the Future with PGT",
+    "description": "[TA] We are a global community of innovators, builders, and leaders. Explore open opportunities to contribute to our ventures and make a meaningful global impact.",
+    "benefitsTag": "[TA] PERKS",
+    "benefitsTitle": "[TA] Why Join PGT?",
+    "benefitsSubtitle": "[TA] We offer a flexible, supportive ecosystem designed to nurture your professional and personal growth.",
+    "list": {
+      "remote": "[TA] Remote-first workflows",
+      "growth": "[TA] Continuous leadership mentorship",
+      "scale": "[TA] Impact millions of students worldwide",
+      "network": "[TA] Access to a global peer network"
+    },
+    "positionsTag": "[TA] OPPORTUNITIES",
+    "positionsTitle": "[TA] Open Core Positions",
+    "positionsSubtitle": "[TA] Explore roles across technology, creative media, outreach, and management.",
+    "role": "[TA] Role:",
+    "type": "[TA] Type:",
+    "hours": "[TA] Commitment:",
+    "apply": "[TA] Apply Now",
+    "positions": {
+      "cod": {
+        "title": "[TA] Chief Operations Director (COD)",
+        "department": "[TA] Operations",
+        "responsibilities": [
+          "[TA] Manage day-to-day team operations, timelines, and internal coordination",
+          "[TA] Track tasks and ensure smooth execution of programs",
+          "[TA] Collaborate with all departments to keep projects running on time"
+        ]
+      },
+      "cco": {
+        "title": "[TA] Chief Communications Officer (CCO)",
+        "department": "[TA] Communications",
+        "responsibilities": [
+          "[TA] Write and review all content: captions, posts, internal documents, and scripts",
+          "[TA] Maintain the tone and voice of PGT across platforms",
+          "[TA] Collaborate with PR and Design teams for campaigns"
+        ]
+      },
+      "cd": {
+        "title": "[TA] Creative Director (CD)",
+        "department": "[TA] Creative",
+        "responsibilities": [
+          "[TA] Design posters, carousels, edit videos, reels, thumbnails, and all brand creatives",
+          "[TA] Maintain visual identity and consistency across platforms",
+          "[TA] Support all departments with design and media content"
+        ]
+      },
+      "cso": {
+        "title": "[TA] Chief Strategy Officer (CSO)",
+        "department": "[TA] Strategy",
+        "responsibilities": [
+          "[TA] Lead campaign ideas, innovation, and planning",
+          "[TA] Analyze what's working and suggest improvements",
+          "[TA] Assist in building long-term strategies for PGT programs"
+        ]
+      },
+      "prh": {
+        "title": "[TA] Public Relations Head (PRH)",
+        "department": "[TA] Public Relations",
+        "responsibilities": [
+          "[TA] Represent PGT publicly and build collaborations",
+          "[TA] Handle outreach to colleges, NGOs, media, and influencers",
+          "[TA] Support visibility and networking of the brand"
+        ]
+      },
+      "cap": {
+        "title": "[TA] Campus Director (CAP)",
+        "department": "[TA] Campus Relations",
+        "responsibilities": [
+          "[TA] Act as the official link between PGT and college campus",
+          "[TA] Organize on-ground activities and represent PGT at events",
+          "[TA] Promote awareness and engagement inside campus"
+        ]
+      },
+      "ctd": {
+        "title": "[TA] Chief Technical Director (CTD)",
+        "department": "[TA] Technology",
+        "responsibilities": [
+          "[TA] Build and manage the official PGT website",
+          "[TA] Create event registration pages and landing pages",
+          "[TA] Maintain form integrations, analytics, and digital tools"
+        ]
+      },
+      "gsec": {
+        "title": "[TA] General Secretary (GSEC)",
+        "department": "[TA] Administration",
+        "responsibilities": [
+          "[TA] Handle official documentation, letters, and internal announcements",
+          "[TA] Support the Founder in maintaining structure and follow-ups",
+          "[TA] Keep track of internal workflows and communication logs"
+        ]
+      }
+    }
+  },
+  "apply": {
+    "title": "[TA] Join the PGT Core Team",
+    "subtitle": "[TA] Fill in the application details below to apply for your desired position.",
+    "form": {
+      "fullName": "[TA] Full Name",
+      "fullNamePlaceholder": "[TA] Enter your full name",
+      "email": "[TA] Email Address",
+      "emailPlaceholder": "[TA] Enter your email address",
+      "position": "[TA] Desired Position",
+      "selectPosition": "[TA] Select a position",
+      "resume": "[TA] Resume Link (Google Drive, Dropbox, etc.)",
+      "resumePlaceholder": "[TA] Enter the URL to your resume",
+      "coverLetter": "[TA] Why do you want to join PGT?",
+      "coverLetterPlaceholder": "[TA] Tell us about your motivation, skills, and how you plan to contribute...",
+      "submit": "[TA] Submit Application",
+      "successTitle": "[TA] Application Submitted!",
+      "successDesc": "[TA] Thank you for applying. Our core leadership team will review your application and reach out within 5-7 business days.",
+      "backToCareers": "[TA] Back to Careers"
+    }
+  },
+  "contact": {
+    "tagline": "[TA] GET IN TOUCH",
+    "title": "[TA] We'd Love to Hear from You",
+    "description": "[TA] Have questions about our programs, partnership inquiries, or want to volunteer? Contact our team directly.",
+    "details": {
+      "email": "[TA] office@pgtglobalnetwork.com",
+      "phone": "[TA] +91 8999902805",
+      "address": "[TA] Daryapur, Maharashtra, India"
+    },
+    "form": {
+      "name": "[TA] Your Name",
+      "namePlaceholder": "[TA] Enter your name",
+      "email": "[TA] Email Address",
+      "emailPlaceholder": "[TA] Enter your email address",
+      "subject": "[TA] Subject",
+      "subjectPlaceholder": "[TA] Enter message subject",
+      "message": "[TA] Message",
+      "messagePlaceholder": "[TA] Write your message details here...",
+      "send": "[TA] Send Message",
+      "successToast": "[TA] Message sent successfully!",
+      "errorToast": "[TA] Failed to send message. Please try again."
+    }
+  },
+  "faq": {
+    "tagline": "[TA] SUPPORT",
+    "title": "[TA] Frequently Asked Questions",
+    "description": "[TA] Find quick answers to common questions about our programs, memberships, and global operations.",
+    "categories": {
+      "all": "[TA] All Questions",
+      "programs": "[TA] Programs",
+      "ventures": "[TA] Ventures",
+      "involvement": "[TA] Involvement"
+    },
+    "contactTitle": "[TA] Still Have Questions?",
+    "contactDesc": "[TA] Can't find the answers you're looking for? Reach out to our volunteer support team for assistance.",
+    "contactBtn": "[TA] Contact Support",
+    "list": {
+      "1": {
+        "question": "[TA] What is PGT Global Network?",
+        "answer": "[TA] PGT Global Network is a student-led, purpose-driven organization empowering individuals through leadership, awareness, education, and community-driven programs. Founded in 2019, it has grown into a platform where students discover real-world learning, social leadership, and meaningful impact."
+      },
+      "2": {
+        "question": "[TA] What programs does PGT offer?",
+        "answer": "[TA] We run flagship initiatives including D3 (Daily Discovery Digest), VoA (Voices of Ability), Seminarix workshops, MotivMinds video series, and the annual HED – Happy Eco Diwali campaign. Each program focuses on empowering students and communities in different ways."
+      },
+      "3": {
+        "question": "[TA] How can I participate in a program?",
+        "answer": "[TA] Each program has its own mode of participation. For example, MotivMinds and D3 are published on our social platforms for open access, Seminarix is delivered directly in schools and hostels, and VoA accepts guest storytellers by invitation or application. Details are shared on our website and social media."
+      },
+      "4": {
+        "question": "[TA] Are the programs free?",
+        "answer": "[TA] Yes, almost all PGT Global Network initiatives are offered free of cost. Our goal is to make awareness, learning, and empowerment accessible to everyone."
+      },
+      "5": {
+        "question": "[TA] Where is PGT based?",
+        "answer": "[TA] PGT Global Network is based in Daryapur, Maharashtra, India. While we operate from our hometown, our reach extends globally through digital platforms and connections."
+      },
+      "6": {
+        "question": "[TA] Who can join or benefit from PGT programs?",
+        "answer": "[TA] Anyone interested in leadership, learning, and personal growth can benefit from our programs. Most of our initiatives are designed for students, but they are open to all age groups who seek inspiration and awareness."
+      },
+      "7": {
+        "question": "[TA] Can organizations or individuals partner with PGT?",
+        "answer": "[TA] Yes, we welcome partnerships with schools, colleges, organizations, and individuals who share our vision of empowering students and communities. For collaborations, you can reach out at office@pgtglobalnetwork.com."
+      },
+      "8": {
+        "question": "[TA] How can I stay updated on PGT initiatives?",
+        "answer": "[TA] You can follow us on Instagram, LinkedIn, and YouTube, or visit our website pgtglobalnetwork.com. All major program updates and new initiatives are announced there."
+      },
+      "9": {
+        "question": "[TA] How can I report a technical issue with PGT platforms?",
+        "answer": "[TA] If you face any technical issues while using our website or platforms, you can contact us at office@pgtglobalnetwork.com with details or screenshots of the problem. Our technical team will assist you as soon as possible."
+      }
+    }
+  },
+  "privacy": {
+    "tagline": "[TA] LEGAL INFORMATION",
+    "title": "[TA] Privacy Policy",
+    "description": "[TA] Last updated: July 27, 2026. This policy details how PGT Global Network handles user data, security, and privacy across our digital portals.",
+    "heading": "[TA] Privacy & Data Terms",
+    "bullets": {
+      "1": "[TA] Data Collection: We collect only necessary details (name, email) for registration, newsletter updates, and program submissions.",
+      "2": "[TA] Security: User passwords are encrypted. We maintain standard safety filters to prevent data leaks and unauthorized access.",
+      "3": "[TA] Third-Parties: We do not sell or trade user information with external marketers. Analytics data is kept strictly anonymous."
+    }
+  },
+  "terms": {
+    "tagline": "[TA] LEGAL TERMS",
+    "title": "[TA] Terms & Conditions",
+    "description": "[TA] Last updated: July 27, 2026. By accessing the PGT Global Network portal, you agree to comply with our community standards and service terms.",
+    "heading": "[TA] Standard Site Terms",
+    "bullets": {
+      "1": "[TA] Usage Rights: Platform content, codes, designs, and materials are copyrighted. Personal non-commercial usage is permitted.",
+      "2": "[TA] User Code: Portal members must maintain positive engagement, avoiding toxic, spam, or malicious actions on dashboards.",
+      "3": "[TA] Liability Limit: PGT operates as an impact network. We provide motivational tools as-is and are not responsible for direct outcomes."
+    }
+  },
+  "dashboard": {
+    "welcome": "[TA] Welcome back, {name}!",
+    "status": "[TA] Account Status: Active",
+    "bioLabel": "[TA] Short Bio",
+    "bioPlaceholder": "[TA] Tell the community about yourself...",
+    "emailLabel": "[TA] Email Address",
+    "emailLocked": "[TA] Email address cannot be changed.",
+    "saveSuccess": "[TA] Profile updated successfully!",
+    "saveError": "[TA] Failed to save profile.",
+    "logsTitle": "[TA] Activity Logs",
+    "logsEmpty": "[TA] No activity recorded yet.",
+    "noName": "[TA] Member"
+  },
+  "errors": {
+    "404": {
+      "title": "[TA] Page Not Found",
+      "description": "[TA] The page you're looking for doesn't exist, may have been moved, or the link is incorrect.",
+      "btnHome": "[TA] Go to Homepage",
+      "btnExplore": "[TA] Explore Programs"
+    },
+    "general": {
+      "title": "[TA] Something Went Wrong",
+      "description": "[TA] An unexpected error occurred while processing your request. Please refresh the page or try again in a few moments.",
+      "diagnostics": "[TA] Error Diagnostics:",
+      "btnRefresh": "[TA] Refresh Page",
+      "btnHome": "[TA] Return Home"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "[TA] Sign In",
+      "subtitle": "[TA] Access your portal account dashboard",
+      "email": "[TA] Email Address",
+      "emailPlaceholder": "[TA] Enter your email address",
+      "password": "[TA] Password",
+      "passwordPlaceholder": "[TA] Enter your password",
+      "forgot": "[TA] Forgot Password?",
+      "remember": "[TA] Remember my email address",
+      "btn": "[TA] Sign In",
+      "authenticating": "[TA] Authenticating...",
+      "divider": "[TA] Or continue with",
+      "google": "[TA] Continue with Google",
+      "noAccount": "[TA] Don't have an account?",
+      "create": "[TA] Create account",
+      "requiredEmail": "[TA] Email is required",
+      "requiredPassword": "[TA] Password is required"
+    },
+    "signUp": {
+      "title": "[TA] Create Account",
+      "subtitle": "[TA] Join the global network and start your journey",
+      "fullName": "[TA] Full Name",
+      "fullNamePlaceholder": "[TA] Enter your full name",
+      "email": "[TA] Email Address",
+      "emailPlaceholder": "[TA] Enter your email address",
+      "password": "[TA] Password",
+      "passwordPlaceholder": "[TA] Create a secure password",
+      "confirmPassword": "[TA] Confirm Password",
+      "confirmPasswordPlaceholder": "[TA] Confirm your secure password",
+      "btn": "[TA] Create Account",
+      "creating": "[TA] Creating account...",
+      "divider": "[TA] Or continue with",
+      "google": "[TA] Continue with Google",
+      "hasAccount": "[TA] Already have an account?",
+      "signIn": "[TA] Sign In",
+      "match": "[TA] Passwords match",
+      "noMatch": "[TA] Passwords do not match",
+      "strength": "[TA] Password strength:",
+      "strengthWeek": "[TA] Weak",
+      "strengthFair": "[TA] Fair",
+      "strengthStrong": "[TA] Strong",
+      "requirements": "[TA] Requirements",
+      "reqLength": "[TA] 8+ Characters",
+      "reqUpper": "[TA] Uppercase Letter",
+      "reqLower": "[TA] Lowercase Letter",
+      "reqNum": "[TA] Number",
+      "reqSpecial": "[TA] Special Character",
+      "requiredName": "[TA] Full name is required",
+      "requiredEmail": "[TA] Email is required",
+      "requiredPassword": "[TA] Password is required"
+    },
+    "forgot": {
+      "title": "[TA] Recover Password",
+      "subtitle": "[TA] Receive a secure reset link in your registered email inbox",
+      "email": "[TA] Email Address",
+      "emailPlaceholder": "[TA] Enter your email address",
+      "btn": "[TA] Send Recovery Link",
+      "sending": "[TA] Sending link...",
+      "successTitle": "[TA] Recovery Email Sent",
+      "successDesc": "[TA] We've sent a secure password reset link to {email}. Please check your inbox and spam folders.",
+      "btnBack": "[TA] Back to Sign In",
+      "requiredEmail": "[TA] Email is required"
+    },
+    "reset": {
+      "title": "[TA] Reset Password",
+      "subtitle": "[TA] Define a new secure password for your portal profile",
+      "password": "[TA] New Password",
+      "passwordPlaceholder": "[TA] Enter your new password",
+      "confirmPassword": "[TA] Confirm New Password",
+      "confirmPasswordPlaceholder": "[TA] Confirm your new password",
+      "btn": "[TA] Update Password",
+      "updating": "[TA] Updating password...",
+      "noSession": "[TA] No active recovery session was detected. Please request a new reset link.",
+      "hasAccount": "[TA] Know your password?",
+      "signIn": "[TA] Sign In",
+      "requiredPassword": "[TA] Password is required"
+    },
+    "verify": {
+      "title": "[TA] Verify Your Email",
+      "subtitle": "[TA] Please confirm your account to access PGT features",
+      "pending": "[TA] Verification Pending",
+      "desc": "[TA] We've sent a verification link to {email}. Please click the link inside the email to complete your registration.",
+      "btnResend": "[TA] Resend Verification Email",
+      "resending": "[TA] Resending...",
+      "cooldown": "[TA] Resend Link in {seconds}s",
+      "btnSignOut": "[TA] Sign Out / Use Different Account",
+      "alreadyVerified": "[TA] Already verified?",
+      "refresh": "[TA] Click here to refresh"
+    }
+  }
+}

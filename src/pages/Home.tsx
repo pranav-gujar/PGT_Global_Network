@@ -5,76 +5,86 @@ import CountUpNumber from '../components/CountUpNumber';
 import HeroBackground from '../components/HeroBackground';
 import AnimatedCard from '../components/AnimatedCard';
 import Background from '../components/Background';
-
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { articles } from '../data/articles';
+import { useLanguage } from '../contexts/LanguageContext';
 
 import Seminarix from '../assets/programs/Seminarix.png';
 import D3 from '../assets/programs/D3.png';
 import VoA from '../assets/programs/VoA.png';
 
-
 const Home = () => {
   const loading = usePageLoading();
+  const { t } = useLanguage();
 
   const coreValues = [
     {
       icon: Target,
-      title: 'Positivity',
-      description: 'Every initiative starts with a clear purpose and a passionate drive to create meaningful change.',
+      title: t('home.coreValues.positivity.title'),
+      description: t('home.coreValues.positivity.description'),
       color: 'text-blue-600'
     },
     {
       icon: TrendingUp,
-      title: 'Growth',
-      description: 'We nurture continuous learning and leadership, helping individuals and organizations reach their potential.',
+      title: t('home.coreValues.growth.title'),
+      description: t('home.coreValues.growth.description'),
       color: 'text-green-600'
     },
     {
       icon: Zap,
-      title: 'Transformation',
-      description: 'We inspire positive change that uplifts lives, strengthens communities, and shapes a better world.',
+      title: t('home.coreValues.transformation.title'),
+      description: t('home.coreValues.transformation.description'),
       color: 'text-purple-600'
     }
   ];
 
   const impactStats = [
-    { number: 10000, label: 'Lives Impacted', icon: Users, suffix: '+' },
-    { number: 200, label: 'Success Stories', icon: Star, suffix: '+' },
-    { number: 8, label: 'Programs & Campaigns', icon: BookOpen, suffix: '+' },
-    { number: 6, label: 'Years of Excellence', icon: Hourglass, suffix: '+' }
+    { number: 10000, label: t('home.stats.lives'), icon: Users, suffix: '+' },
+    { number: 200, label: t('home.stats.stories'), icon: Star, suffix: '+' },
+    { number: 8, label: t('home.stats.programs'), icon: BookOpen, suffix: '+' },
+    { number: 7, label: t('home.stats.years'), icon: Hourglass, suffix: '+' }
   ];
-
 
   const programs = [
     {
       id: 'd3',
-      name: 'D3 Program',
-      description: 'A flagship daily inspiration series delivering knowledge, awareness, and impactful stories to students.',
+      name: t('programs.d3.name'),
+      description: t('programs.d3.description'),
       image: D3
     },
     {
       id: 'voa',
-      name: 'VoA Initiative',
-      description: 'A storytelling series highlighting individuals who turned challenges into change and built impact.',
+      name: t('programs.voa.name'),
+      description: t('programs.voa.description'),
       image: VoA
     },
     {
       id: 'seminarix',
-      name: 'Seminarix',
-      description: 'On-ground seminar sessions empowering students with academics, motivation, and wellness tools',
+      name: t('programs.seminarix.name'),
+      description: t('programs.seminarix.description'),
       image: Seminarix
     }
   ];
 
+  const getArticleTitle = (post: any) => {
+    const key = `articles.list.${post.id}.title`;
+    const val = t(key);
+    return val === key ? post.title : val;
+  };
+
+  const getArticleExcerpt = (post: any) => {
+    const key = `articles.list.${post.id}.excerpt`;
+    const val = t(key);
+    return val === key ? post.excerpt : val;
+  };
 
   if (loading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <div className="pt-28 bg-slate-50/30 overflow-x-hidden">
+    <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
       <style>
         {`
           @keyframes reveal-up {
@@ -102,29 +112,28 @@ const Home = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center">
             {/* Tagline Badge */}
             <div
-              className="inline-flex items-center gap-2 bg-white/95 border border-slate-200/60 px-4 py-1.5 rounded-full shadow-[0_2px_8px_rgba(99,102,241,0.03)] mb-6 animate-reveal-up backdrop-blur-md hover:shadow-[0_4px_16px_rgba(99,102,241,0.1)] hover:border-indigo-400/40 hover:-translate-y-[1px] transform transition-all duration-300 pointer-events-auto cursor-pointer"
+              className="inline-flex items-center gap-2 bg-card/90 border border-border px-4 py-1.5 rounded-full shadow-[0_2px_8px_rgba(99,102,241,0.03)] mb-6 animate-reveal-up backdrop-blur-md hover:shadow-[0_4px_16px_rgba(99,102,241,0.1)] hover:border-indigo-400/40 hover:-translate-y-[1px] transform transition-all duration-300 pointer-events-auto cursor-pointer"
               style={{ animationDelay: '100ms' }}
             >
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
               </span>
-              <span className="text-xs font-bold text-slate-700 tracking-wide uppercase">Global Ecosystem</span>
+              <span className="text-xs font-bold text-foreground/80 tracking-wide uppercase">{t('home.tagline')}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.08] mb-6 font-sans max-w-5xl mx-auto">
-              <span className="block animate-reveal-up" style={{ animationDelay: '250ms' }}>Transforming Lives Through</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tight leading-[1.08] mb-6 font-sans max-w-5xl mx-auto">
+              <span className="block animate-reveal-up" style={{ animationDelay: '250ms' }}>{t('home.titlePrefix')}</span>
               <span className="block mt-3 bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 bg-clip-text text-transparent font-black animate-reveal-up" style={{ animationDelay: '400ms' }}>
-                Positivity, Growth & Transformation
+                {t('home.titleGlow')}
               </span>
             </h1>
 
             <p
-              className="text-base sm:text-lg md:text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed font-normal animate-reveal-up"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed font-normal animate-reveal-up"
               style={{ animationDelay: '550ms' }}
             >
-              Empowering individuals and organizations worldwide through innovative programs,
-              sustainable growth, and purposeful transformation.
+              {t('home.subtitle')}
             </p>
 
             <div
@@ -136,14 +145,14 @@ const Home = () => {
                 className="group relative overflow-hidden w-full sm:w-56 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
               >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-btn pointer-events-none" />
-                Explore Programs
+                {t('home.exploreBtn')}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 duration-300" />
               </Link>
               <Link
                 to="/about"
-                className="w-full sm:w-48 border border-slate-200 bg-white/80 backdrop-blur-md text-slate-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-white hover:border-slate-300 hover:text-indigo-600 hover:-translate-y-[2px] hover:shadow-sm hover:shadow-indigo-500/5 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center"
+                className="w-full sm:w-48 border border-border bg-card/85 backdrop-blur-md text-foreground px-8 py-3.5 rounded-xl font-semibold hover:bg-muted hover:border-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:-translate-y-[2px] hover:shadow-sm active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center"
               >
-                Learn More
+                {t('home.learnBtn')}
               </Link>
             </div>
           </div>
@@ -151,31 +160,31 @@ const Home = () => {
       </AnimatedCard>
 
       {/* Core Values */}
-      <section className="py-24 bg-white border-y border-slate-100 relative z-10">
+      <section className="py-24 bg-card/40 border-y border-border relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <span className="text-xs font-bold text-indigo-600 tracking-wider uppercase">Foundation Principles</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4 tracking-tight">
-              Our Core Values
+            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase">{t('home.valuesTag')}</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
+              {t('home.valuesTitle')}
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Three fundamental principles that guide everything we do
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {t('home.valuesSubtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {coreValues.map((value, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
-                <div className="relative overflow-hidden bg-slate-50/40 border border-slate-100 p-8 rounded-2xl hover:bg-white hover:shadow-2xl hover:shadow-slate-100 hover:border-indigo-500/20 hover:-translate-y-2 transform transition-all duration-300 group h-full flex flex-col justify-between cursor-pointer">
+                <div className="relative overflow-hidden bg-muted/20 border border-border p-8 rounded-2xl hover:bg-card hover:shadow-2xl hover:shadow-slate-900/10 hover:border-indigo-500/20 hover:-translate-y-2 transform transition-all duration-300 group h-full flex flex-col justify-between cursor-pointer">
                   {/* Subtle Theme Glow */}
                   <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.03] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="relative z-10">
-                    <div className={`w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-6 group-hover:scale-105 group-hover:shadow-[0_4px_12px_rgba(99,102,241,0.06)] transition-all duration-300 ${value.color}`}>
+                    <div className={`w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-6 group-hover:scale-105 group-hover:shadow-[0_4px_12px_rgba(99,102,241,0.06)] transition-all duration-300 ${value.color}`}>
                       <value.icon className="h-6 w-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-4">{value.title}</h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">{value.description}</p>
+                    <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
                   </div>
                 </div>
               </AnimatedCard>
@@ -195,12 +204,12 @@ const Home = () => {
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-20">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-indigo-400 mb-4 tracking-wider uppercase">GLOBAL REACH</span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-white/10 text-indigo-400 mb-4 tracking-wider uppercase">{t('home.impactTag')}</span>
               <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
-                Our Global Impact
+                {t('home.impactTitle')}
               </h2>
               <p className="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                Six years of dedication, innovation, and transformation
+                {t('home.impactSubtitle')}
               </p>
             </div>
 
@@ -231,15 +240,15 @@ const Home = () => {
       </AnimatedCard>
 
       {/* Programs Preview */}
-      <section className="py-24 bg-slate-50/20 relative z-10">
+      <section className="py-24 bg-background relative z-10 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <span className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">INITIATIVES</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4 tracking-tight">
-              Our Programs
+            <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.programsTag')}</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
+              {t('home.programsTitle')}
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-              Innovative initiatives designed to create lasting impact
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              {t('home.programsSubtitle')}
             </p>
           </div>
 
@@ -248,9 +257,9 @@ const Home = () => {
               <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
                 <Link
                   to={`/programs/${program.id}`}
-                  className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-slate-100 hover:border-indigo-500/20 hover:-translate-y-2 transform transition-all duration-300 group flex flex-col h-full justify-between cursor-pointer no-underline text-left"
+                  className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-slate-900/10 hover:border-indigo-500/20 hover:-translate-y-2 transform transition-all duration-300 group flex flex-col h-full justify-between cursor-pointer no-underline text-left"
                 >
-                  <div className="overflow-hidden relative h-52 bg-slate-100">
+                  <div className="overflow-hidden relative h-52 bg-muted/30">
                     <img
                       src={program.image}
                       alt={program.name}
@@ -260,17 +269,17 @@ const Home = () => {
                   </div>
                   <div className="p-8 flex-grow flex flex-col justify-between">
                     <div>
-                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
                         {program.name}
                       </h3>
-                      <p className="text-slate-650 mb-6 text-sm leading-relaxed line-clamp-3 font-normal">
+                      <p className="text-muted-foreground mb-6 text-sm leading-relaxed line-clamp-3 font-normal">
                         {program.description}
                       </p>
                     </div>
                     <span
-                      className="text-indigo-600 font-semibold hover:text-indigo-800 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-850 dark:hover:text-indigo-350 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
                     >
-                      Learn More
+                      {t('common.learnMore')}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1 duration-300" />
                     </span>
                   </div>
@@ -285,7 +294,7 @@ const Home = () => {
               className="group relative overflow-hidden bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-btn pointer-events-none" />
-              View All Programs
+              {t('home.exploreBtn')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 duration-300" />
             </Link>
           </div>
@@ -293,16 +302,16 @@ const Home = () => {
       </section>
 
       {/* Latest Articles Preview */}
-      <section className="py-24 bg-slate-50/50 border-b border-slate-100 relative z-10">
+      <section className="py-24 bg-card/25 border-b border-border relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-600 tracking-wider uppercase font-mono">insights</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-4 tracking-tight">
-                Latest Articles
+              <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.insightsTag')}</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
+                {t('home.insightsTitle')}
               </h2>
-              <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                Stay updated with our latest articles, community transformations, and youth technology initiatives.
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                {t('home.insightsSubtitle')}
               </p>
             </div>
           </AnimatedCard>
@@ -312,12 +321,12 @@ const Home = () => {
               <AnimatedCard key={post.id} animation="slideUp" delay={index * 150}>
                 <Link
                   to={`/articles/${post.slug}`}
-                  className="bg-white border border-slate-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-slate-100 hover:border-indigo-500/20 hover:-translate-y-2 transform transition-all duration-300 group flex flex-col h-full justify-between cursor-pointer no-underline text-left"
+                  className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-slate-900/10 hover:border-indigo-500/20 hover:-translate-y-2 transform transition-all duration-300 group flex flex-col h-full justify-between cursor-pointer no-underline text-left"
                 >
-                  <div className="overflow-hidden relative h-52 bg-slate-100">
+                  <div className="overflow-hidden relative h-52 bg-muted/30">
                     <img
                       src={post.image}
-                      alt={post.title}
+                      alt={getArticleTitle(post)}
                       className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -325,23 +334,23 @@ const Home = () => {
                   <div className="p-8 flex-grow flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="px-2.5 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                          {post.category}
+                        <span className="px-2.5 py-1 bg-indigo-50/10 dark:bg-indigo-950/20 text-indigo-700 dark:text-indigo-400 border border-indigo-200/20 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                          {t(`articles.list.${post.id}.category`).replace(/\[.*?\]\s*/g, '') === `articles.list.${post.id}.category` ? post.category : t(`articles.list.${post.id}.category`)}
                         </span>
-                        <span className="text-slate-400 text-xs font-semibold">{post.readTime}</span>
+                        <span className="text-muted-foreground/60 text-xs font-semibold">{t('articles.readTime', { time: post.readTime })}</span>
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300 line-clamp-2">
-                        {post.title}
+                      <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300 line-clamp-2">
+                        {getArticleTitle(post)}
                       </h3>
-                      <p className="text-slate-650 mb-6 text-sm leading-relaxed line-clamp-3 font-normal">
-                        {post.excerpt}
+                      <p className="text-muted-foreground mb-6 text-sm leading-relaxed line-clamp-3 font-normal">
+                        {getArticleExcerpt(post)}
                       </p>
                     </div>
 
                     <span
-                      className="text-indigo-600 font-semibold hover:text-indigo-800 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-850 dark:hover:text-indigo-350 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
                     >
-                      Read More
+                      {t('common.readMore')}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1 duration-300" />
                     </span>
                   </div>
@@ -356,7 +365,7 @@ const Home = () => {
               className="group relative overflow-hidden bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-btn pointer-events-none" />
-              View All Articles
+              {t('articles.searchPlaceholder').replace(/\[.*?\]\s*/g, '') === 'articles.searchPlaceholder' ? 'View All Articles' : t('common.readMore')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 duration-300" />
             </Link>
           </div>
@@ -373,24 +382,24 @@ const Home = () => {
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-              Ready to Transform Your Future?
+              {t('common.explore').replace(/\[.*?\]\s*/g, '') === 'common.explore' ? 'Ready to Transform Your Future?' : t('common.explore')}
             </h2>
             <p className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-slate-400 leading-relaxed font-normal">
-              Join thousands of individuals and organizations who have experienced growth through our programs.
+              {t('about.principles.sustainability.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 to="/careers"
                 className="group relative overflow-hidden w-full sm:w-auto bg-white text-slate-950 px-8 py-3.5 rounded-xl font-semibold hover:bg-slate-100 hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
               >
-                Join Our Team
+                {t('careers.apply')}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 duration-300" />
               </Link>
               <Link
                 to="/contact"
                 className="w-full sm:w-auto border border-white/20 bg-white/5 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white/10 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center"
               >
-                Get In Touch
+                {t('footer.contactUs')}
               </Link>
             </div>
           </div>

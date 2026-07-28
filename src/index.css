@@ -1,3 +1,95 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #fafbfc;
+    --background-rgb: 250, 251, 252;
+    
+    --foreground: #0f172a;
+    --foreground-rgb: 15, 23, 42;
+    
+    --card: #ffffff;
+    --card-rgb: 255, 255, 255;
+    --card-foreground: #0f172a;
+    --card-foreground-rgb: 15, 23, 42;
+    
+    --popover: #ffffff;
+    --popover-rgb: 255, 255, 255;
+    --popover-foreground: #0f172a;
+    --popover-foreground-rgb: 15, 23, 42;
+    
+    --muted: #f8fafc;
+    --muted-rgb: 248, 250, 252;
+    --muted-foreground: #475569;
+    --muted-foreground-rgb: 71, 85, 105;
+    
+    --border: #f1f5f9;
+    --border-rgb: 241, 245, 249;
+    --input: #f8fafc;
+    --input-rgb: 248, 250, 252;
+    
+    --accent: #f1f5f9;
+    --accent-rgb: 241, 245, 249;
+    --accent-foreground: #0f172a;
+    --accent-foreground-rgb: 15, 23, 42;
+    
+    --primary: #2563eb;
+    --primary-rgb: 37, 99, 235;
+    --primary-foreground: #ffffff;
+    
+    --ring: #3b82f6;
+    --ring-rgb: 59, 130, 246;
+    
+    --radial-fade: #fafbfc;
+    --grid-color: #000000;
+  }
+
+  .dark {
+    --background: #090d16;
+    --background-rgb: 9, 13, 22;
+    
+    --foreground: #f8fafc;
+    --foreground-rgb: 248, 250, 252;
+    
+    --card: #0f1626;
+    --card-rgb: 15, 22, 38;
+    --card-foreground: #f8fafc;
+    --card-foreground-rgb: 248, 250, 252;
+    
+    --popover: #0f1626;
+    --popover-rgb: 15, 22, 38;
+    --popover-foreground: #f8fafc;
+    --popover-foreground-rgb: 248, 250, 252;
+    
+    --muted: #151e33;
+    --muted-rgb: 21, 30, 51;
+    --muted-foreground: #94a3b8;
+    --muted-foreground-rgb: 148, 163, 184;
+    
+    --border: #1e293b;
+    --border-rgb: 30, 41, 59;
+    --input: #1e293b;
+    --input-rgb: 30, 41, 59;
+    
+    --accent: #1e293b;
+    --accent-rgb: 30, 41, 59;
+    --accent-foreground: #f8fafc;
+    --accent-foreground-rgb: 248, 250, 252;
+    
+    --primary: #3b82f6;
+    --primary-rgb: 59, 130, 246;
+    --primary-foreground: #ffffff;
+    
+    --ring: #3b82f6;
+    --ring-rgb: 59, 130, 246;
+    
+    --radial-fade: #090d16;
+    --grid-color: #ffffff;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+}

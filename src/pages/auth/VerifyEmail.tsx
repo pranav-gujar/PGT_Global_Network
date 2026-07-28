@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Mail, Loader2, RefreshCw, LogOut, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
+import { useTheme } from '../../contexts/ThemeContext'
 import HeroBackground from '../../components/HeroBackground'
 import AnimatedCard from '../../components/AnimatedCard'
+import { useLanguage } from '../../contexts/LanguageContext'
 
 const VerifyEmail: React.FC = () => {
   const { user, isEmailVerified, resendVerification, signOut } = useAuth()
+  const { resolvedTheme } = useTheme()
+  const { t } = useLanguage()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const emailParam = searchParams.get('email')
@@ -47,7 +51,7 @@ const VerifyEmail: React.FC = () => {
 
           window.turnstile.render(turnstileContainerRef.current, {
             sitekey: siteKey,
-            theme: 'light',
+            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
             callback: (token: string) => {
               setTurnstileToken(token)
             },
@@ -85,7 +89,7 @@ const VerifyEmail: React.FC = () => {
         } catch (e) {}
       }
     }
-  }, [])
+  }, [resolvedTheme])
 
   const handleResend = async () => {
     if (countdown > 0) return
@@ -137,20 +141,24 @@ const VerifyEmail: React.FC = () => {
     } catch (e) {}
   }
 
+  const targetEmail = user?.email || emailParam || 'your email'
+  const descRaw = t('auth.verify.desc', { email: targetEmail });
+  const desc = descRaw === 'auth.verify.desc' ? `We've sent a verification link to ${targetEmail}. Please click the link inside the email to complete your registration.` : descRaw;
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden transition-colors duration-300">
       <HeroBackground />
 
       {/* Back to Website Button */}
       <Link 
         to="/" 
-        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors duration-300 z-20 group"
+        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-indigo-505 transition-colors duration-300 z-20 group"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 duration-300" />
-        Back to Website
+        {t('auth.forgot.btnBack') === 'auth.forgot.btnBack' ? 'Back to Website' : t('auth.forgot.btnBack')}
       </Link>
 
-      <div className="max-w-md w-full z-10">
+      <div className="max-w-md w-full z-10 text-left">
         <AnimatedCard animation="fadeIn">
           {/* Logo Heading */}
           <div className="text-center mb-8">
@@ -160,38 +168,38 @@ const VerifyEmail: React.FC = () => {
                 alt="PGT Logo" 
                 className="w-11 h-11 object-contain filter drop-shadow-sm"
               />
-              <span className="font-extrabold text-2xl tracking-tight text-slate-900">
+              <span className="font-extrabold text-2xl tracking-tight text-foreground">
                 PGT Global Network
               </span>
             </Link>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              Verify Your Email
+            <h2 className="text-3xl font-extrabold tracking-tight text-foreground">
+              {t('auth.verify.title')}
             </h2>
-            <p className="mt-2 text-sm text-slate-500">
-              Please confirm your account to access PGT features
+            <p className="mt-2 text-sm text-muted-foreground">
+              {t('auth.verify.subtitle')}
             </p>
           </div>
 
-          <div className="bg-white/80 border border-slate-200/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-indigo-100/30">
-            <div className="text-center py-4 space-y-5">
-              <div className="w-14 h-14 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse">
+          <div className="bg-card/90 border border-border backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-slate-100/10 dark:shadow-none">
+            <div className="text-center py-4 space-y-5 animate-fadeIn">
+              <div className="w-14 h-14 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-500/20 text-indigo-650 dark:text-indigo-400 rounded-full flex items-center justify-center mx-auto mb-2 animate-pulse">
                 <Mail className="h-7 w-7" />
               </div>
 
-              <h3 className="text-lg font-bold text-slate-900">Verification Pending</h3>
+              <h3 className="text-lg font-bold text-foreground">{t('auth.verify.pending')}</h3>
               
-              <p className="text-sm text-slate-550 leading-relaxed">
-                We've sent a verification link to <strong className="text-indigo-600">{user?.email || emailParam || 'your email'}</strong>. Please click the link inside the email to complete your registration.
+              <p className="text-sm text-muted-foreground leading-relaxed font-normal">
+                {desc}
               </p>
 
               {success && (
-                <div className="bg-green-50 border border-green-200 text-green-700 text-xs py-3 px-4 rounded-xl shadow-sm">
+                <div className="bg-green-50/10 dark:bg-green-950/20 border border-green-200/20 text-green-700 dark:text-green-400 text-xs py-3 px-4 rounded-xl shadow-sm">
                   {success}
                 </div>
               )}
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 text-xs py-3 px-4 rounded-xl shadow-sm">
+                <div className="bg-red-50/10 dark:bg-red-950/20 border border-red-200/25 text-red-700 dark:text-red-400 text-xs py-3 px-4 rounded-xl shadow-sm">
                   {error}
                 </div>
               )}
@@ -211,16 +219,16 @@ const VerifyEmail: React.FC = () => {
                   {loading ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Resending...
+                      {t('auth.verify.resending')}
                     </>
                   ) : countdown > 0 ? (
                     <>
-                      Resend Link in {countdown}s
+                      {t('auth.verify.cooldown', { seconds: countdown }) === 'auth.verify.cooldown' ? `Resend Link in ${countdown}s` : t('auth.verify.cooldown', { seconds: countdown })}
                     </>
                   ) : (
                     <>
                       <RefreshCw className="h-4 w-4" />
-                      Resend Verification Email
+                      {t('auth.verify.btnResend')}
                     </>
                   )}
                 </button>
@@ -228,25 +236,35 @@ const VerifyEmail: React.FC = () => {
                 {/* Sign Out (to switch account) */}
                 <button
                   onClick={handleSignOut}
-                  className="w-full border border-slate-200 hover:bg-slate-50 text-slate-600 hover:text-slate-800 py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full border border-border hover:bg-accent text-foreground py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer bg-transparent"
                 >
                   <LogOut className="h-4 w-4" />
-                  Sign Out / Use Different Account
+                  {t('auth.verify.btnSignOut')}
                 </button>
               </div>
             </div>
 
-            <div className="mt-6 text-center text-xs text-slate-500">
-              Already verified?{' '}
+            <div className="mt-6 text-center text-xs text-muted-foreground">
+              {t('auth.verify.alreadyVerified')}{' '}
               <button 
                 onClick={() => window.location.reload()} 
                 className="font-bold text-indigo-600 hover:text-indigo-500 underline transition-colors cursor-pointer"
               >
-                Click here to refresh
+                {t('auth.verify.refresh')}
               </button>
             </div>
           </div>
         </AnimatedCard>
+
+        {/* Minimalist Footer */}
+        <div className="mt-8 text-center text-[11px] text-muted-foreground/60 select-none animate-reveal-up" style={{ animationDelay: '500ms' }}>
+          <p>© {new Date().getFullYear()} PGT Global Network</p>
+          <div className="mt-1.5 flex justify-center gap-3">
+            <Link to="/privacy" className="hover:text-indigo-600 hover:underline transition-colors">Privacy Policy</Link>
+            <span>•</span>
+            <Link to="/terms" className="hover:text-indigo-600 hover:underline transition-colors">Terms & Conditions</Link>
+          </div>
+        </div>
       </div>
     </div>
   )

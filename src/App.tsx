@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { usePageLoading } from './hooks/usePageLoading';
 import { supabase } from './lib/supabase';
@@ -103,22 +105,36 @@ const AppContent = () => {
       </ErrorBoundary>
       {!isAuthPage && <Footer />}
       {!isAuthPage && <ScrollToTop />}
-      <Toaster position="top-right" />
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: 'var(--card)',
+            color: 'var(--foreground)',
+            border: '1px solid var(--border)',
+            borderRadius: '12px',
+          }
+        }}
+      />
     </>
   );
 };
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AnimatedBackground />
-        <div className="min-h-screen bg-white">
-          <AppContent />
-        </div>
-      </Router>
-    </AuthProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <Router>
+            <AnimatedBackground />
+            <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+              <AppContent />
+            </div>
+          </Router>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default App;

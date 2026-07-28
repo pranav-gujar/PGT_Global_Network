@@ -1,0 +1,726 @@
+{
+  "navbar": {
+    "home": "主页",
+    "about": "关于我们",
+    "programs": "项目",
+    "ventures": "企业",
+    "timeline": "时间线",
+    "impact": "影响",
+    "gallery": "画廊",
+    "articles": "文章",
+    "careers": "职业",
+    "contact": "联系",
+    "more": "更多",
+    "signIn": "登录",
+    "signOut": "退出",
+    "account": "账户",
+    "dashboard": "仪表板",
+    "theme": "主题",
+    "language": "语言",
+    "themeLight": "浅色",
+    "themeDark": "深色",
+    "themeSystem": "系统",
+    "announcementArticle": "新文章已发布 — 立即阅读！点击这里",
+    "announcementCareers": "招募活动开始 — 立即申请！点击这里"
+  },
+  "footer": {
+    "tagline": "PGT全球网络是一个由青年主导的全球网络，推动增长、赋权和有目的的变革。",
+    "quickLinks": "快速链接",
+    "legal": "法律",
+    "contactUs": "联系我们",
+    "rights": "版权所有。",
+    "privacy": "隐私政策",
+    "terms": "条款和条件",
+    "faq": "常见问题",
+    "email": "电子邮件",
+    "phone": "电话"
+  },
+  "common": {
+    "loading": "加载中...",
+    "submitting": "提交中...",
+    "error": "错误",
+    "success": "成功",
+    "back": "返回",
+    "required": "必填",
+    "learnMore": "了解更多",
+    "readMore": "阅读更多",
+    "applyNow": "立即申请",
+    "explore": "探索",
+    "submit": "提交",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "search": "搜索",
+    "backToHome": "返回网站",
+    "goHome": "前往主页",
+    "refresh": "刷新页面",
+    "returnHome": "返回首页"
+  },
+  "home": {
+    "tagline": "全球生态系统",
+    "titlePrefix": "通过以下方式改变生活",
+    "titleGlow": "积极性、成长与变革",
+    "subtitle": "通过创新项目、可持续增长和有目的的变革，赋予全球个人和组织力量。",
+    "exploreBtn": "探索项目",
+    "learnBtn": "了解更多",
+    "valuesTag": "理念",
+    "valuesTitle": "我们的核心价值观",
+    "valuesSubtitle": "定义PGT并塑造我们全球影响力网络的支柱",
+    "impactTag": "全球覆盖",
+    "impactTitle": "我们的全球影响力",
+    "impactSubtitle": "七年的奉献、创新与变革",
+    "stats": {
+      "lives": "受益生命",
+      "stories": "成功故事",
+      "programs": "项目与活动",
+      "years": "卓越年份"
+    },
+    "programsTag": "倡议",
+    "programsTitle": "我们的项目",
+    "programsSubtitle": "旨在创造持久影响的创新倡议",
+    "insightsTag": "洞见",
+    "insightsTitle": "最新文章",
+    "insightsSubtitle": "了解我们的最新文章、社区变革和青年技术倡议。",
+    "coreValues": {
+      "positivity": {
+        "title": "积极性",
+        "description": "每项倡议都以明确的目标和创造有意义变革的热情动力开始。"
+      },
+      "growth": {
+        "title": "成长",
+        "description": "我们培育持续学习和领导力，帮助个人和组织实现潜力。"
+      },
+      "transformation": {
+        "title": "变革",
+        "description": "我们激励积极的变革，提升生命，强化社区，塑造更美好的世界。"
+      }
+    }
+  },
+  "about": {
+    "tagline": "我们是谁",
+    "title": "赋权下一代",
+    "description": "PGT全球网络是一个由学生主导的国际网络，致力于推动数字教育、社区变革和全球青年领导力。",
+    "leadershipTag": "领导层寄语",
+    "leadershipTitle": "来自我们创始人的话",
+    "quote": "当我创立PGT全球网络时，愿景既简单又强大：建立一个目标转化为行动、成长通过真实世界学习培育、变革成为共同旅程的空间。",
+    "p1": "从一个小型学生主导的倡议开始，现已发展成一个触及15多个国家生命的全球网络。",
+    "p2": "今天，PGT继续代表赋权、意识和行动。我们推出的每个项目都让我们更接近一个有目的的成长不是例外而是生活方式的世界。",
+    "p3": "感谢您成为这段旅程的一部分。我们不仅在改变生命——我们在改变世界，一次一个目标。",
+    "CEO": "创始人兼CEO，PGT全球网络",
+    "gratitude": "带着感激和对未来的期待，",
+    "philosophyTag": "理念",
+    "philosophyTitle": "我们的创始原则",
+    "philosophySubtitle": "从第一天起就引导我们的核心信念",
+    "principles": {
+      "purpose": {
+        "title": "目标驱动",
+        "description": "每项倡议都以创造真实持久影响的使命开始。"
+      },
+      "people": {
+        "title": "以人为中心",
+        "description": "我们相信人类潜力并投资于个人发展。"
+      },
+      "global": {
+        "title": "全球视野",
+        "description": "连接各大洲的社区，构建一个统一的学习者和领导者世界。"
+      },
+      "excellence": {
+        "title": "卓越",
+        "description": "在我们的项目、合作伙伴关系和影响力方面追求最高标准。"
+      },
+      "sustainability": {
+        "title": "可持续性",
+        "description": "加入我们推动积极变革并在全球社区创造持久影响的使命。"
+      }
+    }
+  },
+  "programs": {
+    "tagline": "PGT全球核心倡议",
+    "title": "我们的项目",
+    "description": "旨在通过有目的的成长改变生命和社区的综合倡议",
+    "portfolioTag": "项目组合",
+    "portfolioTitle": "适合每段旅程的变革性项目",
+    "portfolioSubtitle": "从数字化转型到个人发展，我们的项目旨在满足多样化需求。",
+    "learnMore": "了解更多",
+    "timelineTitle": "关键组件",
+    "impactTitle": "核心影响",
+    "durationTitle": "持续时间与规模",
+    "applyBtn": "立即申请",
+    "scheduleBtn": "安排免费会话",
+    "d3": {
+      "name": "D3项目",
+      "fullName": "Daily Discovery Digest",
+      "description": "一个旗舰每日灵感系列，向学生传递知识、意识和有影响力的故事。",
+      "features": [
+        "每日Instagram和Facebook故事",
+        "国家和国际纪念日亮点",
+        "历史里程碑",
+        "伟大人物纪念日",
+        "真实影响故事",
+        "每天发现非凡"
+      ],
+      "impact": "每日超过10,000名读者和学习者参与",
+      "duration": "持续日常项目"
+    },
+    "voa": {
+      "name": "VoA倡议",
+      "fullName": "Voices of Ability",
+      "description": "一个故事讲述系列，彰显将挑战转化为变革和影响的个人。",
+      "features": [
+        "生活旅程录制",
+        "同理心故事",
+        "残障与能力意识",
+        "网络视频剧集",
+        "通过讲故事赋权",
+        "社会变革灵感"
+      ],
+      "impact": "数十个强大旅程被分享和庆祝",
+      "duration": "持续故事讲述倡议"
+    },
+    "seminarix": {
+      "name": "Seminarix",
+      "fullName": "学生研讨会系列",
+      "description": "现场研讨会课程，为学生提供学术、励志和健康工具。",
+      "features": [
+        "励志演讲",
+        "学术策略",
+        "心理健康指导",
+        "备考技巧",
+        "互动学校和宿舍课程",
+        "真实故事分享"
+      ],
+      "impact": "数百名学生通过学校和宿舍课程获得指导",
+      "duration": "持续研讨会系列"
+    },
+    "motivminds": {
+      "name": "MotiVMinds",
+      "fullName": "一分钟赋权",
+      "description": "互动虚拟会议，解决青年心理健康、情感健康和个人发展问题。",
+      "features": [
+        "一分钟视频",
+        "个人成长洞见",
+        "学生和志愿者激励",
+        "真实世界智慧",
+        "简短精悍的信息格式",
+        "持续赋权内容"
+      ],
+      "impact": "参与和赋权的青年社区",
+      "duration": "持续视频系列"
+    },
+    "hed": {
+      "name": "HED活动",
+      "fullName": "Happy Eco Diwali活动",
+      "description": "一年一度的绿色庆典活动，倡导节日期间的环保实践。",
+      "features": [
+        "意识活动",
+        "创新竞赛",
+        "植树活动",
+        "ENOSAVE使命倡议",
+        "学生和社区参与"
+      ],
+      "impact": "每年数千人参与环保排灯节庆典",
+      "duration": "年度定期活动"
+    }
+  },
+  "timeline": {
+    "tagline": "PGT全球里程碑",
+    "title": "我们的旅程",
+    "description": "七年的成长、变革和影响——从一个愿景到一个全球网络",
+    "historyTag": "历史",
+    "historyTitle": "变革时间线",
+    "historySubtitle": "探索标志我们道路并定义我们成长的关键里程碑。",
+    "milestones": {
+      "2019": {
+        "title": "火花",
+        "description": "PGT作为一个小型学校倡议开始，专注于意识和环保行动。",
+        "achievements": [
+          "推出第一届Happy Eco Diwali (HED)活动",
+          "组织测验以支持同学备考",
+          "鼓励当地社区的环保庆祝活动",
+          "播下目标、成长和变革的种子"
+        ]
+      },
+      "2020": {
+        "title": "早期成长",
+        "description": "通过教育和意识活动扩大小型倡议。",
+        "achievements": [
+          "开展教育意识测验和小型活动",
+          "尽管面临疫情挑战仍维持生态意识活动",
+          "让学生参与本地和在线形式",
+          "激发了最初几个有记录的学生成功经历"
+        ]
+      },
+      "2021": {
+        "title": "持续行动",
+        "description": "PGT通过意识活动和年度环保活动持续前进。",
+        "achievements": [
+          "在学校举办小型意识活动",
+          "将HED活动扩展到第三届",
+          "组织同伴励志讨论",
+          "尽管规模有限仍维持学生参与"
+        ]
+      },
+      "2022": {
+        "title": "基础建设",
+        "description": "专注于通过生态倡议维持连续性。",
+        "achievements": [
+          "与新志愿者共同执行HED活动第四届",
+          "进行小规模在线意识帖子和竞赛",
+          "开始尝试有结构的影响格式",
+          "加强PGT作为学生主导运动的身份"
+        ]
+      },
+      "2023": {
+        "title": "为影响力做准备",
+        "description": "PGT测试新格式并为即将到来的转型奠定基础。",
+        "achievements": [
+          "以更广泛的覆盖庆祝HED第五届",
+          "参与小型活动测试学生反应",
+          "为更大的全球身份塑造愿景",
+          "为即将推出的项目准备结构"
+        ]
+      },
+      "2024": {
+        "title": "走向全球影响力",
+        "description": "更名为PGT全球网络并推出主要旗舰项目。",
+        "achievements": [
+          "推出VoA、MotivMinds、D3和Seminarix作为旗舰项目",
+          "Seminarix回到创始人的前学校并取得巨大成功",
+          "VoA和MotivMinds用真实故事激励观众",
+          "在第一年就突破了10,000名参与者里程碑"
+        ]
+      },
+      "2025": {
+        "title": "继续旅程",
+        "description": "PGT全球网络正在积极扩展项目并建立新机会。",
+        "achievements": [
+          "将举办第七届Happy Eco Diwali并获得强烈参与",
+          "扩大VoA、MotivMinds、D3和Seminarix的覆盖范围",
+          "与学校、学院和全球网络建立合作",
+          "专注于今年赋权更多数千名学生"
+        ]
+      }
+    }
+  },
+  "ventures": {
+    "tagline": "PGT保护伞",
+    "title": "PGT生态系统",
+    "description": "PGT全球网络正在不同领域构建企业生态系统，每个企业都朝着创造积极影响的更广泛使命努力。",
+    "heading": "我们的企业",
+    "launchingSoon": "即将推出",
+    "comingSoon": "即将推出",
+    "launchDate": "将于{launchDate}推出",
+    "target": "目标：{target}",
+    "visitWebsite": "访问网站",
+    "futureTitle": "未来企业",
+    "futureDesc": "更多企业目前正在开发中，即将宣布。我们正在积极设计教育、创意媒体和网络领域的解决方案。"
+  },
+  "impact": {
+    "tagline": "PGT全球成长成果",
+    "title": "我们的影响力",
+    "description": "PGT如何改变社区、赋权青年领袖并创造全球机会",
+    "metricsTag": "指标",
+    "metricsTitle": "可衡量的进步，共享的成功",
+    "metricsSubtitle": "我们的数字反映了我们对真实世界增长和可持续社区发展的承诺。",
+    "areas": {
+      "education": {
+        "title": "优质教育",
+        "description": "通过数字资源、职业咨询和学术支持工具弥合学习差距。"
+      },
+      "leadership": {
+        "title": "领导力发展",
+        "description": "培养年轻变革者的管理、技术和公共演讲技能。"
+      },
+      "community": {
+        "title": "社区提升",
+        "description": "推动本地生态活动、励志网络研讨会和志愿服务活动。"
+      }
+    },
+    "storiesTag": "故事",
+    "storiesTitle": "社区变革",
+    "storiesSubtitle": "阅读PGT的数字生态系统如何在全球影响学生、志愿者和合作伙伴。"
+  },
+  "gallery": {
+    "tagline": "PGT全球媒体档案",
+    "title": "媒体画廊",
+    "description": "我们全球影响力、学校研讨会、学生峰会和社区外展活动的快照",
+    "categories": {
+      "all": "所有照片",
+      "seminars": "研讨会",
+      "campaigns": "活动",
+      " summits": "峰会",
+      "outreach": "外展"
+    },
+    "viewImage": "查看图片",
+    "close": "关闭"
+  },
+  "articles": {
+    "tagline": "洞见",
+    "title": "洞见与故事",
+    "description": "发现塑造青年赋权的资源、专家指南和学生故事。",
+    "searchPlaceholder": "按标题、内容、标签搜索文章...",
+    "noArticles": "未找到符合您条件的文章。",
+    "tags": "标签：",
+    "back": "返回文章",
+    "share": "分享",
+    "readTime": "{time}",
+    "list": {
+      "1": {
+        "title": "通过技术学习改变青年",
+        "excerpt": "数字项目为青年提供技能、信心和机会。",
+        "content": "<p>Technology has rapidly become the foundation of modern society, shaping the way people learn, work, and interact. For today's youth, digital learning is not just a privilege but a necessity. In communities across the globe, students are increasingly embracing digital tools that equip them with knowledge, confidence, and life-changing opportunities.</p><br><p>One of the greatest advantages of technology in education is accessibility. Online platforms, mobile applications, and interactive tools allow students in rural or underserved areas to connect with high-quality learning resources. This democratization of knowledge ensures that no young person is left behind, regardless of geography or socio-economic background.</p><br><p>Beyond accessibility, technology also fosters creativity and critical thinking. Through project-based learning, coding programs, and digital collaboration, youth can solve real-world problems and innovate with confidence. These skills extend beyond the classroom, empowering them to become leaders, entrepreneurs, and changemakers in their communities.</p><br><p>Moreover, technology is reshaping career paths. With industries demanding digital literacy, coding, data analysis, and AI knowledge, young people who embrace technology stand out in the workforce. By equipping youth with these future-ready skills, we prepare them for sustainable careers and enable them to contribute meaningfully to global development.</p><br><p>However, the journey is not without challenges. Many regions face issues such as limited internet connectivity, lack of devices, or inadequate training for educators. Overcoming these hurdles requires a collaborative effort between governments, NGOs, and private sectors to build infrastructure, provide training, and ensure equitable access.</p><br><p>Ultimately, transforming youth through technology learning is about more than just academic success. It's about building resilience, nurturing confidence, and creating opportunities for young people to thrive in an interconnected world. As we invest in digital education, we invest in a brighter, more inclusive future for all.</p>"
+      },
+      "2": {
+        "title": "可持续社区与学生影响力",
+        "excerpt": "生态活动和意识在全球建立可持续的学生社区。",
+        "content": "<p>Sustainability is no longer a buzzword; it is a call to action. Around the world, students are leading the charge in building eco-conscious communities and reshaping the way we think about the environment. From reducing plastic use to spearheading renewable energy campaigns, young people are proving that small steps can create meaningful global change.</p><br><p>One of the most powerful tools for sustainability lies in awareness. Students organizing campaigns, workshops, and green clubs are raising awareness about pressing issues such as climate change, waste reduction, and conservation. This peer-to-peer learning not only educates but also inspires entire communities to adopt eco-friendly practices.</p><br><p>Beyond awareness, action is critical. Many student-led initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment.</p><br><p>Technology also plays a significant role. Social media allows young activists to amplify their messages, connect with global networks, and advocate for systemic changes. Building sustainable communities requires collaboration. Students who work hand-in-hand with educators, local governments, and NGOs can scale their impact and create lasting change.</p><br><p>The ultimate impact of student-led sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>"
+      },
+      "3": {
+        "title": "全球发展：学生主导的趋势",
+        "excerpt": "学生领导力趋势以创新和影响力重塑发展。",
+        "content": "<p>The future of global development is being shaped not only by policymakers and organizations but also by students. With innovation, determination, and digital fluency, today's youth are redefining the way societies address issues such as poverty, education, and equality. Their leadership is setting new trends that promise long-lasting impact worldwide.</p><br><p>One trend is the rise of social entrepreneurship. Students are launching startups that address local and global challenges, from clean water initiatives to sustainable farming solutions. These ventures not only solve pressing issues but also generate employment and foster innovation at the grassroots level.</p><br><p>Another trend is digital advocacy. Students are using online platforms to voice concerns about climate change, human rights, and gender equality. Their ability to mobilize audiences quickly has turned grassroots movements into global campaigns, influencing decision-makers and shaping public opinion.</p><br><p>Collaborative learning is also gaining traction. International student exchange programs, hackathons, and global forums are giving young people platforms to share ideas, challenge perspectives, and co-create solutions. Technology plays a central role in amplifying these trends.</p><br><p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is undeniably student-led.</p>"
+      },
+      "4": {
+        "title": "毕业生旅程：激励变革的故事",
+        "excerpt": "毕业生的韧性激励社区并产生积极变革。",
+        "content": "<p>Graduating is more than earning a degree; it's the beginning of a journey that often inspires change within communities. Around the world, graduates are using their skills, resilience, and stories of perseverance to spark meaningful transformation, proving that education is one of the most powerful tools for change.</p><br><p>Many graduates return to their hometowns with a vision to uplift their communities. Some open schools to provide better education for local children, while others launch social enterprises that address pressing issues like unemployment or healthcare. Their actions showcase how education extends beyond personal growth to collective advancement.</p><br><p>Stories of resilience also inspire others. Graduates who overcame poverty, discrimination, or other challenges often share their journeys, encouraging younger students to dream big and pursue education. These narratives not only motivate but also build a culture of persistence and hope.</p><br><p>Moreover, graduates play a crucial role in mentoring. By guiding younger students through internships, workshops, and volunteer programs, they ensure that the next generation has the tools and confidence to succeed. Ultimately, graduate stories highlight that success is not measured solely by personal achievement but by the positive change one brings to society.</p>"
+      },
+      "5": {
+        "title": "为未来学习创新课堂",
+        "excerpt": "将创新与技术融合使学习更具包容性和影响力。",
+        "content": "<p>Education is undergoing a paradigm shift, driven by technology and progressive teaching models. The traditional classroom layout is transforming into an interactive, digital space where learning is personalized, inclusive, and tailored for the future.</p><br><p>At the center of classroom innovation is gamification. Integrating educational games, quizzes, and simulations makes complex concepts engaging and memorable. Students are no longer passive listeners; they become active participants who explore ideas, solve challenges, and collaborate dynamically.</p><br><p>Another breakthrough is personalized learning. AI-driven platforms can analyze student performance and adjust learning paths accordingly. This ensures that fast learners remain challenged while students who need more support receive targeted guidance, creating a balanced and supportive classroom environment.</p><br><p>Virtual and augmented reality (VR/AR) are also expanding horizons. Students can now embark on virtual field trips to historic sites, dive deep into human anatomy, or explore molecular chemistry, turning abstract concepts into tangible experiences.</p><br><p>Fostering this shift requires empowering educators. Providing training, modern equipment, and support allows teachers to lead innovative classrooms with confidence. When schools and communities invest in progressive education, they open pathways for students to achieve their potential and solve future global challenges.</p>"
+      }
+    }
+  },
+  "careers": {
+    "tagline": "加入生态系统",
+    "title": "与PGT共建未来",
+    "description": "我们是一个由创新者、建设者和领导者组成的全球社区。探索开放的机会，为我们的企业做贡献。",
+    "benefitsTag": "福利",
+    "benefitsTitle": "为什么加入PGT？",
+    "benefitsSubtitle": "我们提供一个灵活、支持性的生态系统，旨在培育您的专业和个人成长。",
+    "list": {
+      "remote": "远程优先工作流程",
+      "growth": "持续领导力辅导",
+      "scale": "影响全球数百万学生",
+      "network": "进入全球同伴网络"
+    },
+    "positionsTag": "机会",
+    "positionsTitle": "开放核心职位",
+    "positionsSubtitle": "探索技术、创意媒体、外展和管理方面的角色。",
+    "role": "角色：",
+    "type": "类型：",
+    "hours": "承诺：",
+    "apply": "立即申请",
+    "positions": {
+      "cod": {
+        "title": "Chief Operations Director (COD)",
+        "department": "运营",
+        "responsibilities": [
+          "管理日常团队运营、时间表和内部协调",
+          "跟踪任务并确保项目顺利执行",
+          "与所有部门协作以保持项目按时进行"
+        ]
+      },
+      "cco": {
+        "title": "Chief Communications Officer (CCO)",
+        "department": "传播",
+        "responsibilities": [
+          "撰写和审查所有内容：说明文字、帖子、内部文件和脚本",
+          "在所有平台上保持PGT的语气和声音",
+          "与公关和设计团队合作开展活动"
+        ]
+      },
+      "cd": {
+        "title": "Creative Director (CD)",
+        "department": "创意",
+        "responsibilities": [
+          "设计海报、轮播图，编辑视频、短视频、缩略图和所有品牌创意",
+          "在所有平台上保持视觉标识和一致性",
+          "为所有部门提供设计和媒体内容支持"
+        ]
+      },
+      "cso": {
+        "title": "Chief Strategy Officer (CSO)",
+        "department": "战略",
+        "responsibilities": [
+          "主导活动创意、创新和规划",
+          "分析效果并提出改进建议",
+          "协助制定PGT项目的长期战略"
+        ]
+      },
+      "prh": {
+        "title": "Public Relations Head (PRH)",
+        "department": "公共关系",
+        "responsibilities": [
+          "公开代表PGT并建立合作关系",
+          "处理与高校、NGO、媒体和影响者的外展事务",
+          "支持品牌的知名度和网络建设"
+        ]
+      },
+      "cap": {
+        "title": "Campus Director (CAP)",
+        "department": "校园关系",
+        "responsibilities": [
+          "担任PGT和大学校园之间的官方联络人",
+          "组织实地活动并在活动中代表PGT",
+          "促进校园内的意识和参与"
+        ]
+      },
+      "ctd": {
+        "title": "Chief Technical Director (CTD)",
+        "department": "技术",
+        "responsibilities": [
+          "建立和管理PGT官方网站",
+          "创建活动注册页面和登陆页面",
+          "维护表单集成、分析和数字工具"
+        ]
+      },
+      "gsec": {
+        "title": "General Secretary (GSEC)",
+        "department": "行政",
+        "responsibilities": [
+          "处理正式文件、信函和内部公告",
+          "支持创始人维护结构和跟进事项",
+          "跟踪内部工作流程和通信记录"
+        ]
+      }
+    }
+  },
+  "apply": {
+    "title": "加入PGT核心团队",
+    "subtitle": "填写下面的申请详情以申请您心仪的职位。",
+    "form": {
+      "fullName": "全名",
+      "fullNamePlaceholder": "请输入您的全名",
+      "email": "电子邮件地址",
+      "emailPlaceholder": "请输入您的电子邮件地址",
+      "position": "期望职位",
+      "selectPosition": "选择一个职位",
+      "resume": "简历链接（Google Drive、Dropbox等）",
+      "resumePlaceholder": "请输入您的简历URL",
+      "coverLetter": "您为什么想加入PGT？",
+      "coverLetterPlaceholder": "请告诉我们您的动机、技能以及您计划如何做贡献...",
+      "submit": "提交申请",
+      "successTitle": "申请已提交！",
+      "successDesc": "感谢您的申请。我们的核心领导团队将审查您的申请，并在5-7个工作日内与您联系。",
+      "backToCareers": "返回职业页面"
+    }
+  },
+  "contact": {
+    "tagline": "与我们联系",
+    "title": "我们很乐意听取您的意见",
+    "description": "有关于我们项目的问题、合作咨询或想要志愿服务？直接联系我们的团队。",
+    "details": {
+      "email": "office@pgtglobalnetwork.com",
+      "phone": "+91 8999902805",
+      "address": "印度马哈拉施特拉邦达里亚布尔"
+    },
+    "form": {
+      "name": "您的姓名",
+      "namePlaceholder": "请输入您的姓名",
+      "email": "电子邮件地址",
+      "emailPlaceholder": "请输入您的电子邮件地址",
+      "subject": "主题",
+      "subjectPlaceholder": "请输入消息主题",
+      "message": "消息",
+      "messagePlaceholder": "请在此处写下您的消息详情...",
+      "send": "发送消息",
+      "successToast": "消息发送成功！",
+      "errorToast": "发送消息失败，请重试。"
+    }
+  },
+  "faq": {
+    "tagline": "支持",
+    "title": "常见问题",
+    "description": "查找有关我们项目、会员资格和全球运营的常见问题的快速答案。",
+    "categories": {
+      "all": "所有问题",
+      "programs": "项目",
+      "ventures": "企业",
+      "involvement": "参与"
+    },
+    "contactTitle": "还有问题吗？",
+    "contactDesc": "找不到您想要的答案？联系我们的志愿支持团队获取帮助。",
+    "contactBtn": "联系支持",
+    "list": {
+      "1": {
+        "question": "什么是PGT全球网络？",
+        "answer": "PGT全球网络是一个由学生主导、以目标为导向的组织，通过领导力、意识、教育和社区驱动的项目赋权个人。成立于2019年，已成长为学生发现真实世界学习和有意义影响力的平台。"
+      },
+      "2": {
+        "question": "PGT提供哪些项目？",
+        "answer": "我们运营旗舰倡议，包括D3（每日发现文摘）、VoA（能力之声）、Seminarix工作坊、MotivMinds视频系列和年度HED – Happy Eco Diwali活动。"
+      },
+      "3": {
+        "question": "如何参与项目？",
+        "answer": "每个项目都有自己的参与方式。MotivMinds和D3发布在我们的社交平台上供开放访问，Seminarix直接在学校和宿舍举办，VoA通过邀请或申请接受嘉宾故事讲述者。"
+      },
+      "4": {
+        "question": "项目是免费的吗？",
+        "answer": "是的，PGT全球网络的几乎所有倡议都免费提供。我们的目标是让意识、学习和赋权对所有人都可及。"
+      },
+      "5": {
+        "question": "PGT在哪里？",
+        "answer": "PGT全球网络总部位于印度马哈拉施特拉邦达里亚普尔。虽然我们从家乡运营，但我们的覆盖通过数字平台延伸至全球。"
+      },
+      "6": {
+        "question": "谁可以加入或从PGT项目中受益？",
+        "answer": "任何对领导力、学习和个人成长感兴趣的人都可以从我们的项目中受益。"
+      },
+      "7": {
+        "question": "组织或个人可以与PGT合作吗？",
+        "answer": "是的，我们欢迎合作。要进行合作，您可以联系office@pgtglobalnetwork.com。"
+      },
+      "8": {
+        "question": "如何了解PGT倡议的最新动态？",
+        "answer": "您可以在Instagram、LinkedIn和YouTube上关注我们，或访问我们的网站pgtglobalnetwork.com。"
+      },
+      "9": {
+        "question": "如何报告技术问题？",
+        "answer": "如果遇到技术问题，您可以通过office@pgtglobalnetwork.com与我们联系，提供问题的详情或截图。"
+      }
+    }
+  },
+  "privacy": {
+    "tagline": "法律信息",
+    "title": "隐私政策",
+    "description": "最后更新：2026年7月27日。本政策详述PGT全球网络如何处理用户数据、安全性和隐私。",
+    "heading": "隐私和数据条款",
+    "bullets": {
+      "1": "数据收集：我们仅收集必要的详细信息（姓名、电子邮件）用于注册、通讯更新和项目提交。",
+      "2": "安全性：用户密码已加密。我们维护标准安全过滤器以防止数据泄露和未经授权的访问。",
+      "3": "第三方：我们不向外部营销商出售或交易用户信息。分析数据严格保持匿名。"
+    }
+  },
+  "terms": {
+    "tagline": "法律条款",
+    "title": "条款和条件",
+    "description": "最后更新：2026年7月27日。通过访问PGT全球网络门户，您同意遵守我们的社区标准和服务条款。",
+    "heading": "标准网站条款",
+    "bullets": {
+      "1": "使用权：平台内容、代码、设计和材料受版权保护。允许个人非商业使用。",
+      "2": "用户准则：门户成员必须保持积极参与，避免在仪表板上进行有害、垃圾邮件或恶意操作。",
+      "3": "责任限制：PGT作为影响力网络运营。我们按原样提供励志工具，不对直接结果负责。"
+    }
+  },
+  "dashboard": {
+    "welcome": "欢迎回来，{name}！",
+    "status": "账户状态：活跃",
+    "bioLabel": "简短简介",
+    "bioPlaceholder": "向社区介绍您自己...",
+    "emailLabel": "电子邮件地址",
+    "emailLocked": "电子邮件地址无法更改。",
+    "saveSuccess": "个人资料更新成功！",
+    "saveError": "保存个人资料失败。",
+    "logsTitle": "活动日志",
+    "logsEmpty": "尚未记录任何活动。",
+    "noName": "成员"
+  },
+  "errors": {
+    "404": {
+      "title": "页面未找到",
+      "description": "您正在查找的页面不存在，可能已被移动，或链接不正确。",
+      "btnHome": "前往主页",
+      "btnExplore": "探索项目"
+    },
+    "general": {
+      "title": "出了点问题",
+      "description": "处理您的请求时发生意外错误。请刷新页面或重试。",
+      "diagnostics": "错误诊断：",
+      "btnRefresh": "刷新页面",
+      "btnHome": "返回首页"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "登录",
+      "subtitle": "访问您的门户账户仪表板",
+      "email": "电子邮件地址",
+      "emailPlaceholder": "请输入您的电子邮件地址",
+      "password": "密码",
+      "passwordPlaceholder": "请输入您的密码",
+      "forgot": "忘记密码？",
+      "remember": "记住我的电子邮件地址",
+      "btn": "登录",
+      "authenticating": "正在验证...",
+      "divider": "或继续使用",
+      "google": "使用Google继续",
+      "noAccount": "没有账户？",
+      "create": "创建账户",
+      "requiredEmail": "需要电子邮件",
+      "requiredPassword": "需要密码"
+    },
+    "signUp": {
+      "title": "创建账户",
+      "subtitle": "加入全球网络，开始您的旅程",
+      "fullName": "全名",
+      "fullNamePlaceholder": "请输入您的全名",
+      "email": "电子邮件地址",
+      "emailPlaceholder": "请输入您的电子邮件地址",
+      "password": "密码",
+      "passwordPlaceholder": "创建安全密码",
+      "confirmPassword": "确认密码",
+      "confirmPasswordPlaceholder": "确认您的安全密码",
+      "btn": "创建账户",
+      "creating": "正在创建账户...",
+      "divider": "或继续使用",
+      "google": "使用Google继续",
+      "hasAccount": "已有账户？",
+      "signIn": "登录",
+      "match": "密码匹配",
+      "noMatch": "密码不匹配",
+      "strength": "密码强度：",
+      "strengthWeek": "弱",
+      "strengthFair": "一般",
+      "strengthStrong": "强",
+      "requirements": "要求",
+      "reqLength": "8+字符",
+      "reqUpper": "大写字母",
+      "reqLower": "小写字母",
+      "reqNum": "数字",
+      "reqSpecial": "特殊字符",
+      "requiredName": "需要全名",
+      "requiredEmail": "需要电子邮件",
+      "requiredPassword": "需要密码"
+    },
+    "forgot": {
+      "title": "找回密码",
+      "subtitle": "在您注册的电子邮件收件箱中接收安全重置链接",
+      "email": "电子邮件地址",
+      "emailPlaceholder": "请输入您的电子邮件地址",
+      "btn": "发送找回链接",
+      "sending": "正在发送链接...",
+      "successTitle": "找回邮件已发送",
+      "successDesc": "我们已向{email}发送了安全密码重置链接。请检查您的收件箱和垃圾邮件文件夹。",
+      "btnBack": "返回登录",
+      "requiredEmail": "需要电子邮件"
+    },
+    "reset": {
+      "title": "重置密码",
+      "subtitle": "为您的门户个人资料设置新的安全密码",
+      "password": "新密码",
+      "passwordPlaceholder": "请输入您的新密码",
+      "confirmPassword": "确认新密码",
+      "confirmPasswordPlaceholder": "确认您的新密码",
+      "btn": "更新密码",
+      "updating": "正在更新密码...",
+      "noSession": "未检测到活动的恢复会话。请申请新的重置链接。",
+      "hasAccount": "知道密码？",
+      "signIn": "登录",
+      "requiredPassword": "需要密码"
+    },
+    "verify": {
+      "title": "验证您的电子邮件",
+      "subtitle": "请确认您的账户以访问PGT功能",
+      "pending": "验证待处理",
+      "desc": "我们已向{email}发送了验证链接。请点击电子邮件中的链接完成注册。",
+      "btnResend": "重新发送验证邮件",
+      "resending": "正在重新发送...",
+      "cooldown": "在{seconds}秒后重新发送链接",
+      "btnSignOut": "退出 / 使用其他账户",
+      "alreadyVerified": "已经验证了？",
+      "refresh": "点击此处刷新"
+    }
+  }
+}

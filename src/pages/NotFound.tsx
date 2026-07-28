@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Compass } from 'lucide-react';
 import HeroBackground from '../components/HeroBackground';
 import AnimatedCard from '../components/AnimatedCard';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const NotFound: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
-    <div className="pt-28 bg-slate-50/30 overflow-x-hidden relative min-h-[80vh] flex flex-col justify-center">
+    <div className="pt-28 bg-background overflow-x-hidden relative min-h-[80vh] flex flex-col justify-center transition-colors duration-300">
       <style>
         {`
           @keyframes reveal-up {
@@ -31,7 +34,7 @@ const NotFound: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center flex flex-col items-center justify-center flex-grow">
         <AnimatedCard animation="zoomIn" className="mb-6">
           {/* Glowing Icon Badge */}
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-indigo-50 border border-indigo-100 shadow-[0_8px_30px_rgba(99,102,241,0.06)] text-indigo-600 hover:scale-105 transition-all duration-300">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 shadow-[0_8px_30px_rgba(99,102,241,0.06)] text-indigo-600 hover:scale-105 transition-all duration-300">
             <Compass className="h-10 w-10 text-indigo-600 animate-spin" style={{ animationDuration: '20s' }} />
           </div>
         </AnimatedCard>
@@ -45,17 +48,17 @@ const NotFound: React.FC = () => {
         </h1>
 
         <h2 
-          className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 animate-reveal-up" 
+          className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight mb-4 animate-reveal-up" 
           style={{ animationDelay: '300ms' }}
         >
-          Page Not Found
+          {t('errors.404.title')}
         </h2>
 
         <p 
-          className="text-base sm:text-lg md:text-xl text-slate-650 mb-10 max-w-xl mx-auto leading-relaxed font-normal animate-reveal-up" 
+          className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-xl mx-auto leading-relaxed font-normal animate-reveal-up" 
           style={{ animationDelay: '450ms' }}
         >
-          The page you're looking for doesn't exist, may have been moved, or the link is incorrect.
+          {t('errors.404.description')}
         </p>
 
         <div 
@@ -67,14 +70,14 @@ const NotFound: React.FC = () => {
             className="group relative overflow-hidden w-full sm:w-56 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
           >
             <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer-btn pointer-events-none" />
-            Go to Homepage
+            {t('errors.404.btnHome')}
           </Link>
           <Link
             to="/programs"
-            className="w-full sm:w-56 border border-slate-200 bg-white/80 backdrop-blur-md text-slate-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-white hover:border-slate-300 hover:text-indigo-600 hover:-translate-y-[2px] hover:shadow-sm hover:shadow-indigo-500/5 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2 group"
+            className="w-full sm:w-56 border border-border bg-card/85 text-muted-foreground px-8 py-3.5 rounded-xl font-semibold hover:bg-card hover:border-indigo-500/30 hover:text-indigo-600 dark:hover:text-indigo-400 hover:-translate-y-[2px] hover:shadow-sm hover:shadow-indigo-500/5 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2 group"
           >
-            Explore Programs
-            <ArrowRight className="h-4 w-4 text-slate-500 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all duration-300" />
+            {t('errors.404.btnExplore')}
+            <ArrowRight className="h-4 w-4 text-muted-foreground/60 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 group-hover:translate-x-1 transition-all duration-300" />
           </Link>
         </div>
       </div>

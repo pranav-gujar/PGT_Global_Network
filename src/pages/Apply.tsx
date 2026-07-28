@@ -23,12 +23,14 @@ import { supabase } from "../lib/supabase";
 import toast from "react-hot-toast";
 import HeroBackground from "../components/HeroBackground";
 import AnimatedCard from "../components/AnimatedCard";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const Apply: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const positionTitle = searchParams.get("position");
+  const { t } = useLanguage();
 
   const [profile, setProfile] = useState<any>(null);
   const [fetchingProfile, setFetchingProfile] = useState(false);
@@ -50,6 +52,11 @@ const Apply: React.FC = () => {
   const [availability, setAvailability] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
+
+  const getTranslation = (key: string, fallback: any) => {
+    const val = t(key);
+    return val === key ? fallback : val;
+  };
 
   // Redirect if no position specified
   useEffect(() => {
@@ -100,227 +107,177 @@ const Apply: React.FC = () => {
     }
   };
 
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) {
-      toast.error("You must be logged in to apply.");
-      return;
-    }
-    if (!resumeFile) {
-      toast.error("Please upload your PDF resume.");
-      return;
-    }
-    if (!termsAccepted) {
-      toast.error("Please accept the terms and declaration.");
-      return;
-    }
+    if (!user || !positionTitle || !resumeFile) return;
 
     setSubmitting(true);
     setUploadProgress(10);
 
     try {
-      // 1. Upload Resume
+      // 1. Upload Resume PDF file to Supabase Storage
       const fileExt = resumeFile.name.split(".").pop();
-      const fileName = `${Date.now()}.${fileExt}`;
-      const filePath = `${user.id}/${fileName}`;
-
+      const filePath = `${user.id}/${Date.now()}_resume.${fileExt}`;
       setUploadProgress(30);
-      const { error: uploadError } = await supabase.storage
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
         .from("resumes")
-        .upload(filePath, resumeFile, { upsert: true });
+        .upload(filePath, resumeFile, {
+          cacheControl: "3600",
+          upsert: true
+        });
 
       if (uploadError) throw uploadError;
       setUploadProgress(60);
 
-      // 2. Get Public URL
-      const { data: urlData } = supabase.storage.from("resumes").getPublicUrl(filePath);
+      // Get public URL
+      const { data: urlData } = supabase.storage
+        .from("resumes")
+        .getPublicUrl(filePath);
+      
       const resumeUrl = urlData.publicUrl;
       setUploadProgress(80);
 
-      // 3. Save application details to DB
-      const { data: appData, error: dbError } = await supabase
+      // 2. Insert Application details into Database
+      const { error: insertError } = await supabase
         .from("applications")
         .insert({
           user_id: user.id,
-          position_title: positionTitle || "",
-          applicant_details: {
+          position_title: positionTitle,
+          position_type: "job",
+          application_data: {
             full_name: fullName,
-            email: user.email,
-            phone,
+            phone_number: phone,
             organization_institution: organizationInstitution,
             current_role: currentRole,
             highest_qualification: highestQualification,
-            // Legacy fallbacks for backward compatibility
-            college: organizationInstitution,
-            year_qualification: highestQualification,
             city_state: cityState,
             why_join: whyJoin,
-            skills,
+            skills: skills,
             previous_experience: previousExperience,
             portfolio_links: portfolioLinks,
-            availability,
-            terms_accepted: termsAccepted,
-          },
-          resume_url: resumeUrl,
-          status: "Submitted",
-        })
-        .select()
-        .single();
+            availability: availability,
+            resume_url: resumeUrl,
+            applied_at: new Date().toISOString()
+          }
+        });
 
-      if (dbError) throw dbError;
+      if (insertError) throw insertError;
       setUploadProgress(100);
 
-      if (appData) {
-        setSuccessData(appData);
-        toast.success("Application submitted successfully!");
-      }
-    } catch (err: any) {
-      console.error("Application submission failed:", err);
-      toast.error(err.message || "Failed to submit application. Please try again.");
+      // 3. Log user activity
+      await supabase.from("user_activities").insert({
+        user_id: user.id,
+        activity_type: "Job Application",
+        activity_data: {
+          position_title: positionTitle,
+          applied_at: new Date().toISOString()
+        }
+      });
+
+      toast.success("Application submitted successfully!");
+      setSuccessData({
+        position: positionTitle,
+        appliedAt: new Date().toLocaleDateString()
+      });
+    } catch (error: any) {
+      toast.error(error.message || "Error submitting application");
+      console.error("Application submission error:", error);
     } finally {
       setSubmitting(false);
     }
   };
 
-  if (successData) {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 overflow-hidden">
-        <HeroBackground />
-
-        <div className="max-w-md w-full z-10">
-          <AnimatedCard animation="fadeIn">
-            <div className="bg-white/95 border border-slate-200/60 backdrop-blur-md rounded-3xl p-8 text-center shadow-2xl relative overflow-hidden group">
-              <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.04] to-transparent rounded-3xl pointer-events-none" />
-
-              <div className="w-16 h-16 bg-emerald-50 border border-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-500 hover:scale-105 transition-all duration-300">
-                <CheckCircle2 className="h-8 w-8 animate-reveal-up" />
-              </div>
-
-              <h2 className="text-2xl font-extrabold text-slate-900 mb-2">Application Submitted!</h2>
-              <p className="text-sm text-slate-500 mb-6">
-                Thank you for applying to join the PGT Core Team. Your application has been logged successfully.
-              </p>
-
-              <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 mb-8 text-left space-y-3.5 relative z-10 font-normal">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-400 font-bold uppercase tracking-wider">Application ID</span>
-                  <span className="font-bold text-indigo-600 font-mono bg-indigo-50/50 px-2.5 py-0.5 rounded border border-indigo-100/40 select-all">
-                    {successData.application_id}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-400 font-bold uppercase tracking-wider">Position</span>
-                  <span className="font-semibold text-slate-700">{successData.position_title}</span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-400 font-bold uppercase tracking-wider">Status</span>
-                  <span className="bg-amber-50 text-amber-700 font-bold px-2 py-0.5 rounded-full border border-amber-200 text-[10px]">
-                    {successData.status}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center text-xs">
-                  <span className="text-slate-400 font-bold uppercase tracking-wider">Submitted On</span>
-                  <span className="font-semibold text-slate-700">
-                    {new Date(successData.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Link
-                  to="/dashboard"
-                  className="w-full relative overflow-hidden bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-3.5 px-4 rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                >
-                  Go to Applications Dashboard
-                </Link>
-                <Link
-                  to="/careers"
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-550 hover:text-slate-700 hover:bg-slate-100 py-3.5 px-4 rounded-xl font-semibold text-sm inline-flex items-center justify-center transition-all duration-300 cursor-pointer"
-                >
-                  Return to Careers Page
-                </Link>
-              </div>
-            </div>
-          </AnimatedCard>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="relative min-h-screen py-32 px-4 sm:px-6 lg:px-8 bg-slate-50/50 overflow-hidden">
+    <div className="pt-28 pb-20 bg-background overflow-x-hidden min-h-screen transition-colors duration-300">
       <HeroBackground />
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Back navigation */}
+        <AnimatedCard animation="slideUp" delay={50}>
+          <div className="mb-8 text-left">
+            <Link
+              to="/careers"
+              className="group inline-flex items-center text-muted-foreground hover:text-indigo-650 text-sm font-semibold tracking-wide transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+              {t('apply.form.backToCareers')}
+            </Link>
+          </div>
+        </AnimatedCard>
 
-      <div className="max-w-2xl mx-auto z-10 relative">
-        {/* Back Link */}
-        <button
-          onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-semibold text-xs tracking-wide uppercase transition-colors duration-300 mb-6 bg-white/80 border border-slate-200/50 rounded-xl px-4 py-2 hover:shadow-sm"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to Positions
-        </button>
-
-        <AnimatedCard animation="slideUp">
-          <div className="bg-white/95 border border-slate-200/80 backdrop-blur-xl rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-            <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.02] to-transparent rounded-3xl pointer-events-none" />
-
-            {/* Header */}
-            <div className="border-b border-slate-100 pb-6 mb-8">
-              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 border border-indigo-100/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                Application Form
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-1.5">
-                Core Team Application
-              </h1>
-              <p className="text-sm text-slate-500 flex items-center gap-2">
-                <Briefcase className="h-4 w-4 text-slate-400" />
-                Applying for: <strong className="text-slate-800">{positionTitle}</strong>
-              </p>
-            </div>
-
-            {fetchingProfile ? (
-              <div className="flex items-center justify-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
+        {/* Form Container */}
+        <AnimatedCard animation="slideUp" delay={150}>
+          <div className="bg-card border border-border rounded-3xl p-8 sm:p-12 shadow-2xl shadow-slate-950/10 dark:shadow-none">
+            {successData ? (
+              <div className="text-center py-8 space-y-6">
+                <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                  <CheckCircle2 className="h-8 w-8" />
+                </div>
+                <h2 className="text-3xl font-extrabold text-foreground tracking-tight">
+                  {t('apply.form.successTitle')}
+                </h2>
+                <p className="text-muted-foreground text-sm leading-relaxed max-w-md mx-auto font-normal">
+                  {t('apply.form.successDesc')}
+                </p>
+                <div className="bg-muted p-5 rounded-2xl border border-border max-w-sm mx-auto text-left space-y-2.5">
+                  <p className="text-xs text-muted-foreground"><strong>Position:</strong> {successData.position}</p>
+                  <p className="text-xs text-muted-foreground"><strong>Applied On:</strong> {successData.appliedAt}</p>
+                </div>
+                <div className="pt-6">
+                  <Link
+                    to="/careers"
+                    className="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-6 py-3 rounded-xl transition-colors duration-300"
+                  >
+                    {t('apply.form.backToCareers')}
+                  </Link>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <p className="text-xs text-slate-455">
-                  Fields marked with <span className="text-red-500 font-bold">*</span> are required.
-                </p>
+              <form onSubmit={handleSubmit} className="space-y-8 text-left">
+                <div>
+                  <h1 className="text-3xl font-extrabold text-foreground tracking-tight">
+                    {t('apply.title')}
+                  </h1>
+                  <p className="text-muted-foreground text-sm mt-2 font-normal">
+                    {t('apply.subtitle')}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-1.5 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 text-indigo-700 dark:text-indigo-400 text-xs px-3.5 py-1.5 rounded-xl font-bold select-none">
+                    <ShieldCheck className="h-4 w-4" />
+                    <strong>Position:</strong> {positionTitle}
+                  </div>
+                </div>
 
                 {/* Visual Group: Personal Details */}
-                <div className="space-y-5">
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <User className="h-4 w-4 text-slate-450" /> Personal Details
+                <div className="space-y-5 pt-6 border-t border-border">
+                  <h3 className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest flex items-center gap-2">
+                    <User className="h-4 w-4 text-muted-foreground/50" /> Personal Details
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        Full Name <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {t('apply.form.fullName')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <input
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
-                        placeholder="Enter your full name"
+                        className="w-full px-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                        placeholder={t('apply.form.fullNamePlaceholder')}
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        Email Address
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {t('apply.form.email')}
                       </label>
                       <input
                         type="email"
                         value={user?.email || ""}
                         disabled
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-400 focus:outline-none text-sm transition-all duration-300 cursor-not-allowed select-none shadow-sm"
+                        className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-muted-foreground/55 focus:outline-none text-sm transition-all duration-300 cursor-not-allowed select-none shadow-sm"
                         required
                       />
                     </div>
@@ -328,16 +285,16 @@ const Apply: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        Phone Number <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {getTranslation('apply.form.phone', 'Phone Number')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        <Phone className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
                         <input
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                          className="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                           placeholder="Enter your mobile number"
                           required
                         />
@@ -345,16 +302,16 @@ const Apply: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        City / State <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {getTranslation('apply.form.cityState', 'City / State')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <div className="relative">
-                        <MapPin className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        <MapPin className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
                         <input
                           type="text"
                           value={cityState}
                           onChange={(e) => setCityState(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                          className="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                           placeholder="Enter your current city and state"
                           required
                         />
@@ -364,23 +321,23 @@ const Apply: React.FC = () => {
                 </div>
 
                 {/* Visual Group: Background Information */}
-                <div className="space-y-5 pt-4 border-t border-slate-100">
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Briefcase className="h-4 w-4 text-slate-455" /> Background Information
+                <div className="space-y-5 pt-4 border-t border-border">
+                  <h3 className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest flex items-center gap-2">
+                    <Briefcase className="h-4 w-4 text-muted-foreground/50" /> Background Information
                   </h3>
 
                   <div className="space-y-5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        Organization / Institution <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {getTranslation('apply.form.org', 'Organization / Institution')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <div className="relative">
-                        <BookOpen className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        <BookOpen className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
                         <input
                           type="text"
                           value={organizationInstitution}
                           onChange={(e) => setOrganizationInstitution(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-855 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                          className="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                           placeholder='Enter your current organisation, institution, or "Independent"'
                           required
                         />
@@ -388,16 +345,16 @@ const Apply: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        Current Role / Occupation <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {t('careers.role') === 'careers.role' ? 'Current Role / Occupation' : t('careers.role')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <div className="relative">
-                        <Briefcase className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        <Briefcase className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
                         <input
                           type="text"
                           value={currentRole}
                           onChange={(e) => setCurrentRole(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-855 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                          className="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                           placeholder="e.g. Student, Software Engineer, Founder, Teacher, Freelancer"
                           required
                         />
@@ -405,16 +362,16 @@ const Apply: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                        Highest Qualification <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                        {getTranslation('apply.form.qualification', 'Highest Qualification')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <div className="relative">
-                        <GraduationCap className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                        <GraduationCap className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
                         <input
                           type="text"
                           value={highestQualification}
                           onChange={(e) => setHighestQualification(e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-855 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                          className="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                           placeholder="e.g. HSC, Diploma, B.Tech, MBA, PhD"
                           required
                         />
@@ -424,63 +381,63 @@ const Apply: React.FC = () => {
                 </div>
 
                 {/* Visual Group: Questionnaire */}
-                <div className="space-y-5 pt-4 border-t border-slate-100">
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-slate-450" /> Motivation & Experience
+                <div className="space-y-5 pt-4 border-t border-border">
+                  <h3 className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest flex items-center gap-2">
+                    <Sparkles className="h-4 w-4 text-muted-foreground/50" /> Motivation & Experience
                   </h3>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                      Why do you want to join PGT Global Network? <span className="text-red-500 ml-0.5">*</span>
+                    <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                      {t('apply.form.coverLetter')} <span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <textarea
                       value={whyJoin}
                       onChange={(e) => setWhyJoin(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm font-normal"
+                      className="w-full px-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm font-normal"
                       rows={4}
-                      placeholder="Explain why you want to join and how you can contribute..."
+                      placeholder={t('apply.form.coverLetterPlaceholder')}
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5">
-                      Relevant Skills <span className="text-red-500 ml-0.5">*</span>
+                    <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5">
+                      {getTranslation('apply.form.skills', 'Relevant Skills')} <span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <input
                       type="text"
                       value={skills}
                       onChange={(e) => setSkills(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                      className="w-full px-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                       placeholder="Enter your key skills (separated by commas)"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                      Previous Experience <span className="text-[10px] font-bold text-slate-400 lowercase italic tracking-wide">(Optional)</span>
+                    <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                      {getTranslation('apply.form.prevExp', 'Previous Experience')} <span className="text-[10px] font-bold text-muted-foreground/50 lowercase italic tracking-wide">(Optional)</span>
                     </label>
                     <textarea
                       value={previousExperience}
                       onChange={(e) => setPreviousExperience(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm font-normal"
+                      className="w-full px-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm font-normal"
                       rows={3}
                       placeholder="Describe any prior leadership, work, or volunteer experience..."
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                      Portfolio / LinkedIn / GitHub links <span className="text-[10px] font-bold text-slate-400 lowercase italic tracking-wide">(Optional)</span>
+                    <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                      {getTranslation('apply.form.portfolio', 'Portfolio / LinkedIn / GitHub links')} <span className="text-[10px] font-bold text-muted-foreground/50 lowercase italic tracking-wide">(Optional)</span>
                     </label>
                     <div className="relative">
-                      <LinkIcon className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                      <LinkIcon className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground/60" />
                       <input
                         type="url"
                         value={portfolioLinks}
                         onChange={(e) => setPortfolioLinks(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                        className="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                         placeholder="Enter your URL (optional)"
                       />
                     </div>
@@ -488,34 +445,34 @@ const Apply: React.FC = () => {
                 </div>
 
                 {/* Visual Group: Logistics & Resume */}
-                <div className="space-y-5 pt-4 border-t border-slate-100">
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                    <FileText className="h-4 w-4 text-slate-450" /> Availability & Resume
+                <div className="space-y-5 pt-4 border-t border-border">
+                  <h3 className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-muted-foreground/50" /> Availability & Resume
                   </h3>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5 text-slate-400" /> Availability (Hours per week / Start Date) <span className="text-red-500 ml-0.5">*</span>
+                    <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                      <Clock className="h-3.5 w-3.5 text-muted-foreground/60" /> {getTranslation('apply.form.availability', 'Availability (Hours per week / Start Date)')} <span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <input
                       type="text"
                       value={availability}
                       onChange={(e) => setAvailability(e.target.value)}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-850 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                      className="w-full px-4 py-3 bg-input border border-input rounded-xl text-foreground placeholder-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
                       placeholder="Enter your availability (e.g. hours per week, start date)"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                      Upload Resume (PDF format, under 5MB) <span className="text-red-500 ml-0.5">*</span>
+                    <label className="block text-xs font-bold text-muted-foreground/80 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                      {getTranslation('apply.form.resume', 'Upload Resume (PDF format, under 5MB)')} <span className="text-red-500 ml-0.5">*</span>
                     </label>
-                    <label className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 border-dashed rounded-2xl hover:border-indigo-400 transition-colors duration-300 relative bg-slate-50/50 cursor-pointer block">
+                    <label className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-border border-dashed rounded-2xl hover:border-indigo-400 transition-colors duration-300 relative bg-muted/40 cursor-pointer block">
                       <div className="space-y-1.5 text-center">
-                        <Upload className="mx-auto h-10 w-10 text-slate-400" />
-                        <div className="flex text-sm text-slate-650 justify-center">
-                          <span className="relative rounded-md font-bold text-indigo-650 hover:text-indigo-550 focus-within:outline-none">
+                        <Upload className="mx-auto h-10 w-10 text-muted-foreground/60" />
+                        <div className="flex text-sm text-muted-foreground justify-center">
+                          <span className="relative rounded-md font-bold text-indigo-700 dark:text-indigo-400 hover:text-indigo-550 focus-within:outline-none">
                             Upload a PDF file
                           </span>
                           <input
@@ -526,10 +483,10 @@ const Apply: React.FC = () => {
                             required
                           />
                         </div>
-                        <p className="text-xs text-slate-400 font-normal">PDF files up to 5MB</p>
+                        <p className="text-xs text-muted-foreground/50 font-normal">PDF files up to 5MB</p>
                         {resumeFile && (
                           <div className="pt-2">
-                            <span className="inline-flex items-center gap-1 bg-indigo-50 border border-indigo-150 text-indigo-700 text-xs px-3 py-1 rounded-full font-bold">
+                            <span className="inline-flex items-center gap-1 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 text-indigo-700 dark:text-indigo-400 text-xs px-3 py-1 rounded-full font-bold">
                               Selected: {resumeFile.name}
                             </span>
                           </div>
@@ -540,24 +497,24 @@ const Apply: React.FC = () => {
                 </div>
 
                 {/* Terms and declaration */}
-                <div className="space-y-4 pt-4 border-t border-slate-100">
+                <div className="space-y-4 pt-4 border-t border-border">
                   <label className="relative flex items-start gap-3 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={termsAccepted}
                       onChange={(e) => setTermsAccepted(e.target.checked)}
-                      className="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded cursor-pointer"
+                      className="mt-1 h-4.5 w-4.5 text-indigo-650 dark:text-indigo-400 focus:ring-indigo-500 border-border rounded cursor-pointer"
                       required
                     />
-                    <span className="text-xs text-slate-550 leading-relaxed font-normal">
-                      I declare that the information provided in this application is true and complete to the best of my knowledge. I understand that any false statements may disqualify my application.
+                    <span className="text-xs text-muted-foreground leading-relaxed font-normal">
+                      {getTranslation('apply.form.terms', 'I declare that the information provided in this application is true and complete to the best of my knowledge. I understand that any false statements may disqualify my application.')}
                     </span>
                   </label>
                 </div>
 
                 {/* Submitting progress bar */}
                 {submitting && (
-                  <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                  <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
                     <div
                       className="bg-indigo-600 h-1.5 rounded-full transition-all duration-300 ease-out"
                       style={{ width: `${uploadProgress}%` }}
@@ -574,11 +531,11 @@ const Apply: React.FC = () => {
                   {submitting ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Submitting Application... ({uploadProgress}%)
+                      {t('common.submitting')} ({uploadProgress}%)
                     </>
                   ) : (
                     <>
-                      Submit Application
+                      {t('apply.form.submit')}
                       <Sparkles className="h-4 w-4" />
                     </>
                   )}

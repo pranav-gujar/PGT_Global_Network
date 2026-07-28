@@ -24,7 +24,7 @@ const LoadingSpinner = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-slate-50/95 backdrop-blur-md z-50 flex flex-col items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 bg-background/95 backdrop-blur-md z-50 flex flex-col items-center justify-center overflow-hidden">
       <style>
         {`
           @keyframes loader-shimmer {
@@ -38,20 +38,20 @@ const LoadingSpinner = () => {
       </style>
 
       {/* Background spot light glow blobs */}
-      <div className="absolute top-1/4 left-1/4 w-[280px] h-[280px] rounded-full bg-blue-300/10 blur-[80px] animate-pulse pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-[280px] h-[280px] rounded-full bg-indigo-300/10 blur-[80px] animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/4 left-1/4 w-[280px] h-[280px] rounded-full bg-blue-350/5 dark:bg-blue-900/10 blur-[80px] animate-pulse pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[280px] h-[280px] rounded-full bg-indigo-350/5 dark:bg-indigo-900/10 blur-[80px] animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
 
       {/* Loader visual container */}
       <div className="relative flex flex-col items-center z-10">
         <div className="relative w-48 h-48 flex items-center justify-center">
           
           {/* Inner orbit ring with animated node */}
-          <div className="absolute w-36 h-36 border border-slate-200/50 rounded-full animate-[spin_8s_linear_infinite]">
+          <div className="absolute w-36 h-36 border border-slate-200/50 dark:border-slate-800/50 rounded-full animate-[spin_8s_linear_infinite]">
             <div className="absolute -top-1 left-[calc(50%-4px)] w-2.5 h-2.5 bg-indigo-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
           </div>
           
           {/* Outer dashed orbit ring */}
-          <div className="absolute w-44 h-44 border border-dashed border-slate-300/45 rounded-full animate-[spin_16s_linear_infinite_reverse]">
+          <div className="absolute w-44 h-44 border border-dashed border-slate-300/45 dark:border-slate-700/40 rounded-full animate-[spin_16s_linear_infinite_reverse]">
             <div className="absolute -bottom-1.5 left-[calc(50%-6px)] w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
           </div>
 
@@ -59,7 +59,7 @@ const LoadingSpinner = () => {
           <div className="absolute w-24 h-24 rounded-full bg-indigo-500/[0.03] blur-md animate-ping pointer-events-none"></div>
 
           {/* Focal Logo */}
-          <div className="relative w-20 h-20 bg-white border border-slate-200/50 rounded-3xl flex items-center justify-center shadow-xl shadow-slate-100/50 hover:scale-105 transition-transform duration-300 overflow-hidden">
+          <div className="relative w-20 h-20 bg-card border border-border rounded-3xl flex items-center justify-center shadow-xl shadow-slate-100/50 dark:shadow-none hover:scale-105 transition-transform duration-300 overflow-hidden">
             <img 
               src="/PGT New Logo Transparent.png" 
               alt="PGT Logo" 
@@ -73,7 +73,7 @@ const LoadingSpinner = () => {
         {/* Rotating Brand messages container */}
         <div className="mt-6 h-8 flex items-center justify-center">
           <p 
-            className={`text-slate-600 font-semibold tracking-wide text-sm sm:text-base transition-all duration-300 ${
+            className={`text-foreground/80 dark:text-foreground/90 font-semibold tracking-wide text-sm sm:text-base transition-all duration-300 ${
               fade ? 'opacity-100 transform translate-y-0 scale-100' : 'opacity-0 transform -translate-y-1 scale-95'
             }`}
           >

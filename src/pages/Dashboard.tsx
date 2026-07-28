@@ -25,9 +25,11 @@ import toast from 'react-hot-toast'
 import ImageUploadModal from '../components/ImageUploadModal'
 import HeroBackground from '../components/HeroBackground'
 import AnimatedCard from '../components/AnimatedCard'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Dashboard = () => {
   const { user, userRole, updateProfile } = useAuth()
+  const { t } = useLanguage()
   const [profile, setProfile] = useState<any>(null)
   const [applications, setApplications] = useState<any[]>([])
   const [activities, setActivities] = useState<any[]>([])
@@ -56,7 +58,7 @@ const Dashboard = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false)
-    }, 4000)
+    }, 1500)
     return () => clearTimeout(timeout)
   }, [])
 
@@ -107,8 +109,10 @@ const Dashboard = () => {
       await updateProfile(editData)
       setProfile((prev: any) => ({ ...prev, ...editData }))
       setEditMode(false)
+      toast.success(t('dashboard.saveSuccess') === 'dashboard.saveSuccess' ? 'Profile updated successfully!' : t('dashboard.saveSuccess'))
     } catch (error) {
       console.error('Failed to update profile:', error)
+      toast.error(t('dashboard.saveError') === 'dashboard.saveError' ? 'Failed to save profile.' : t('dashboard.saveError'))
     }
   }
 
@@ -175,7 +179,7 @@ const Dashboard = () => {
     }
   }
 
-  const displayName = profile?.full_name || user?.user_metadata?.full_name || 'PGTian'
+  const displayName = profile?.full_name || user?.user_metadata?.full_name || t('dashboard.noName') || 'PGTian'
 
   if (!user) {
     return <Navigate to="/" replace />
@@ -183,28 +187,28 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="relative min-h-screen flex items-center justify-center bg-slate-50 overflow-hidden">
+      <div className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
         <HeroBackground />
         <div className="z-10 text-center space-y-4">
           <div className="relative w-16 h-16 mx-auto">
-            <div className="absolute inset-0 rounded-full border-4 border-indigo-100"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-indigo-500/10"></div>
             <div className="absolute inset-0 rounded-full border-4 border-indigo-600 border-t-transparent animate-spin"></div>
           </div>
-          <p className="text-sm font-semibold text-slate-650 tracking-wide animate-pulse">Loading Member Workspace...</p>
+          <p className="text-sm font-semibold text-muted-foreground tracking-wide animate-pulse">Loading Member Workspace...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="relative min-h-screen bg-slate-50 overflow-hidden">
+    <div className="relative min-h-screen bg-background overflow-hidden transition-colors duration-300">
       <HeroBackground />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 relative z-10">
         
         {/* Welcome Hero Banner */}
         <AnimatedCard animation="fadeIn" className="mb-8">
-          <div className="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden border border-white/5">
+          <div className="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 dark:from-indigo-955/40 dark:via-slate-955 dark:to-indigo-900/40 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden border border-border">
             {/* Ambient Lighting Overlay */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute bottom-0 left-10 w-64 h-64 bg-blue-500/5 rounded-full blur-2xl pointer-events-none"></div>
@@ -213,7 +217,7 @@ const Dashboard = () => {
               <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
                 {/* Avatar Display */}
                 <div className="relative group">
-                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl group-hover:border-indigo-400/40 transition-all duration-300 transform group-hover:scale-105 bg-indigo-900 flex items-center justify-center">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl group-hover:border-indigo-400/40 transition-all duration-300 transform group-hover:scale-105 bg-indigo-950 flex items-center justify-center">
                     {profileImage ? (
                       <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
                     ) : (
@@ -233,7 +237,7 @@ const Dashboard = () => {
 
                 <div className="space-y-2">
                   <div className="flex flex-col sm:flex-row items-center gap-2.5">
-                    <span className="text-slate-400 text-sm font-semibold tracking-wide uppercase">
+                    <span className="text-slate-400/80 text-sm font-semibold tracking-wide uppercase">
                       {getGreeting()},
                     </span>
                     <span className={`px-3 py-0.5 rounded-full text-xs font-bold border bg-gradient-to-r ${getRoleBadgeColor(userRole)}`}>
@@ -241,10 +245,10 @@ const Dashboard = () => {
                     </span>
                   </div>
                   <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-                    {displayName}
+                    {t('dashboard.welcome', { name: displayName }) === 'dashboard.welcome' ? `Welcome back, ${displayName}!` : t('dashboard.welcome', { name: displayName })}
                   </h1>
-                  <p className="text-slate-400 text-sm max-w-xl leading-relaxed">
-                    Welcome back, {displayName.split(' ')[0]}! This is your secure member workspace. Access your active applications, track historical activities, or manage your developer credentials.
+                  <p className="text-slate-400/80 text-sm max-w-xl leading-relaxed">
+                    {t('dashboard.status') === 'dashboard.status' ? 'Account Status: Active' : t('dashboard.status')}
                   </p>
                 </div>
               </div>
@@ -254,7 +258,7 @@ const Dashboard = () => {
                   to="/careers" 
                   className="bg-white/10 hover:bg-white/20 text-white font-semibold py-3 px-5 rounded-xl text-sm border border-white/10 transition-all duration-300 flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] shadow-lg text-center"
                 >
-                  Apply for Positions
+                  {t('careers.apply') === 'careers.apply' ? 'Apply Now' : t('careers.apply')}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -268,9 +272,9 @@ const Dashboard = () => {
           {/* Profile Card Column */}
           <div className="lg:col-span-1">
             <AnimatedCard animation="slideUp" delay={100}>
-              <div className="bg-white/80 border border-slate-200/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-indigo-100/30 space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                  <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2.5">
+              <div className="bg-card border border-border p-8 rounded-2xl shadow-xl shadow-slate-950/10 dark:shadow-none space-y-6">
+                <div className="flex items-center justify-between pb-4 border-b border-border">
+                  <h2 className="text-xl font-extrabold text-foreground flex items-center gap-2.5">
                     <User className="h-5 w-5 text-indigo-650" />
                     Member Details
                   </h2>
@@ -290,7 +294,7 @@ const Dashboard = () => {
                         })
                         setEditMode(true)
                       }}
-                      className="p-2 text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50/50 rounded-xl transition-all duration-300 cursor-pointer"
+                      className="p-2 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50/10 rounded-xl transition-all duration-300 cursor-pointer"
                       title="Edit Profile"
                     >
                       <Edit3 className="h-5 w-5" />
@@ -311,7 +315,7 @@ const Dashboard = () => {
                           facebook: profile?.facebook || ''
                         })
                       }}
-                      className="p-2 text-slate-500 hover:text-slate-750 hover:bg-slate-50/50 rounded-xl transition-all duration-300 cursor-pointer"
+                      className="p-2 text-muted-foreground hover:bg-muted/80 rounded-xl transition-all duration-300 cursor-pointer"
                       title="Cancel Edit"
                     >
                       <X className="h-5 w-5" />
@@ -321,156 +325,130 @@ const Dashboard = () => {
 
                 <div className="space-y-6">
                   {editMode && (
-                    <p className="text-xs text-slate-455">
+                    <p className="text-xs text-muted-foreground/60">
                       Fields marked with <span className="text-red-500 font-bold">*</span> are required.
                     </p>
                   )}
 
                   {/* Full Name */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">
-                      Full Name {editMode && <span className="text-red-500 ml-0.5">*</span>}
+                    <label className="block text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-1.5">
+                      {t('apply.form.fullName') === 'apply.form.fullName' ? 'Full Name' : t('apply.form.fullName')} {editMode && <span className="text-red-500 ml-0.5">*</span>}
                     </label>
                     {editMode ? (
                       <input
                         type="text"
                         value={editData.full_name}
                         onChange={(e) => setEditData({ ...editData, full_name: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
+                        className="w-full px-4 py-2.5 bg-input border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
                         placeholder="Enter your full name"
                       />
                     ) : (
-                      <p className="text-slate-800 text-sm font-semibold">{displayName}</p>
+                      <p className="text-foreground text-sm font-semibold">{displayName}</p>
                     )}
                   </div>
 
                   {/* Registered Email - Locked and Non-Editable */}
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1.5 text-slate-400">
-                      Email Address <span className="text-[10px] bg-slate-105 text-slate-500 px-1.5 py-0.5 rounded font-bold uppercase tracking-normal">Locked</span>
+                    <label className="block text-xs font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1.5 text-muted-foreground/50">
+                      {t('dashboard.emailLabel') === 'dashboard.emailLabel' ? 'Email Address' : t('dashboard.emailLabel')} <span className="text-[10px] bg-muted text-muted-foreground/60 px-1.5 py-0.5 rounded font-bold uppercase tracking-normal">Locked</span>
                     </label>
-                    <p className="text-slate-800 text-sm font-semibold select-all cursor-not-allowed opacity-75">{user.email}</p>
+                    <p className="text-foreground text-sm font-semibold select-all cursor-not-allowed opacity-75">{user.email}</p>
                   </div>
 
                   {/* Bio */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5">
-                      Professional Bio
+                    <label className="block text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-1.5">
+                      {t('dashboard.bioLabel') === 'dashboard.bioLabel' ? 'Short Bio' : t('dashboard.bioLabel')}
                     </label>
                     {editMode ? (
                       <textarea
                         value={editData.bio}
                         onChange={(e) => setEditData({ ...editData, bio: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
+                        className="w-full px-4 py-2.5 bg-input border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
                         rows={3}
-                        placeholder="Describe your background and bio..."
+                        placeholder={t('dashboard.bioPlaceholder') === 'dashboard.bioPlaceholder' ? 'Tell the community about yourself...' : t('dashboard.bioPlaceholder')}
                       />
                     ) : (
                       profile?.bio ? (
-                        <p className="text-slate-600 text-sm leading-relaxed font-normal">{profile.bio}</p>
+                        <p className="text-muted-foreground text-sm leading-relaxed font-normal">{profile.bio}</p>
                       ) : (
-                        <p className="text-slate-400 italic text-sm font-normal">Not provided yet</p>
+                        <p className="text-muted-foreground/50 italic text-sm font-normal">Not provided yet</p>
                       )
                     )}
                   </div>
 
                   {/* Location */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5 text-slate-405" /> Location
+                    <label className="block text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5 text-muted-foreground/60" /> Location
                     </label>
                     {editMode ? (
                       <input
                         type="text"
                         value={editData.location}
                         onChange={(e) => setEditData({ ...editData, location: e.target.value })}
-                        className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
+                        className="w-full px-4 py-2.5 bg-input border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
                         placeholder="Enter your current city and country"
                       />
                     ) : (
                       profile?.location ? (
-                        <p className="text-slate-800 text-sm font-semibold">{profile.location}</p>
+                        <p className="text-foreground text-sm font-semibold">{profile.location}</p>
                       ) : (
-                        <p className="text-slate-400 italic text-sm font-normal">Not provided yet</p>
+                        <p className="text-muted-foreground/50 italic text-sm font-normal">Not provided yet</p>
                       )
                     )}
                   </div>
 
                   {/* Social & Web Links */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">
+                    <label className="block text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-2">
                       Social & Web Links
                     </label>
                     {editMode ? (
-                      <div className="space-y-4 pt-2 border-t border-slate-100">
+                      <div className="space-y-4 pt-2 border-t border-border">
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1">
+                          <label className="block text-xs font-semibold text-muted-foreground/60 mb-1 flex items-center gap-1">
                             <Globe className="h-3 w-3" /> Website
                           </label>
                           <input
                             type="url"
                             value={editData.website}
                             onChange={(e) => setEditData({ ...editData, website: e.target.value })}
-                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
+                            className="w-full px-4 py-2 bg-input border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
                             placeholder="Enter your website URL (optional)"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1">
+                          <label className="block text-xs font-semibold text-muted-foreground/60 mb-1 flex items-center gap-1">
                             <Instagram className="h-3 w-3" /> Instagram
                           </label>
                           <input
                             type="url"
                             value={editData.instagram}
                             onChange={(e) => setEditData({ ...editData, instagram: e.target.value })}
-                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
+                            className="w-full px-4 py-2 bg-input border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
                             placeholder="Enter your Instagram profile URL (optional)"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1">
+                          <label className="block text-xs font-semibold text-muted-foreground/60 mb-1 flex items-center gap-1">
                             <Linkedin className="h-3 w-3" /> LinkedIn
                           </label>
                           <input
                             type="url"
                             value={editData.linkedin}
                             onChange={(e) => setEditData({ ...editData, linkedin: e.target.value })}
-                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
+                            className="w-full px-4 py-2 bg-input border border-input rounded-xl text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
                             placeholder="Enter your LinkedIn profile URL (optional)"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1">
-                            <Youtube className="h-3 w-3" /> YouTube
-                          </label>
-                          <input
-                            type="url"
-                            value={editData.youtube}
-                            onChange={(e) => setEditData({ ...editData, youtube: e.target.value })}
-                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
-                            placeholder="Enter your YouTube channel URL (optional)"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1 flex items-center gap-1">
-                            <Facebook className="h-3 w-3" /> Facebook
-                          </label>
-                          <input
-                            type="url"
-                            value={editData.facebook}
-                            onChange={(e) => setEditData({ ...editData, facebook: e.target.value })}
-                            className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-all duration-300"
-                            placeholder="Enter your Facebook profile URL (optional)"
                           />
                         </div>
                       </div>
                     ) : (
                       (!profile?.website && !profile?.instagram && !profile?.linkedin && !profile?.youtube && !profile?.facebook) ? (
-                        <p className="text-slate-400 italic text-sm font-normal">Not provided yet</p>
+                        <p className="text-muted-foreground/50 italic text-sm font-normal">Not provided yet</p>
                       ) : (
                         <div className="flex flex-wrap items-center gap-3">
                           {profile?.website && (
@@ -478,7 +456,7 @@ const Dashboard = () => {
                               href={ensureAbsoluteUrl(profile.website)} 
                               target="_blank" 
                               rel="noopener noreferrer" 
-                              className="p-2.5 bg-slate-50 hover:bg-indigo-50 border border-slate-200/60 rounded-xl text-slate-600 hover:text-indigo-600 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
+                              className="p-2.5 bg-muted border border-border rounded-xl text-muted-foreground hover:bg-muted/70 hover:text-indigo-500 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm font-semibold text-xs"
                               title="Website"
                             >
                               <Globe className="h-4 w-4" />
@@ -489,7 +467,7 @@ const Dashboard = () => {
                               href={ensureAbsoluteUrl(profile.instagram)} 
                               target="_blank" 
                               rel="noopener noreferrer" 
-                              className="p-2.5 bg-slate-50 hover:bg-rose-50 border border-slate-200/60 rounded-xl text-slate-600 hover:text-rose-600 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
+                              className="p-2.5 bg-muted border border-border rounded-xl text-muted-foreground hover:bg-muted/70 hover:text-rose-600 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm font-semibold text-xs"
                               title="Instagram"
                             >
                               <Instagram className="h-4 w-4" />
@@ -500,32 +478,10 @@ const Dashboard = () => {
                               href={ensureAbsoluteUrl(profile.linkedin)} 
                               target="_blank" 
                               rel="noopener noreferrer" 
-                              className="p-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-200/60 rounded-xl text-slate-600 hover:text-blue-600 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
+                              className="p-2.5 bg-muted border border-border rounded-xl text-muted-foreground hover:bg-muted/70 hover:text-blue-600 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm font-semibold text-xs"
                               title="LinkedIn"
                             >
                               <Linkedin className="h-4 w-4" />
-                            </a>
-                          )}
-                          {profile?.youtube && (
-                            <a 
-                              href={ensureAbsoluteUrl(profile.youtube)} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className="p-2.5 bg-slate-50 hover:bg-red-50 border border-slate-200/60 rounded-xl text-slate-600 hover:text-red-650 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
-                              title="YouTube"
-                            >
-                              <Youtube className="h-4 w-4" />
-                            </a>
-                          )}
-                          {profile?.facebook && (
-                            <a 
-                              href={ensureAbsoluteUrl(profile.facebook)} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className="p-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-200/60 rounded-xl text-slate-600 hover:text-blue-800 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
-                              title="Facebook"
-                            >
-                              <Facebook className="h-4 w-4" />
                             </a>
                           )}
                         </div>
@@ -534,7 +490,7 @@ const Dashboard = () => {
                   </div>
 
                   {editMode && (
-                    <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 animate-fadeIn">
+                    <div className="flex items-center justify-end gap-3 pt-4 border-t border-border animate-fadeIn">
                       <button
                         onClick={() => {
                           setEditMode(false)
@@ -550,7 +506,7 @@ const Dashboard = () => {
                             facebook: profile?.facebook || ''
                           })
                         }}
-                        className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition-all duration-300 active:scale-95 cursor-pointer"
+                        className="px-4 py-2 bg-muted hover:bg-muted/80 text-muted-foreground font-semibold rounded-xl text-sm transition-all duration-300 active:scale-95 cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -573,25 +529,25 @@ const Dashboard = () => {
             
             {/* Applications List Card */}
             <AnimatedCard animation="slideUp" delay={200}>
-              <div className="bg-white/80 border border-slate-200/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-indigo-100/30">
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-                  <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2.5">
+              <div className="bg-card border border-border p-8 rounded-2xl shadow-xl shadow-slate-950/10 dark:shadow-none">
+                <div className="flex items-center justify-between pb-4 border-b border-border mb-6">
+                  <h2 className="text-xl font-extrabold text-foreground flex items-center gap-2.5">
                     <FileText className="h-5 w-5 text-indigo-600" />
                     My Applications
                   </h2>
-                  <span className="bg-indigo-50 text-indigo-700 text-xs px-2.5 py-1 rounded-full font-bold">
+                  <span className="bg-indigo-50/10 dark:bg-indigo-950/20 text-indigo-700 dark:text-indigo-400 border border-indigo-200/20 text-xs px-2.5 py-1 rounded-full font-bold">
                     {applications.length} Total
                   </span>
                 </div>
 
                 {applications.length === 0 ? (
                   <div className="text-center py-10 space-y-4">
-                    <div className="w-14 h-14 bg-indigo-50 border border-indigo-100/60 rounded-full flex items-center justify-center mx-auto text-indigo-500">
+                    <div className="w-14 h-14 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 rounded-full flex items-center justify-center mx-auto text-indigo-500">
                       <Briefcase className="h-6 w-6" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="text-base font-bold text-slate-800">No active applications</h3>
-                      <p className="text-sm text-slate-550">You haven't submitted any program or role applications yet.</p>
+                      <h3 className="text-base font-bold text-foreground">No active applications</h3>
+                      <p className="text-sm text-muted-foreground">You haven't submitted any program or role applications yet.</p>
                     </div>
                     <Link
                       to="/careers"
@@ -606,19 +562,19 @@ const Dashboard = () => {
                     {applications.map((application) => (
                       <div 
                         key={application.id} 
-                        className="bg-white/50 border border-slate-200 rounded-xl p-5 hover:shadow-md hover:scale-[1.01] transition-all duration-300 flex flex-col sm:flex-row justify-between sm:items-center gap-4"
+                        className="bg-card border border-border rounded-xl p-5 hover:shadow-md hover:scale-[1.01] transition-all duration-300 flex flex-col sm:flex-row justify-between sm:items-center gap-4"
                       >
                         <div className="space-y-2">
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
-                            <h3 className="font-bold text-slate-900 text-base">{application.position_title}</h3>
+                            <h3 className="font-bold text-foreground text-base">{application.position_title}</h3>
                           </div>
-                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-500 text-xs">
-                            <span className="flex items-center gap-1 font-semibold text-indigo-600 bg-indigo-50/50 px-2 py-0.5 rounded border border-indigo-100/40 font-mono">
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-muted-foreground text-xs">
+                            <span className="flex items-center gap-1 font-semibold text-indigo-700 dark:text-indigo-400 bg-indigo-50/10 dark:bg-indigo-950/20 px-2 py-0.5 rounded border border-indigo-200/20 font-mono">
                               ID: {application.application_id}
                             </span>
                             <span className="flex items-center gap-1">
-                              <Calendar className="h-3.5 w-3.5 text-slate-400" />
+                              <Calendar className="h-3.5 w-3.5 text-muted-foreground/60" />
                               Submitted: {new Date(application.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                             </span>
                           </div>
@@ -626,10 +582,10 @@ const Dashboard = () => {
                         
                         <div>
                           <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
-                            application.status === 'Submitted' ? 'bg-amber-50 text-amber-700 border-amber-200' :
-                            application.status === 'Reviewed' ? 'bg-indigo-50 text-indigo-700 border-indigo-200' :
-                            application.status === 'Accepted' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                            'bg-rose-50 text-rose-700 border-rose-200'
+                            application.status === 'Submitted' ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20' :
+                            application.status === 'Reviewed' ? 'bg-indigo-50/10 text-indigo-600 dark:text-indigo-400 border-indigo-200/20' :
+                            application.status === 'Accepted' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' :
+                            'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20'
                           }`}>
                             <span className={`w-1.5 h-1.5 rounded-full ${
                               application.status === 'Submitted' ? 'bg-amber-500' :
@@ -646,39 +602,37 @@ const Dashboard = () => {
                 )}
               </div>
             </AnimatedCard>
-
+ 
             {/* Recent Activities Timeline Card */}
             <AnimatedCard animation="slideUp" delay={300}>
-              <div className="bg-white/80 border border-slate-200/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-indigo-100/30">
-                <div className="pb-4 border-b border-slate-100 mb-6">
-                  <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2.5">
+              <div className="bg-card border border-border p-8 rounded-2xl shadow-xl shadow-slate-950/10 dark:shadow-none">
+                <div className="pb-4 border-b border-border mb-6">
+                  <h2 className="text-xl font-extrabold text-foreground flex items-center gap-2.5">
                     <Activity className="h-5 w-5 text-indigo-650" />
-                    Recent Activity logs
+                    {t('dashboard.logsTitle') === 'dashboard.logsTitle' ? 'Recent Activity logs' : t('dashboard.logsTitle')}
                   </h2>
                 </div>
 
                 {activities.length === 0 ? (
                   <div className="text-center py-10 space-y-3">
-                    <div className="w-14 h-14 bg-indigo-50 border border-indigo-100/60 rounded-full flex items-center justify-center mx-auto text-indigo-500">
+                    <div className="w-14 h-14 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 rounded-full flex items-center justify-center mx-auto text-indigo-500">
                       <Clock className="h-6 w-6" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="text-base font-bold text-slate-800">No activity logged</h3>
-                      <p className="text-sm text-slate-500">System event triggers and logins will show up here.</p>
+                      <h3 className="text-base font-bold text-foreground">{t('dashboard.logsEmpty')}</h3>
                     </div>
                   </div>
                 ) : (
-                  <div className="relative pl-6 border-l-2 border-slate-100 space-y-6">
+                  <div className="relative pl-6 border-l-2 border-border space-y-6">
                     {activities.map((activity) => (
                       <div key={activity.id} className="relative group">
-                        {/* Timeline Bullet Node */}
-                        <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-indigo-600 bg-white group-hover:bg-indigo-600 transition-all duration-300 shadow-sm"></div>
+                        <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 border-indigo-600 bg-background group-hover:bg-indigo-600 transition-all duration-300 shadow-sm animate-pulse"></div>
                         
                         <div className="space-y-1">
-                          <p className="text-slate-850 font-semibold text-sm leading-tight group-hover:text-indigo-600 transition-colors duration-200">
+                          <p className="text-foreground font-semibold text-sm leading-tight group-hover:text-indigo-600 transition-colors duration-200 text-left">
                             {activity.activity_type}
                           </p>
-                          <p className="text-slate-450 text-xs flex items-center gap-1.5">
+                          <p className="text-muted-foreground text-xs flex items-center gap-1.5">
                             <Clock className="h-3.5 w-3.5" />
                             {new Date(activity.created_at).toLocaleString(undefined, { 
                               year: 'numeric', 

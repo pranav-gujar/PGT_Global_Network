@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
+import { Menu, X, ChevronDown, User, LogOut, Sun, Moon, Laptop } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import AuthModal from '../components/AuthModal';
+import { useLanguage, LANGUAGES, LanguageCode } from '../contexts/LanguageContext';
 
 
 const Navbar = () => {
@@ -10,8 +12,12 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { language, setLanguage, t } = useLanguage();
 
   const navigate = useNavigate();
 
@@ -37,9 +43,13 @@ const Navbar = () => {
 
   // Close dropdowns when clicking outside or scrolling
   useEffect(() => {
-    const handleClickOutside = () => {
-      setDropdownOpen(false);
-      setUserDropdownOpen(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
+        setUserDropdownOpen(false);
+      }
     };
 
     const handleScroll = () => {
@@ -47,32 +57,32 @@ const Navbar = () => {
       setUserDropdownOpen(false);
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('scroll', handleScroll);
     
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Programs', path: '/programs' },
-    { name: 'Ventures', path: '/ventures' },
-    { name: 'Timeline', path: '/timeline' },
-    { name: 'Impact', path: '/impact' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Articles', path: '/articles' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Contact', path: '/contact' },
+    { name: t('navbar.home'), path: '/' },
+    { name: t('navbar.about'), path: '/about' },
+    { name: t('navbar.programs'), path: '/programs' },
+    { name: t('navbar.ventures'), path: '/ventures' },
+    { name: t('navbar.timeline'), path: '/timeline' },
+    { name: t('navbar.impact'), path: '/impact' },
+    { name: t('navbar.gallery'), path: '/gallery' },
+    { name: t('navbar.articles'), path: '/articles' },
+    { name: t('navbar.careers'), path: '/careers' },
+    { name: t('navbar.contact'), path: '/contact' },
   ];
 
   const moreItems = [
-    { name: 'FAQ', path: '/faq' },
-    { name: 'Privacy Policy', path: '/privacy' },
-    { name: 'Terms & Conditions', path: '/terms' },
+    { name: t('footer.faq'), path: '/faq' },
+    { name: t('footer.privacy'), path: '/privacy' },
+    { name: t('footer.terms'), path: '/terms' },
   ];
 
   const isActive = (path: string) => {
@@ -84,16 +94,16 @@ const Navbar = () => {
   return (
     <header className="fixed w-full top-0 z-50 transition-all duration-300">
       {/* Announcement Bar */}
-      <div className={`bg-white border-b border-slate-200/80 overflow-hidden whitespace-nowrap transition-all duration-300 ${
+      <div className={`bg-white dark:bg-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 overflow-hidden whitespace-nowrap transition-all duration-300 ${
         scrolled ? 'h-0 py-0 opacity-0 border-none' : 'py-2.5 h-10 opacity-100'
       }`}>
-        <div className="w-full flex items-center text-[10px] sm:text-xs font-semibold text-slate-600">
+        <div className="w-full flex items-center text-[10px] sm:text-xs font-semibold text-slate-600 dark:text-slate-450">
           <div className="flex space-x-12 animate-marquee hover:[animation-play-state:paused] cursor-pointer">
-            <Link to="/articles" className="hover:text-indigo-600 transition-colors inline-flex items-center gap-1">
-              📢 New Article Posted — Read Now! Click here →
+            <Link to="/articles" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors inline-flex items-center gap-1">
+              📢 {t('navbar.announcementArticle')} →
             </Link>
-            <Link to="/careers" className="hover:text-indigo-600 transition-colors inline-flex items-center gap-1">
-              🚀 Recruitment Drive Live — Apply Now! Click here →
+            <Link to="/careers" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors inline-flex items-center gap-1">
+              🚀 {t('navbar.announcementCareers')} →
             </Link>
           </div>
         </div>
@@ -114,8 +124,8 @@ const Navbar = () => {
 
       <nav className={`w-full transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-          : 'bg-white shadow-lg'
+          ? 'bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-gray-100 dark:border-slate-800/60' 
+          : 'bg-white dark:bg-slate-950 shadow-lg'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`flex justify-between items-center transition-all duration-300 ${
@@ -134,7 +144,7 @@ const Navbar = () => {
                     filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
                   }}
                 />
-                <span className={`font-bold text-gray-900 transition-all duration-300 ${
+                <span className={`font-bold text-gray-900 dark:text-white transition-all duration-300 ${
                   scrolled ? 'text-lg' : 'text-xl'
                 }`}>
                   <span className="hidden sm:inline">PGT Global Network</span>
@@ -154,8 +164,8 @@ const Navbar = () => {
                       scrolled ? 'text-[11px] xl:text-xs' : 'text-xs xl:text-sm'
                     } ${
                       isActive(item.path)
-                        ? 'text-blue-600 bg-blue-50'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                        ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/40'
+                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-slate-300 dark:hover:text-blue-450 dark:hover:bg-slate-900'
                     }`}
                   >
                     {item.name}
@@ -163,32 +173,79 @@ const Navbar = () => {
                 ))}
                 
                 {/* More Dropdown */}
-                <div className="relative">
+                <div className="relative" ref={moreDropdownRef}>
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
+                    onClick={() => {
                       setDropdownOpen(!dropdownOpen);
                     }}
-                    className={`flex items-center px-2 xl:px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
+                    className={`flex items-center px-2 xl:px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-slate-300 dark:hover:text-blue-450 dark:hover:bg-slate-900 transition-all duration-200 ${
                       scrolled ? 'text-[11px] xl:text-xs' : 'text-xs xl:text-sm'
                     }`}
                   >
-                    More
+                    {t('navbar.more')}
                     <ChevronDown className="ml-1 h-3.5 w-3.5" />
                   </button>
                   
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 rounded-md shadow-lg border border-gray-200 dark:border-slate-800 z-50">
                       {moreItems.map((item) => (
                         <Link
                           key={item.name}
                           to={item.path}
-                          className={`block px-4 py-2 text-sm hover:bg-gray-50 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
+                          className={`block px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-slate-800/60 ${isActive(item.path) ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/40' : 'text-gray-700 dark:text-slate-200'}`}
                           onClick={() => setDropdownOpen(false)}
                         >
                           {item.name}
                         </Link>
                       ))}
+                      
+                      {/* Premium Theme Switcher inside More Dropdown */}
+                      <div className="border-t border-gray-150 dark:border-slate-800 mt-2 pt-2 px-3">
+                        <div className="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-1.5 px-1">
+                          {t('navbar.theme')}
+                        </div>
+                        <div className="flex items-center justify-between bg-gray-50 dark:bg-slate-950 rounded-lg p-0.5 border border-gray-100 dark:border-slate-800/80">
+                          <button
+                            onClick={() => setTheme('light')}
+                            className={`p-1.5 rounded-md transition-all duration-200 flex-1 flex justify-center ${theme === 'light' ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-400 hover:text-slate-800 dark:text-slate-450 dark:hover:text-slate-100'}`}
+                            title={t('navbar.themeLight')}
+                          >
+                            <Sun className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            onClick={() => setTheme('dark')}
+                            className={`p-1.5 rounded-md transition-all duration-200 flex-1 flex justify-center ${theme === 'dark' ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-400 hover:text-slate-800 dark:text-slate-450 dark:hover:text-slate-100'}`}
+                            title={t('navbar.themeDark')}
+                          >
+                            <Moon className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            onClick={() => setTheme('system')}
+                            className={`p-1.5 rounded-md transition-all duration-200 flex-1 flex justify-center ${theme === 'system' ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-400 hover:text-slate-800 dark:text-slate-450 dark:hover:text-slate-100'}`}
+                            title={t('navbar.themeSystem')}
+                          >
+                            <Laptop className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Premium Language Selector inside More Dropdown */}
+                      <div className="border-t border-gray-150 dark:border-slate-800 mt-2 pt-2 px-3 pb-2">
+                        <div className="text-[10px] font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-1.5 px-1">
+                          🌐 Language
+                        </div>
+                        <select
+                          value={language}
+                          onChange={(e) => setLanguage(e.target.value as LanguageCode)}
+                          className="w-full bg-gray-50 dark:bg-slate-950 text-xs font-semibold text-foreground border border-gray-100 dark:border-slate-800/80 rounded-lg p-1.5 focus:outline-none cursor-pointer"
+                        >
+                          {LANGUAGES.map((lang) => (
+                            <option key={lang.code} value={lang.code} className="bg-white dark:bg-slate-900 text-foreground">
+                              {lang.nativeName}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -198,39 +255,38 @@ const Navbar = () => {
             {/* Desktop Auth Section */}
             <div className="hidden lg:flex items-center flex-shrink-0">
               {user ? (
-                <div className="relative">
+                <div className="relative" ref={userDropdownRef}>
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
+                    onClick={() => {
                       setUserDropdownOpen(!userDropdownOpen);
                     }}
-                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${
+                    className={`flex items-center px-3 py-2 rounded-md font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-slate-300 dark:hover:text-blue-450 dark:hover:bg-slate-900 transition-all duration-200 ${
                       scrolled ? 'text-[11px] xl:text-xs' : 'text-xs xl:text-sm'
                     }`}
                   >
                     <User className="h-4 w-4 mr-1" />
-                    Account
+                    {t('navbar.account')}
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </button>
                   
                   {userDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-900 rounded-md shadow-lg border border-gray-200 dark:border-slate-800 z-50">
                       <Link
                         to="/dashboard"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/60"
                         onClick={() => setUserDropdownOpen(false)}
                       >
-                        Dashboard
+                        {t('navbar.dashboard')}
                       </Link>
                       <button
                         onClick={() => {
                           handleLogout();
                           setUserDropdownOpen(false);
                         }}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center"
+                        className="w-full text-left px-4 py-2 text-sm text-gray-750 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800/60 flex items-center"
                       >
                         <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
+                        {t('navbar.signOut')}
                       </button>
                     </div>
                   )}
@@ -242,86 +298,142 @@ const Navbar = () => {
                     scrolled ? 'text-xs' : 'text-sm'
                   }`}
                 >
-                  Sign In
+                  {t('navbar.signIn')}
                 </button>
               )}
             </div>
 
-            {/* Mobile menu button */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-700 hover:text-blue-600 focus:outline-none transition-colors duration-200"
-              >
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
+             {/* Mobile menu button */}
+             <div className="lg:hidden">
+               <button
+                 onClick={() => setIsOpen(!isOpen)}
+                 className="text-gray-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none transition-colors duration-200"
+               >
+                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+               </button>
+             </div>
+           </div>
+         </div>
+ 
+         {/* Mobile Navigation */}
+         {isOpen && (
+           <div className="lg:hidden">
+             <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-gray-100 dark:border-slate-800 shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
+               {navItems.map((item) => (
+                 <Link
+                   key={item.name}
+                   to={item.path}
+                   className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
+                     isActive(item.path)
+                       ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/40'
+                       : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-slate-300 dark:hover:text-blue-400 dark:hover:bg-slate-900'
+                   }`}
+                   onClick={() => setIsOpen(false)}
+                 >
+                   {item.name}
+                 </Link>
+               ))}
+               {moreItems.map((item) => (
+                 <Link
+                   key={item.name}
+                   to={item.path}
+                   className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path) ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950/40' : 'text-gray-700 dark:text-slate-300 hover:text-blue-600 hover:bg-gray-50 dark:hover:bg-slate-900'}`}
+                   onClick={() => setIsOpen(false)}
+                 >
+                   {item.name}
+                 </Link>
+               ))}
+               
+               {/* Mobile Auth */}
+               {user ? (
+                 <>
+                   <Link
+                     to="/dashboard"
+                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-slate-300 hover:text-blue-600 hover:bg-gray-50 dark:hover:bg-slate-900 transition-all duration-200"
+                     onClick={() => setIsOpen(false)}
+                   >
+                     {t('navbar.dashboard')}
+                   </Link>
+                   <button
+                     onClick={() => {
+                       handleLogout();
+                       setIsOpen(false);
+                     }}
+                     className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-slate-300 hover:text-blue-600 hover:bg-gray-50 dark:hover:bg-slate-900 transition-all duration-200"
+                   >
+                     {t('navbar.signOut')}
+                   </button>
+                 </>
+               ) : (
+                 <button
+                   onClick={() => {
+                     navigate('/signin');
+                     setIsOpen(false);
+                   }}
+                   className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
+                 >
+                   {t('navbar.signIn')}
+                 </button>
+               )}
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-200 ${
-                    isActive(item.path)
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              {moreItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium hover:text-blue-600 hover:bg-gray-50 transition-all duration-200 ${isActive(item.path) ? 'text-blue-600 bg-blue-50' : 'text-gray-700'}`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              
-              {/* Mobile Auth */}
-              {user ? (
-                <>
-                  <Link
-                    to="/dashboard"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setIsOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-all duration-200"
-                  >
-                    Sign Out
-                  </button>
-                </>
-              ) : (
-                <button
-                  onClick={() => {
-                    navigate('/signin');
-                    setIsOpen(false);
-                  }}
-                  className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200"
-                >
-                  Sign In
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+               {/* Mobile Theme Switcher */}
+               <div className="border-t border-gray-150 dark:border-slate-800 my-3 pt-3 px-1">
+                 <p className="text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-2">{t('navbar.theme')}</p>
+                 <div className="grid grid-cols-3 gap-2 bg-gray-50 dark:bg-slate-900/60 p-1 rounded-xl border border-gray-100 dark:border-slate-800/80">
+                   <button
+                     onClick={() => setTheme('light')}
+                     className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                       theme === 'light'
+                         ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm border border-gray-100 dark:border-slate-700'
+                         : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                     }`}
+                   >
+                     <Sun className="h-4 w-4" />
+                     <span>{t('navbar.themeLight')}</span>
+                   </button>
+                   <button
+                     onClick={() => setTheme('dark')}
+                     className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                       theme === 'dark'
+                         ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm border border-gray-100 dark:border-slate-700'
+                         : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                     }`}
+                   >
+                     <Moon className="h-4 w-4" />
+                     <span>{t('navbar.themeDark')}</span>
+                   </button>
+                   <button
+                     onClick={() => setTheme('system')}
+                     className={`flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                       theme === 'system'
+                         ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 shadow-sm border border-gray-100 dark:border-slate-700'
+                         : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                     }`}
+                   >
+                     <Laptop className="h-4 w-4" />
+                     <span>{t('navbar.themeSystem')}</span>
+                   </button>
+                 </div>
+               </div>
+
+               {/* Mobile Language Selector */}
+               <div className="border-t border-gray-150 dark:border-slate-800 my-3 pt-3 px-1">
+                 <p className="text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider mb-2">🌐 Language</p>
+                 <select
+                   value={language}
+                   onChange={(e) => setLanguage(e.target.value as LanguageCode)}
+                   className="w-full bg-gray-50 dark:bg-slate-900/60 text-sm font-semibold text-foreground border border-gray-100 dark:border-slate-800/80 rounded-xl p-2.5 focus:outline-none cursor-pointer"
+                 >
+                   {LANGUAGES.map((lang) => (
+                     <option key={lang.code} value={lang.code} className="bg-white dark:bg-slate-900 text-foreground">
+                       {lang.nativeName}
+                     </option>
+                   ))}
+                 </select>
+               </div>
+             </div>
+           </div>
+         )}
       </nav>
     </header>
   );

@@ -1,0 +1,726 @@
+{
+  "navbar": {
+    "home": "ホーム",
+    "about": "私たちについて",
+    "programs": "プログラム",
+    "ventures": "ベンチャー",
+    "timeline": "タイムライン",
+    "impact": "インパクト",
+    "gallery": "ギャラリー",
+    "articles": "記事",
+    "careers": "キャリア",
+    "contact": "お問い合わせ",
+    "more": "もっと見る",
+    "signIn": "サインイン",
+    "signOut": "サインアウト",
+    "account": "アカウント",
+    "dashboard": "ダッシュボード",
+    "theme": "テーマ",
+    "language": "言語",
+    "themeLight": "ライト",
+    "themeDark": "ダーク",
+    "themeSystem": "システム",
+    "announcementArticle": "新しい記事が投稿されました — 今すぐ読む！こちらをクリック",
+    "announcementCareers": "採用キャンペーン開始 — 今すぐ応募！こちらをクリック"
+  },
+  "footer": {
+    "tagline": "PGTグローバルネットワークは、成長、エンパワーメント、変革を推進する若者主導のグローバルネットワークです。",
+    "quickLinks": "クイックリンク",
+    "legal": "法的情報",
+    "contactUs": "お問い合わせ",
+    "rights": "全著作権所有。",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "faq": "よくある質問",
+    "email": "メール",
+    "phone": "電話"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "submitting": "送信中...",
+    "error": "エラー",
+    "success": "成功",
+    "back": "戻る",
+    "required": "必須",
+    "learnMore": "詳しく見る",
+    "readMore": "続きを読む",
+    "applyNow": "今すぐ申し込む",
+    "explore": "探索する",
+    "submit": "送信",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "edit": "編集",
+    "search": "検索",
+    "backToHome": "ウェブサイトに戻る",
+    "goHome": "ホームページへ",
+    "refresh": "ページを更新",
+    "returnHome": "ホームに戻る"
+  },
+  "home": {
+    "tagline": "グローバルエコシステム",
+    "titlePrefix": "生活を変革する",
+    "titleGlow": "ポジティビティ、成長、変革",
+    "subtitle": "革新的なプログラム、持続可能な成長、目的ある変革を通じて、世界中の個人と組織をエンパワーする。",
+    "exploreBtn": "プログラムを探る",
+    "learnBtn": "詳しく見る",
+    "valuesTag": "哲学",
+    "valuesTitle": "私たちの核となる価値観",
+    "valuesSubtitle": "PGTを定義し、グローバルな影響ネットワークを形成する柱",
+    "impactTag": "グローバルリーチ",
+    "impactTitle": "私たちのグローバルな影響力",
+    "impactSubtitle": "献身、革新、変革の7年間",
+    "stats": {
+      "lives": "影響を受けた命",
+      "stories": "成功ストーリー",
+      "programs": "プログラムとキャンペーン",
+      "years": "卓越の年月"
+    },
+    "programsTag": "イニシアチブ",
+    "programsTitle": "私たちのプログラム",
+    "programsSubtitle": "持続的な影響を生み出すために設計された革新的なイニシアチブ",
+    "insightsTag": "洞察",
+    "insightsTitle": "最新の記事",
+    "insightsSubtitle": "最新記事、コミュニティ変革、若者技術イニシアチブで最新情報をお届けします。",
+    "coreValues": {
+      "positivity": {
+        "title": "ポジティビティ",
+        "description": "すべてのイニシアチブは明確な目的と有意義な変革への情熱から始まります。"
+      },
+      "growth": {
+        "title": "成長",
+        "description": "継続的な学習とリーダーシップを育み、個人と組織が潜在能力を発揮できるよう支援します。"
+      },
+      "transformation": {
+        "title": "変革",
+        "description": "生活を向上させ、コミュニティを強化し、より良い世界を形成するポジティブな変革を促します。"
+      }
+    }
+  },
+  "about": {
+    "tagline": "私たちは誰か",
+    "title": "次世代をエンパワーする",
+    "description": "PGTグローバルネットワークは、デジタル教育、コミュニティ変革、グローバルな若者リーダーシップを推進する学生主導の国際ネットワークです。",
+    "leadershipTag": "リーダーシップからのメッセージ",
+    "leadershipTitle": "創設者からのノート",
+    "quote": "PGTグローバルネットワークを設立したとき、ビジョンはシンプルだが強力でした：目的が行動に変わり、成長が実際の学習を通じて培われ、変革が共有の旅となる空間を構築すること。",
+    "p1": "小さな学生主導のイニシアチブとして始まったものが、15カ国以上の命に触れるグローバルネットワークへと成長しました。",
+    "p2": "今日、PGTはエンパワーメント、意識、行動を続けて代表しています。私たちが立ち上げるすべてのプログラムは、目的ある成長が例外ではなく生き方となる世界に近づけます。",
+    "p3": "この旅の一部であることに感謝します。共に、私たちは人生を変えるだけでなく、一度に一つの目的で世界を変えています。",
+    "CEO": "創設者兼CEO、PGTグローバルネットワーク",
+    "gratitude": "感謝と前途への興奮を持って、",
+    "philosophyTag": "哲学",
+    "philosophyTitle": "私たちの創設原則",
+    "philosophySubtitle": "初日から私たちを導いてきた核となる信念",
+    "principles": {
+      "purpose": {
+        "title": "目的主導",
+        "description": "すべてのイニシアチブは、真の持続的な影響を生み出す使命から始まります。"
+      },
+      "people": {
+        "title": "人中心",
+        "description": "私たちは人間の潜在能力を信じ、個人の発展に投資します。"
+      },
+      "global": {
+        "title": "グローバルビジョン",
+        "description": "大陸を越えてコミュニティを繋げ、学習者とリーダーの統一された世界を構築します。"
+      },
+      "excellence": {
+        "title": "卓越性",
+        "description": "プログラム、パートナーシップ、影響力において最高の基準を追求します。"
+      },
+      "sustainability": {
+        "title": "持続可能性",
+        "description": "ポジティブな変革を推進し、世界中のコミュニティに持続的な影響を与える使命に参加してください。"
+      }
+    }
+  },
+  "programs": {
+    "tagline": "PGTグローバル中核イニシアチブ",
+    "title": "私たちのプログラム",
+    "description": "目的ある成長を通じて生活とコミュニティを変革するために設計された包括的なイニシアチブ",
+    "portfolioTag": "ポートフォリオ",
+    "portfolioTitle": "あらゆる旅のための変革的プログラム",
+    "portfolioSubtitle": "デジタル変革から個人開発まで、私たちのプログラムは多様なニーズに対応するよう設計されています。",
+    "learnMore": "詳しく見る",
+    "timelineTitle": "主要コンポーネント",
+    "impactTitle": "コアインパクト",
+    "durationTitle": "期間とスケール",
+    "applyBtn": "今すぐ申し込む",
+    "scheduleBtn": "無料セッションをスケジュール",
+    "d3": {
+      "name": "D3プログラム",
+      "fullName": "Daily Discovery Digest",
+      "description": "学生に知識、意識、影響力のあるストーリーを届けるフラッグシップの毎日のインスピレーションシリーズ。",
+      "features": [
+        "毎日のInstagram＆Facebookストーリー",
+        "国内外の記念日ハイライト",
+        "歴史的マイルストーン",
+        "偉人の記念日",
+        "実際の影響ストーリー",
+        "毎日の非凡な発見"
+      ],
+      "impact": "毎日10,000人以上の読者と学習者が参加",
+      "duration": "継続的な毎日のプログラム"
+    },
+    "voa": {
+      "name": "VoAイニシアチブ",
+      "fullName": "Voices of Ability",
+      "description": "挑戦を変革と影響に変えた個人を紹介するストーリーテリングシリーズ。",
+      "features": [
+        "生活の旅の録音",
+        "共感構築ストーリー",
+        "障害と能力の意識",
+        "オンライン公開ビデオエピソード",
+        "ストーリーテリングによるエンパワーメント",
+        "社会変革へのインスピレーション"
+      ],
+      "impact": "数十の強力な旅が共有され祝われている",
+      "duration": "継続的なストーリーテリングイニシアチブ"
+    },
+    "seminarix": {
+      "name": "Seminarix",
+      "fullName": "学生向けセミナーシリーズ",
+      "description": "学術、動機、健康ツールで学生をエンパワーする現場セミナーセッション。",
+      "features": [
+        "モチベーショナルトーク",
+        "学術戦略",
+        "メンタルウェルネスガイダンス",
+        "試験準備テクニック",
+        "インタラクティブな学校・寮セッション",
+        "実際のストーリー共有"
+      ],
+      "impact": "数百人の学生が学校・寮セッションを通じて指導を受けた",
+      "duration": "継続的なセミナーシリーズ"
+    },
+    "motivminds": {
+      "name": "MotiVMinds",
+      "fullName": "1分間のエンパワーメント",
+      "description": "若者のメンタルヘルス、感情的健康、個人開発に対処するインタラクティブな仮想セッション。",
+      "features": [
+        "1分間のビデオ",
+        "個人成長の洞察",
+        "学生とボランティアのモチベーション",
+        "現実世界の知恵",
+        "短くキャッチーなメッセージ形式",
+        "継続的なエンパワーメントコンテンツ"
+      ],
+      "impact": "参加し、エンパワーされた若者コミュニティ",
+      "duration": "継続的なビデオシリーズ"
+    },
+    "hed": {
+      "name": "HEDキャンペーン",
+      "fullName": "Happy Eco Diwaliキャンペーン",
+      "description": "フェスティバル期間中の環境に優しい実践を促進する年次のグリーンセレブレーションキャンペーン。",
+      "features": [
+        "啓発キャンペーン",
+        "イノベーションコンテスト",
+        "植樹活動",
+        "ミッションENOSAVEイニシアチブ",
+        "学生とコミュニティの参加"
+      ],
+      "impact": "毎年環境に優しいDiwaliのお祝いに数千人が参加",
+      "duration": "年次定期キャンペーン"
+    }
+  },
+  "timeline": {
+    "tagline": "PGTグローバルマイルストーン",
+    "title": "私たちの旅",
+    "description": "成長、変革、影響力の7年間 — ビジョンからグローバルネットワークへ",
+    "historyTag": "歴史",
+    "historyTitle": "変革のタイムライン",
+    "historySubtitle": "私たちの道を示し、成長を定義した主要なマイルストーンを探る。",
+    "milestones": {
+      "2019": {
+        "title": "火花",
+        "description": "PGTは意識と環境行動に焦点を当てた小さな学校イニシアチブとして始まりました。",
+        "achievements": [
+          "最初のHappy Eco Diwali (HED)キャンペーンを開始",
+          "試験準備中に同級生を支援するためのクイズを実施",
+          "地域コミュニティでエコフレンドリーなお祝いを促進",
+          "目的、成長、変革のアイデアを植えた"
+        ]
+      },
+      "2020": {
+        "title": "早期成長",
+        "description": "教育と意識活動で小規模なイニシアチブを拡大した。",
+        "achievements": [
+          "教育意識クイズとミニ活動を実施",
+          "パンデミックの課題にもかかわらずエコ意識キャンペーンを維持",
+          "学生をローカルおよびオンライン形式に参加させた",
+          "最初のいくつかの記録された学生成功体験に触発"
+        ]
+      },
+      "2021": {
+        "title": "一貫した行動",
+        "description": "PGTは意識キャンペーンと年次エコキャンペーンを通じて継続した。",
+        "achievements": [
+          "学校で小規模な意識イベントを開催",
+          "HEDキャンペーンを第3版に拡大",
+          "ピアツーピアのモチベーションディスカッションを実施",
+          "限られた規模にもかかわらず学生の関与を維持"
+        ]
+      },
+      "2022": {
+        "title": "基盤構築",
+        "description": "エコイニシアチブで継続性を維持することに集中した。",
+        "achievements": [
+          "新しいボランティアと共にHEDキャンペーン第4版を実施",
+          "小規模なオンライン啓発投稿とコンテストを実施",
+          "影響のための構造化されたフォーマットで実験を開始",
+          "学生主導運動としてのPGTのアイデンティティを強化"
+        ]
+      },
+      "2023": {
+        "title": "影響への準備",
+        "description": "PGTは新しいフォーマットをテストし、基盤を強化した。",
+        "achievements": [
+          "より広い範囲でHED第5版を開催",
+          "学生の反応をテストするためのミニキャンペーンに参加",
+          "より大きなグローバルアイデンティティのビジョンを形成",
+          "今後のプログラムの構造を準備"
+        ]
+      },
+      "2024": {
+        "title": "グローバルインパクトへ",
+        "description": "PGTグローバルネットワークとして再ブランド化し、大規模なフラッグシッププログラムを立ち上げた。",
+        "achievements": [
+          "フラッグシッププログラムとしてVoA、MotivMinds、D3、Seminarixを立ち上げた",
+          "Seminarixが創設者の元学校に大成功で戻った",
+          "VoAとMotivMindsが本物のストーリーで聴衆を刺激した",
+          "初年度に10,000人参加マイルストーンを突破"
+        ]
+      },
+      "2025": {
+        "title": "旅を続ける",
+        "description": "PGTグローバルネットワークはプログラムを積極的に拡大し、新しい機会を構築しています。",
+        "achievements": [
+          "強力な参加でHappy Eco Diwali第7版を開催予定",
+          "VoA、MotivMinds、D3、Seminarixのリーチをプラットフォーム全体で拡大",
+          "学校、大学、グローバルネットワークとのコラボレーションを構築",
+          "今年さらに数千人の学生をエンパワーすることに注力"
+        ]
+      }
+    }
+  },
+  "ventures": {
+    "tagline": "PGT傘下",
+    "title": "PGTエコシステム",
+    "description": "PGTグローバルネットワークは、ポジティブな影響を生み出すという広範な使命に向けて、さまざまな分野でベンチャーのエコシステムを構築しています。",
+    "heading": "私たちのベンチャー",
+    "launchingSoon": "まもなく公開",
+    "comingSoon": "近日公開",
+    "launchDate": "{launchDate}に公開",
+    "target": "ターゲット：{target}",
+    "visitWebsite": "ウェブサイトを訪問",
+    "futureTitle": "将来のベンチャー",
+    "futureDesc": "さらに多くのベンチャーが現在開発中で、まもなく発表される予定です。教育、クリエイティブメディア、ネットワーキング分野でのソリューションを積極的に設計しています。"
+  },
+  "impact": {
+    "tagline": "PGTグローバル成長成果",
+    "title": "私たちのインパクト",
+    "description": "PGTがコミュニティを変革し、若いリーダーをエンパワーし、グローバルな機会を生み出す方法",
+    "metricsTag": "メトリクス",
+    "metricsTitle": "測定されたProgress、共有された成功",
+    "metricsSubtitle": "私たちの数字は、現実世界の成長と持続可能なコミュニティ開発へのコミットメントを反映しています。",
+    "areas": {
+      "education": {
+        "title": "質の高い教育",
+        "description": "デジタルリソース、キャリアカウンセリング、学術サポートツールを通じて学習格差を埋める。"
+      },
+      "leadership": {
+        "title": "リーダーシップ開発",
+        "description": "若い変革者のマネジメント、技術、パブリックスピーキングスキルを育成する。"
+      },
+      "community": {
+        "title": "コミュニティの向上",
+        "description": "地域のエコキャンペーン、モチベーションウェビナー、ボランティアサービス活動を推進する。"
+      }
+    },
+    "storiesTag": "ストーリー",
+    "storiesTitle": "コミュニティの変革",
+    "storiesSubtitle": "PGTのデジタルエコシステムが学生、ボランティア、パートナーにどのような影響を与えたか読んでください。"
+  },
+  "gallery": {
+    "tagline": "PGTグローバルメディアアーカイブ",
+    "title": "メディアギャラリー",
+    "description": "グローバルインパクト、学校セミナー、学生サミット、コミュニティアウトリーチのスナップショット",
+    "categories": {
+      "all": "全写真",
+      "seminars": "セミナー",
+      "campaigns": "キャンペーン",
+      " summits": "サミット",
+      "outreach": "アウトリーチ"
+    },
+    "viewImage": "画像を見る",
+    "close": "閉じる"
+  },
+  "articles": {
+    "tagline": "洞察",
+    "title": "洞察とストーリー",
+    "description": "若者のエンパワーメントを形成するリソース、専門家ガイド、学生ストーリーを発見する。",
+    "searchPlaceholder": "タイトル、コンテンツ、タグで記事を検索...",
+    "noArticles": "条件に一致する記事が見つかりませんでした。",
+    "tags": "タグ：",
+    "back": "記事に戻る",
+    "share": "共有",
+    "readTime": "{time}",
+    "list": {
+      "1": {
+        "title": "技術学習で若者を変革する",
+        "excerpt": "デジタルプログラムが若者にスキル、自信、機会を与える。",
+        "content": "<p>Technology has rapidly become the foundation of modern society, shaping the way people learn, work, and interact. For today's youth, digital learning is not just a privilege but a necessity. In communities across the globe, students are increasingly embracing digital tools that equip them with knowledge, confidence, and life-changing opportunities.</p><br><p>One of the greatest advantages of technology in education is accessibility. Online platforms, mobile applications, and interactive tools allow students in rural or underserved areas to connect with high-quality learning resources. This democratization of knowledge ensures that no young person is left behind, regardless of geography or socio-economic background.</p><br><p>Beyond accessibility, technology also fosters creativity and critical thinking. Through project-based learning, coding programs, and digital collaboration, youth can solve real-world problems and innovate with confidence. These skills extend beyond the classroom, empowering them to become leaders, entrepreneurs, and changemakers in their communities.</p><br><p>Moreover, technology is reshaping career paths. With industries demanding digital literacy, coding, data analysis, and AI knowledge, young people who embrace technology stand out in the workforce. By equipping youth with these future-ready skills, we prepare them for sustainable careers and enable them to contribute meaningfully to global development.</p><br><p>However, the journey is not without challenges. Many regions face issues such as limited internet connectivity, lack of devices, or inadequate training for educators. Overcoming these hurdles requires a collaborative effort between governments, NGOs, and private sectors to build infrastructure, provide training, and ensure equitable access.</p><br><p>Ultimately, transforming youth through technology learning is about more than just academic success. It's about building resilience, nurturing confidence, and creating opportunities for young people to thrive in an interconnected world. As we invest in digital education, we invest in a brighter, more inclusive future for all.</p>"
+      },
+      "2": {
+        "title": "持続可能なコミュニティと学生の影響力",
+        "excerpt": "エコキャンペーンと意識が世界中で持続可能な学生コミュニティを構築する。",
+        "content": "<p>Sustainability is no longer a buzzword; it is a call to action. Around the world, students are leading the charge in building eco-conscious communities and reshaping the way we think about the environment. From reducing plastic use to spearheading renewable energy campaigns, young people are proving that small steps can create meaningful global change.</p><br><p>One of the most powerful tools for sustainability lies in awareness. Students organizing campaigns, workshops, and green clubs are raising awareness about pressing issues such as climate change, waste reduction, and conservation. This peer-to-peer learning not only educates but also inspires entire communities to adopt eco-friendly practices.</p><br><p>Beyond awareness, action is critical. Many student-led initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment.</p><br><p>Technology also plays a significant role. Social media allows young activists to amplify their messages, connect with global networks, and advocate for systemic changes. Building sustainable communities requires collaboration. Students who work hand-in-hand with educators, local governments, and NGOs can scale their impact and create lasting change.</p><br><p>The ultimate impact of student-led sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>"
+      },
+      "3": {
+        "title": "グローバル発展：学生主導のトレンド",
+        "excerpt": "学生のリーダーシップトレンドが革新と影響力で発展を再形成する。",
+        "content": "<p>The future of global development is being shaped not only by policymakers and organizations but also by students. With innovation, determination, and digital fluency, today's youth are redefining the way societies address issues such as poverty, education, and equality. Their leadership is setting new trends that promise long-lasting impact worldwide.</p><br><p>One trend is the rise of social entrepreneurship. Students are launching startups that address local and global challenges, from clean water initiatives to sustainable farming solutions. These ventures not only solve pressing issues but also generate employment and foster innovation at the grassroots level.</p><br><p>Another trend is digital advocacy. Students are using online platforms to voice concerns about climate change, human rights, and gender equality. Their ability to mobilize audiences quickly has turned grassroots movements into global campaigns, influencing decision-makers and shaping public opinion.</p><br><p>Collaborative learning is also gaining traction. International student exchange programs, hackathons, and global forums are giving young people platforms to share ideas, challenge perspectives, and co-create solutions. Technology plays a central role in amplifying these trends.</p><br><p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is undeniably student-led.</p>"
+      },
+      "4": {
+        "title": "卒業生の旅：変革を促す物語",
+        "excerpt": "卒業生のレジリエンスがコミュニティを刺激し、ポジティブな変化をもたらす。",
+        "content": "<p>Graduating is more than earning a degree; it's the beginning of a journey that often inspires change within communities. Around the world, graduates are using their skills, resilience, and stories of perseverance to spark meaningful transformation, proving that education is one of the most powerful tools for change.</p><br><p>Many graduates return to their hometowns with a vision to uplift their communities. Some open schools to provide better education for local children, while others launch social enterprises that address pressing issues like unemployment or healthcare. Their actions showcase how education extends beyond personal growth to collective advancement.</p><br><p>Stories of resilience also inspire others. Graduates who overcame poverty, discrimination, or other challenges often share their journeys, encouraging younger students to dream big and pursue education. These narratives not only motivate but also build a culture of persistence and hope.</p><br><p>Moreover, graduates play a crucial role in mentoring. By guiding younger students through internships, workshops, and volunteer programs, they ensure that the next generation has the tools and confidence to succeed. Ultimately, graduate stories highlight that success is not measured solely by personal achievement but by the positive change one brings to society.</p>"
+      },
+      "5": {
+        "title": "将来の学習のために教室を革新する",
+        "excerpt": "革新と技術を融合させることで学習がインクルーシブで影響力のあるものになる。",
+        "content": "<p>Education is undergoing a paradigm shift, driven by technology and progressive teaching models. The traditional classroom layout is transforming into an interactive, digital space where learning is personalized, inclusive, and tailored for the future.</p><br><p>At the center of classroom innovation is gamification. Integrating educational games, quizzes, and simulations makes complex concepts engaging and memorable. Students are no longer passive listeners; they become active participants who explore ideas, solve challenges, and collaborate dynamically.</p><br><p>Another breakthrough is personalized learning. AI-driven platforms can analyze student performance and adjust learning paths accordingly. This ensures that fast learners remain challenged while students who need more support receive targeted guidance, creating a balanced and supportive classroom environment.</p><br><p>Virtual and augmented reality (VR/AR) are also expanding horizons. Students can now embark on virtual field trips to historic sites, dive deep into human anatomy, or explore molecular chemistry, turning abstract concepts into tangible experiences.</p><br><p>Fostering this shift requires empowering educators. Providing training, modern equipment, and support allows teachers to lead innovative classrooms with confidence. When schools and communities invest in progressive education, they open pathways for students to achieve their potential and solve future global challenges.</p>"
+      }
+    }
+  },
+  "careers": {
+    "tagline": "エコシステムに参加",
+    "title": "PGTと共に未来を構築",
+    "description": "私たちは革新者、構築者、リーダーのグローバルコミュニティです。私たちのベンチャーに貢献するためのオープンな機会を探求してください。",
+    "benefitsTag": "特典",
+    "benefitsTitle": "なぜPGTに参加するのか？",
+    "benefitsSubtitle": "私たちは、あなたの専門的および個人的成長を育成するために設計された柔軟でサポーティブなエコシステムを提供します。",
+    "list": {
+      "remote": "リモートファーストのワークフロー",
+      "growth": "継続的なリーダーシップメンタリング",
+      "scale": "世界中の数百万人の学生に影響を与える",
+      "network": "グローバルピアネットワークへのアクセス"
+    },
+    "positionsTag": "機会",
+    "positionsTitle": "オープンコアポジション",
+    "positionsSubtitle": "テクノロジー、クリエイティブメディア、アウトリーチ、マネジメントのロールを探求する。",
+    "role": "役割：",
+    "type": "タイプ：",
+    "hours": "コミットメント：",
+    "apply": "今すぐ申し込む",
+    "positions": {
+      "cod": {
+        "title": "Chief Operations Director (COD)",
+        "department": "オペレーション",
+        "responsibilities": [
+          "日常のチーム業務、スケジュール、社内調整を管理する",
+          "タスクを追跡してプログラムのスムーズな実行を確保する",
+          "すべての部門と協力してプロジェクトを時間通りに進める"
+        ]
+      },
+      "cco": {
+        "title": "Chief Communications Officer (CCO)",
+        "department": "コミュニケーション",
+        "responsibilities": [
+          "すべてのコンテンツを書いてレビューする：キャプション、投稿、内部文書、スクリプト",
+          "すべてのプラットフォームでPGTのトーンと声を維持する",
+          "キャンペーンのためにPRとデザインチームと協力する"
+        ]
+      },
+      "cd": {
+        "title": "Creative Director (CD)",
+        "department": "クリエイティブ",
+        "responsibilities": [
+          "ポスター、カルーセルをデザインし、動画、リール、サムネイル、すべてのブランドクリエイティブを編集する",
+          "すべてのプラットフォームでビジュアルアイデンティティと一貫性を維持する",
+          "デザインとメディアコンテンツですべての部門をサポートする"
+        ]
+      },
+      "cso": {
+        "title": "Chief Strategy Officer (CSO)",
+        "department": "ストラテジー",
+        "responsibilities": [
+          "キャンペーンのアイデア、革新、計画を主導する",
+          "何が機能しているかを分析して改善を提案する",
+          "PGTプログラムの長期戦略構築を支援する"
+        ]
+      },
+      "prh": {
+        "title": "Public Relations Head (PRH)",
+        "department": "広報",
+        "responsibilities": [
+          "PGTを公に代表してコラボレーションを構築する",
+          "大学、NGO、メディア、インフルエンサーへのアウトリーチを処理する",
+          "ブランドの知名度とネットワーキングをサポートする"
+        ]
+      },
+      "cap": {
+        "title": "Campus Director (CAP)",
+        "department": "キャンパス関係",
+        "responsibilities": [
+          "PGTと大学キャンパスの公式連絡役として機能する",
+          "現地活動を組織してイベントでPGTを代表する",
+          "キャンパス内での意識とエンゲージメントを促進する"
+        ]
+      },
+      "ctd": {
+        "title": "Chief Technical Director (CTD)",
+        "department": "テクノロジー",
+        "responsibilities": [
+          "PGTの公式ウェブサイトを構築して管理する",
+          "イベント登録ページとランディングページを作成する",
+          "フォーム統合、分析、デジタルツールを維持する"
+        ]
+      },
+      "gsec": {
+        "title": "General Secretary (GSEC)",
+        "department": "管理",
+        "responsibilities": [
+          "公式文書、レター、内部発表を処理する",
+          "構造とフォローアップの維持において創設者をサポートする",
+          "内部ワークフローとコミュニケーションログを追跡する"
+        ]
+      }
+    }
+  },
+  "apply": {
+    "title": "PGTコアチームに参加",
+    "subtitle": "希望するポジションに応募するために、以下に応募詳細を記入してください。",
+    "form": {
+      "fullName": "氏名",
+      "fullNamePlaceholder": "フルネームを入力してください",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "position": "希望ポジション",
+      "selectPosition": "ポジションを選択",
+      "resume": "履歴書リンク（Google Drive、Dropboxなど）",
+      "resumePlaceholder": "履歴書のURLを入力してください",
+      "coverLetter": "なぜPGTに参加したいですか？",
+      "coverLetterPlaceholder": "モチベーション、スキル、貢献する計画について教えてください...",
+      "submit": "応募を送信",
+      "successTitle": "応募が送信されました！",
+      "successDesc": "応募いただきありがとうございます。コアリーダーシップチームが応募を確認し、5〜7営業日以内にご連絡します。",
+      "backToCareers": "キャリアに戻る"
+    }
+  },
+  "contact": {
+    "tagline": "お問い合わせ",
+    "title": "ご意見をお聞かせください",
+    "description": "プログラムに関するご質問、パートナーシップのお問い合わせ、またはボランティア希望の方は、チームに直接お問い合わせください。",
+    "details": {
+      "email": "office@pgtglobalnetwork.com",
+      "phone": "+91 8999902805",
+      "address": "インド、マハーラーシュトラ州ダリヤープル"
+    },
+    "form": {
+      "name": "お名前",
+      "namePlaceholder": "名前を入力してください",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "subject": "件名",
+      "subjectPlaceholder": "メッセージの件名を入力してください",
+      "message": "メッセージ",
+      "messagePlaceholder": "ここにメッセージの詳細を書いてください...",
+      "send": "メッセージを送信",
+      "successToast": "メッセージが正常に送信されました！",
+      "errorToast": "メッセージの送信に失敗しました。もう一度お試しください。"
+    }
+  },
+  "faq": {
+    "tagline": "サポート",
+    "title": "よくある質問",
+    "description": "プログラム、メンバーシップ、グローバルオペレーションに関する一般的な質問への迅速な回答を見つける。",
+    "categories": {
+      "all": "すべての質問",
+      "programs": "プログラム",
+      "ventures": "ベンチャー",
+      "involvement": "参加"
+    },
+    "contactTitle": "まだ質問がありますか？",
+    "contactDesc": "お探しの回答が見つかりませんか？ボランティアサポートチームにお問い合わせください。",
+    "contactBtn": "サポートに連絡",
+    "list": {
+      "1": {
+        "question": "PGTグローバルネットワークとは何ですか？",
+        "answer": "PGTグローバルネットワークは、リーダーシップ、意識、教育、コミュニティ主導のプログラムを通じて個人をエンパワーする学生主導の目的志向の組織です。2019年に設立され、学生が実世界の学習と有意義な影響力を発見するプラットフォームに成長しました。"
+      },
+      "2": {
+        "question": "PGTはどのようなプログラムを提供していますか？",
+        "answer": "D3（デイリーディスカバリーダイジェスト）、VoA（ヴォイシズオブアビリティ）、Seminarixワークショップ、MotivMindsビデオシリーズ、年次HED – Happy Eco Diwaliキャンペーンを含むフラッグシップイニシアチブを運営しています。"
+      },
+      "3": {
+        "question": "プログラムに参加するにはどうすればよいですか？",
+        "answer": "各プログラムには独自の参加方法があります。MotivMindsとD3はソーシャルプラットフォームでオープンアクセスで公開され、Seminarixは学校と寮で直接提供され、VoAは招待または応募でゲストストーリーテラーを受け付けています。"
+      },
+      "4": {
+        "question": "プログラムは無料ですか？",
+        "answer": "はい、PGTグローバルネットワークのほぼすべてのイニシアチブは無料で提供されています。意識、学習、エンパワーメントをすべての人が利用できるようにすることが私たちの目標です。"
+      },
+      "5": {
+        "question": "PGTはどこにありますか？",
+        "answer": "PGTグローバルネットワークはインド、マハーラーシュトラ州ダリアプールに拠点を置いています。地元から運営していますが、デジタルプラットフォームを通じてグローバルに展開しています。"
+      },
+      "6": {
+        "question": "誰がPGTのプログラムに参加したり恩恵を受けたりできますか？",
+        "answer": "リーダーシップ、学習、個人の成長に興味のある人は誰でも私たちのプログラムから恩恵を受けることができます。"
+      },
+      "7": {
+        "question": "組織や個人はPGTとパートナーシップを結べますか？",
+        "answer": "はい、パートナーシップを歓迎しています。コラボレーションについては、office@pgtglobalnetwork.comまでお問い合わせください。"
+      },
+      "8": {
+        "question": "PGTイニシアチブの最新情報を入手するにはどうすればよいですか？",
+        "answer": "Instagram、LinkedIn、YouTubeでフォローするか、ウェブサイトpgtglobalnetwork.comをご覧ください。"
+      },
+      "9": {
+        "question": "技術的な問題を報告するにはどうすればよいですか？",
+        "answer": "技術的な問題が発生した場合は、問題の詳細やスクリーンショットをoffice@pgtglobalnetwork.comまでご連絡ください。"
+      }
+    }
+  },
+  "privacy": {
+    "tagline": "法的情報",
+    "title": "プライバシーポリシー",
+    "description": "最終更新：2026年7月27日。このポリシーはPGTグローバルネットワークがユーザーデータ、セキュリティ、プライバシーをどのように処理するかを詳述しています。",
+    "heading": "プライバシーとデータ条件",
+    "bullets": {
+      "1": "データ収集：登録、ニュースレター更新、プログラム提出のために必要な詳細（名前、メール）のみを収集します。",
+      "2": "セキュリティ：ユーザーパスワードは暗号化されています。データ漏洩や不正アクセスを防ぐための標準的なセキュリティフィルターを維持しています。",
+      "3": "サードパーティ：外部マーケターにユーザー情報を販売または取引しません。分析データは厳密に匿名に保たれます。"
+    }
+  },
+  "terms": {
+    "tagline": "法的条件",
+    "title": "利用規約",
+    "description": "最終更新：2026年7月27日。PGTグローバルネットワークポータルにアクセスすることで、コミュニティ基準とサービス条件を遵守することに同意します。",
+    "heading": "標準サイト条件",
+    "bullets": {
+      "1": "使用権：プラットフォームのコンテンツ、コード、デザイン、素材は著作権で保護されています。個人的な非商業的使用は許可されています。",
+      "2": "ユーザーコード：ポータルメンバーは、ダッシュボードでの有害、スパム、悪意のある行為を避け、ポジティブな参加を維持する必要があります。",
+      "3": "責任制限：PGTはインパクトネットワークとして運営されています。モチベーションツールをそのまま提供し、直接的な結果については責任を負いません。"
+    }
+  },
+  "dashboard": {
+    "welcome": "{name}さん、お帰りなさい！",
+    "status": "アカウント状態：アクティブ",
+    "bioLabel": "短い自己紹介",
+    "bioPlaceholder": "コミュニティにあなた自身について教えてください...",
+    "emailLabel": "メールアドレス",
+    "emailLocked": "メールアドレスは変更できません。",
+    "saveSuccess": "プロフィールが正常に更新されました！",
+    "saveError": "プロフィールの保存に失敗しました。",
+    "logsTitle": "アクティビティログ",
+    "logsEmpty": "まだアクティビティが記録されていません。",
+    "noName": "メンバー"
+  },
+  "errors": {
+    "404": {
+      "title": "ページが見つかりません",
+      "description": "お探しのページは存在しない、移動された可能性があります、またはリンクが正しくありません。",
+      "btnHome": "ホームページへ",
+      "btnExplore": "プログラムを探る"
+    },
+    "general": {
+      "title": "何かが間違っています",
+      "description": "リクエストの処理中に予期しないエラーが発生しました。ページを更新するか、再度お試しください。",
+      "diagnostics": "エラー診断：",
+      "btnRefresh": "ページを更新",
+      "btnHome": "ホームに戻る"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "サインイン",
+      "subtitle": "ポータルアカウントダッシュボードにアクセス",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "password": "パスワード",
+      "passwordPlaceholder": "パスワードを入力してください",
+      "forgot": "パスワードを忘れましたか？",
+      "remember": "メールアドレスを覚える",
+      "btn": "サインイン",
+      "authenticating": "認証中...",
+      "divider": "または続ける",
+      "google": "Googleで続ける",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "create": "アカウントを作成",
+      "requiredEmail": "メールが必要です",
+      "requiredPassword": "パスワードが必要です"
+    },
+    "signUp": {
+      "title": "アカウントを作成",
+      "subtitle": "グローバルネットワークに参加して旅を始める",
+      "fullName": "氏名",
+      "fullNamePlaceholder": "フルネームを入力してください",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "password": "パスワード",
+      "passwordPlaceholder": "安全なパスワードを作成してください",
+      "confirmPassword": "パスワードを確認",
+      "confirmPasswordPlaceholder": "安全なパスワードを確認してください",
+      "btn": "アカウントを作成",
+      "creating": "アカウントを作成中...",
+      "divider": "または続ける",
+      "google": "Googleで続ける",
+      "hasAccount": "すでにアカウントをお持ちですか？",
+      "signIn": "サインイン",
+      "match": "パスワードが一致します",
+      "noMatch": "パスワードが一致しません",
+      "strength": "パスワードの強度：",
+      "strengthWeek": "弱い",
+      "strengthFair": "普通",
+      "strengthStrong": "強い",
+      "requirements": "要件",
+      "reqLength": "8文字以上",
+      "reqUpper": "大文字",
+      "reqLower": "小文字",
+      "reqNum": "数字",
+      "reqSpecial": "特殊文字",
+      "requiredName": "フルネームが必要です",
+      "requiredEmail": "メールが必要です",
+      "requiredPassword": "パスワードが必要です"
+    },
+    "forgot": {
+      "title": "パスワードを回復",
+      "subtitle": "登録済みメール受信箱で安全なリセットリンクを受け取る",
+      "email": "メールアドレス",
+      "emailPlaceholder": "メールアドレスを入力してください",
+      "btn": "回復リンクを送信",
+      "sending": "リンクを送信中...",
+      "successTitle": "回復メールを送信しました",
+      "successDesc": "{email}に安全なパスワードリセットリンクを送信しました。受信箱とスパムフォルダを確認してください。",
+      "btnBack": "サインインに戻る",
+      "requiredEmail": "メールが必要です"
+    },
+    "reset": {
+      "title": "パスワードをリセット",
+      "subtitle": "ポータルプロフィールに新しい安全なパスワードを設定する",
+      "password": "新しいパスワード",
+      "passwordPlaceholder": "新しいパスワードを入力してください",
+      "confirmPassword": "新しいパスワードを確認",
+      "confirmPasswordPlaceholder": "新しいパスワードを確認してください",
+      "btn": "パスワードを更新",
+      "updating": "パスワードを更新中...",
+      "noSession": "アクティブな回復セッションが検出されませんでした。新しいリセットリンクをリクエストしてください。",
+      "hasAccount": "パスワードを知っていますか？",
+      "signIn": "サインイン",
+      "requiredPassword": "パスワードが必要です"
+    },
+    "verify": {
+      "title": "メールを確認",
+      "subtitle": "PGT機能にアクセスするためにアカウントを確認してください",
+      "pending": "確認保留中",
+      "desc": "{email}に確認リンクを送信しました。登録を完了するためにメール内のリンクをクリックしてください。",
+      "btnResend": "確認メールを再送信",
+      "resending": "再送信中...",
+      "cooldown": "{seconds}秒後に再送信",
+      "btnSignOut": "サインアウト / 別のアカウントを使用",
+      "alreadyVerified": "すでに確認しましたか？",
+      "refresh": "ここをクリックして更新"
+    }
+  }
+}

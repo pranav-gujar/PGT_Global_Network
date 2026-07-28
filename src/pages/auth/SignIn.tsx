@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
+import { useTheme } from '../../contexts/ThemeContext'
 import HeroBackground from '../../components/HeroBackground'
 import AnimatedCard from '../../components/AnimatedCard'
+import { useLanguage } from '../../contexts/LanguageContext'
 
 const SignIn: React.FC = () => {
   const { signIn, signInWithGoogle, user } = useAuth()
+  const { resolvedTheme } = useTheme()
+  const { t } = useLanguage()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const redirect = searchParams.get('redirect') || '/dashboard'
@@ -43,7 +47,7 @@ const SignIn: React.FC = () => {
 
           window.turnstile.render(turnstileContainerRef.current, {
             sitekey: siteKey,
-            theme: 'light',
+            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
             callback: (token: string) => {
               setTurnstileToken(token)
             },
@@ -81,7 +85,7 @@ const SignIn: React.FC = () => {
         } catch (e) {}
       }
     }
-  }, [])
+  }, [resolvedTheme])
 
   // Auto-fill email if Remember Me was selected previously
   useEffect(() => {
@@ -140,17 +144,22 @@ const SignIn: React.FC = () => {
     }
   }
 
+  const getTranslation = (key: string, fallback: any) => {
+    const val = t(key);
+    return val === key ? fallback : val;
+  };
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden transition-colors duration-300">
       <HeroBackground />
 
       {/* Back to Website Button */}
       <Link 
         to="/" 
-        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-indigo-600 transition-colors duration-300 z-20 group"
+        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-indigo-505 transition-colors duration-300 z-20 group"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 duration-300" />
-        Back to Website
+        {t('auth.forgot.btnBack') === 'auth.forgot.btnBack' ? 'Back to Website' : t('auth.forgot.btnBack')}
       </Link>
 
       <div className="max-w-md w-full z-10">
@@ -163,21 +172,21 @@ const SignIn: React.FC = () => {
                 alt="PGT Logo" 
                 className="w-11 h-11 object-contain filter drop-shadow-sm"
               />
-              <span className="font-extrabold text-2xl tracking-tight text-slate-900">
+              <span className="font-extrabold text-2xl tracking-tight text-foreground">
                 PGT Global Network
               </span>
             </Link>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              Welcome Back
+            <h2 className="text-3xl font-extrabold tracking-tight text-foreground">
+              {t('auth.signIn.title')}
             </h2>
-            <p className="mt-2 text-sm text-slate-500">
-              Sign in to access your dashboard and active programs
+            <p className="mt-2 text-sm text-muted-foreground">
+              {t('auth.signIn.subtitle')}
             </p>
           </div>
 
-          <div className="bg-white/80 border border-slate-200/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-indigo-100/30">
+          <div className="bg-card/90 border border-border backdrop-blur-xl p-8 rounded-2xl shadow-xl shadow-slate-100/10 dark:shadow-none">
             {error && !isUnverified && (
-              <div className="mb-5 bg-red-50 border border-red-200 text-red-700 text-xs py-3 px-4 rounded-xl flex items-start gap-2.5 shadow-sm animate-fadeIn">
+              <div className="mb-5 bg-red-50/10 dark:bg-red-950/20 border border-red-200/25 text-red-700 dark:text-red-400 text-xs py-3 px-4 rounded-xl flex items-start gap-2.5 shadow-sm animate-fadeIn">
                 <span className="font-bold flex-shrink-0">Error:</span>
                 <span>{error}</span>
               </div>
@@ -185,13 +194,13 @@ const SignIn: React.FC = () => {
 
             {isUnverified ? (
               <div className="space-y-6 text-center animate-fadeIn">
-                <div className="mx-auto w-12 h-12 bg-amber-50 border border-amber-100 rounded-full flex items-center justify-center text-amber-600 shadow-inner">
+                <div className="mx-auto w-12 h-12 bg-amber-50/10 dark:bg-amber-950/20 border border-amber-500/20 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 shadow-inner">
                   <Mail className="h-6 w-6" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-lg font-extrabold text-slate-900">Verification Required</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Your email address has not yet been verified. Please check your inbox and verify your account before signing in.
+                  <h3 className="text-lg font-extrabold text-foreground">{t('auth.verify.pending')}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {t('auth.verify.desc', { email })}
                   </p>
                 </div>
                 
@@ -200,14 +209,14 @@ const SignIn: React.FC = () => {
                     to={`/verify-email?email=${encodeURIComponent(email)}`}
                     className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] text-center cursor-pointer"
                   >
-                    Resend Verification Email
+                    {t('auth.verify.btnResend')}
                   </Link>
                   <button
                     onClick={() => {
                       setIsUnverified(false)
                       setError('')
                     }}
-                    className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 active:scale-[0.98] cursor-pointer"
+                    className="w-full bg-muted hover:bg-accent text-foreground font-semibold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 active:scale-[0.98] cursor-pointer border border-border"
                   >
                     Return to Sign In
                   </button>
@@ -215,15 +224,11 @@ const SignIn: React.FC = () => {
               </div>
             ) : (
               <>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <p className="text-xs text-slate-450">
-                    Fields marked with <span className="text-red-500 font-bold">*</span> are required.
-                  </p>
-
+                <form onSubmit={handleSubmit} className="space-y-5 text-left">
                   {/* Email */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-550 uppercase tracking-widest mb-1.5">
-                      Email Address <span className="text-red-500 ml-0.5">*</span>
+                    <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
+                      {t('auth.signIn.email')} <span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <div className="relative">
                       <Mail className="absolute left-3.5 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -231,8 +236,8 @@ const SignIn: React.FC = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
-                        placeholder="Enter your email address"
+                        className="w-full pl-11 pr-4 py-3 bg-background border border-border rounded-xl text-foreground placeholder-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                        placeholder={t('auth.signIn.emailPlaceholder')}
                         required
                       />
                     </div>
@@ -241,14 +246,14 @@ const SignIn: React.FC = () => {
                   {/* Password */}
                   <div>
                     <div className="flex justify-between items-center mb-1.5">
-                      <label className="block text-xs font-bold text-slate-555 uppercase tracking-widest">
-                        Password <span className="text-red-500 ml-0.5">*</span>
+                      <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest">
+                        {t('auth.signIn.password')} <span className="text-red-500 ml-0.5">*</span>
                       </label>
                       <Link 
                         to="/forgot-password" 
                         className="text-xs font-bold text-indigo-600 hover:text-indigo-500 transition-colors"
                       >
-                        Forgot password?
+                        {t('auth.signIn.forgot')}
                       </Link>
                     </div>
                     <div className="relative">
@@ -257,14 +262,14 @@ const SignIn: React.FC = () => {
                         type={showPassword ? 'text' : 'password'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full pl-11 pr-11 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
-                        placeholder="Enter your password"
+                        className="w-full pl-11 pr-11 py-3 bg-background border border-border rounded-xl text-foreground placeholder-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all duration-300 shadow-sm"
+                        placeholder={t('auth.signIn.passwordPlaceholder')}
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-450 hover:text-slate-600 transition-colors"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-450 hover:text-slate-600 dark:text-muted-foreground dark:hover:text-foreground transition-colors"
                       >
                         {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                       </button>
@@ -278,10 +283,10 @@ const SignIn: React.FC = () => {
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
-                      className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                      className="h-4 w-4 rounded border-border bg-background text-indigo-650 focus:ring-indigo-500 cursor-pointer"
                     />
-                    <label htmlFor="remember-me" className="ml-2 block text-xs font-semibold text-slate-500 cursor-pointer hover:text-slate-700 transition-colors select-none">
-                      Remember my email address
+                    <label htmlFor="remember-me" className="ml-2 block text-xs font-semibold text-muted-foreground cursor-pointer hover:text-foreground transition-colors select-none">
+                      {t('auth.signIn.remember')}
                     </label>
                   </div>
 
@@ -299,11 +304,11 @@ const SignIn: React.FC = () => {
                     {loading ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        Authenticating...
+                        {t('auth.signIn.authenticating')}
                       </>
                     ) : (
                       <>
-                        Sign In
+                        {t('auth.signIn.btn')}
                         <ArrowRight className="h-4 w-4" />
                       </>
                     )}
@@ -313,11 +318,11 @@ const SignIn: React.FC = () => {
                 {/* Divider */}
                 <div className="relative my-5">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-200"></div>
+                    <div className="w-full border-t border-border"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white/90 px-3 text-slate-400 font-semibold tracking-wider">
-                      Or continue with
+                    <span className="bg-card px-3 text-muted-foreground font-semibold tracking-wider transition-colors duration-300">
+                      {t('auth.signIn.divider')}
                     </span>
                   </div>
                 </div>
@@ -327,29 +332,39 @@ const SignIn: React.FC = () => {
                   type="button"
                   onClick={handleGoogleSignIn}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 active:scale-[0.98] cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-3 bg-card hover:bg-muted border border-border text-foreground font-bold py-3.5 px-4 rounded-xl text-sm transition-all duration-300 active:scale-[0.98] cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <img 
                     src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
                     alt="Google Logo" 
                     className="h-5 w-5" 
                   />
-                  Continue with Google
+                  {t('auth.signIn.google')}
                 </button>
 
-                <div className="mt-6 text-center text-xs text-slate-500">
-                  Don't have an account?{' '}
+                <div className="mt-6 text-center text-xs text-muted-foreground">
+                  {t('auth.signIn.noAccount')}{' '}
                   <Link 
                     to="/signup" 
-                    className="font-bold text-indigo-600 hover:text-indigo-500 transition-colors underline decoration-dotted"
+                    className="font-bold text-indigo-650 hover:text-indigo-500 transition-colors underline decoration-dotted"
                   >
-                    Create account
+                    {t('auth.signIn.create')}
                   </Link>
                 </div>
               </>
             )}
           </div>
         </AnimatedCard>
+
+        {/* Minimalist Footer */}
+        <div className="mt-8 text-center text-[11px] text-muted-foreground/60 select-none animate-reveal-up" style={{ animationDelay: '500ms' }}>
+          <p>© {new Date().getFullYear()} PGT Global Network</p>
+          <div className="mt-1.5 flex justify-center gap-3">
+            <Link to="/privacy" className="hover:text-indigo-600 hover:underline transition-colors">Privacy Policy</Link>
+            <span>•</span>
+            <Link to="/terms" className="hover:text-indigo-600 hover:underline transition-colors">Terms & Conditions</Link>
+          </div>
+        </div>
       </div>
     </div>
   )
