@@ -355,7 +355,7 @@ const ProgramDetail = () => {
             {/* Duration */}
             <AnimatedCard animation="slideUp" delay={0}>
               <div className="bg-card border border-border p-6 rounded-2xl flex items-center gap-5 hover:bg-muted/10 hover:shadow-xl hover:shadow-slate-950/10 hover:border-indigo-500/20 hover:-translate-y-0.5 transform transition-all duration-300 group cursor-pointer">
-                <div className="w-12 h-12 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform duration-300 shadow-sm shadow-indigo-500/10">
                   <Clock className="h-5 w-5" />
                 </div>
                 <div>
@@ -368,7 +368,7 @@ const ProgramDetail = () => {
             {/* Participants */}
             <AnimatedCard animation="slideUp" delay={150}>
               <div className="bg-card border border-border p-6 rounded-2xl flex items-center gap-5 hover:bg-muted/10 hover:shadow-xl hover:shadow-slate-950/10 hover:border-indigo-500/20 hover:-translate-y-0.5 transform transition-all duration-300 group cursor-pointer">
-                <div className="w-12 h-12 bg-green-50/10 dark:bg-green-950/20 border border-green-200/20 rounded-xl flex items-center justify-center text-green-600 dark:text-green-400 group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/40 rounded-xl flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform duration-300 shadow-sm shadow-emerald-500/10">
                   <Users className="h-5 w-5" />
                 </div>
                 <div>
@@ -381,7 +381,7 @@ const ProgramDetail = () => {
             {/* Success Rate */}
             <AnimatedCard animation="slideUp" delay={300}>
               <div className="bg-card border border-border p-6 rounded-2xl flex items-center gap-5 hover:bg-muted/10 hover:shadow-xl hover:shadow-slate-950/10 hover:border-indigo-500/20 hover:-translate-y-0.5 transform transition-all duration-300 group cursor-pointer">
-                <div className="w-12 h-12 bg-orange-50/10 dark:bg-orange-950/20 border border-orange-200/20 rounded-xl flex items-center justify-center text-orange-650 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 bg-orange-50 dark:bg-orange-950/40 border border-orange-200/80 dark:border-orange-800/40 rounded-xl flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:scale-105 transition-transform duration-300 shadow-sm shadow-orange-500/10">
                   <Target className="h-5 w-5" />
                 </div>
                 <div>

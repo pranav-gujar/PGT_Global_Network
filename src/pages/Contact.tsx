@@ -323,7 +323,7 @@ const Contact = () => {
             {/* Right Column: Contact Methods & Info (2nd in markup for mobile-bottom display) */}
             <div className="lg:col-span-5 space-y-8 animate-reveal-up" style={{ animationDelay: '400ms' }}>
               <div>
-                <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">Reach out</span>
+                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">Reach out</span>
                 <h2 className="text-3xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">Contact Information</h2>
                 <p className="text-muted-foreground leading-relaxed font-normal text-sm sm:text-base">
                   Have questions, collaboration ideas, or feedback? Use the form to get in touch with our team, or reach out directly through any of our channels.
@@ -335,15 +335,15 @@ const Contact = () => {
                   <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
                     <a 
                       href={info.action !== '#' ? info.action : undefined}
-                      className="relative overflow-hidden bg-card border border-border p-6 rounded-2xl hover:bg-muted/40 hover:shadow-2xl hover:shadow-slate-950/5 hover:border-indigo-500/20 hover:-translate-y-1.5 transform transition-all duration-300 group cursor-pointer flex items-center gap-6 text-left block"
+                      className="relative overflow-hidden bg-card border border-border p-6 rounded-2xl hover:bg-muted/40 hover:shadow-2xl hover:shadow-slate-955/5 hover:border-indigo-500/20 hover:-translate-y-1.5 transform transition-all duration-300 group cursor-pointer flex items-center gap-6 text-left block"
                     >
                       <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.03] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                      <div className="flex-shrink-0 w-12 h-12 bg-muted border border-border rounded-xl flex items-center justify-center group-hover:scale-105 transition-all duration-300 text-indigo-700 dark:text-indigo-400 relative z-10">
+                      <div className="flex-shrink-0 w-12 h-12 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 rounded-xl flex items-center justify-center group-hover:scale-105 transition-all duration-300 text-indigo-600 dark:text-indigo-400 shadow-sm shadow-indigo-500/10 relative z-10">
                         <info.icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-foreground mb-0.5 group-hover:text-indigo-655 transition-colors duration-300 relative z-10">{info.title}</h4>
+                        <h4 className="text-base font-bold text-foreground mb-0.5 group-hover:text-indigo-600 transition-colors duration-300 relative z-10">{info.title}</h4>
                         <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-1 relative z-10">{info.details}</p>
                         <p className="text-muted-foreground text-xs leading-normal font-normal relative z-10">{info.description}</p>
                       </div>
@@ -361,7 +361,7 @@ const Contact = () => {
       <section className="py-24 bg-background border-b border-border relative z-10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedCard animation="slideUp">
-            <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('faq.tagline')}</span>
+            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('faq.tagline')}</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-foreground mt-2 mb-6 tracking-tight">
               {t('faq.title')}
             </h2>

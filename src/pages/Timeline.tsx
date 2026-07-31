@@ -193,11 +193,11 @@ const Timeline = () => {
                         <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.03] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                         <div className="flex items-center space-x-4 mb-6 relative z-10">
-                          <div className="w-12 h-12 bg-muted flex items-center justify-center rounded-xl text-indigo-650 dark:text-indigo-400 group-hover:scale-105 transition-all duration-300 shadow-[0_4px_12px_rgba(99,102,241,0.04)]">
+                          <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 flex items-center justify-center rounded-xl text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-all duration-300 shadow-sm shadow-indigo-500/10">
                             <event.icon className="h-6 w-6" />
                           </div>
                           <div>
-                            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider">{event.year}</span>
+                            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 px-2.5 py-0.5 rounded-full uppercase tracking-wider">{event.year}</span>
                             <h4 className="text-xl font-bold text-foreground mt-1">{event.title}</h4>
                           </div>
                         </div>
@@ -216,19 +216,19 @@ const Timeline = () => {
                         {/* Metric Subgrid Dashboard */}
                         <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border relative z-10 bg-muted/40 p-4 rounded-xl group-hover:bg-card group-hover:border-border transition-all duration-300">
                           <div className="text-center">
-                            <div className="text-lg sm:text-xl font-black text-indigo-605 dark:text-indigo-400">
+                            <div className="text-lg sm:text-xl font-black text-indigo-600 dark:text-indigo-400">
                               <CountUpNumber end={event.stats.participants} suffix="+" duration={2000} />
                             </div>
                             <div className="text-[10px] font-bold text-muted-foreground/60 uppercase mt-1">{t('navbar.programs') === 'navbar.programs' ? 'Participants' : t('navbar.programs')}</div>
                           </div>
                           <div className="text-center border-x border-border/60">
-                            <div className="text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-450">
+                            <div className="text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-400">
                               <CountUpNumber end={event.stats.programs} duration={2000} />
                             </div>
                             <div className="text-[10px] font-bold text-muted-foreground/60 uppercase mt-1">{t('programs.durationTitle').replace(/\[.*?\]\s*/g, '') === 'programs.durationTitle' ? 'Programs' : t('programs.durationTitle')}</div>
                           </div>
                           <div className="text-center">
-                            <div className="text-lg sm:text-xl font-black text-purple-605 dark:text-purple-400">
+                            <div className="text-lg sm:text-xl font-black text-purple-600 dark:text-purple-400">
                               <CountUpNumber end={event.stats.successStories} suffix="+" duration={2000} />
                             </div>
                             <div className="text-[10px] font-bold text-muted-foreground/60 uppercase mt-1">{t('home.stats.stories').replace(/\[.*?\]\s*/g, '') === 'home.stats.stories' ? 'Stories' : t('home.stats.stories')}</div>

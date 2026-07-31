@@ -157,11 +157,11 @@ const Terms = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {sections.map((section, index) => (
               <AnimatedCard key={index} animation="slideUp" delay={index * 100}>
-                <div className="relative overflow-hidden bg-card border border-border backdrop-blur-sm p-8 rounded-2xl shadow-xl shadow-slate-955/10 dark:shadow-none hover:border-indigo-500/20 hover:shadow-2xl hover:shadow-indigo-500/[0.02] hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer h-full">
+                <div className="relative overflow-hidden bg-card border border-border backdrop-blur-sm p-8 rounded-2xl shadow-xl shadow-slate-950/10 dark:shadow-none hover:border-indigo-500/20 hover:shadow-2xl hover:shadow-indigo-500/[0.02] hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer h-full">
                   <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.02] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="flex items-center gap-4 mb-6 relative z-10">
-                    <div className="w-12 h-12 bg-muted border border-border rounded-xl flex items-center justify-center text-indigo-700 dark:text-indigo-400 group-hover:scale-105 transition-transform duration-300">
+                    <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform duration-300 shadow-sm shadow-indigo-500/10">
                       <section.icon className="h-5 w-5" />
                     </div>
                     <h3 className="text-xl font-bold text-foreground">{section.title}</h3>

@@ -23,19 +23,22 @@ const Home = () => {
       icon: Target,
       title: t('home.coreValues.positivity.title'),
       description: t('home.coreValues.positivity.description'),
-      color: 'text-blue-600'
+      color: 'text-indigo-600 dark:text-indigo-400',
+      bgBox: 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200/80 dark:border-indigo-800/40 shadow-indigo-500/10'
     },
     {
       icon: TrendingUp,
       title: t('home.coreValues.growth.title'),
       description: t('home.coreValues.growth.description'),
-      color: 'text-green-600'
+      color: 'text-emerald-600 dark:text-emerald-400',
+      bgBox: 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200/80 dark:border-emerald-800/40 shadow-emerald-500/10'
     },
     {
       icon: Zap,
       title: t('home.coreValues.transformation.title'),
       description: t('home.coreValues.transformation.description'),
-      color: 'text-purple-600'
+      color: 'text-purple-600 dark:text-purple-400',
+      bgBox: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200/80 dark:border-purple-800/40 shadow-purple-500/10'
     }
   ];
 
@@ -180,8 +183,8 @@ const Home = () => {
                   <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.03] to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="relative z-10">
-                    <div className={`w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-6 group-hover:scale-105 group-hover:shadow-[0_4px_12px_rgba(99,102,241,0.06)] transition-all duration-300 ${value.color}`}>
-                      <value.icon className="h-6 w-6" />
+                    <div className={`w-14 h-14 rounded-2xl ${value.bgBox} border flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300 ${value.color}`}>
+                      <value.icon className="h-7 w-7" />
                     </div>
                     <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
@@ -243,7 +246,7 @@ const Home = () => {
       <section className="py-24 bg-background relative z-10 border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.programsTag')}</span>
+            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.programsTag')}</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
               {t('home.programsTitle')}
             </h2>
@@ -277,7 +280,7 @@ const Home = () => {
                       </p>
                     </div>
                     <span
-                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-850 dark:hover:text-indigo-350 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-700 dark:hover:text-indigo-300 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
                     >
                       {t('common.learnMore')}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1 duration-300" />
@@ -306,7 +309,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.insightsTag')}</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.insightsTag')}</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 {t('home.insightsTitle')}
               </h2>
@@ -348,7 +351,7 @@ const Home = () => {
                     </div>
 
                     <span
-                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-850 dark:hover:text-indigo-350 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
+                      className="text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-700 dark:hover:text-indigo-300 inline-flex items-center text-sm gap-1 group/link mt-auto w-fit"
                     >
                       {t('common.readMore')}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1 duration-300" />

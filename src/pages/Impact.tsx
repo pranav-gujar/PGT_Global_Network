@@ -148,23 +148,23 @@ const Impact = () => {
   };
 
   const getIconBg = (color: string) => {
-    if (color.includes('blue')) return 'bg-blue-50/10 dark:bg-blue-950/20 border border-blue-200/20';
-    if (color.includes('green')) return 'bg-emerald-50/10 dark:bg-emerald-950/20 border border-emerald-200/20';
-    if (color.includes('purple')) return 'bg-purple-50/10 dark:bg-purple-950/20 border border-purple-200/20';
-    if (color.includes('orange')) return 'bg-orange-50/10 dark:bg-orange-950/20 border border-orange-200/20';
-    if (color.includes('pink')) return 'bg-pink-50/10 dark:bg-pink-950/20 border border-pink-200/20';
-    if (color.includes('yellow')) return 'bg-yellow-50/10 dark:bg-yellow-950/20 border border-yellow-200/20';
-    return 'bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/20';
+    if (color.includes('blue')) return 'bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/40 shadow-sm shadow-blue-500/10';
+    if (color.includes('green')) return 'bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/40 shadow-sm shadow-emerald-500/10';
+    if (color.includes('purple')) return 'bg-purple-50 dark:bg-purple-950/40 border border-purple-200/80 dark:border-purple-800/40 shadow-sm shadow-purple-500/10';
+    if (color.includes('orange')) return 'bg-orange-50 dark:bg-orange-950/40 border border-orange-200/80 dark:border-orange-800/40 shadow-sm shadow-orange-500/10';
+    if (color.includes('pink')) return 'bg-pink-50 dark:bg-pink-950/40 border border-pink-200/80 dark:border-pink-800/40 shadow-sm shadow-pink-500/10';
+    if (color.includes('yellow')) return 'bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-800/40 shadow-sm shadow-amber-500/10';
+    return 'bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 shadow-sm shadow-indigo-500/10';
   };
 
   const getIconColor = (color: string) => {
-    if (color.includes('blue')) return 'text-blue-600';
-    if (color.includes('green')) return 'text-emerald-600';
-    if (color.includes('purple')) return 'text-purple-600';
-    if (color.includes('orange')) return 'text-orange-600';
-    if (color.includes('pink')) return 'text-pink-600';
-    if (color.includes('yellow')) return 'text-yellow-600';
-    return 'text-indigo-600';
+    if (color.includes('blue')) return 'text-blue-600 dark:text-blue-400';
+    if (color.includes('green')) return 'text-emerald-600 dark:text-emerald-400';
+    if (color.includes('purple')) return 'text-purple-600 dark:text-purple-400';
+    if (color.includes('orange')) return 'text-orange-600 dark:text-orange-400';
+    if (color.includes('pink')) return 'text-pink-600 dark:text-pink-400';
+    if (color.includes('yellow')) return 'text-amber-600 dark:text-amber-400';
+    return 'text-indigo-600 dark:text-indigo-400';
   };
 
   return (
@@ -219,7 +219,7 @@ const Impact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.valuesTag')}</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('home.valuesTag')}</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 {t('home.valuesTitle')}
               </h2>
@@ -269,7 +269,7 @@ const Impact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 tracking-wider uppercase font-mono">feedbacks</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">feedbacks</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 {t('timeline.historyTitle').replace(/\[.*?\]\s*/g, '') === 'timeline.historyTitle' ? 'Voices of Transformation' : t('timeline.historyTitle')}
               </h2>

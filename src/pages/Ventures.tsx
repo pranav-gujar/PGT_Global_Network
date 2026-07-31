@@ -286,7 +286,7 @@ const Ventures = () => {
             <AnimatedCard animation="slideUp" delay={300}>
               <div className="bg-card border border-border backdrop-blur-sm p-8 sm:p-10 rounded-3xl text-center shadow-sm relative overflow-hidden group">
                 <div className="absolute -right-16 -top-16 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl group-hover:bg-indigo-500/10 transition-colors duration-500" />
-                <div className="w-12 h-12 bg-indigo-50/10 dark:bg-indigo-950/20 border border-indigo-200/25 rounded-xl flex items-center justify-center mx-auto mb-4 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-all duration-300">
+                <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 rounded-xl flex items-center justify-center mx-auto mb-4 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-all duration-300 shadow-sm shadow-indigo-500/10">
                   <Sparkles className="h-5 w-5 animate-pulse" />
                 </div>
                 <h3 className="text-xl font-extrabold text-foreground tracking-tight mb-2">

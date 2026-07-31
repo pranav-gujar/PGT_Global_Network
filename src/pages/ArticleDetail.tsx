@@ -131,7 +131,7 @@ const ArticleDetail = () => {
             <div className="max-w-4xl mx-auto mb-8 text-left animate-reveal-up" style={{ animationDelay: '50ms' }}>
               <Link
                 to="/articles"
-                className="group inline-flex items-center text-muted-foreground hover:text-indigo-650 text-sm font-semibold tracking-wide transition-colors"
+                className="group inline-flex items-center text-muted-foreground hover:text-indigo-600 dark:hover:text-indigo-400 text-sm font-semibold tracking-wide transition-colors"
               >
                 <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                 {t('articles.back').replace(/\[.*?\]\s*/g, '') === 'articles.back' ? 'Back to Articles' : t('articles.back')}

@@ -16,22 +16,30 @@ const About = () => {
     {
       icon: Target,
       title: t('about.principles.purpose.title'),
-      description: t('about.principles.purpose.description')
+      description: t('about.principles.purpose.description'),
+      color: 'text-indigo-600 dark:text-indigo-400',
+      bgBox: 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200/80 dark:border-indigo-800/40 shadow-indigo-500/10'
     },
     {
       icon: Users,
       title: t('about.principles.people.title'),
-      description: t('about.principles.people.description')
+      description: t('about.principles.people.description'),
+      color: 'text-blue-600 dark:text-blue-400',
+      bgBox: 'bg-blue-50 dark:bg-blue-950/40 border-blue-200/80 dark:border-blue-800/40 shadow-blue-500/10'
     },
     {
       icon: Globe,
       title: t('about.principles.global.title'),
-      description: t('about.principles.global.description')
+      description: t('about.principles.global.description'),
+      color: 'text-purple-600 dark:text-purple-400',
+      bgBox: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200/80 dark:border-purple-800/40 shadow-purple-500/10'
     },
     {
       icon: Award,
       title: t('about.principles.excellence.title'),
-      description: t('about.principles.excellence.description')
+      description: t('about.principles.excellence.description'),
+      color: 'text-amber-600 dark:text-amber-400',
+      bgBox: 'bg-amber-50 dark:bg-amber-950/40 border-amber-200/80 dark:border-amber-800/40 shadow-amber-500/10'
     }
   ];
 
@@ -40,22 +48,25 @@ const About = () => {
       icon: Target,
       title: t('home.coreValues.positivity.title'),
       description: t('home.coreValues.positivity.description'),
-      color: 'text-blue-650 dark:text-blue-400',
-      bgGlow: 'from-blue-500/[0.03]'
+      color: 'text-indigo-600 dark:text-indigo-400',
+      bgBox: 'bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200/80 dark:border-indigo-800/40 shadow-indigo-500/10',
+      bgGlow: 'from-indigo-500/[0.05]'
     },
     {
       icon: StarIcon,
       title: t('home.coreValues.growth.title'),
       description: t('home.coreValues.growth.description'),
-      color: 'text-green-655 dark:text-green-400',
-      bgGlow: 'from-green-500/[0.03]'
+      color: 'text-emerald-600 dark:text-emerald-400',
+      bgBox: 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200/80 dark:border-emerald-800/40 shadow-emerald-500/10',
+      bgGlow: 'from-emerald-500/[0.05]'
     },
     {
       icon: Heart,
       title: t('home.coreValues.transformation.title'),
       description: t('home.coreValues.transformation.description'),
-      color: 'text-purple-650 dark:text-purple-400',
-      bgGlow: 'from-purple-500/[0.03]'
+      color: 'text-purple-600 dark:text-purple-400',
+      bgBox: 'bg-purple-50 dark:bg-purple-950/40 border-purple-200/80 dark:border-purple-800/40 shadow-purple-500/10',
+      bgGlow: 'from-purple-500/[0.05]'
     }
   ];
 
@@ -117,8 +128,8 @@ const About = () => {
             <AnimatedCard animation="slideLeft">
               <div className="bg-card border border-border p-8 md:p-10 rounded-2xl hover:bg-muted/10 hover:shadow-2xl hover:shadow-slate-950/10 hover:border-indigo-500/20 hover:-translate-y-1 transform transition-all duration-300 group h-full flex flex-col justify-between cursor-pointer">
                 <div>
-                  <div className="w-12 h-12 bg-indigo-50/10 dark:bg-indigo-950/20 flex items-center justify-center rounded-xl mb-8 group-hover:scale-105 transition-transform duration-300 text-indigo-650 dark:text-indigo-400">
-                    <Target className="h-6 w-6" />
+                  <div className="w-14 h-14 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-all duration-300 text-indigo-600 dark:text-indigo-400 shadow-sm shadow-indigo-500/10">
+                    <Target className="h-7 w-7" />
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-4 tracking-tight">
                     {t('about.principles.purpose.title').replace(/\[.*?\]\s*/g, '') === 'about.principles.purpose.title' ? 'Our Mission' : t('about.principles.purpose.title')}
@@ -133,8 +144,8 @@ const About = () => {
             <AnimatedCard animation="slideRight">
               <div className="bg-card border border-border p-8 md:p-10 rounded-2xl hover:bg-muted/10 hover:shadow-2xl hover:shadow-slate-950/10 hover:border-indigo-500/20 hover:-translate-y-1 transform transition-all duration-300 group h-full flex flex-col justify-between cursor-pointer">
                 <div>
-                  <div className="w-12 h-12 bg-purple-50/10 dark:bg-purple-950/20 flex items-center justify-center rounded-xl mb-8 group-hover:scale-105 transition-transform duration-300 text-purple-605 dark:text-purple-400">
-                    <Eye className="h-6 w-6" />
+                  <div className="w-14 h-14 bg-purple-50 dark:bg-purple-950/40 border border-purple-200/80 dark:border-purple-800/40 flex items-center justify-center rounded-2xl mb-8 group-hover:scale-110 transition-all duration-300 text-purple-600 dark:text-purple-400 shadow-sm shadow-purple-500/10">
+                    <Eye className="h-7 w-7" />
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-4 tracking-tight">
                     {t('about.philosophyTitle').replace(/\[.*?\]\s*/g, '') === 'about.philosophyTitle' ? 'Our Vision' : t('about.philosophyTitle')}
@@ -169,8 +180,8 @@ const About = () => {
                   <div className={`absolute -inset-[1px] bg-gradient-to-br ${value.bgGlow} to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
                   <div className="relative z-10">
-                    <div className={`w-12 h-12 bg-muted flex items-center justify-center rounded-xl mb-6 group-hover:scale-105 group-hover:shadow-[0_4px_12px_rgba(99,102,241,0.06)] transition-all duration-300 ${value.color}`}>
-                      <value.icon className="h-6 w-6" />
+                    <div className={`w-14 h-14 ${value.bgBox} border flex items-center justify-center rounded-2xl mb-6 group-hover:scale-110 transition-all duration-300 ${value.color}`}>
+                      <value.icon className="h-7 w-7" />
                     </div>
                     <h3 className="text-xl font-bold text-foreground mb-4">{value.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
@@ -194,13 +205,36 @@ const About = () => {
                 <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-8 tracking-tight">
                   {t('about.leadershipTitle')}
                 </h2>
-                <div className="w-28 h-28 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden shadow-md">
-                  <img
-                    src={founderImg}
-                    alt="Pranav Gujar"
-                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
-                  />
+                
+                {/* Executive Founder Frame */}
+                <div className="relative mx-auto mb-10 w-44 h-52 sm:w-48 sm:h-56 group/founder">
+                  {/* Ambient Indigo Soft Aura */}
+                  <div className="absolute -inset-3 bg-gradient-to-b from-indigo-500/15 via-blue-500/10 to-transparent dark:from-indigo-500/25 dark:via-blue-500/15 rounded-[2.2rem] blur-xl opacity-75 group-hover/founder:opacity-100 group-hover/founder:blur-2xl transition-all duration-500" />
+
+                  {/* Outer Frame Box */}
+                  <div className="relative w-full h-full bg-card border border-border p-2.5 rounded-[2rem] shadow-xl shadow-slate-950/5 dark:shadow-none transition-all duration-500 group-hover/founder:border-indigo-500/30 group-hover/founder:shadow-2xl group-hover/founder:shadow-indigo-500/10 group-hover/founder:-translate-y-1">
+                    
+                    {/* Subtle Top Brand Accent Line */}
+                    <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent rounded-full opacity-60 group-hover/founder:opacity-100 transition-opacity" />
+
+                    {/* Photo Container */}
+                    <div className="w-full h-full rounded-[1.4rem] overflow-hidden bg-muted/30 relative border border-border/40">
+                      <img
+                        src={founderImg}
+                        alt="Pranav Gujar"
+                        className="w-full h-full object-cover object-top group-hover/founder:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
+                    </div>
+
+                    {/* Elegant Badge overlapping bottom */}
+                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-card/95 backdrop-blur-md border border-border shadow-md px-3.5 py-1 rounded-full text-[11px] font-bold text-foreground tracking-wider uppercase flex items-center gap-1.5 whitespace-nowrap group-hover/founder:border-indigo-500/30 group-hover/founder:shadow-indigo-500/10 transition-all duration-300">
+                      <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                      Founder & CEO
+                    </div>
+                  </div>
                 </div>
+
                 <h3 className="text-2xl font-bold text-foreground mb-1">Pranav Gujar</h3>
                 <p className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">{t('about.CEO')}</p>
               </div>
@@ -250,8 +284,8 @@ const About = () => {
               <AnimatedCard key={index} animation="slideUp" delay={index * 150}>
                 <div className="bg-card border border-border p-8 rounded-2xl hover:shadow-2xl hover:shadow-slate-950/10 hover:border-indigo-500/20 hover:-translate-y-1 transform transition-all duration-300 group cursor-pointer h-full">
                   <div className="flex items-start space-x-5">
-                    <div className="w-12 h-12 bg-muted flex items-center justify-center rounded-xl flex-shrink-0 group-hover:scale-105 group-hover:shadow-[0_4px_12px_rgba(99,102,241,0.06)] transition-all duration-300 text-indigo-605 dark:text-indigo-400">
-                      <principle.icon className="h-6 w-6" />
+                    <div className={`w-14 h-14 ${principle.bgBox} border flex items-center justify-center rounded-2xl flex-shrink-0 group-hover:scale-110 transition-all duration-300 ${principle.color}`}>
+                      <principle.icon className="h-7 w-7" />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200">

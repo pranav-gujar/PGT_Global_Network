@@ -93,10 +93,10 @@ const Programs = () => {
         };
       default:
         return {
-          badge: 'bg-slate-50/10 dark:bg-slate-900/20 text-slate-700 dark:text-slate-400 border border-slate-200/20 hover:bg-slate-100/20',
+          badge: 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 border border-indigo-200/80 dark:border-indigo-800/40 hover:bg-indigo-100/40',
           glow: 'from-indigo-500/[0.03]',
-          iconText: 'text-indigo-650 dark:text-indigo-400',
-          iconBg: 'bg-muted',
+          iconText: 'text-indigo-600 dark:text-indigo-400',
+          iconBg: 'bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 shadow-sm shadow-indigo-500/10',
           shadow: 'hover:shadow-indigo-500/[0.04]',
           bullet: 'bg-indigo-500',
           border: 'hover:border-indigo-500/30'
@@ -225,7 +225,7 @@ const Programs = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('programs.portfolioTag')}</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('programs.portfolioTag')}</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 {t('programs.portfolioTitle')}
               </h2>

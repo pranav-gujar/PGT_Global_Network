@@ -306,7 +306,7 @@ const Careers = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-650 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('careers.benefitsTag')}</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('careers.benefitsTag')}</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 {t('careers.benefitsTitle')}
               </h2>
@@ -341,7 +341,7 @@ const Careers = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('careers.positionsTag')}</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">{t('careers.positionsTag')}</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 {t('careers.positionsTitle')}
               </h2>
@@ -449,7 +449,7 @@ const Careers = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
             <div className="text-center mb-20">
-              <span className="text-xs font-bold text-indigo-655 dark:text-indigo-400 tracking-wider uppercase font-mono">workflow</span>
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">workflow</span>
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">
                 Application Process
               </h2>
@@ -462,7 +462,7 @@ const Careers = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center group cursor-pointer">
               <AnimatedCard animation="zoomIn" delay={0}>
-                <div className="w-16 h-16 bg-card border border-border text-indigo-650 font-extrabold text-xl shadow-slate-950/5 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:border-indigo-400 transition-all duration-300 select-none">
+                <div className="w-16 h-16 bg-card border border-border text-indigo-600 dark:text-indigo-400 font-extrabold text-xl shadow-slate-950/5 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:border-indigo-400 transition-all duration-300 select-none">
                   <span>1</span>
                 </div>
                 <h3 className="text-lg font-bold text-foreground mb-2">Apply Online</h3>

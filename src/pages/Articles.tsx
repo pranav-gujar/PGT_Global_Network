@@ -281,7 +281,7 @@ const Articles = () => {
                         </div>
 
                         <span
-                          className="text-indigo-605 dark:text-indigo-400 font-bold hover:text-indigo-505 inline-flex items-center text-xs tracking-wider uppercase group-hover:translate-x-0.5 transition-transform duration-300"
+                          className="text-indigo-600 dark:text-indigo-400 font-bold hover:text-indigo-500 inline-flex items-center text-xs tracking-wider uppercase group-hover:translate-x-0.5 transition-transform duration-300"
                         >
                           {t('common.readMore') === 'common.readMore' ? 'Read More' : t('common.readMore')}
                           <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-1 duration-300" />
