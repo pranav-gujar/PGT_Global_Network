@@ -92,10 +92,10 @@ const ResetPassword: React.FC = () => {
       {/* Back to Website Button */}
       <Link 
         to="/" 
-        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-indigo-505 transition-colors duration-300 z-20 group"
+        className="absolute top-6 left-6 sm:top-8 sm:left-8 inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-indigo-500 transition-colors duration-300 z-20 group"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 duration-300" />
-        {t('auth.forgot.btnBack') === 'auth.forgot.btnBack' ? 'Back to Website' : t('auth.forgot.btnBack')}
+        {t('common.backToHome') === 'common.backToHome' ? 'Back to Website' : t('common.backToHome')}
       </Link>
 
       <div className="max-w-md w-full z-10 text-left">
