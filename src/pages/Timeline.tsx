@@ -7,6 +7,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 const Timeline = () => {
   const loading = usePageLoading();
@@ -66,7 +68,7 @@ const Timeline = () => {
         'Executed HED campaign 4th edition with new volunteers',
         'Ran small-scale online awareness posts and contests',
         'Started experimenting with structured formats for impact',
-        'Strengthened the identity of PGT as a student-led movement'
+        'Strengthened the identity of PGT as an impact-driven leadership ecosystem'
       ]),
       stats: { participants: 600, programs: 2, successStories: 80 }
     },
@@ -99,7 +101,7 @@ const Timeline = () => {
     {
       year: '2025',
       title: getTranslation('timeline.milestones.2025.title', 'Continuing the Journey'),
-      description: getTranslation('timeline.milestones.2025.description', 'PGT Global Network is actively scaling programs and building new opportunities for student leadership.'),
+      description: getTranslation('timeline.milestones.2025.description', 'PGT Global Network is actively scaling programs and building new opportunities for leadership development, innovation, and real-world impact.'),
       icon: Star,
       achievements: getTranslation('timeline.milestones.2025.achievements', [
         'Going to run Happy Eco Diwali 7th edition with strong engagement',
@@ -117,6 +119,14 @@ const Timeline = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Milestones & Timeline"
+        description="Explore PGT Global Network's key milestones from founding in 2019 to scaling international initiatives, webinars, and global community transformation."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Timeline', item: '/timeline' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

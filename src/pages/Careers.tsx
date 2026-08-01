@@ -11,6 +11,8 @@ import Background from "../components/Background";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { usePageLoading } from "../hooks/usePageLoading";
 import { useLanguage } from "../contexts/LanguageContext";
+import SEO from "../components/SEO";
+import { getBreadcrumbSchema, getJobPostingSchema } from "../lib/schema";
 
 // JobPosition component for Core Team roles
 const JobPosition = ({ position, handleApply, isApplied, onSignInClick }) => {
@@ -249,6 +251,26 @@ const Careers = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Careers & Opportunities"
+        description="Join PGT Global Network. Explore core team positions, volunteer roles, and leadership opportunities to shape global digital education."
+        schema={[
+          getBreadcrumbSchema([
+            { name: 'Home', item: '/' },
+            { name: 'Careers', item: '/careers' }
+          ]),
+          getJobPostingSchema({
+            title: 'Digital Content Creator & Community Lead',
+            description: 'Lead content strategy and community growth initiatives across PGT platforms.',
+            datePosted: '2026-01-01'
+          }),
+          getJobPostingSchema({
+            title: 'Technical Program Coordinator',
+            description: 'Coordinate digital learning webinars and technology programs globally.',
+            datePosted: '2026-01-01'
+          })
+        ]}
+      />
       <style>
         {`
           @keyframes reveal-up {

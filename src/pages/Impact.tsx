@@ -7,6 +7,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -169,6 +171,14 @@ const Impact = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Global Impact & Growth Outcomes"
+        description="Discover how PGT Global Network is transforming communities, empowering youth leaders, and building global opportunities across 15+ countries."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Impact', item: '/impact' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

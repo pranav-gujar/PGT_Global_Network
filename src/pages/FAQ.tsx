@@ -6,6 +6,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema, getFAQSchema } from '../lib/schema';
 
 const FAQ = () => {
   const loading = usePageLoading();
@@ -34,7 +36,7 @@ const FAQ = () => {
       id: 1,
       category: 'general',
       question: getTranslation('faq.list.1.question', 'What is PGT Global Network?'),
-      answer: getTranslation('faq.list.1.answer', 'PGT Global Network is a student-led, purpose-driven organization empowering individuals through leadership, awareness, education, and community-driven programs. Founded in 2019, it has grown into a platform where students discover real-world learning, social leadership, and meaningful impact.')
+      answer: getTranslation('faq.list.1.answer', 'PGT Global Network is a purpose-driven organization and global learning ecosystem empowering individuals through leadership, awareness, education, and community-driven programs. Founded in 2019, it has grown into a professional platform committed to empowering students, young professionals, educators, and global changemakers.')
     },
     {
       id: 2,
@@ -105,6 +107,17 @@ const FAQ = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Frequently Asked Questions (FAQ)"
+        description="Find answers to common questions about PGT Global Network's programs, application process, partnerships, digital initiatives, and technical support."
+        schema={[
+          getBreadcrumbSchema([
+            { name: 'Home', item: '/' },
+            { name: 'FAQ', item: '/faq' }
+          ]),
+          getFAQSchema(faqItems.map(item => ({ question: item.question, answer: item.answer })))
+        ]}
+      />
       <style>
         {`
           @keyframes reveal-up {

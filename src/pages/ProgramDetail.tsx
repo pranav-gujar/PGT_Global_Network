@@ -8,6 +8,8 @@ import HeroBackground from '../components/HeroBackground';
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema, getCourseSchema } from '../lib/schema';
 
 import Seminarix from '../assets/programs/Seminarix.png';
 import D3 from '../assets/programs/D3.png';
@@ -241,6 +243,22 @@ const ProgramDetail = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden min-h-screen transition-colors duration-300">
+      <SEO 
+        title={`${translatedFullName || translatedName} | Core Initiative`}
+        description={translatedDescription || program.description}
+        schema={[
+          getBreadcrumbSchema([
+            { name: 'Home', item: '/' },
+            { name: 'Programs', item: '/programs' },
+            { name: translatedName, item: `/programs/${programId}` }
+          ]),
+          getCourseSchema({
+            title: translatedFullName || translatedName,
+            description: translatedDescription || program.description,
+            url: `https://pgtglobalnetwork.com/programs/${programId}`
+          })
+        ]}
+      />
       <style>
         {`
           @keyframes reveal-up {

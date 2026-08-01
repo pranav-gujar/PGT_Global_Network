@@ -47,7 +47,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <img
                   src="/PGT New Logo Transparent.png"
-                  alt="PGT Logo"
+                  alt="PGT Global Network Logo"
                   className="w-10 h-10"
                   style={{
                     filter: 'brightness(0) invert(1) drop-shadow(0 2px 8px rgba(99,102,241,0.25))'

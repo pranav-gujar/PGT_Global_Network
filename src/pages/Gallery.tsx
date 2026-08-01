@@ -6,6 +6,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 // Gallery Images
 import one from '../assets/gallery/1.jpg';
@@ -229,7 +231,15 @@ const Gallery = () => {
   }
 
   return (
-    <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+    <div className="pt-28 bg-background overflow-x-hidden min-h-screen transition-colors duration-300">
+      <SEO 
+        title="Media Gallery & Impact Snapshots"
+        description="Snapshots of PGT Global Network's impact, school seminars, webinars, summits, and community outreach projects worldwide."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Gallery', item: '/gallery' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

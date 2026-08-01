@@ -6,6 +6,7 @@ import { useTheme } from '../../contexts/ThemeContext'
 import HeroBackground from '../../components/HeroBackground'
 import AnimatedCard from '../../components/AnimatedCard'
 import { useLanguage } from '../../contexts/LanguageContext'
+import SEO from '../../components/SEO'
 
 const VerifyEmail: React.FC = () => {
   const { user, isEmailVerified, resendVerification, signOut } = useAuth()
@@ -147,6 +148,7 @@ const VerifyEmail: React.FC = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-background overflow-hidden transition-colors duration-300">
+      <SEO title="Verify Email" noindex={true} />
       <HeroBackground />
 
       {/* Back to Website Button */}

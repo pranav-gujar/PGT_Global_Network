@@ -6,6 +6,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 const Privacy = () => {
   const loading = usePageLoading();
@@ -65,6 +67,14 @@ const Privacy = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Privacy Policy"
+        description="Learn how PGT Global Network handles user data, privacy protection, analytics, security, and cookie policies."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Privacy Policy', item: '/privacy' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

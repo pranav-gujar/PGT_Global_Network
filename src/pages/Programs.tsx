@@ -16,6 +16,8 @@ import MotivMinds from '../assets/programs/MotiVMinds.png';
 
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema, getCourseSchema } from '../lib/schema';
 
 const Programs = () => {
   const loading = usePageLoading();
@@ -168,6 +170,31 @@ const Programs = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Core Initiatives & Programs"
+        description="Explore PGT Global Network's core initiatives including D3, VoA, Happy Eco Diwali, MotivMinds, and Seminarix designed to foster digital learning and community leadership."
+        schema={[
+          getBreadcrumbSchema([
+            { name: 'Home', item: '/' },
+            { name: 'Programs', item: '/programs' }
+          ]),
+          getCourseSchema({
+            title: 'D3 - Daily Discovery Digest',
+            description: 'A continuous daily awareness initiative delivering knowledge, inspiration, and historic milestones.',
+            url: 'https://pgtglobalnetwork.com/programs/d3'
+          }),
+          getCourseSchema({
+            title: 'VoA - Voices of Ability',
+            description: 'A storytelling series that showcases individuals who turned personal challenges into change.',
+            url: 'https://pgtglobalnetwork.com/programs/voa'
+          }),
+          getCourseSchema({
+            title: 'Seminarix - Digital Learning Seminars',
+            description: 'Interactive educational webinars and workshops bringing tech and career guidance.',
+            url: 'https://pgtglobalnetwork.com/programs/seminarix'
+          })
+        ]}
+      />
       <style>
         {`
           @keyframes reveal-up {

@@ -5,6 +5,8 @@ import AnimatedCard from "../components/AnimatedCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { usePageLoading } from "../hooks/usePageLoading";
 import { useLanguage } from "../contexts/LanguageContext";
+import SEO from "../components/SEO";
+import { getBreadcrumbSchema } from "../lib/schema";
 
 // ── Venture data schema ───────────────────────────────────────────────────────
 interface Venture {
@@ -215,6 +217,14 @@ const Ventures = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Ventures & Umbrella Ecosystem"
+        description="Explore PGT Global Network's ventures including PGT Publications and PGT Technologies driving innovation across education, publishing, and technology."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Ventures', item: '/ventures' }
+        ])}
+      />
       <style>{`
         @keyframes reveal-up {
           0%   { opacity: 0; transform: translateY(24px); filter: blur(4px); }

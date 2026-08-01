@@ -41,10 +41,10 @@ export const articles: Article[] = [
     content: `
       <p>Sustainability is no longer a buzzword; it is a call to action. Around the world, students are leading the charge in building eco-conscious communities and reshaping the way we think about the environment. From reducing plastic use to spearheading renewable energy campaigns, young people are proving that small steps can create meaningful global change.</p>
       <br> <p>One of the most powerful tools for sustainability lies in awareness. Students organizing campaigns, workshops, and green clubs are raising awareness about pressing issues such as climate change, waste reduction, and conservation. This peer-to-peer learning not only educates but also inspires entire communities to adopt eco-friendly practices.</p>
-      <br> <p>Beyond awareness, action is critical. Many student-led initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment. These grassroots projects ripple outward, influencing families, neighborhoods, and policy discussions.</p>
+      <br> <p>Beyond awareness, action is critical. Many community-driven and youth initiatives focus on recycling programs, tree-planting drives, and energy conservation projects. In doing so, students learn valuable lessons about leadership and responsibility while directly impacting their local environment. These grassroots projects ripple outward, influencing families, neighborhoods, and policy discussions.</p>
       <br> <p>Technology also plays a significant role. Social media allows young activists to amplify their messages, connect with global networks, and advocate for systemic changes. Platforms like Instagram and TikTok have become spaces where sustainability movements gain momentum, empowering youth voices to reach policymakers and businesses alike.</p>
       <br> <p>Building sustainable communities requires collaboration. Students who work hand-in-hand with educators, local governments, and NGOs can scale their impact and create lasting change. Whether through eco-hackathons, clean energy prototypes, or awareness campaigns, their contributions highlight the creativity and determination of the next generation.</p>
-      <br> <p>The ultimate impact of student-led sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>
+      <br> <p>The ultimate impact of youth-driven sustainability is not only environmental but also social. By fostering responsibility, empathy, and a sense of collective purpose, students are cultivating communities that thrive on shared values. Their leadership proves that sustainability is not an option but an essential path toward a healthier and more equitable future.</p>
     `,
     author: 'Pranav Gujar',
     date: '2023-11-05',
@@ -55,16 +55,16 @@ export const articles: Article[] = [
   },
   {
     id: '3',
-    slug: 'global-development-student-led-trends-ahead',
-    title: 'Global Development: Student-Led Trends Ahead',
-    excerpt: 'Student leadership trends reshape development with innovation and impact.',
+    slug: 'global-development-leadership-trends-ahead',
+    title: 'Global Development: Next-Generation Leadership Trends',
+    excerpt: 'Emerging leadership trends reshape global development with innovation and impact.',
     content: `
       <p>The future of global development is being shaped not only by policymakers and organizations but also by students. With innovation, determination, and digital fluency, today’s youth are redefining the way societies address issues such as poverty, education, and equality. Their leadership is setting new trends that promise long-lasting impact worldwide.</p>
       <br> <p>One trend is the rise of social entrepreneurship. Students are launching startups that address local and global challenges, from clean water initiatives to sustainable farming solutions. These ventures not only solve pressing issues but also generate employment and foster innovation at the grassroots level.</p>
       <br> <p>Another trend is digital advocacy. Students are using online platforms to voice concerns about climate change, human rights, and gender equality. Their ability to mobilize audiences quickly has turned grassroots movements into global campaigns, influencing decision-makers and shaping public opinion.</p>
       <br> <p>Collaborative learning is also gaining traction. International student exchange programs, hackathons, and global forums are giving young people platforms to share ideas, challenge perspectives, and co-create solutions. These experiences broaden their worldview and prepare them to be inclusive leaders in diverse communities.</p>
       <br> <p>Technology plays a central role in amplifying these trends. With access to AI, data analysis, and virtual learning, students are building tools that predict problems and propose innovative solutions. Their ability to merge technology with social impact is redefining what development looks like in the 21st century.</p>
-      <br> <p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is undeniably student-led.</p>
+      <br> <p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is driven by purpose, innovation, and next-generation leadership.</p>
     `,
     author: 'Pranav Gujar',
     date: '2025-02-18',

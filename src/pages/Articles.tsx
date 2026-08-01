@@ -8,6 +8,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 const Articles = () => {
   const loading = usePageLoading();
@@ -68,6 +70,14 @@ const Articles = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Insights & Articles"
+        description="Discover resources, expert guides, leadership insights, and educational stories shaping community development globally."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Articles', item: '/articles' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

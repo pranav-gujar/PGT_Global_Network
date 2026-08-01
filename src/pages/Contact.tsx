@@ -8,6 +8,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 const Contact = () => {
   const loading = usePageLoading();
@@ -122,7 +124,15 @@ const Contact = () => {
   }
 
   return (
-    <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+    <div className="pt-28 bg-background overflow-x-hidden min-h-screen transition-colors duration-300">
+      <SEO 
+        title="Contact Us & Get in Touch"
+        description="Get in touch with PGT Global Network for collaborations, partnerships, program inquiries, or technical support at office@pgtglobalnetwork.com."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Contact Us', item: '/contact' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

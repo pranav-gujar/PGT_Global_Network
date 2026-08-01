@@ -6,6 +6,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 const Terms = () => {
   const loading = usePageLoading();
@@ -65,6 +67,14 @@ const Terms = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="Terms of Service"
+        description="Read PGT Global Network's Terms of Service outlining platform usage rules, intellectual property, user responsibilities, and legal guidelines."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'Terms of Service', item: '/terms' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

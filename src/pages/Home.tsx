@@ -9,6 +9,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { articles } from '../data/articles';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getOrganizationSchema, getWebSiteSchema } from '../lib/schema';
 
 import Seminarix from '../assets/programs/Seminarix.png';
 import D3 from '../assets/programs/D3.png';
@@ -88,6 +90,7 @@ const Home = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO schema={[getOrganizationSchema(), getWebSiteSchema()]} />
       <style>
         {`
           @keyframes reveal-up {

@@ -1,0 +1,31 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /programs
+Allow: /programs/*
+Allow: /timeline
+Allow: /impact
+Allow: /gallery
+Allow: /articles
+Allow: /articles/*
+Allow: /careers
+Allow: /ventures
+Allow: /contact
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+
+# Disallow private and administrative routes
+Disallow: /dashboard
+Disallow: /apply
+Disallow: /signin
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /error
+
+# Host & Sitemap
+Host: https://pgtglobalnetwork.com
+Sitemap: https://pgtglobalnetwork.com/sitemap.xml

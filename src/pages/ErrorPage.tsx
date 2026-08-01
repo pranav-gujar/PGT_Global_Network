@@ -4,6 +4,7 @@ import { AlertTriangle, RefreshCw } from 'lucide-react';
 import HeroBackground from '../components/HeroBackground';
 import AnimatedCard from '../components/AnimatedCard';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
 
 interface ErrorPageProps {
   error?: Error;
@@ -36,6 +37,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({ error, resetErrorBoundary }) => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden relative min-h-[80vh] flex flex-col justify-center transition-colors duration-300">
+      <SEO title="Application Error" noindex={true} />
       <style>
         {`
           @keyframes reveal-up {

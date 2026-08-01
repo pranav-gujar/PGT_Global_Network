@@ -21,9 +21,12 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 import { supabase } from "../lib/supabase";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { usePageLoading } from "../hooks/usePageLoading";
+import { useLanguage } from "../contexts/LanguageContext";
+import SEO from "../components/SEO";
 import HeroBackground from "../components/HeroBackground";
 import AnimatedCard from "../components/AnimatedCard";
-import { useLanguage } from "../contexts/LanguageContext";
 
 const Apply: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -190,6 +193,7 @@ const Apply: React.FC = () => {
 
   return (
     <div className="pt-28 pb-20 bg-background overflow-x-hidden min-h-screen transition-colors duration-300">
+      <SEO title="Job Application" noindex={true} />
       <HeroBackground />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

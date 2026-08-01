@@ -26,6 +26,7 @@ import ImageUploadModal from '../components/ImageUploadModal'
 import HeroBackground from '../components/HeroBackground'
 import AnimatedCard from '../components/AnimatedCard'
 import { useLanguage } from '../contexts/LanguageContext'
+import SEO from '../components/SEO'
 
 const Dashboard = () => {
   const { user, userRole, updateProfile } = useAuth()
@@ -202,6 +203,7 @@ const Dashboard = () => {
 
   return (
     <div className="relative min-h-screen bg-background overflow-hidden transition-colors duration-300">
+      <SEO title="Member Dashboard" noindex={true} />
       <HeroBackground />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 relative z-10">

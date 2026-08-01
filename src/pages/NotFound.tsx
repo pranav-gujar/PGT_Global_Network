@@ -4,12 +4,14 @@ import { ArrowRight, Compass } from 'lucide-react';
 import HeroBackground from '../components/HeroBackground';
 import AnimatedCard from '../components/AnimatedCard';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
 
 const NotFound: React.FC = () => {
   const { t } = useLanguage();
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden relative min-h-[80vh] flex flex-col justify-center transition-colors duration-300">
+      <SEO title="Page Not Found (404)" noindex={true} />
       <style>
         {`
           @keyframes reveal-up {

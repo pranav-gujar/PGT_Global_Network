@@ -133,10 +133,10 @@ const Navbar = () => {
           }`}>
             {/* Logo */}
             <div className="flex items-center flex-shrink-0">
-              <Link to="/" className="flex items-center space-x-2 whitespace-nowrap">
+              <Link to="/" aria-label="PGT Global Network Homepage" className="flex items-center space-x-2 whitespace-nowrap">
                 <img 
                   src="/PGT New Logo Transparent.png" 
-                  alt="PGT Logo" 
+                  alt="PGT Global Network Logo" 
                   className={`transition-all duration-300 filter drop-shadow-md ${
                     scrolled ? 'w-8 h-8' : 'w-10 h-10'
                   }`}

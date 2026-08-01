@@ -7,6 +7,8 @@ import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema } from '../lib/schema';
 
 const About = () => {
   const loading = usePageLoading();
@@ -76,6 +78,14 @@ const About = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden transition-colors duration-300">
+      <SEO 
+        title="About Us"
+        description="Learn about PGT Global Network's mission, values, founder note, and journey toward empowering communities worldwide through digital education and leadership."
+        schema={getBreadcrumbSchema([
+          { name: 'Home', item: '/' },
+          { name: 'About Us', item: '/about' }
+        ])}
+      />
       <style>
         {`
           @keyframes reveal-up {

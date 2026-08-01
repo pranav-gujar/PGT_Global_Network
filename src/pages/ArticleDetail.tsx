@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import LoadingSpinner from '../components/LoadingSpinner'; 
 import { usePageLoading } from '../hooks/usePageLoading';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEO from '../components/SEO';
+import { getBreadcrumbSchema, getArticleSchema } from '../lib/schema';
 import {
   Calendar,
   User,
@@ -121,6 +123,27 @@ const ArticleDetail = () => {
 
   return (
     <div className="pt-28 bg-background overflow-x-hidden min-h-screen transition-colors duration-300">
+      <SEO 
+        title={translatedTitle}
+        description={blogPost.excerpt}
+        image={blogPost.image}
+        type="article"
+        schema={[
+          getBreadcrumbSchema([
+            { name: 'Home', item: '/' },
+            { name: 'Articles', item: '/articles' },
+            { name: translatedTitle, item: `/articles/${blogPost.slug}` }
+          ]),
+          getArticleSchema({
+            title: translatedTitle,
+            description: blogPost.excerpt,
+            url: `https://pgtglobalnetwork.com/articles/${blogPost.slug}`,
+            imageUrl: blogPost.image,
+            datePublished: blogPost.date,
+            authorName: blogPost.author
+          })
+        ]}
+      />
       {/* Hero Section */}
       <AnimatedCard animation="fadeIn">
         <section className="relative overflow-hidden py-16 sm:py-24 border-b border-border bg-background transition-colors duration-300">
