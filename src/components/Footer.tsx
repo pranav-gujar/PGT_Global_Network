@@ -191,7 +191,15 @@ const Footer = () => {
                 © 2026 PGT Global Network. {t('footer.rights')}
               </p>
               <p className="text-slate-500 text-xs font-medium text-center md:text-right">
-                Designed & Developed with <span className="text-red-500">❤️</span> by Technical Team.
+                Designed & Engineered by{' '}
+                <a
+                  href="https://technologies.pgtglobalnetwork.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-slate-300 transition-colors"
+                >
+                  PGT Technologies
+                </a>
               </p>
             </div>
           </div>
