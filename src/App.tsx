@@ -12,6 +12,8 @@ import AnimatedBackground from './components/AnimatedBackground';
 import LoadingSpinner from './components/LoadingSpinner';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
+import CookieConsent from './components/CookieConsent';
+import PgtAssistant from './components/PgtAssistant';
 import Home from './pages/Home';
 import About from './pages/About';
 import Programs from './pages/Programs';
@@ -92,6 +94,7 @@ const AppContent = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/cookies" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             
             {/* Auth routes */}
@@ -113,6 +116,8 @@ const AppContent = () => {
       </main>
       {!isAuthPage && <Footer />}
       {!isAuthPage && <ScrollToTop />}
+      <CookieConsent />
+      <PgtAssistant />
       <Toaster 
         position="top-right"
         toastOptions={{
