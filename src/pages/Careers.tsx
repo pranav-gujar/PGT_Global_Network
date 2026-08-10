@@ -401,7 +401,7 @@ const Careers = () => {
               
               {/* Header */}
               <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4 tracking-tight">
-                {t('common.explore').replace(/\[.*?\]\s*/g, '') === 'common.explore' ? 'Mentorship Programs' : t('common.explore')}
+                {getTranslation("careers.mentorshipTitle", "Explore Mentorship Program")}
               </h2>
 
               {/* Intro */}

@@ -11,6 +11,7 @@ import {
   RotateCcw,
   Send,
   ChevronRight,
+  ChevronDown,
   Home
 } from 'lucide-react';
 import { assistantEngine, EngineResponse } from '../lib/ai/assistantEngine';
@@ -22,17 +23,20 @@ export interface ChatMessage {
   sender: 'user' | 'assistant';
   userText?: string;
   response?: EngineResponse;
+  timestamp?: string;
 }
 
 export const PgtAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [entranceState, setEntranceState] = useState<EntranceState>('hidden');
   const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [showScrollBottomBtn, setShowScrollBottomBtn] = useState<boolean>(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: 'msg-init',
       sender: 'assistant',
-      response: assistantEngine.getMainMenu(new Date())
+      response: assistantEngine.getMainMenu(new Date()),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [inputText, setInputText] = useState<string>('');
@@ -41,20 +45,18 @@ export const PgtAssistant: React.FC = () => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
   // ── Entrance animation sequence synchronized to trigger right AFTER site preloader finishes (~650ms) ──
   useEffect(() => {
-    // 1. Hide launcher while site preloader overlay is active (0ms to 650ms)
     setEntranceState('hidden');
 
-    // 2. Trigger elastic spring pop entrance animation as page content becomes visible (650ms)
     const entranceTimer = setTimeout(() => {
       setEntranceState('entering');
     }, 650);
 
-    // 3. Transition smoothly into continuous idle float bobbing after entrance completes (650ms + 850ms = 1500ms)
     const idleTimer = setTimeout(() => {
       setEntranceState('idle');
     }, 1500);
@@ -89,25 +91,41 @@ export const PgtAssistant: React.FC = () => {
     };
   }, [isOpen]);
 
-  // ── Smooth scroll positioning logic ──────────────────────────────────────
-  const scrollToBottom = () => {
-    if (chatScrollRef.current) {
-      chatScrollRef.current.scrollTo({
-        top: chatScrollRef.current.scrollHeight,
-        behavior: 'smooth'
-      });
+  // ── Smooth WhatsApp Auto-Scroll to Bottom Logic ─────────────────────────────
+  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior, block: 'end' });
+    } else if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
     }
   };
 
+  const handleScroll = () => {
+    if (!chatScrollRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = chatScrollRef.current;
+    const distanceFromBottom = scrollHeight - (scrollTop + clientHeight);
+    setShowScrollBottomBtn(distanceFromBottom > 80);
+  };
+
   useEffect(() => {
-    if (chatScrollRef.current) {
-      if (messages.length <= 1 && !isTyping) {
-        chatScrollRef.current.scrollTop = 0;
-      } else {
-        scrollToBottom();
-      }
-    }
+    if (!isOpen) return;
+
+    // Single RAF post-paint trigger ensures smooth scroll without stutter
+    const rafId = requestAnimationFrame(() => {
+      scrollToBottom('smooth');
+    });
+
+    const timer = setTimeout(() => {
+      scrollToBottom('smooth');
+    }, 120);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(timer);
+    };
   }, [messages, isTyping, isOpen]);
+
+
 
   const handleToggleOpen = () => {
     setIsOpen(!isOpen);
@@ -115,10 +133,12 @@ export const PgtAssistant: React.FC = () => {
 
   // ── WhatsApp-style typing indicator flow for user actions ───────────────
   const pushMessageWithTyping = (userText: string, botResponseGetter: () => EngineResponse) => {
+    const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
       sender: 'user',
-      userText
+      userText,
+      timestamp: nowStr
     };
 
     setMessages(prev => [...prev, userMsg]);
@@ -129,12 +149,18 @@ export const PgtAssistant: React.FC = () => {
       const botMsg: ChatMessage = {
         id: `bot-${Date.now()}`,
         sender: 'assistant',
-        response: botResponse
+        response: botResponse,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
-      setIsTyping(false);
+      
+      // Append bot message first while typing indicator is present so there is no layout snap
       setMessages(prev => [...prev, botMsg]);
-    }, 450);
+      setTimeout(() => {
+        setIsTyping(false);
+      }, 150);
+    }, 1300);
   };
+
 
   const handleSelectCategory = (categoryId: string, categoryLabel: string) => {
     pushMessageWithTyping(`Selected: ${categoryLabel}`, () => assistantEngine.getSubMenu(categoryId));
@@ -229,7 +255,7 @@ export const PgtAssistant: React.FC = () => {
             </div>
           </div>
 
-          {/* Online Status Ring Indicator (Unclipped, attached to floating button unit) */}
+          {/* Online Status Ring Indicator */}
           {!isOpen && (
             <span className="absolute -top-1 -right-1 z-10 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-500 rounded-full border-2 border-slate-900 animate-pulse shadow-md pointer-events-none" />
           )}
@@ -262,13 +288,17 @@ export const PgtAssistant: React.FC = () => {
               <h2 className="font-bold text-xs sm:text-sm text-white truncate leading-tight">
                 PGT Assistant
               </h2>
-              <p className="text-[10px] text-slate-400 truncate leading-tight font-medium">
-                AI Concierge
+              <p className="text-[10px] text-slate-400 truncate leading-tight font-medium flex items-center gap-1.5">
+                <span>AI Concierge</span>
+                <span className="inline-flex items-center gap-1 text-emerald-400 font-semibold ml-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Active Now
+                </span>
               </p>
             </div>
           </div>
 
-          {/* Minimalist Home Header Button (Clean, Hover Zoom Micro-Interaction, Native Tooltip) */}
+          {/* Home Header Button */}
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={handleResetMainMenu}
@@ -281,45 +311,62 @@ export const PgtAssistant: React.FC = () => {
           </div>
         </div>
 
-        {/* Content Area - Scrollable Chat History Message Stream */}
-        <div ref={chatScrollRef} className="flex-1 p-4 overflow-y-auto space-y-4 text-xs sm:text-sm">
+        {/* Content Area - Scrollable Chat History Stream */}
+        <div
+          ref={chatScrollRef}
+          onScroll={handleScroll}
+          className="flex-1 p-4 overflow-y-auto space-y-4 text-xs sm:text-sm relative smooth-chat-scroll"
+        >
           {messages.map((msg) => (
             <div key={msg.id} className="space-y-3">
-              {/* 1. USER MESSAGE BUBBLE */}
+              {/* 1. USER MESSAGE BUBBLE WITH SPRING POP ANIMATION */}
               {msg.sender === 'user' && (
-                <div className="flex justify-end animate-msg-user">
+                <div className="flex flex-col items-end animate-msg-user">
                   <div className="bg-indigo-600 text-white rounded-2xl rounded-tr-xs px-3.5 py-2 text-xs font-medium max-w-[85%] shadow-md">
                     {msg.userText}
                   </div>
+                  {msg.timestamp && (
+                    <span className="text-[9px] text-slate-400/80 mt-1 px-1 font-mono">
+                      {msg.timestamp}
+                    </span>
+                  )}
                 </div>
               )}
 
-              {/* 2. ASSISTANT MESSAGE CARD */}
+              {/* 2. ASSISTANT MESSAGE CARD WITH SPRING ENTRANCE */}
               {msg.sender === 'assistant' && msg.response && (
                 <div className="flex flex-col items-start space-y-2 animate-msg-bot w-full">
                   {/* Main Response Box */}
                   <div className="w-full bg-gradient-to-br from-indigo-950/40 via-slate-800/60 to-slate-900 border border-indigo-500/20 rounded-2xl p-3.5 space-y-2 shadow-inner">
-                    <div className="flex items-center gap-2 text-indigo-300 font-bold text-xs sm:text-sm">
-                      <Sparkles className="w-4 h-4 text-indigo-400 shrink-0 animate-pulse" />
-                      <span>{msg.response.title}</span>
+                    <div className="flex items-center justify-between gap-2 text-indigo-300 font-bold text-xs sm:text-sm">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-indigo-400 shrink-0 animate-pulse" />
+                        <span>{msg.response.title}</span>
+                      </div>
+                      {msg.timestamp && (
+                        <span className="text-[9px] text-slate-400/70 font-mono font-normal">
+                          {msg.timestamp}
+                        </span>
+                      )}
                     </div>
                     <p className="text-slate-200 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
                       {msg.response.text}
                     </p>
                   </div>
 
-                  {/* MAIN MENU CATEGORIES */}
+                  {/* MAIN MENU CATEGORIES - STAGGERED ENTRANCE */}
                   {msg.response.type === 'main_menu' && msg.response.categories && (
                     <div className="w-full space-y-2 pt-1">
                       <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider px-1">
                         Select Category
                       </p>
                       <div className="grid grid-cols-1 gap-2">
-                        {msg.response.categories.map(cat => (
+                        {msg.response.categories.map((cat, idx) => (
                           <button
                             key={cat.id}
                             onClick={() => handleSelectCategory(cat.id, cat.label)}
-                            className="w-full text-left p-2.5 rounded-xl bg-slate-800/40 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between gap-2.5 group active:scale-[0.99]"
+                            style={{ animationDelay: `${idx * 45}ms` }}
+                            className="w-full text-left p-2.5 rounded-xl bg-slate-800/40 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between gap-2.5 group active:scale-[0.99] animate-msg-option"
                           >
                             <div className="flex items-center gap-2.5 min-w-0">
                               <div className="p-1.5 rounded-lg bg-slate-900 border border-slate-800 shrink-0">
@@ -341,7 +388,7 @@ export const PgtAssistant: React.FC = () => {
                     </div>
                   )}
 
-                  {/* SUB-MENU ITEMS */}
+                  {/* SUB-MENU ITEMS - STAGGERED ENTRANCE */}
                   {msg.response.type === 'sub_menu' && msg.response.subItems && (
                     <div className="w-full space-y-2 pt-1">
                       <div className="flex items-center justify-between px-1">
@@ -357,11 +404,12 @@ export const PgtAssistant: React.FC = () => {
                         </button>
                       </div>
                       <div className="space-y-2">
-                        {msg.response.subItems.map(item => (
+                        {msg.response.subItems.map((item, idx) => (
                           <button
                             key={item.id}
                             onClick={() => handleSelectSubItem(item.knowledgeKey, item.label)}
-                            className="w-full text-left p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between gap-3 group active:scale-[0.99]"
+                            style={{ animationDelay: `${idx * 45}ms` }}
+                            className="w-full text-left p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 transition-all flex items-center justify-between gap-3 group active:scale-[0.99] animate-msg-option"
                           >
                             <div className="min-w-0">
                               <h4 className="font-semibold text-xs text-white group-hover:text-indigo-300 transition-colors truncate">
@@ -385,7 +433,7 @@ export const PgtAssistant: React.FC = () => {
                         {msg.response.primaryAction && (
                           <button
                             onClick={() => handleNavigate(msg.response!.primaryAction!.pageUrl)}
-                            className="flex-1 px-3 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-md shadow-indigo-500/20 active:scale-95 text-center flex items-center justify-center gap-1.5"
+                            className="flex-1 px-3 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-md shadow-indigo-500/20 active:scale-95 text-center flex items-center justify-center gap-1.5 animate-msg-option"
                           >
                             <span>{msg.response.primaryAction.label}</span>
                           </button>
@@ -393,7 +441,7 @@ export const PgtAssistant: React.FC = () => {
                         {msg.response.secondaryAction && (
                           <button
                             onClick={() => handleNavigate(msg.response!.secondaryAction!.pageUrl)}
-                            className="flex-1 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-xl transition-all border border-slate-700/60 active:scale-95 text-center flex items-center justify-center gap-1.5"
+                            className="flex-1 px-3 py-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-xl transition-all border border-slate-700/60 active:scale-95 text-center flex items-center justify-center gap-1.5 animate-msg-option"
                           >
                             <span>{msg.response.secondaryAction.label}</span>
                           </button>
@@ -402,7 +450,7 @@ export const PgtAssistant: React.FC = () => {
 
                       <button
                         onClick={handleResetMainMenu}
-                        className="w-full py-2 px-3 rounded-xl bg-slate-800/40 hover:bg-slate-800 text-xs font-medium text-slate-400 hover:text-indigo-300 border border-slate-800 transition-colors flex items-center justify-center gap-1.5"
+                        className="w-full py-2 px-3 rounded-xl bg-slate-800/40 hover:bg-slate-800 text-xs font-medium text-slate-400 hover:text-indigo-300 border border-slate-800 transition-colors flex items-center justify-center gap-1.5 animate-msg-option"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
                         <span>Return to Main Menu</span>
@@ -414,9 +462,9 @@ export const PgtAssistant: React.FC = () => {
             </div>
           ))}
 
-          {/* WhatsApp-Style Typing Indicator */}
+          {/* WhatsApp-Style Typing Indicator with Smooth Bubble Entrance */}
           {isTyping && (
-            <div className="flex items-center gap-2 animate-msg-bot pt-1">
+            <div className="flex items-center gap-2 animate-typing-bubble pt-1">
               <div className="w-7 h-7 rounded-xl bg-slate-800 border border-slate-700/60 p-1 flex items-center justify-center shrink-0 shadow-inner">
                 {!imgError ? (
                   <img src="/PGT AI.png" alt="PGT AI" className="w-full h-full object-contain" />
@@ -428,10 +476,25 @@ export const PgtAssistant: React.FC = () => {
                 <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-typing-dot-1" />
                 <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-typing-dot-2" />
                 <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-typing-dot-3" />
+                <span className="text-[10px] text-indigo-300/80 ml-1 font-medium italic">PGT Assistant is typing...</span>
               </div>
             </div>
           )}
+
+          {/* WhatsApp Floating Scroll to Bottom Button */}
+          {showScrollBottomBtn && (
+            <button
+              onClick={() => scrollToBottom('smooth')}
+              aria-label="Scroll to bottom"
+              className="sticky bottom-2 left-full -translate-x-2 z-20 p-2 rounded-full bg-indigo-600/90 hover:bg-indigo-500 text-white shadow-xl border border-indigo-400/30 transition-all duration-200 animate-scroll-pill group flex items-center justify-center backdrop-blur-sm"
+            >
+              <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </button>
+          )}
+
+          <div ref={messagesEndRef} />
         </div>
+
 
         {/* Footer Freeform Text Input */}
         <form
@@ -460,4 +523,5 @@ export const PgtAssistant: React.FC = () => {
 };
 
 export default PgtAssistant;
+
 
