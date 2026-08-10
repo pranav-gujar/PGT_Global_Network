@@ -166,12 +166,22 @@ export const MENU_CATEGORIES: MenuCategory[] = [
 ];
 
 export const assistantEngine = {
+  /** Helper to get dynamic greeting based on local device time */
+  getGreetingTitle(date: Date = new Date()): string {
+    const hour = date.getHours();
+    if (hour >= 4 && hour < 12) return 'Good morning! ☀️';
+    if (hour >= 12 && hour < 17) return 'Good afternoon! 🌤️';
+    if (hour >= 17 && hour < 22) return 'Good evening! 🌙';
+    return 'Good night! 🌌';
+  },
+
   /** Returns the main menu state */
-  getMainMenu(): EngineResponse {
+  getMainMenu(customDate?: Date): EngineResponse {
+    const greetingTitle = this.getGreetingTitle(customDate || new Date());
     return {
       type: 'main_menu',
-      title: 'How can I assist you today?',
-      text: 'Select a category below or type your inquiry to explore PGT Global Network solutions, programs, and services:',
+      title: greetingTitle,
+      text: '👋 Hello! How can I assist you today?\n\nSelect a category below or type your inquiry to explore PGT Global Network solutions, programs, and services:',
       categories: MENU_CATEGORIES
     };
   },
@@ -222,26 +232,34 @@ export const assistantEngine = {
     };
   },
 
-  /** Hybrid text matching against knowledge base & menu nodes */
+  /** Text inquiry matching against knowledge base & menu nodes */
   query(text: string): EngineResponse {
     const raw = text.trim().toLowerCase();
     if (!raw) return this.getMainMenu();
 
-    // Check for unsupported service keywords
+    // 1. Direct handling for common greetings (hi, hello, hey, good morning, etc.)
+    const commonGreetings = ['hi', 'hello', 'hey', 'greetings', 'hallo', 'good morning', 'good afternoon', 'good evening', 'good night', 'howdy', 'namaste', 'start', 'help', 'menu'];
+    if (commonGreetings.includes(raw) || commonGreetings.some(g => raw.startsWith(`${g} `) || raw.endsWith(` ${g}`))) {
+      return this.getMainMenu();
+    }
+
+    // 2. Check for unsupported service keywords
     const unsupportedKeywords = ['loan', 'cash', 'crypto', 'bitcoin', 'gamble', 'betting', 'weapon', 'medical', 'surgery'];
     if (unsupportedKeywords.some(k => raw.includes(k))) {
       return this.getAnswer('unsupported');
     }
 
-    // Direct match against category labels/ids
-    const categoryMatch = MENU_CATEGORIES.find(c =>
-      c.id === raw || c.label.toLowerCase().includes(raw) || raw.includes(c.id)
-    );
+    // 3. Direct match against category labels, IDs, or common section keywords
+    const categoryMatch = MENU_CATEGORIES.find(c => {
+      const cLabel = c.label.toLowerCase();
+      return c.id === raw || cLabel === raw || raw.includes(c.id) || (raw.length >= 4 && cLabel.includes(raw));
+    });
     if (categoryMatch) {
       return this.getSubMenu(categoryMatch.id);
     }
 
-    // Fuzzy search knowledge base items
+    // 4. Exact and intelligent word matching against Knowledge Base items
+    const queryWords = raw.split(/\s+/).filter(w => w.length > 1);
     const knowledgeKeys = Object.keys(PGT_KNOWLEDGE_BASE);
     let bestKey: string | null = null;
     let maxScore = 0;
@@ -250,12 +268,27 @@ export const assistantEngine = {
       const item = PGT_KNOWLEDGE_BASE[key];
       let score = 0;
 
-      if (raw.includes(item.id)) score += 10;
-      if (item.title.toLowerCase().includes(raw)) score += 8;
+      // Exact ID match
+      if (raw === item.id || queryWords.includes(item.id)) {
+        score += 15;
+      }
 
+      // Title match
+      const itemTitleLower = item.title.toLowerCase();
+      if (raw === itemTitleLower || itemTitleLower.includes(raw)) {
+        score += 10;
+      }
+
+      // Keyword matching
       for (const kw of item.keywords) {
-        if (raw.includes(kw) || kw.includes(raw)) {
-          score += 5;
+        const kwLower = kw.toLowerCase();
+        // Exact keyword match
+        if (raw === kwLower || queryWords.includes(kwLower)) {
+          score += 8;
+        } 
+        // Phrase match (only for query words >= 4 chars)
+        else if (raw.length >= 4 && kwLower.length >= 4 && (raw.includes(kwLower) || kwLower.includes(raw))) {
+          score += 4;
         }
       }
 
@@ -265,7 +298,8 @@ export const assistantEngine = {
       }
     }
 
-    if (bestKey && maxScore >= 4) {
+    // Return answer if confidence score threshold is met (score >= 8)
+    if (bestKey && maxScore >= 8) {
       return this.getAnswer(bestKey);
     }
 
@@ -273,7 +307,7 @@ export const assistantEngine = {
     return {
       type: 'main_menu',
       title: 'Explore PGT Global Network',
-      text: `I couldn't find an exact match for "${text}". Please choose from the main categories below:`,
+      text: `I couldn't find an exact match for "${text}". Please choose from the main categories below or ask another question:`,
       categories: MENU_CATEGORIES
     };
   }

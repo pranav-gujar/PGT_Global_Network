@@ -27,12 +27,13 @@ const ScrollToTop: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-5 right-[4.75rem] sm:bottom-6 sm:right-20 z-40 p-3 bg-indigo-600/90 hover:bg-indigo-600 text-white rounded-xl border border-indigo-500/30 backdrop-blur-md shadow-lg shadow-indigo-600/10 hover:shadow-indigo-500/25 transition-all duration-300 transform active:scale-95 group ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
-      }`}
       aria-label="Scroll to top"
+      title="Scroll to top"
+      className={`fixed bottom-4 right-[68px] sm:bottom-6 sm:right-[88px] z-40 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-slate-900/95 backdrop-blur-md border border-indigo-500/30 shadow-2xl flex items-center justify-center text-indigo-400 hover:text-indigo-300 hover:border-indigo-400/50 hover:bg-slate-800/90 transition-all duration-300 transform hover:scale-110 active:scale-95 group ${
+        isVisible ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-16 opacity-0 pointer-events-none'
+      }`}
     >
-      <ChevronUp className="h-5 w-5 transform group-hover:-translate-y-0.5 transition-transform duration-300" />
+      <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:-translate-y-0.5 transition-transform duration-300" />
     </button>
   );
 };
