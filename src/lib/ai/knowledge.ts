@@ -126,7 +126,7 @@ export const PGT_KNOWLEDGE_BASE: Record<string, KnowledgeItem> = {
     category: 'venture',
     title: 'PGT Technologies',
     summary: 'The technology and innovation division developing web solutions, software, AI apps, and automation systems.',
-    details: 'Motto: "Future Engineered". Launching August 2026. Builds modern web applications, AI-powered automation, digital platforms, and software services for enterprise impact.',
+    details: 'Motto: "Future Engineered". Founded 15 August 2026. Builds modern web applications, AI-powered automation, digital platforms, and software services for enterprise impact.',
     businessOutcomes: [
       'Custom web & mobile app engineering',
       'AI & automation workflow deployment',

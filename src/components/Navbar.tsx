@@ -99,6 +99,14 @@ const Navbar = () => {
       }`}>
         <div className="w-full flex items-center text-[10px] sm:text-xs font-semibold text-slate-600 dark:text-slate-450">
           <div className="flex space-x-12 animate-marquee hover:[animation-play-state:paused] cursor-pointer">
+            <a
+              href="https://technologies.pgtglobalnetwork.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1 font-semibold text-blue-600 dark:text-blue-400"
+            >
+              ⚡ {t('navbar.announcementTech') === 'navbar.announcementTech' ? 'PGT Technologies is Now Live — Explore Solutions! Click here' : t('navbar.announcementTech')} →
+            </a>
             <Link to="/articles" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors inline-flex items-center gap-1">
               📢 {t('navbar.announcementArticle')} →
             </Link>

@@ -35,6 +35,8 @@ interface Venture {
     btnBg: string;         // CTA button background
     btnHover: string;      // CTA button hover background
     btnShadow: string;     // CTA button shadow
+    cardTopBar: string;    // Top accent bar gradient identifying venture primary logo theme
+    ambientGlow: string;   // Ambient background glow tint identifying venture primary logo theme
   };
 }
 
@@ -54,16 +56,18 @@ const VENTURES: Venture[] = [
     websiteUrl: "https://publications.pgtglobalnetwork.com",
     logo: "/ventures/pgt-publications-logo.png",
     theme: {
-      accent: "text-violet-600 dark:text-violet-400",
-      glowFrom: "from-violet-500/10",
-      glowBorder: "group-hover:border-violet-400/35",
+      accent: "text-orange-600 dark:text-orange-400",
+      glowFrom: "from-orange-500/15",
+      glowBorder: "group-hover:border-orange-500/40 dark:group-hover:border-orange-500/50",
       badgeBg: "bg-emerald-50/15 dark:bg-emerald-950/20 border-emerald-300/25",
       badgeText: "text-emerald-700 dark:text-emerald-400",
       logoBg: "bg-white dark:bg-slate-900/60",
-      logoBorder: "border-violet-200/30 dark:border-violet-700/30",
-      btnBg: "bg-violet-600 hover:bg-violet-700",
-      btnHover: "hover:shadow-violet-500/20",
-      btnShadow: "shadow-violet-500/10",
+      logoBorder: "border-orange-200/50 dark:border-orange-700/50 shadow-orange-500/10",
+      btnBg: "bg-orange-600 hover:bg-orange-700",
+      btnHover: "hover:shadow-orange-500/25",
+      btnShadow: "shadow-orange-500/15",
+      cardTopBar: "bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400",
+      ambientGlow: "bg-orange-500/5 dark:bg-orange-500/10",
     },
   },
   {
@@ -72,23 +76,25 @@ const VENTURES: Venture[] = [
     motto: "Future Engineered",
     description:
       "PGT Technologies is the technology and innovation division of PGT Global Network. It develops modern digital solutions including websites, software, AI-powered applications, automation systems, and technology services for organizations, businesses, and communities while building products that create meaningful real-world impact.",
-    status: "Launching Soon",
-    foundedLabel: "Launching",
+    status: "Active",
+    foundedLabel: "Founded",
     foundedDate: "15 August 2026",
     websiteDisplay: "technologies.pgtglobalnetwork.com",
     websiteUrl: "https://technologies.pgtglobalnetwork.com",
     logo: "/ventures/pgt-technologies-logo.png",
     theme: {
       accent: "text-blue-600 dark:text-blue-400",
-      glowFrom: "from-blue-500/10",
-      glowBorder: "group-hover:border-blue-400/35",
-      badgeBg: "bg-amber-50/15 dark:bg-amber-950/20 border-amber-300/25",
-      badgeText: "text-amber-700 dark:text-amber-400",
+      glowFrom: "from-blue-500/15",
+      glowBorder: "group-hover:border-blue-500/40 dark:group-hover:border-blue-500/50",
+      badgeBg: "bg-emerald-50/15 dark:bg-emerald-950/20 border-emerald-300/25",
+      badgeText: "text-emerald-700 dark:text-emerald-400",
       logoBg: "bg-white dark:bg-slate-900/60",
-      logoBorder: "border-blue-200/30 dark:border-blue-700/30",
+      logoBorder: "border-blue-200/50 dark:border-blue-700/50 shadow-blue-500/10",
       btnBg: "bg-blue-600 hover:bg-blue-700",
-      btnHover: "hover:shadow-blue-500/20",
-      btnShadow: "shadow-blue-500/10",
+      btnHover: "hover:shadow-blue-500/25",
+      btnShadow: "shadow-blue-500/15",
+      cardTopBar: "bg-gradient-to-r from-blue-600 via-sky-500 to-blue-500",
+      ambientGlow: "bg-blue-500/5 dark:bg-blue-500/10",
     },
   },
 ];
@@ -118,6 +124,12 @@ const VentureCard: React.FC<VentureCardProps> = ({ venture, index }) => {
       <article
         className={`relative overflow-hidden bg-card border border-border rounded-3xl shadow-xl shadow-slate-950/8 dark:shadow-none transition-all duration-400 group ${venture.theme.glowBorder}`}
       >
+        {/* Venture Brand Primary Top Accent Line */}
+        <div className={`h-1.5 w-full ${venture.theme.cardTopBar}`} />
+
+        {/* Ambient background brand tint blur */}
+        <div className={`absolute top-0 right-0 w-96 h-96 ${venture.theme.ambientGlow} rounded-full blur-3xl pointer-events-none transition-opacity duration-500 group-hover:opacity-100 opacity-60`} />
+
         {/* Hover radial glow */}
         <div
           className={`absolute -inset-[1px] bg-gradient-to-br ${venture.theme.glowFrom} to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
