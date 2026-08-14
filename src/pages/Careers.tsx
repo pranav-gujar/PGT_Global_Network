@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Clock, Users, ArrowRight, ExternalLink, Check } from "lucide-react";
+import { MapPin, Clock, Users, ArrowRight, ExternalLink, Check, BookOpen, Award, Briefcase, Target, GraduationCap, Sparkles } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ProtectedAction from "../components/ProtectedAction";
 import AnimatedCard from "../components/AnimatedCard";
@@ -387,82 +387,236 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* Mentorship Programs */}
-      <section className="relative py-24 bg-slate-950 overflow-hidden border-b border-white/[0.04] z-10">
-        <Background />
-        
-        {/* Spotlight glowing gradients */}
-        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full bg-indigo-500/10 blur-[130px] pointer-events-none"></div>
+      {/* Mentorship & Internship Programs */}
+      <section className="relative py-16 sm:py-24 bg-card/30 border-b border-border overflow-hidden z-10 transition-colors duration-300">
+        {/* Subtle background glow tint */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedCard animation="fadeIn">
-            <div className="bg-card border border-border shadow-2xl shadow-slate-950/10 dark:shadow-none p-8 md:p-12 text-center group cursor-pointer relative overflow-hidden rounded-3xl backdrop-blur-md">
-              <div className="absolute -inset-[1px] bg-gradient-to-br from-indigo-500/[0.04] to-transparent rounded-3xl pointer-events-none" />
-              
-              {/* Header */}
-              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4 tracking-tight">
-                {getTranslation("careers.mentorshipTitle", "Explore Mentorship Program")}
+          <AnimatedCard animation="slideUp">
+            <div className="text-center mb-12 sm:mb-16">
+              <span className="inline-flex items-center gap-1.5 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-800/40 px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-3.5 font-mono shadow-sm">
+                <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                GROWTH & OPPORTUNITIES
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-foreground mt-1 mb-3 sm:mb-4 tracking-tight font-sans">
+                Mentorship & Internship Programs
               </h2>
-
-              {/* Intro */}
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
-                Structured mentorship designed to support learners from <span className="font-bold text-indigo-600 dark:text-indigo-400">any educational background</span>,
-                helping them gain clarity, confidence, and real-world skills.
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-normal px-2">
+                Empowering students and emerging professionals through structured learning, hands-on experience, and real-world opportunities.
               </p>
+            </div>
+          </AnimatedCard>
 
-              {/* Structured Grid for Key Info */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 text-left relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
+            {/* Mentorship Program Card */}
+            <AnimatedCard animation="fadeIn">
+              <div className="bg-card border border-border rounded-2xl sm:rounded-3xl shadow-xl shadow-slate-950/5 dark:shadow-none hover:border-indigo-500/30 hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between h-full">
+                {/* Top Accent Gradient Bar */}
+                <div className="h-1.5 w-full bg-gradient-to-r from-indigo-600 via-indigo-500 to-blue-600" />
                 
-                {/* Card 1: Domain Scope */}
-                <div className="bg-muted/40 p-6 rounded-2xl border border-border hover:border-indigo-500/20 hover:bg-card hover:-translate-y-1 transform transition-all duration-300">
-                  <h3 className="font-bold text-foreground text-lg mb-2">150+ Specialized Domains</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-normal">
-                    Spanning <strong>11+ broad categories</strong> including technology, engineering, design, business, content, and social impact.
-                  </p>
-                </div>
+                {/* Ambient glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none group-hover:opacity-100 opacity-40 transition-opacity duration-500" />
 
-                {/* Card 2: Eligibility */}
-                <div className="bg-muted/40 p-6 rounded-2xl border border-border hover:border-indigo-500/20 hover:bg-card hover:-translate-y-1 transform transition-all duration-300">
-                  <h3 className="font-bold text-foreground text-lg mb-2">Open to All Streams</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-normal">
-                    Designed for students of <strong>all branches and degrees</strong>. Focuses on guided learning, hands-on practice, and mentor-led growth.
-                  </p>
-                </div>
+                <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-between flex-grow">
+                  <div>
+                    {/* Badge row */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-5 sm:mb-6">
+                      <span className="inline-flex items-center gap-1.5 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-700 dark:text-indigo-400 text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-indigo-200/40 dark:border-indigo-800/40">
+                        <GraduationCap className="h-3.5 w-3.5" />
+                        Mentorship Program
+                      </span>
+                      <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">PGT Learning</span>
+                    </div>
 
-                {/* Card 3: Certification */}
-                <div className="bg-muted/40 p-6 rounded-2xl border border-border hover:border-indigo-500/20 hover:bg-card hover:-translate-y-1 transform transition-all duration-300">
-                  <h3 className="font-bold text-foreground text-lg mb-2">Verified Certification</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-normal">
-                    Earn an official certificate of completion and verified performance badges from PGT Global Network.
-                  </p>
+                    {/* Header */}
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-foreground mb-2.5 sm:mb-3 tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
+                      {getTranslation("careers.mentorshipTitle", "Explore Mentorship Program")}
+                    </h3>
+
+                    {/* Intro */}
+                    <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 font-normal">
+                      Structured mentorship designed to support learners from <span className="font-semibold text-indigo-600 dark:text-indigo-400">any educational background</span>,
+                      helping them gain clarity, confidence, and real-world skills.
+                    </p>
+
+                    {/* Feature Items List */}
+                    <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                      
+                      {/* Feature 1 */}
+                      <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/40 border border-border/60 hover:bg-muted/70 hover:border-indigo-500/20 transition-all duration-300">
+                        <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-200/30 dark:border-indigo-800/30 flex-shrink-0 mt-0.5">
+                          <BookOpen className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-xs sm:text-sm mb-0.5 sm:mb-1">150+ Specialized Domains</h4>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed font-normal">
+                            Spanning <strong>11+ broad categories</strong> including technology, engineering, design, business, content, and social impact.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Feature 2 */}
+                      <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/40 border border-border/60 hover:bg-muted/70 hover:border-indigo-500/20 transition-all duration-300">
+                        <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-200/30 dark:border-indigo-800/30 flex-shrink-0 mt-0.5">
+                          <Users className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-xs sm:text-sm mb-0.5 sm:mb-1">Open to All Streams</h4>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed font-normal">
+                            Designed for students of <strong>all branches and degrees</strong>. Focuses on guided learning, hands-on practice, and mentor-led growth.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Feature 3 */}
+                      <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/40 border border-border/60 hover:bg-muted/70 hover:border-indigo-500/20 transition-all duration-300">
+                        <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-200/30 dark:border-indigo-800/30 flex-shrink-0 mt-0.5">
+                          <Award className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-xs sm:text-sm mb-0.5 sm:mb-1">Verified Certification</h4>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed font-normal">
+                            Earn an official certificate of completion and verified performance badges from PGT Global Network.
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="pt-2 relative z-10">
+                    {user ? (
+                      <a
+                        href="https://mentorship.pgtglobalnetwork.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-indigo-600 via-indigo-600 to-blue-600 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.01] transition-all duration-300 inline-flex items-center justify-center gap-2"
+                      >
+                        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
+                        Explore Mentorship
+                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => navigate(`/signin?redirect=${encodeURIComponent(location.pathname + location.search)}`)}
+                        className="w-full bg-muted/80 border border-border text-foreground hover:bg-muted hover:border-indigo-500/30 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 shadow-sm cursor-pointer"
+                      >
+                        Sign in to Apply
+                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
 
               </div>
+            </AnimatedCard>
 
-              {/* CTA Button */}
-              {user ? (
-                <a
-                  href="https://mentorship.pgtglobalnetwork.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/btn relative overflow-hidden bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-3.5 rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
-                >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
-                  Explore Mentorship
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              ) : (
-                <button
-                  onClick={() => navigate(`/signin?redirect=${encodeURIComponent(location.pathname + location.search)}`)}
-                  className="w-full sm:w-auto bg-muted border border-border text-muted-foreground hover:bg-muted/80 px-8 py-3.5 rounded-xl font-semibold text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer"
-                >
-                  Sign in to Apply
-                  <ExternalLink className="h-4 w-4" />
-                </button>
-              )}
+            {/* Internship Program Card */}
+            <AnimatedCard animation="fadeIn" delay={150}>
+              <div className="bg-card border border-border rounded-2xl sm:rounded-3xl shadow-xl shadow-slate-950/5 dark:shadow-none hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between h-full">
+                {/* Top Accent Gradient Bar */}
+                <div className="h-1.5 w-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600" />
+                
+                {/* Ambient glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none group-hover:opacity-100 opacity-40 transition-opacity duration-500" />
 
-            </div>
-          </AnimatedCard>
+                <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-between flex-grow">
+                  <div>
+                    {/* Badge row */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-5 sm:mb-6">
+                      <span className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-blue-200/40 dark:border-blue-800/40">
+                        <Briefcase className="h-3.5 w-3.5" />
+                        Internship Program
+                      </span>
+                      <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">PGT Careers</span>
+                    </div>
+
+                    {/* Header */}
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-foreground mb-2.5 sm:mb-3 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                      {getTranslation("careers.internshipTitle", "Explore Internship Program")}
+                    </h3>
+
+                    {/* Intro */}
+                    <p className="text-muted-foreground text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 font-normal">
+                      Gain practical experience, work on real-world projects, and collaborate with PGT Global Network teams to <span className="font-semibold text-blue-600 dark:text-blue-400">accelerate your career</span>.
+                    </p>
+
+                    {/* Feature Items List */}
+                    <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                      
+                      {/* Feature 1 */}
+                      <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/40 border border-border/60 hover:bg-muted/70 hover:border-blue-500/20 transition-all duration-300">
+                        <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/30 dark:border-blue-800/30 flex-shrink-0 mt-0.5">
+                          <Briefcase className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-xs sm:text-sm mb-0.5 sm:mb-1">Practical Real-World Experience</h4>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed font-normal">
+                            Work directly on <strong>live projects, campaigns, and digital platforms</strong> with global reach and measurable impact.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Feature 2 */}
+                      <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/40 border border-border/60 hover:bg-muted/70 hover:border-blue-500/20 transition-all duration-300">
+                        <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/30 dark:border-blue-800/30 flex-shrink-0 mt-0.5">
+                          <Target className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-xs sm:text-sm mb-0.5 sm:mb-1">Diverse Domain Roles</h4>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed font-normal">
+                            Opportunities across <strong>Tech, Creative Media, Operations, Strategy, PR, and Content Creation</strong>.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Feature 3 */}
+                      <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-muted/40 border border-border/60 hover:bg-muted/70 hover:border-blue-500/20 transition-all duration-300">
+                        <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/30 dark:border-blue-800/30 flex-shrink-0 mt-0.5">
+                          <Award className="h-4 w-4 sm:h-5 sm:w-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-foreground text-xs sm:text-sm mb-0.5 sm:mb-1">Official Credentials & Certification</h4>
+                          <p className="text-muted-foreground text-[11px] sm:text-xs leading-relaxed font-normal">
+                            Receive official <strong>Internship Completion Certificates, recommendation letters</strong>, and performance recognition.
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="pt-2 relative z-10">
+                    {user ? (
+                      <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSftcJxHfGfY29pYBliDi__zniohipKYHq9zggpxKmM4FpsepQ/viewform?usp=dialog"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98] hover:scale-[1.01] transition-all duration-300 inline-flex items-center justify-center gap-2"
+                      >
+                        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
+                        Explore Internship
+                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => navigate(`/signin?redirect=${encodeURIComponent(location.pathname + location.search)}`)}
+                        className="w-full bg-muted/80 border border-border text-foreground hover:bg-muted hover:border-blue-500/30 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 shadow-sm cursor-pointer"
+                      >
+                        Sign in to Apply
+                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+              </div>
+            </AnimatedCard>
+          </div>
         </div>
       </section>
 

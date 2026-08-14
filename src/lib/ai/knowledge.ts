@@ -104,6 +104,21 @@ export const PGT_KNOWLEDGE_BASE: Record<string, KnowledgeItem> = {
     actionLabel: 'View HED Campaign',
     keywords: ['hed', 'happy eco diwali', 'green', 'eco', 'diwali', 'sustainability', 'environment', 'trees']
   },
+  internship: {
+    id: 'internship',
+    category: 'program',
+    title: 'PGT Internship Program',
+    summary: 'A hands-on internship program offering real-world experience, skill development, and verified certification.',
+    details: 'The PGT Internship Program allows students and emerging professionals to work on live projects across technology, creative media, operations, PR, and management, backed by official completion letters.',
+    businessOutcomes: [
+      'Practical hands-on experience on live projects',
+      'Guidance & professional skill development',
+      'Verified certificate & performance credentials'
+    ],
+    pageUrl: '/careers',
+    actionLabel: 'Apply for Internship',
+    keywords: ['internship', 'intern', 'internship program', 'careers', 'work', 'experience', 'apply for internship']
+  },
 
   // Ventures
   publications: {
