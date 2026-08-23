@@ -223,7 +223,7 @@ const ArticleDetail = () => {
               <style>
                 {`
                   .blog-prose h1, .blog-prose h2, .blog-prose h3, .blog-prose h4 {
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: var(--font-sans);
                     font-weight: 800;
                     color: var(--foreground);
                     margin-top: 2.5rem;
@@ -245,7 +245,7 @@ const ArticleDetail = () => {
                     font-size: 3rem;
                     font-weight: 900;
                     color: #6366f1;
-                    font-family: system-ui, -apple-system, sans-serif;
+                    font-family: var(--font-sans);
                     margin-right: 0.08em;
                     line-height: 1;
                   }
@@ -284,7 +284,7 @@ const ArticleDetail = () => {
                     padding: 1.25rem;
                     border-radius: 12px;
                     overflow-x: auto;
-                    font-family: monospace;
+                    font-family: var(--font-mono);
                     font-size: 0.95rem;
                     margin: 2rem 0;
                     border: 1px solid var(--border);
@@ -295,7 +295,7 @@ const ArticleDetail = () => {
                     padding: 0.2rem 0.4rem;
                     border-radius: 6px;
                     font-size: 0.9rem;
-                    font-family: monospace;
+                    font-family: var(--font-mono);
                   }
                   .blog-prose pre code {
                     background-color: transparent;

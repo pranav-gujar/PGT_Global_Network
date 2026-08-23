@@ -4,6 +4,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+      },
       colors: {
         background: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--background-rgb), ${opacityValue})` : `rgb(var(--background-rgb))`,
         foreground: ({ opacityValue }) => opacityValue !== undefined ? `rgba(var(--foreground-rgb), ${opacityValue})` : `rgb(var(--foreground-rgb))`,
