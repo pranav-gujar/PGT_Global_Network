@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, Send, ChevronDown, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
@@ -54,6 +55,9 @@ const Contact = () => {
     }
   ];
 
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
+
   const enquiryCategories = [
     'General Inquiry',
     'Partnership / Collaboration',
@@ -66,6 +70,45 @@ const Contact = () => {
     'Report an Issue',
     'Other'
   ];
+
+  // Pre-fill fields based on query parameters
+  useEffect(() => {
+    const programParam = searchParams.get('program');
+    const typeParam = searchParams.get('type');
+    const categoryParam = searchParams.get('category');
+
+    if (typeParam === 'apply') {
+      setCategory('General Inquiry');
+      if (programParam) {
+        setMessage((prev) => prev || `Hello, I would like to apply and enroll in the ${programParam}.`);
+      } else {
+        setMessage((prev) => prev || 'Hello, I would like to apply and enroll in your programs.');
+      }
+    } else if (typeParam === 'session' || programParam) {
+      setCategory('General Inquiry');
+      if (programParam) {
+        setMessage((prev) => prev || `Hello, I would like to schedule a free session and learn more about ${programParam}.`);
+      } else {
+        setMessage((prev) => prev || 'Hello, I would like to schedule a free session to learn more about your programs.');
+      }
+    } else if (categoryParam && enquiryCategories.includes(categoryParam)) {
+      setCategory(categoryParam);
+    }
+  }, [searchParams]);
+
+  // Smooth scroll to specific section if hash anchor is present in URL
+  useEffect(() => {
+    if (!loading && location.hash) {
+      const scrollTimer = setTimeout(() => {
+        const targetId = location.hash.replace('#', '');
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+      return () => clearTimeout(scrollTimer);
+    }
+  }, [loading, location.hash]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -191,7 +234,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             
             {/* Left Column: Contact Form (1st in markup for mobile-top display) */}
-            <div className="lg:col-span-7 animate-reveal-up" style={{ animationDelay: '200ms' }}>
+            <div id="contact-form" className="lg:col-span-7 animate-reveal-up scroll-mt-32" style={{ animationDelay: '200ms' }}>
               <div className="bg-card border border-border backdrop-blur-md p-8 sm:p-12 rounded-3xl shadow-xl shadow-slate-950/10 dark:shadow-none">
                 {success ? (
                   <div className="text-center py-12 px-6">
@@ -331,7 +374,7 @@ const Contact = () => {
             </div>
 
             {/* Right Column: Contact Methods & Info (2nd in markup for mobile-bottom display) */}
-            <div className="lg:col-span-5 space-y-8 animate-reveal-up" style={{ animationDelay: '400ms' }}>
+            <div id="contact-info" className="lg:col-span-5 space-y-8 animate-reveal-up scroll-mt-32" style={{ animationDelay: '400ms' }}>
               <div>
                 <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase font-mono">Reach out</span>
                 <h2 className="text-3xl font-extrabold text-foreground mt-2 mb-4 tracking-tight">Contact Information</h2>

@@ -539,21 +539,19 @@ const ProgramDetail = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-10">
               {/* Apply Button */}
               <Link
-                to="/contact"
+                to={`/contact?program=${encodeURIComponent(program?.name || programId || '')}&type=apply#contact-form`}
                 className="w-48 bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 hover:shadow-indigo-700/35 px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center"
               >
                 {t('careers.apply')}
               </Link>
 
               {/* Free Session Button */}
-              <a
-                href="https://topmate.io/pranav_gujar/1355631?utm_source=public_profile&utm_campaign=pranav_gujar"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to={`/contact?program=${encodeURIComponent(program?.name || programId || '')}&type=session#contact-form`}
                 className="w-56 border border-white/20 hover:border-white/50 text-white hover:bg-white/10 px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:-translate-y-0.5 inline-flex items-center justify-center"
               >
                 {t('programs.scheduleBtn').replace(/\[.*?\]\s*/g, '') === 'programs.scheduleBtn' ? 'Schedule Free Session' : t('programs.scheduleBtn')}
-              </a>
+              </Link>
             </div>
           </div>
         </section>

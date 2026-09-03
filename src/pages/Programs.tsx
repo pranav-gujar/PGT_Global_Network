@@ -362,20 +362,18 @@ const Programs = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
-                to="/contact"
+                to="/contact?type=apply#contact-form"
                 className="group relative overflow-hidden w-full sm:w-auto bg-white text-slate-950 px-8 py-3.5 rounded-xl font-semibold hover:bg-slate-100 hover:shadow-lg hover:shadow-white/10 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center gap-2"
               >
                 {t('careers.apply')}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 duration-300" />
               </Link>
-              <a
-                href="https://topmate.io/pranav_gujar/1355631?utm_source=public_profile&utm_campaign=pranav_gujar"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact#contact-info"
                 className="w-full sm:w-auto border border-white/20 bg-white/5 text-white px-8 py-3.5 rounded-xl font-semibold hover:bg-white/10 active:scale-[0.98] hover:scale-[1.02] transform transition-all duration-300 inline-flex items-center justify-center"
               >
                 {t('footer.contactUs').replace(/\[.*?\]\s*/g, '') === 'footer.contactUs' ? 'Start a Conversation' : t('footer.contactUs')}
-              </a>
+              </Link>
             </div>
           </div>
         </section>
