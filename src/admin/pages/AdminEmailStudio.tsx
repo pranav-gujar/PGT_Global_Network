@@ -24,6 +24,8 @@ import {
   Settings,
   Key,
   AlertCircle,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { supabase } from '../../lib/supabase';
@@ -182,7 +184,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     return localStorage.getItem('pgt_admin_resend_api_key') || (import.meta as any).env?.VITE_RESEND_API_KEY || '';
   });
   const [senderEmailAddress, setSenderEmailAddress] = useState<string>(() => {
-    return localStorage.getItem('pgt_admin_sender_email') || 'PGT Global Network <onboarding@resend.dev>';
+    return localStorage.getItem('pgt_admin_sender_email') || 'PGT Global Network Team <office@pgtglobalnetwork.com>';
   });
   const [isProviderSettingsOpen, setIsProviderSettingsOpen] = useState<boolean>(false);
   const [tempApiKey, setTempApiKey] = useState<string>('');
@@ -208,8 +210,9 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     count?: number;
   } | null>(null);
 
-  // Custom In-App Delete Confirmation Modal State (Zero browser confirm)
-  const [logToDelete, setLogToDelete] = useState<EmailStudioLog | null>(null);
+  // Custom In-App Inline Delete State (Zero full-screen blocking modals)
+  const [inlineDeleteId, setInlineDeleteId] = useState<string | null>(null);
+  const [isDeletingId, setIsDeletingId] = useState<string | null>(null);
 
   // Outgoing Email Logs State
   const [logs, setLogs] = useState<EmailStudioLog[]>([]);
@@ -428,23 +431,29 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>${subject || 'PGT Global Network Executive Communication'}</title>
 </head>
-<body style="margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; -webkit-font-smoothing: antialiased;">
+<body style="margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #1e293b; -webkit-font-smoothing: antialiased;">
   
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f8fafc; padding: 36px 16px;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f1f5f9; padding: 40px 16px;">
     <tr>
       <td align="center">
-        <!-- Main Container Card with Subtle Ambient Shadow -->
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 580px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.02);">
+        <!-- Main Container Card with Refined Shadow & Border -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 580px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; overflow: hidden; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);">
           
-          <!-- Top Gradient Accent Line -->
+          <!-- Top Vibrant Gradient Accent Bar -->
           <tr>
-            <td style="height: 4px; background: linear-gradient(90deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);"></td>
+            <td style="height: 5px; background: linear-gradient(90deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);"></td>
           </tr>
 
-          <!-- Brand Header (Logo Only - No text, No badge) -->
+          <!-- Brand Header with Centered Official Logo -->
           <tr>
-            <td align="left" style="padding: 34px 40px 22px 40px;">
-              <img src="${logoSrc}" alt="PGT Global Network" style="height: 40px; width: auto; max-width: 170px; display: block; border: 0;" />
+            <td align="center" style="padding: 36px 40px 24px 40px; border-bottom: 1px solid #f8fafc;">
+              <table border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                  <td align="center">
+                    <img src="${logoSrc}" alt="PGT Global Network" style="height: 48px; width: auto; max-width: 190px; display: block; margin: 0 auto; border: 0;" />
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
@@ -452,8 +461,8 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
           ${
             headline
               ? `<tr>
-            <td style="padding: 16px 40px 6px 40px;">
-              <h1 style="margin: 0; font-size: 22px; font-weight: 700; color: #0f172a; line-height: 1.35; letter-spacing: -0.3px;">
+            <td align="center" style="padding: 24px 40px 8px 40px;">
+              <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1.35; letter-spacing: -0.4px; text-align: center;">
                 ${headline}
               </h1>
             </td>
@@ -463,30 +472,30 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
 
           <!-- Body Content Area -->
           <tr>
-            <td style="padding: ${headline ? '14px' : '22px'} 40px 32px 40px; font-size: 15px; line-height: 1.75; color: #334155;">
+            <td style="padding: ${headline ? '16px' : '28px'} 44px 34px 44px; font-size: 15px; line-height: 1.8; color: #334155;">
               ${
                 greeting
-                  ? `<p style="margin: 0 0 18px 0; font-weight: 600; color: #0f172a; font-size: 15px;">${greeting}</p>`
+                  ? `<p style="margin: 0 0 18px 0; font-weight: 700; color: #0f172a; font-size: 15px; letter-spacing: -0.1px;">${greeting}</p>`
                   : ''
               }
 
               ${formattedParagraphsHtml}
 
-              <!-- Call to Action Button (Optional) -->
+              <!-- Call to Action Button (Optional, Beautifully Centered) -->
               ${
                 ctaText && ctaUrl
-                  ? `<div style="margin: 30px 0 24px 0; text-align: left;">
-                <table border="0" cellspacing="0" cellpadding="0">
+                  ? `<div style="margin: 32px 0 28px 0; text-align: center;">
+                <table border="0" cellspacing="0" cellpadding="0" align="center">
                   <tr>
-                    <td align="center" style="border-radius: 10px; background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); box-shadow: 0 4px 14px rgba(79, 70, 229, 0.28);">
-                      <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="font-size: 14px; font-weight: 600; color: #ffffff; text-decoration: none; padding: 13px 30px; display: inline-block; letter-spacing: 0.2px;">
+                    <td align="center" style="border-radius: 12px; background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%); box-shadow: 0 6px 18px rgba(79, 70, 229, 0.32);">
+                      <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="font-size: 14.5px; font-weight: 700; color: #ffffff; text-decoration: none; padding: 14px 32px; display: inline-block; letter-spacing: 0.2px;">
                         ${ctaText} &nbsp;&rarr;
                       </a>
                     </td>
                   </tr>
                 </table>
-                <p style="margin: 12px 0 0 0; font-size: 12px; color: #94a3b8;">
-                  Direct Link: <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline;">${ctaUrl}</a>
+                <p style="margin: 12px 0 0 0; font-size: 11.5px; color: #94a3b8; text-align: center;">
+                  Direct link: <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline;">${ctaUrl}</a>
                 </p>
               </div>`
                   : ''
@@ -496,15 +505,15 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
               <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid #f1f5f9;">
                 <table border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td style="border-left: 3px solid #4f46e5; padding-left: 14px;">
-                      <p style="margin: 0 0 4px 0; font-size: 13px; color: #64748b;">With regards,</p>
-                      <p style="margin: 0; font-size: 15px; font-weight: 700; color: #0f172a;">${senderName || 'PGT Global Network Team'}</p>
+                    <td style="border-left: 3.5px solid #4f46e5; padding-left: 16px;">
+                      <p style="margin: 0 0 4px 0; font-size: 13px; color: #64748b; font-weight: 500;">With regards,</p>
+                      <p style="margin: 0; font-size: 15.5px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px;">${senderName || 'PGT Global Network Team'}</p>
                       <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #4f46e5;">${senderRole || 'Executive Office & Secretariat'}</p>
                       <p style="margin: 3px 0 0 0; font-size: 12.5px; color: #64748b;">${companyName || 'PGT Global Network'}</p>
                       ${
                         officialWebsiteUrl
-                          ? `<p style="margin: 4px 0 0 0; font-size: 12.5px;"><a href="${officialWebsiteUrl.startsWith('http') ? officialWebsiteUrl : `https://${officialWebsiteUrl}`}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 500;">${officialWebsiteUrl && !officialWebsiteUrl.includes('pgtglobalnetwork.com') ? officialWebsiteUrl.replace(/^https?:\/\//i, '') : 'www.pgtglobalnetwork.com'}</a></p>`
-                          : `<p style="margin: 4px 0 0 0; font-size: 12.5px;"><a href="https://www.pgtglobalnetwork.com/" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 500;">www.pgtglobalnetwork.com</a></p>`
+                          ? `<p style="margin: 4px 0 0 0; font-size: 12px;"><a href="${officialWebsiteUrl.startsWith('http') ? officialWebsiteUrl : `https://${officialWebsiteUrl}`}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">${officialWebsiteUrl && !officialWebsiteUrl.includes('pgtglobalnetwork.com') ? officialWebsiteUrl.replace(/^https?:\/\//i, '') : 'www.pgtglobalnetwork.com'}</a></p>`
+                          : `<p style="margin: 4px 0 0 0; font-size: 12px;"><a href="https://www.pgtglobalnetwork.com/" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">www.pgtglobalnetwork.com</a></p>`
                       }
                     </td>
                   </tr>
@@ -515,15 +524,15 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
 
           <!-- Corporate Legal Footer -->
           <tr>
-            <td style="padding: 24px 40px 28px 40px; background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center; font-size: 11px; line-height: 1.6; color: #94a3b8;">
-              <p style="margin: 0 0 6px 0; font-weight: 600; color: #64748b; font-size: 11px; letter-spacing: 0.5px;">
+            <td align="center" style="padding: 26px 40px 30px 40px; background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center; font-size: 11px; line-height: 1.6; color: #94a3b8;">
+              <p style="margin: 0 0 6px 0; font-weight: 700; color: #64748b; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase;">
                 PGT GLOBAL NETWORK
               </p>
-              <p style="margin: 0 0 4px 0;">
+              <p style="margin: 0 0 4px 0; font-size: 11px;">
                 &copy; ${new Date().getFullYear()} ${companyName || 'PGT Global Network'}. All rights reserved.
               </p>
-              <p style="margin: 0; font-size: 10px; color: #94a3b8; max-width: 480px; display: inline-block;">
-                ${footerNote || 'PGT Global Network. Official executive communication. Confidential and privileged.'}
+              <p style="margin: 0; font-size: 10.5px; color: #94a3b8; max-width: 460px; display: inline-block;">
+                ${footerNote || 'Official executive communication. Privileged and confidential.'}
               </p>
             </td>
           </tr>
@@ -563,51 +572,57 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     bcc?: string;
   }): Promise<{ isLive: boolean; messageId: string; error?: string }> => {
     const key = resendApiKey.trim();
-    const sender = senderEmailAddress.trim() || 'PGT Global Network <onboarding@resend.dev>';
+    const sender = senderEmailAddress.trim() || 'PGT Global Network Team <office@pgtglobalnetwork.com>';
+    let lastError: string | null = null;
 
-    // 1. Direct Resend API if API Key is available
+    // 1. Direct Resend API via proxy / direct if API Key is available
     if (key) {
-      try {
-        const payload: any = {
-          from: sender,
-          to: [params.to],
-          subject: params.subject,
-          html: params.html,
-        };
-        if (params.cc) {
-          payload.cc = params.cc.split(',').map((s) => s.trim()).filter(Boolean);
-        }
-        if (params.bcc) {
-          payload.bcc = params.bcc.split(',').map((s) => s.trim()).filter(Boolean);
-        }
-
-        const res = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${key}`,
-          },
-          body: JSON.stringify(payload),
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          return { isLive: true, messageId: data.id || `re_${Date.now().toString(36)}` };
-        } else {
-          const errText = await res.text();
-          console.warn('[EmailStudio] Resend API error:', errText);
-          return {
-            isLive: false,
-            messageId: `vault_${Date.now().toString(36)}`,
-            error: errText,
+      const endpoints = ['/api-resend/emails', 'https://api.resend.com/emails'];
+      for (const endpoint of endpoints) {
+        try {
+          const payload: any = {
+            from: sender,
+            to: [params.to],
+            subject: params.subject,
+            html: params.html,
           };
+          if (params.cc) {
+            payload.cc = params.cc.split(',').map((s) => s.trim()).filter(Boolean);
+          }
+          if (params.bcc) {
+            payload.bcc = params.bcc.split(',').map((s) => s.trim()).filter(Boolean);
+          }
+
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${key}`,
+            },
+            body: JSON.stringify(payload),
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            return { isLive: true, messageId: data.id || `re_${Date.now().toString(36)}` };
+          } else {
+            const errText = await res.text();
+            console.warn(`[EmailStudio] Resend API (${endpoint}) response:`, errText);
+            try {
+              const parsed = JSON.parse(errText);
+              lastError = parsed.message || parsed.error || errText;
+            } catch {
+              lastError = errText;
+            }
+          }
+        } catch (err: any) {
+          console.warn(`[EmailStudio] Resend API (${endpoint}) network error:`, err);
+          if (!lastError) lastError = err.message;
         }
-      } catch (err: any) {
-        console.warn('[EmailStudio] Resend API network error:', err);
       }
     }
 
-    // 2. Supabase Function invoke fallback
+    // 2. Supabase Edge Function invoke fallback
     try {
       const { data, error } = await supabase.functions.invoke('send-emails', {
         body: {
@@ -619,21 +634,30 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
             html: params.html,
             cc: params.cc,
             bcc: params.bcc,
+            resendApiKey: key || undefined,
           },
         },
       });
+
       if (!error && data?.success) {
         return { isLive: true, messageId: data.messageId || `sb_${Date.now().toString(36)}` };
+      } else {
+        const sbErr = error?.message || data?.error || (data?.errors && data?.errors.join(', '));
+        if (sbErr) {
+          console.warn('[EmailStudio] Supabase Edge Function error:', sbErr);
+          lastError = sbErr;
+        }
       }
-    } catch {
-      // Offline fallback to vault
+    } catch (sbErr: any) {
+      console.warn('[EmailStudio] Supabase Edge Function invoke exception:', sbErr);
+      if (sbErr?.message) lastError = sbErr.message;
     }
 
     // Default: Vault Logged
     return {
       isLive: false,
       messageId: `pgt_vault_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`,
-      error: 'Live delivery requires a Resend API Key. Stored in vault.',
+      error: lastError || (key ? 'Live delivery failed' : 'Live delivery requires a Resend API Key. Stored in vault.'),
     };
   };
 
@@ -700,11 +724,17 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
       });
 
       if (delivery.isLive) {
-        toast.success(`Email delivered live to ${recipientEmail.trim()}!`, { duration: 3000 });
+        toast.success(`Email delivered live to ${recipientEmail.trim()}!`, { duration: 3500 });
       } else {
-        toast.success('Dispatched & Logged to Vault! Add Resend Key to send live emails.', {
-          duration: 4500,
-        });
+        if (delivery.error && delivery.error.includes('Key')) {
+          toast.success('Dispatched & Logged to Vault! Add Resend Key to send live emails.', {
+            duration: 4500,
+          });
+        } else {
+          toast.error(`Live Delivery Failed: ${delivery.error || 'Check console or Supabase logs'}. Stored in vault.`, {
+            duration: 6000,
+          });
+        }
       }
     } catch (err: any) {
       console.error('Dispatch error:', err);
@@ -855,34 +885,29 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     }
   };
 
-  // Trigger Custom In-App Delete Confirmation (Zero browser confirm)
-  const handleDeleteLogClick = (log: EmailStudioLog, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setLogToDelete(log);
-  };
-
-  // Perform permanent deletion
-  const handleConfirmDeleteLog = async () => {
-    if (!logToDelete) return;
-    const targetId = logToDelete.id;
+  // Perform permanent inline deletion
+  const handleExecuteDelete = async (targetId: string, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIsDeletingId(targetId);
     try {
       await deleteEmailLog(targetId);
       setLogs((prev) => prev.filter((l) => l.id !== targetId));
       if (selectedAuditLog?.id === targetId) {
         setSelectedAuditLog(null);
       }
+      setInlineDeleteId(null);
       toast.success('Dispatched email log permanently removed');
     } catch (err: any) {
       toast.error('Failed to delete log: ' + err.message);
     } finally {
-      setLogToDelete(null);
+      setIsDeletingId(null);
     }
   };
 
   // Save Provider Settings
   const handleSaveProviderSettings = () => {
     const cleanKey = tempApiKey.trim();
-    const cleanSender = tempSenderEmail.trim() || 'PGT Global Network <onboarding@resend.dev>';
+    const cleanSender = tempSenderEmail.trim() || 'PGT Global Network Team <office@pgtglobalnetwork.com>';
     setResendApiKey(cleanKey);
     setSenderEmailAddress(cleanSender);
     try {
@@ -1646,21 +1671,21 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
               <div className="bg-slate-100/90 dark:bg-slate-900/70 p-5 max-h-[620px] overflow-y-auto">
                 <div className="mx-auto max-w-[440px] rounded-2xl bg-white text-slate-900 shadow-md border border-slate-200/90 overflow-hidden font-sans text-xs">
                   {/* Top Gradient Accent Line */}
-                  <div className="h-1 w-full bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400" />
+                  <div className="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400" />
 
-                  {/* Header: Logo Only */}
-                  <div className="p-5 border-b border-slate-100 text-left">
+                  {/* Header: Centered Official Logo */}
+                  <div className="p-6 border-b border-slate-100 text-center flex justify-center items-center bg-slate-50/40">
                     <img
                       src="/PGT New Logo Transparent.png"
                       alt="PGT Global Network"
-                      className="h-8 w-auto object-contain"
+                      className="h-10 w-auto object-contain mx-auto"
                     />
                   </div>
 
                   {/* Headline Banner */}
                   {headline && (
-                    <div className="px-6 pt-5">
-                      <h3 className="text-base font-bold text-slate-900 leading-snug tracking-tight">
+                    <div className="px-6 pt-5 text-center">
+                      <h3 className="text-base font-extrabold text-slate-900 leading-snug tracking-tight">
                         {headline}
                       </h3>
                     </div>
@@ -1669,13 +1694,13 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                   {/* Body Content */}
                   <div className="p-6 space-y-3.5 leading-relaxed text-slate-700">
                     {recipientMode === 'single' && recipientName.trim() && (
-                      <p className="font-semibold text-slate-900 text-[13px]">
+                      <p className="font-bold text-slate-900 text-[13px]">
                         Dear {recipientName.trim()},
                       </p>
                     )}
 
                     {recipientMode === 'batch' && parsedBatchRecipients.length > 0 && parsedBatchRecipients[0].name && (
-                      <p className="font-semibold text-slate-900 text-[13px]">
+                      <p className="font-bold text-slate-900 text-[13px]">
                         Dear {parsedBatchRecipients[0].name},
                       </p>
                     )}
@@ -1705,15 +1730,15 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                       </p>
                     )}
 
-                    {/* CTA Button */}
+                    {/* CTA Button (Centered) */}
                     {ctaText && (
-                      <div className="pt-2">
-                        <span className="inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-indigo-500/25">
+                      <div className="pt-3 pb-1 text-center">
+                        <span className="inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-6 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/25">
                           {ctaText} &nbsp;&rarr;
                         </span>
                         {ctaUrl && (
-                          <p className="text-[10px] text-slate-400 mt-1 truncate">
-                            Direct Link: <span className="text-indigo-600 underline">{ctaUrl}</span>
+                          <p className="text-[10px] text-slate-400 mt-1.5 truncate text-center">
+                            Direct link: <span className="text-indigo-600 underline">{ctaUrl}</span>
                           </p>
                         )}
                       </div>
@@ -1721,7 +1746,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
 
                     {/* Sign-off */}
                     <div className="pt-5 border-t border-slate-100 space-y-0.5 text-slate-600">
-                      <div className="border-l-2 border-indigo-500 pl-3 space-y-0.5">
+                      <div className="border-l-[3px] border-indigo-500 pl-3.5 space-y-0.5">
                         <p className="text-xs text-slate-400">With regards,</p>
                         <p className="font-bold text-slate-900 text-sm">{senderName}</p>
                         <p className="text-xs font-semibold text-indigo-600">{senderRole}</p>
@@ -1741,8 +1766,8 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
 
                   {/* Footer Box */}
                   <div className="bg-slate-50/80 p-4 border-t border-slate-100 text-center text-[10px] text-slate-400 space-y-1">
-                    <p className="font-semibold text-slate-500 uppercase text-[9px] tracking-wider">
-                      PGT GLOBAL NETWORK &bull; EXECUTIVE CORRESPONDENCE
+                    <p className="font-bold text-slate-500 uppercase text-[9px] tracking-wider">
+                      PGT GLOBAL NETWORK
                     </p>
                     <p>© 2026 {companyName}. All rights reserved.</p>
                     <p className="text-[9px] leading-tight text-slate-400">
@@ -1767,31 +1792,31 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
               <div className="rounded-[26px] bg-slate-100 dark:bg-slate-900 overflow-hidden max-h-[580px] overflow-y-auto">
                 <div className="bg-white text-slate-900 font-sans text-[11px] p-4 space-y-3">
                   {/* Top Gradient */}
-                  <div className="h-1 -mx-4 -mt-4 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400" />
+                  <div className="h-1.5 -mx-4 -mt-4 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400" />
 
-                  {/* Header: Logo Only */}
-                  <div className="border-b border-slate-100 pb-2.5 pt-1 text-left">
+                  {/* Header: Centered Official Logo */}
+                  <div className="border-b border-slate-100 pb-3 pt-2 text-center flex justify-center bg-slate-50/40 -mx-4 px-4">
                     <img
                       src="/PGT New Logo Transparent.png"
                       alt="PGT Global Network"
-                      className="h-6 w-auto object-contain"
+                      className="h-8 w-auto object-contain mx-auto"
                     />
                   </div>
 
                   {headline && (
-                    <h4 className="font-bold text-slate-900 text-xs leading-snug">
+                    <h4 className="font-extrabold text-slate-900 text-xs leading-snug text-center pt-1">
                       {headline}
                     </h4>
                   )}
 
                   {recipientMode === 'single' && recipientName.trim() && (
-                    <p className="font-semibold text-slate-900 text-xs">
+                    <p className="font-bold text-slate-900 text-xs">
                       Dear {recipientName.trim()},
                     </p>
                   )}
 
                   {recipientMode === 'batch' && parsedBatchRecipients.length > 0 && parsedBatchRecipients[0].name && (
-                    <p className="font-semibold text-slate-900 text-xs">
+                    <p className="font-bold text-slate-900 text-xs">
                       Dear {parsedBatchRecipients[0].name},
                     </p>
                   )}
@@ -1822,8 +1847,8 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                   )}
 
                   {ctaText && (
-                    <div className="pt-1">
-                      <span className="inline-block rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-700 px-3.5 py-1.5 text-[10.5px] font-semibold text-white shadow-xs">
+                    <div className="pt-2 pb-1 text-center">
+                      <span className="inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-4 py-2 text-[10.5px] font-bold text-white shadow-xs">
                         {ctaText} &nbsp;&rarr;
                       </span>
                     </div>
@@ -1927,111 +1952,422 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/60">
-                {filteredLogs.map((log) => (
-                  <tr
-                    key={log.id}
-                    onClick={() => setSelectedAuditLog(log)}
-                    className="group cursor-pointer hover:bg-muted/40 transition-colors"
-                  >
-                    <td className="py-3 px-4 font-mono text-[11px] text-muted-foreground whitespace-nowrap">
-                      {formatIST(log.created_at)}
-                    </td>
-                    <td className="py-3 px-4">
-                      <p className="font-bold text-foreground">{log.recipient_name || 'Recipient'}</p>
-                      <p className="font-mono text-[11px] text-primary">{log.recipient_email}</p>
-                      {log.cc && (
-                        <p className="text-[10px] text-muted-foreground truncate max-w-xs mt-0.5">
-                          <span className="font-semibold text-foreground/70">CC:</span> {log.cc}
-                        </p>
-                      )}
-                      {log.bcc && (
-                        <p className="text-[10px] text-muted-foreground truncate max-w-xs mt-0.5">
-                          <span className="font-semibold text-foreground/70">BCC:</span> {log.bcc}
-                        </p>
-                      )}
-                    </td>
-                    <td className="py-3 px-4">
-                      <p className="font-semibold text-foreground truncate max-w-xs">{log.subject}</p>
-                      <span className="inline-block mt-0.5 rounded bg-muted px-1.5 py-0.2 text-[10px] text-muted-foreground font-medium">
-                        {log.template_used || 'Email'}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                        <CheckCircle2 className="h-3 w-3" />
-                        <span>{log.status || 'Delivered'}</span>
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-right whitespace-nowrap">
-                      <div
-                        className="inline-flex items-center space-x-1"
-                        onClick={(e) => e.stopPropagation()}
+                {filteredLogs.map((log) => {
+                  const isExpanded = selectedAuditLog?.id === log.id;
+                  const isInlineDeleting = inlineDeleteId === log.id;
+
+                  return (
+                    <React.Fragment key={log.id}>
+                      <tr
+                        onClick={() => setSelectedAuditLog(isExpanded ? null : log)}
+                        className={`group cursor-pointer transition-colors ${
+                          isExpanded
+                            ? 'bg-indigo-500/10 dark:bg-indigo-950/30'
+                            : 'hover:bg-muted/40'
+                        }`}
                       >
-                        <button
-                          onClick={() => setSelectedAuditLog(log)}
-                          className="flex h-7 px-2.5 items-center gap-1 rounded-lg border border-border bg-card text-xs font-semibold text-foreground hover:bg-muted transition-colors"
-                        >
-                          <Eye className="h-3.5 w-3.5 text-primary" />
-                          <span>Inspect</span>
-                        </button>
-                        <button
-                          onClick={(e) => handleDeleteLogClick(log, e)}
-                          className="flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground hover:text-red-500 hover:bg-red-500/10 transition-colors"
-                          title="Delete log"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                        <td className="py-3.5 px-4 font-mono text-[11px] text-muted-foreground whitespace-nowrap">
+                          <div className="flex items-center space-x-2">
+                            <span className={`text-muted-foreground transition-transform duration-200 ${isExpanded ? 'rotate-180 text-primary' : ''}`}>
+                              <ChevronDown className="h-3.5 w-3.5" />
+                            </span>
+                            <span>{formatIST(log.created_at)}</span>
+                          </div>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <p className="font-bold text-foreground">{log.recipient_name || 'Recipient'}</p>
+                          <p className="font-mono text-[11px] text-primary">{log.recipient_email}</p>
+                          {log.cc && (
+                            <p className="text-[10px] text-muted-foreground truncate max-w-xs mt-0.5">
+                              <span className="font-semibold text-foreground/70">CC:</span> {log.cc}
+                            </p>
+                          )}
+                          {log.bcc && (
+                            <p className="text-[10px] text-muted-foreground truncate max-w-xs mt-0.5">
+                              <span className="font-semibold text-foreground/70">BCC:</span> {log.bcc}
+                            </p>
+                          )}
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <p className="font-semibold text-foreground truncate max-w-xs">{log.subject}</p>
+                          <span className="inline-block mt-0.5 rounded bg-muted px-1.5 py-0.2 text-[10px] text-muted-foreground font-medium">
+                            {log.template_used || 'Email'}
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <CheckCircle2 className="h-3 w-3" />
+                            <span>{log.status || 'Delivered'}</span>
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                          <div
+                            className="inline-flex items-center space-x-1.5"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {isInlineDeleting ? (
+                              <div className="inline-flex items-center gap-1.5 bg-red-500/10 border border-red-500/30 px-2.5 py-1 rounded-xl animate-in fade-in duration-150">
+                                <span className="text-[10px] font-bold text-red-500">Delete?</span>
+                                <button
+                                  type="button"
+                                  onClick={(e) => handleExecuteDelete(log.id, e)}
+                                  disabled={isDeletingId === log.id}
+                                  className="px-2 py-0.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold transition-all disabled:opacity-50"
+                                >
+                                  {isDeletingId === log.id ? '...' : 'Yes'}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setInlineDeleteId(null);
+                                  }}
+                                  className="px-2 py-0.5 rounded-lg border border-border bg-card text-[10px] text-muted-foreground hover:text-foreground"
+                                >
+                                  No
+                                </button>
+                              </div>
+                            ) : (
+                              <>
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedAuditLog(isExpanded ? null : log)}
+                                  className={`inline-flex h-7 px-2.5 items-center gap-1 rounded-lg border text-xs font-semibold transition-colors ${
+                                    isExpanded
+                                      ? 'bg-primary text-primary-foreground border-primary'
+                                      : 'border-border bg-card text-foreground hover:bg-muted'
+                                  }`}
+                                >
+                                  {isExpanded ? (
+                                    <>
+                                      <ChevronUp className="h-3.5 w-3.5" />
+                                      <span>Collapse</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Eye className="h-3.5 w-3.5 text-primary" />
+                                      <span>Inspect</span>
+                                    </>
+                                  )}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setInlineDeleteId(log.id);
+                                  }}
+                                  className="flex h-7 w-7 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground hover:text-red-500 hover:bg-red-500/10 transition-colors"
+                                  title="Delete log"
+                                >
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+
+                      {/* INLINE EXPANDABLE AUDIT DRAWER (Zero full-screen blocking) */}
+                      {isExpanded && (
+                        <tr key={`expanded-row-${log.id}`} className="bg-muted/15">
+                          <td colSpan={5} className="p-3 sm:p-5">
+                            <div className="rounded-2xl border border-border/90 bg-card shadow-md overflow-hidden animate-in slide-in-from-top-2 duration-200">
+                              {/* Drawer Header Strip */}
+                              <div className="p-4 border-b border-border/70 flex flex-wrap items-center justify-between gap-3 bg-muted/30">
+                                <div>
+                                  <div className="flex items-center space-x-2">
+                                    <h4 className="text-sm font-bold text-foreground">
+                                      Dispatched Email Audit Dossier
+                                    </h4>
+                                    <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                                      {log.status || 'Delivered'}
+                                    </span>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground mt-0.5 font-mono">
+                                    {log.recipient_name} &lt;{log.recipient_email}&gt; • {formatIST(log.created_at)}
+                                  </p>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedAuditLog(null)}
+                                  className="inline-flex items-center space-x-1 rounded-xl border border-border px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+                                >
+                                  <ChevronUp className="h-3.5 w-3.5" />
+                                  <span>Close Audit</span>
+                                </button>
+                              </div>
+
+                              {/* 3-Tab Selector */}
+                              <div className="flex border-b border-border/70 px-4 pt-2 bg-muted/10 gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => setAuditTab('visual')}
+                                  className={`py-2 px-3 text-xs font-bold border-b-2 transition-all ${
+                                    auditTab === 'visual'
+                                      ? 'border-primary text-primary'
+                                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                                  }`}
+                                >
+                                  1. Visual Email Preview
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setAuditTab('fields')}
+                                  className={`py-2 px-3 text-xs font-bold border-b-2 transition-all ${
+                                    auditTab === 'fields'
+                                      ? 'border-primary text-primary'
+                                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                                  }`}
+                                >
+                                  2. Fields &amp; Message Content
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => setAuditTab('raw')}
+                                  className={`py-2 px-3 text-xs font-bold border-b-2 transition-all ${
+                                    auditTab === 'raw'
+                                      ? 'border-primary text-primary'
+                                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                                  }`}
+                                >
+                                  3. Raw Database Audit
+                                </button>
+                              </div>
+
+                              {/* Drawer Body Content */}
+                              <div className="p-4 sm:p-5 space-y-4">
+                                {auditTab === 'visual' && (
+                                  <div className="space-y-3">
+                                    <div className="rounded-xl border border-border/80 bg-muted/30 p-3 text-xs space-y-1.5">
+                                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 pb-2">
+                                        <div className="flex items-center space-x-2">
+                                          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">To:</span>
+                                          <span className="font-bold text-foreground">{log.recipient_name}</span>
+                                          <span className="font-mono text-primary text-[11px]">&lt;{log.recipient_email}&gt;</span>
+                                        </div>
+                                        <span className="font-mono text-[10px] text-muted-foreground">
+                                          ID: {log.provider_message_id || '—'}
+                                        </span>
+                                      </div>
+
+                                      {(log.cc || log.bcc) && (
+                                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pt-0.5">
+                                          {log.cc && (
+                                            <div className="flex items-center space-x-1.5 text-[11px]">
+                                              <span className="font-bold text-muted-foreground">CC:</span>
+                                              <span className="font-mono text-foreground">{log.cc}</span>
+                                              <button
+                                                type="button"
+                                                onClick={() => handleCopy(log.cc!, 'vis_cc')}
+                                                className="text-muted-foreground hover:text-foreground p-0.5"
+                                                title="Copy CC"
+                                              >
+                                                {copiedAuditField === 'vis_cc' ? (
+                                                  <Check className="h-3 w-3 text-emerald-500" />
+                                                ) : (
+                                                  <Copy className="h-3 w-3" />
+                                                )}
+                                              </button>
+                                            </div>
+                                          )}
+                                          {log.bcc && (
+                                            <div className="flex items-center space-x-1.5 text-[11px]">
+                                              <span className="font-bold text-muted-foreground">BCC:</span>
+                                              <span className="font-mono text-foreground">{log.bcc}</span>
+                                              <button
+                                                type="button"
+                                                onClick={() => handleCopy(log.bcc!, 'vis_bcc')}
+                                                className="text-muted-foreground hover:text-foreground p-0.5"
+                                                title="Copy BCC"
+                                              >
+                                                {copiedAuditField === 'vis_bcc' ? (
+                                                  <Check className="h-3 w-3 text-emerald-500" />
+                                                ) : (
+                                                  <Copy className="h-3 w-3" />
+                                                )}
+                                              </button>
+                                            </div>
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    <div className="rounded-xl border border-border bg-slate-100 dark:bg-slate-900 p-3 sm:p-4">
+                                      {log.rendered_html ? (
+                                        <iframe
+                                          srcDoc={log.rendered_html}
+                                          title="Delivered Email"
+                                          className="w-full min-h-[420px] rounded-lg bg-white border border-slate-200"
+                                        />
+                                      ) : (
+                                        <div className="p-8 text-center text-xs text-muted-foreground">
+                                          No cached visual HTML for this log.
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {auditTab === 'fields' && (
+                                  <div className="space-y-3 text-xs">
+                                    <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
+                                      <div className="flex justify-between items-center mb-1">
+                                        <span className="text-[11px] font-bold text-muted-foreground uppercase">
+                                          Subject Line
+                                        </span>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleCopy(log.subject, 'subj')}
+                                          className="text-muted-foreground hover:text-foreground"
+                                        >
+                                          {copiedAuditField === 'subj' ? (
+                                            <Check className="h-3.5 w-3.5 text-emerald-500" />
+                                          ) : (
+                                            <Copy className="h-3.5 w-3.5" />
+                                          )}
+                                        </button>
+                                      </div>
+                                      <p className="font-bold text-foreground text-sm">{log.subject}</p>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                      <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
+                                        <span className="text-[11px] font-bold text-muted-foreground uppercase">
+                                          Recipient
+                                        </span>
+                                        <p className="font-semibold text-foreground mt-1">
+                                          {log.recipient_name}
+                                        </p>
+                                        <p className="font-mono text-primary text-[11px]">
+                                          {log.recipient_email}
+                                        </p>
+                                      </div>
+                                      <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
+                                        <span className="text-[11px] font-bold text-muted-foreground uppercase">
+                                          Template Used
+                                        </span>
+                                        <p className="font-semibold text-foreground mt-1">
+                                          {log.template_used}
+                                        </p>
+                                        <p className="font-mono text-muted-foreground text-[10px] mt-0.5">
+                                          ID: {log.provider_message_id || '—'}
+                                        </p>
+                                      </div>
+                                    </div>
+
+                                    <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5">
+                                      <div className="flex justify-between items-center mb-1.5">
+                                        <span className="text-[11px] font-bold text-muted-foreground uppercase">
+                                          Body Content
+                                        </span>
+                                        <button
+                                          type="button"
+                                          onClick={() => handleCopy(log.body_paragraphs, 'body')}
+                                          className="text-muted-foreground hover:text-foreground"
+                                        >
+                                          {copiedAuditField === 'body' ? (
+                                            <Check className="h-3.5 w-3.5 text-emerald-500" />
+                                          ) : (
+                                            <Copy className="h-3.5 w-3.5" />
+                                          )}
+                                        </button>
+                                      </div>
+                                      <div className="whitespace-pre-wrap leading-relaxed text-foreground bg-card p-3 rounded-lg border border-border/60">
+                                        {log.body_paragraphs}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {auditTab === 'raw' && (
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span className="text-xs text-muted-foreground font-mono">
+                                        Database Payload JSON (Supabase &amp; Vault)
+                                      </span>
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleCopy(JSON.stringify(log, null, 2), 'rawJson')
+                                        }
+                                        className="inline-flex items-center space-x-1 text-xs text-primary hover:underline"
+                                      >
+                                        {copiedAuditField === 'rawJson' ? (
+                                          <Check className="h-3.5 w-3.5 text-emerald-500" />
+                                        ) : (
+                                          <Copy className="h-3.5 w-3.5" />
+                                        )}
+                                        <span>Copy Raw JSON</span>
+                                      </button>
+                                    </div>
+                                    <pre className="rounded-xl border border-border bg-muted/60 p-4 text-[11px] font-mono text-foreground overflow-x-auto max-h-[320px]">
+                                      {JSON.stringify(log, null, 2)}
+                                    </pre>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Drawer Footer Actions */}
+                              <div className="p-3.5 border-t border-border/70 flex items-center justify-between gap-3 bg-muted/20">
+                                <div className="flex items-center space-x-2">
+                                  {isInlineDeleting ? (
+                                    <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-xl animate-in fade-in duration-150">
+                                      <span className="text-xs font-bold text-red-500">Permanently delete?</span>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => handleExecuteDelete(log.id, e)}
+                                        disabled={isDeletingId === log.id}
+                                        className="px-2.5 py-1 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-all disabled:opacity-50"
+                                      >
+                                        {isDeletingId === log.id ? 'Deleting...' : 'Yes, Delete'}
+                                      </button>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setInlineDeleteId(null);
+                                        }}
+                                        className="px-2 py-1 rounded-lg border border-border bg-card text-xs text-muted-foreground hover:text-foreground"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setInlineDeleteId(log.id);
+                                      }}
+                                      className="inline-flex items-center space-x-1.5 rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-1.5 text-xs font-semibold text-red-500 hover:bg-red-500/20 transition-colors"
+                                    >
+                                      <Trash2 className="h-3.5 w-3.5" />
+                                      <span>Delete Log</span>
+                                    </button>
+                                  )}
+                                </div>
+
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedAuditLog(null)}
+                                  className="rounded-xl border border-border px-4 py-1.5 text-xs font-semibold text-foreground hover:bg-muted"
+                                >
+                                  Collapse View
+                                </button>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         )}
       </div>
-
-      {/* CUSTOM IN-APP DELETE CONFIRMATION MODAL (NO BROWSER POPUPS) */}
-      {logToDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 animate-in fade-in-50 duration-150">
-          <div className="relative w-full max-w-md rounded-2xl border border-border/80 bg-card p-6 shadow-2xl space-y-4 animate-in zoom-in-95 duration-150">
-            <div className="flex items-center space-x-3 text-red-500">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 border border-red-500/20 shrink-0">
-                <Trash2 className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-foreground">Confirm Permanent Deletion</h3>
-                <p className="text-xs text-muted-foreground">This dispatched log record will be permanently erased.</p>
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5 text-xs space-y-1.5">
-              <p className="text-muted-foreground">Target Recipient:</p>
-              <p className="font-bold text-foreground truncate">
-                {logToDelete.recipient_name} &lt;{logToDelete.recipient_email}&gt;
-              </p>
-              <p className="font-semibold text-primary truncate">Subject: {logToDelete.subject}</p>
-            </div>
-
-            <div className="flex items-center justify-end space-x-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setLogToDelete(null)}
-                className="rounded-xl border border-border px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleConfirmDeleteLog}
-                className="rounded-xl bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-xs font-bold shadow-sm transition-all admin-btn-press"
-              >
-                Yes, Delete Record
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* EMAIL DELIVERY ENGINE SETTINGS MODAL */}
       {isProviderSettingsOpen && (
@@ -2089,11 +2425,11 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                   type="text"
                   value={tempSenderEmail}
                   onChange={(e) => setTempSenderEmail(e.target.value)}
-                  placeholder="PGT Global Network <onboarding@resend.dev>"
+                  placeholder="PGT Global Network Team <office@pgtglobalnetwork.com>"
                   className="w-full rounded-xl border border-border/80 bg-background px-3.5 py-2.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
                 <p className="text-[11px] text-muted-foreground mt-1">
-                  Default testing address is <span className="font-mono">PGT Global Network &lt;onboarding@resend.dev&gt;</span>. Once you verify your domain, update this to your executive address.
+                  Official verified sender address: <span className="font-mono text-primary">PGT Global Network Team &lt;office@pgtglobalnetwork.com&gt;</span>.
                 </p>
               </div>
             </div>
@@ -2219,319 +2555,9 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
         </div>
       )}
 
-      {/* FULL DISPATCHED AUDIT MODAL (3 TABS) */}
-      {selectedAuditLog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 animate-in fade-in-50 duration-200">
-          <div className="relative w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl border border-border/80 bg-card shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            {/* Modal Header */}
-            <div className="p-4 sm:p-5 border-b border-border/70 flex items-start justify-between gap-3 bg-muted/20">
-              <div>
-                <div className="flex items-center space-x-2">
-                  <h3 className="text-base font-bold text-foreground">
-                    Dispatched Email Audit Dossier
-                  </h3>
-                  <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                    {selectedAuditLog.status || 'Delivered'}
-                  </span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-0.5 font-mono">
-                  {selectedAuditLog.recipient_name} &lt;{selectedAuditLog.recipient_email}&gt; •{' '}
-                  {formatIST(selectedAuditLog.created_at)}
-                </p>
-              </div>
-
-              <button
-                onClick={() => setSelectedAuditLog(null)}
-                className="rounded-lg p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-
-            {/* 3-Tab Selector */}
-            <div className="flex border-b border-border/70 px-4 pt-2 bg-muted/10 gap-2">
-              <button
-                type="button"
-                onClick={() => setAuditTab('visual')}
-                className={`py-2 px-3 text-xs font-bold border-b-2 transition-all ${
-                  auditTab === 'visual'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                1. Visual Email Preview
-              </button>
-              <button
-                type="button"
-                onClick={() => setAuditTab('fields')}
-                className={`py-2 px-3 text-xs font-bold border-b-2 transition-all ${
-                  auditTab === 'fields'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                2. Fields &amp; Message Content
-              </button>
-              <button
-                type="button"
-                onClick={() => setAuditTab('raw')}
-                className={`py-2 px-3 text-xs font-bold border-b-2 transition-all ${
-                  auditTab === 'raw'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                3. Raw Database Audit
-              </button>
-            </div>
-
-            {/* Modal Body with Scroll */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
-              {auditTab === 'visual' && (
-                <div className="space-y-3">
-                  {/* Recipient / CC / BCC Quick Meta Strip */}
-                  <div className="rounded-xl border border-border/80 bg-muted/30 p-3 text-xs space-y-1.5">
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 pb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">To:</span>
-                        <span className="font-bold text-foreground">{selectedAuditLog.recipient_name}</span>
-                        <span className="font-mono text-primary text-[11px]">&lt;{selectedAuditLog.recipient_email}&gt;</span>
-                      </div>
-                      <span className="font-mono text-[10px] text-muted-foreground">
-                        ID: {selectedAuditLog.provider_message_id || '—'}
-                      </span>
-                    </div>
-
-                    {(selectedAuditLog.cc || selectedAuditLog.bcc) && (
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 pt-0.5">
-                        {selectedAuditLog.cc && (
-                          <div className="flex items-center space-x-1.5 text-[11px]">
-                            <span className="font-bold text-muted-foreground">CC:</span>
-                            <span className="font-mono text-foreground">{selectedAuditLog.cc}</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopy(selectedAuditLog.cc!, 'vis_cc')}
-                              className="text-muted-foreground hover:text-foreground p-0.5"
-                              title="Copy CC"
-                            >
-                              {copiedAuditField === 'vis_cc' ? (
-                                <Check className="h-3 w-3 text-emerald-500" />
-                              ) : (
-                                <Copy className="h-3 w-3" />
-                              )}
-                            </button>
-                          </div>
-                        )}
-                        {selectedAuditLog.bcc && (
-                          <div className="flex items-center space-x-1.5 text-[11px]">
-                            <span className="font-bold text-muted-foreground">BCC:</span>
-                            <span className="font-mono text-foreground">{selectedAuditLog.bcc}</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopy(selectedAuditLog.bcc!, 'vis_bcc')}
-                              className="text-muted-foreground hover:text-foreground p-0.5"
-                              title="Copy BCC"
-                            >
-                              {copiedAuditField === 'vis_bcc' ? (
-                                <Check className="h-3 w-3 text-emerald-500" />
-                              ) : (
-                                <Copy className="h-3 w-3" />
-                              )}
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="rounded-xl border border-border bg-slate-100 dark:bg-slate-900 p-3 sm:p-4">
-                    {selectedAuditLog.rendered_html ? (
-                      <iframe
-                        srcDoc={selectedAuditLog.rendered_html}
-                        title="Delivered Email"
-                        className="w-full min-h-[460px] rounded-lg bg-white border border-slate-200"
-                      />
-                    ) : (
-                      <div className="p-8 text-center text-xs text-muted-foreground">
-                        No cached visual HTML for this log.
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {auditTab === 'fields' && (
-                <div className="space-y-3 text-xs">
-                  <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-[11px] font-bold text-muted-foreground uppercase">
-                        Subject Line
-                      </span>
-                      <button
-                        onClick={() => handleCopy(selectedAuditLog.subject, 'subj')}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        {copiedAuditField === 'subj' ? (
-                          <Check className="h-3.5 w-3.5 text-emerald-500" />
-                        ) : (
-                          <Copy className="h-3.5 w-3.5" />
-                        )}
-                      </button>
-                    </div>
-                    <p className="font-bold text-foreground text-sm">{selectedAuditLog.subject}</p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-                      <span className="text-[11px] font-bold text-muted-foreground uppercase">
-                        Recipient
-                      </span>
-                      <p className="font-semibold text-foreground mt-1">
-                        {selectedAuditLog.recipient_name}
-                      </p>
-                      <p className="font-mono text-primary text-[11px]">
-                        {selectedAuditLog.recipient_email}
-                      </p>
-                    </div>
-                    <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-                      <span className="text-[11px] font-bold text-muted-foreground uppercase">
-                        Template Used
-                      </span>
-                      <p className="font-semibold text-foreground mt-1">
-                        {selectedAuditLog.template_used}
-                      </p>
-                      <p className="font-mono text-muted-foreground text-[10px] mt-0.5">
-                        ID: {selectedAuditLog.provider_message_id || '—'}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* CC and BCC Audit Cards */}
-                  {(selectedAuditLog.cc || selectedAuditLog.bcc) && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {selectedAuditLog.cc && (
-                        <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-[11px] font-bold text-muted-foreground uppercase">
-                              Carbon Copy (CC)
-                            </span>
-                            <button
-                              onClick={() => handleCopy(selectedAuditLog.cc!, 'f_cc')}
-                              className="text-muted-foreground hover:text-foreground"
-                              title="Copy CC"
-                            >
-                              {copiedAuditField === 'f_cc' ? (
-                                <Check className="h-3.5 w-3.5 text-emerald-500" />
-                              ) : (
-                                <Copy className="h-3.5 w-3.5" />
-                              )}
-                            </button>
-                          </div>
-                          <p className="font-mono text-foreground text-[11px] break-all">
-                            {selectedAuditLog.cc}
-                          </p>
-                        </div>
-                      )}
-                      {selectedAuditLog.bcc && (
-                        <div className="rounded-xl border border-border/70 bg-muted/30 p-3">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="text-[11px] font-bold text-muted-foreground uppercase">
-                              Blind Carbon Copy (BCC)
-                            </span>
-                            <button
-                              onClick={() => handleCopy(selectedAuditLog.bcc!, 'f_bcc')}
-                              className="text-muted-foreground hover:text-foreground"
-                              title="Copy BCC"
-                            >
-                              {copiedAuditField === 'f_bcc' ? (
-                                <Check className="h-3.5 w-3.5 text-emerald-500" />
-                              ) : (
-                                <Copy className="h-3.5 w-3.5" />
-                              )}
-                            </button>
-                          </div>
-                          <p className="font-mono text-foreground text-[11px] break-all">
-                            {selectedAuditLog.bcc}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5">
-                    <div className="flex justify-between items-center mb-1.5">
-                      <span className="text-[11px] font-bold text-muted-foreground uppercase">
-                        Body Content
-                      </span>
-                      <button
-                        onClick={() => handleCopy(selectedAuditLog.body_paragraphs, 'body')}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        {copiedAuditField === 'body' ? (
-                          <Check className="h-3.5 w-3.5 text-emerald-500" />
-                        ) : (
-                          <Copy className="h-3.5 w-3.5" />
-                        )}
-                      </button>
-                    </div>
-                    <div className="whitespace-pre-wrap leading-relaxed text-foreground bg-card p-3 rounded-lg border border-border/60">
-                      {selectedAuditLog.body_paragraphs}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {auditTab === 'raw' && (
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-muted-foreground font-mono">
-                      Database Payload JSON (Supabase &amp; Vault)
-                    </span>
-                    <button
-                      onClick={() =>
-                        handleCopy(JSON.stringify(selectedAuditLog, null, 2), 'rawJson')
-                      }
-                      className="inline-flex items-center space-x-1 text-xs text-primary hover:underline"
-                    >
-                      {copiedAuditField === 'rawJson' ? (
-                        <Check className="h-3.5 w-3.5 text-emerald-500" />
-                      ) : (
-                        <Copy className="h-3.5 w-3.5" />
-                      )}
-                      <span>Copy Raw JSON</span>
-                    </button>
-                  </div>
-                  <pre className="rounded-xl border border-border bg-muted/60 p-4 text-[11px] font-mono text-foreground overflow-x-auto max-h-[360px]">
-                    {JSON.stringify(selectedAuditLog, null, 2)}
-                  </pre>
-                </div>
-              )}
-            </div>
-
-            {/* Modal Footer Actions */}
-            <div className="p-4 border-t border-border/70 flex items-center justify-between gap-3 bg-muted/20">
-              <button
-                type="button"
-                onClick={(e) => handleDeleteLogClick(selectedAuditLog, e)}
-                className="inline-flex items-center space-x-1.5 rounded-xl border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs font-semibold text-red-500 hover:bg-red-500/20 transition-colors"
-              >
-                <Trash2 className="h-3.5 w-3.5" />
-                <span>Delete From Logs</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSelectedAuditLog(null)}
-                className="rounded-xl border border-border px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted"
-              >
-                Close Audit
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
 export default AdminEmailStudio;
+
