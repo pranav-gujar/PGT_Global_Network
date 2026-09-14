@@ -19,7 +19,8 @@ import {
   MessageCircle,
 } from "lucide-react";
 import AnimatedCard from "../components/AnimatedCard";
-import { articles } from "../data/articles"; 
+import { articles as initialArticles, Article } from "../data/articles"; 
+import { getPublicArticleBySlug } from '../services/articlesService';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';
 
@@ -30,6 +31,10 @@ const ArticleDetail = () => {
   const [shareDropdownOpen, setShareDropdownOpen] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
   const shareContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const [blogPost, setBlogPost] = React.useState<Article | null>(() => {
+    return initialArticles.find((post) => post.slug === slug) || null;
+  });
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,7 +54,19 @@ const ArticleDetail = () => {
     };
   }, [shareDropdownOpen]);
 
-  const blogPost = articles.find((post) => post.slug === slug);
+  React.useEffect(() => {
+    let isMounted = true;
+    if (slug) {
+      getPublicArticleBySlug(slug).then((found) => {
+        if (isMounted && found) {
+          setBlogPost(found);
+        }
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
 
   const getTranslation = (key: string, fallback: any) => {
     const val = t(key);
@@ -199,13 +216,13 @@ const ArticleDetail = () => {
               </div>
             </div>
 
-            {/* Featured Image Premium Photo Card */}
+            {/* Featured Image Premium Photo Card - Complete Full Image Display */}
             <AnimatedCard animation="fadeIn" delay={450}>
-              <div className="relative max-w-4xl mx-auto mt-12 overflow-hidden rounded-3xl border border-border shadow-2xl shadow-slate-950/10 dark:shadow-none aspect-video group">
+              <div className="relative max-w-4xl mx-auto mt-12 overflow-hidden rounded-3xl border border-border shadow-2xl shadow-slate-950/10 dark:shadow-none bg-muted/20 flex items-center justify-center group">
                 <img
                   src={blogPost.image}
                   alt={translatedTitle}
-                  className="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700 ease-out"
+                  className="w-full h-auto max-h-[640px] object-contain rounded-3xl group-hover:scale-[1.005] transition-transform duration-700 ease-out"
                 />
               </div>
             </AnimatedCard>
@@ -238,16 +255,25 @@ const ArticleDetail = () => {
                     font-size: 1.125rem;
                     line-height: 1.85;
                     color: var(--muted-foreground);
-                    margin-bottom: 1.75rem;
+                    margin-top: 0 !important;
+                    margin-bottom: 1.75rem !important;
                     font-weight: 400;
                   }
-                  .blog-prose > p:first-of-type::first-letter {
-                    font-size: 3rem;
-                    font-weight: 900;
+                  .blog-prose p:last-child {
+                    margin-bottom: 0 !important;
+                  }
+                  .blog-prose > p:first-of-type::first-letter,
+                  .blog-prose p:first-of-type::first-letter {
+                    float: left;
+                    font-size: 3.15rem;
+                    line-height: 0.82;
+                    margin-top: 3px;
+                    margin-right: 8px;
+                    padding: 0;
+                    font-weight: 700;
                     color: #6366f1;
-                    font-family: var(--font-sans);
-                    margin-right: 0.08em;
-                    line-height: 1;
+                    font-family: 'Georgia', 'Cambria', 'Times New Roman', serif;
+                    text-transform: uppercase;
                   }
                   .blog-prose strong {
                     color: var(--foreground);

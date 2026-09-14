@@ -7,7 +7,8 @@ import AnimatedCard from '../components/AnimatedCard';
 import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { usePageLoading } from '../hooks/usePageLoading';
-import { articles } from '../data/articles';
+import { articles as initialArticles, Article } from '../data/articles';
+import { getPublicArticles } from '../services/articlesService';
 import { useLanguage } from '../contexts/LanguageContext';
 import SEO from '../components/SEO';
 import { getOrganizationSchema, getWebSiteSchema } from '../lib/schema';
@@ -19,6 +20,19 @@ import VoA from '../assets/programs/VoA.png';
 const Home = () => {
   const loading = usePageLoading();
   const { t } = useLanguage();
+  const [articlesList, setArticlesList] = React.useState<Article[]>(initialArticles);
+
+  React.useEffect(() => {
+    let isMounted = true;
+    getPublicArticles().then((data) => {
+      if (isMounted && data && data.length > 0) {
+        setArticlesList(data);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const coreValues = [
     {
@@ -323,7 +337,7 @@ const Home = () => {
           </AnimatedCard>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {articles.slice(0, 3).map((post, index) => (
+            {articlesList.slice(0, 3).map((post, index) => (
               <AnimatedCard key={post.id} animation="slideUp" delay={index * 150}>
                 <Link
                   to={`/articles/${post.slug}`}

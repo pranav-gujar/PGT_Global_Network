@@ -486,28 +486,18 @@ const Careers = () => {
                     </div>
                   </div>
 
-                  {/* CTA Button */}
+                  {/* CTA Button - Direct External Link */}
                   <div className="pt-2 relative z-10">
-                    {user ? (
-                      <a
-                        href="https://mentorship.pgtglobalnetwork.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-indigo-600 via-indigo-600 to-blue-600 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.01] transition-all duration-300 inline-flex items-center justify-center gap-2"
-                      >
-                        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
-                        Explore Mentorship
-                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                      </a>
-                    ) : (
-                      <button
-                        onClick={() => navigate(`/signin?redirect=${encodeURIComponent(location.pathname + location.search)}`)}
-                        className="w-full bg-muted/80 border border-border text-foreground hover:bg-muted hover:border-indigo-500/30 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 shadow-sm cursor-pointer"
-                      >
-                        Sign in to Apply
-                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                      </button>
-                    )}
+                    <a
+                      href="https://mentorship.pgtglobalnetwork.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-indigo-600 via-indigo-600 to-blue-600 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] hover:scale-[1.01] transition-all duration-300 inline-flex items-center justify-center gap-2"
+                    >
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
+                      Explore Mentorship
+                      <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    </a>
                   </div>
                 </div>
 
@@ -589,28 +579,18 @@ const Careers = () => {
                     </div>
                   </div>
 
-                  {/* CTA Button */}
+                  {/* CTA Button - Direct External Link */}
                   <div className="pt-2 relative z-10">
-                    {user ? (
-                      <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSftcJxHfGfY29pYBliDi__zniohipKYHq9zggpxKmM4FpsepQ/viewform?usp=dialog"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98] hover:scale-[1.01] transition-all duration-300 inline-flex items-center justify-center gap-2"
-                      >
-                        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
-                        Explore Internship
-                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                      </a>
-                    ) : (
-                      <button
-                        onClick={() => navigate(`/signin?redirect=${encodeURIComponent(location.pathname + location.search)}`)}
-                        className="w-full bg-muted/80 border border-border text-foreground hover:bg-muted hover:border-blue-500/30 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-all duration-300 shadow-sm cursor-pointer"
-                      >
-                        Sign in to Apply
-                        <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                      </button>
-                    )}
+                    <a
+                      href="https://docs.google.com/forms/d/e/1FAIpQLSftcJxHfGfY29pYBliDi__zniohipKYHq9zggpxKmM4FpsepQ/viewform?usp=dialog"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-600 to-indigo-600 text-white px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98] hover:scale-[1.01] transition-all duration-300 inline-flex items-center justify-center gap-2"
+                    >
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-shimmer-btn pointer-events-none" />
+                      Explore Internship
+                      <ExternalLink className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    </a>
                   </div>
                 </div>
 

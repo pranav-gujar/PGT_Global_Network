@@ -141,29 +141,47 @@ const Apply: React.FC = () => {
       const resumeUrl = urlData.publicUrl;
       setUploadProgress(80);
 
-      // 2. Insert Application details into Database
-      const { error: insertError } = await supabase
+      // 2. Insert Application details into Database (handles both modern applicant_details and legacy schema)
+      const payloadDetails = {
+        full_name: fullName,
+        phone_number: phone,
+        organization_institution: organizationInstitution,
+        current_role: currentRole,
+        highest_qualification: highestQualification,
+        city_state: cityState,
+        why_join: whyJoin,
+        skills: skills,
+        previous_experience: previousExperience,
+        portfolio_links: portfolioLinks,
+        availability: availability,
+        resume_url: resumeUrl,
+        applied_at: new Date().toISOString()
+      };
+
+      let { error: insertError } = await supabase
         .from("applications")
         .insert({
           user_id: user.id,
           position_title: positionTitle,
-          position_type: "job",
-          application_data: {
-            full_name: fullName,
-            phone_number: phone,
-            organization_institution: organizationInstitution,
-            current_role: currentRole,
-            highest_qualification: highestQualification,
-            city_state: cityState,
-            why_join: whyJoin,
-            skills: skills,
-            previous_experience: previousExperience,
-            portfolio_links: portfolioLinks,
-            availability: availability,
-            resume_url: resumeUrl,
-            applied_at: new Date().toISOString()
-          }
+          resume_url: resumeUrl,
+          status: "Submitted",
+          applicant_details: payloadDetails
         });
+
+      // If database has legacy application_data column instead of applicant_details
+      if (insertError && insertError.message?.includes("applicant_details")) {
+        console.warn("[Apply] Retrying with legacy application_data schema...", insertError.message);
+        const retry = await supabase
+          .from("applications")
+          .insert({
+            user_id: user.id,
+            position_title: positionTitle,
+            resume_url: resumeUrl,
+            status: "Submitted",
+            application_data: payloadDetails
+          });
+        insertError = retry.error;
+      }
 
       if (insertError) throw insertError;
       setUploadProgress(100);

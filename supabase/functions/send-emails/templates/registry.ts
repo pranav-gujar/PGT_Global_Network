@@ -81,5 +81,16 @@ export const directHandlers: Record<
       recipient: payload.recipient,
       ...payload.data,
     });
+  },
+
+  "executive_email_studio": (payload: DirectPayload) => {
+    return {
+      to: payload.recipient,
+      from: payload.data?.from || "PGT Global Network Team <office@pgtglobalnetwork.com>",
+      subject: payload.data?.subject || "PGT Global Network Executive Communication",
+      html: payload.data?.html || "<p>PGT Global Network Executive Dispatch</p>",
+      emailType: "executive_email_studio",
+      relatedId: payload.data?.relatedId,
+    };
   }
 };

@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search, Calendar, User, ArrowRight, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedCard from '../components/AnimatedCard';
-import { articles, Article } from '../data/articles'; 
+import { articles as initialArticles, Article } from '../data/articles'; 
+import { getPublicArticles } from '../services/articlesService';
 import HeroBackground from '../components/HeroBackground';
 import Background from '../components/Background';
 import LoadingSpinner from '../components/LoadingSpinner'; 
@@ -15,8 +16,35 @@ const Articles = () => {
   const loading = usePageLoading();
   const { t } = useLanguage();
   
+  const [articlesList, setArticlesList] = useState<Article[]>(initialArticles);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchArticlesData = () => {
+      getPublicArticles().then((data) => {
+        if (isMounted && data && data.length > 0) {
+          setArticlesList(data);
+        }
+      });
+    };
+
+    fetchArticlesData();
+
+    const handleArticlesUpdate = () => {
+      fetchArticlesData();
+    };
+
+    window.addEventListener('storage', handleArticlesUpdate);
+    window.addEventListener('pgt-articles-updated', handleArticlesUpdate);
+
+    return () => {
+      isMounted = false;
+      window.removeEventListener('storage', handleArticlesUpdate);
+      window.removeEventListener('pgt-articles-updated', handleArticlesUpdate);
+    };
+  }, []);
 
   const getArticleTitle = (post: any) => {
     const key = `articles.list.${post.id}.title`;
@@ -37,24 +65,30 @@ const Articles = () => {
   };
 
   const categories = useMemo(() => {
-    return ['All', ...Array.from(new Set(articles.map(post => getArticleCategory(post))))];
-  }, [t]);
+    const rawCategories = articlesList
+      .map((post) => getArticleCategory(post))
+      .filter((c): c is string => Boolean(c && typeof c === 'string' && c.trim()));
+    const distinct = Array.from(new Set(rawCategories));
+    return ['All', ...distinct];
+  }, [articlesList, t]);
 
   const filteredPosts = useMemo(() => {
-    return articles.filter(post => {
+    return articlesList.filter((post) => {
       const title = getArticleTitle(post);
       const excerpt = getArticleExcerpt(post);
-      const category = getArticleCategory(post);
+      const category = getArticleCategory(post) || '';
 
       const matchesSearch =
         title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
         category.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesCategory = selectedCategory === 'All' || category === selectedCategory;
+
+      const matchesCategory =
+        selectedCategory === 'All' ||
+        category.trim().toLowerCase() === selectedCategory.trim().toLowerCase();
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory, t]);
+  }, [articlesList, searchTerm, selectedCategory, t]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -134,33 +168,57 @@ const Articles = () => {
       <section className="py-6 bg-background/80 backdrop-blur-md sticky top-20 z-40 border-b border-border transition-all duration-305">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedCard animation="slideUp">
-            <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-              {/* Search Bar */}
-              <div className="relative flex-1 max-w-md w-full">
-                <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-                <input
-                  type="text"
-                  placeholder={t('articles.searchPlaceholder')}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm transition-all duration-305 text-foreground"
-                />
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                {/* Search Bar */}
+                <div className="relative flex-1 max-w-md w-full">
+                  <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+                  <input
+                    type="text"
+                    placeholder={t('articles.searchPlaceholder')}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm transition-all duration-305 text-foreground"
+                  />
+                </div>
+
+                {/* Category Dropdown Filter */}
+                <div className="flex items-center gap-2 w-full md:w-auto justify-end">
+                  <Filter className="h-4 w-4 text-muted-foreground" />
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-card text-sm text-foreground transition-all duration-300 w-full md:w-auto font-medium cursor-pointer"
+                  >
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              {/* Category Filter */}
-              <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-                <Filter className="h-4 w-4 text-muted-foreground" />
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="px-4 py-2.5 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 bg-card text-sm text-foreground transition-all duration-300 w-full md:w-auto"
-                >
-                  {categories.map(category => (
-                    <option key={category} value={category}>
+              {/* Dynamic Category Chips for Instant 1-Click Filtering */}
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 no-scrollbar">
+                {categories.map((category) => {
+                  const isActive =
+                    selectedCategory.trim().toLowerCase() === category.trim().toLowerCase();
+                  return (
+                    <button
+                      key={category}
+                      type="button"
+                      onClick={() => setSelectedCategory(category)}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+                        isActive
+                          ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 ring-1 ring-indigo-500'
+                          : 'bg-card text-muted-foreground hover:text-foreground hover:bg-muted border border-border/80'
+                      }`}
+                    >
                       {category}
-                    </option>
-                  ))}
-                </select>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </AnimatedCard>
@@ -185,7 +243,7 @@ const Articles = () => {
                   {/* Featured Cover Image */}
                   <div className="flex-1 overflow-hidden rounded-2xl border border-border relative group aspect-video lg:aspect-auto lg:h-[400px]">
                     <img
-                      src={featuredPost.image}
+                      src={(featuredPost as any).card_image || featuredPost.image}
                       alt={getArticleTitle(featuredPost)}
                       className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                     />
@@ -258,7 +316,7 @@ const Articles = () => {
                         {/* Cover thumbnail */}
                         <div className="aspect-video relative overflow-hidden bg-muted rounded-t-2xl border-b border-border">
                           <img
-                            src={post.image}
+                            src={(post as any).card_image || post.image}
                             alt={getArticleTitle(post)}
                             className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500 ease-out"
                           />

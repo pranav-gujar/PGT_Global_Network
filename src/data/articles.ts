@@ -9,6 +9,7 @@ export interface Article {
   category: string;
   readTime: string;
   image: string;
+  card_image?: string;
   tags: string[];
 }
 
@@ -67,7 +68,7 @@ export const articles: Article[] = [
       <br> <p>As these trends gain momentum, it becomes clear that the role of students in global development is not marginal—it is essential. By empowering them with resources, mentorship, and opportunities, society can unlock the full potential of youth leadership. The future of development is bright, and it is driven by purpose, innovation, and next-generation leadership.</p>
     `,
     author: 'Pranav Gujar',
-    date: '2025-02-18',
+    date: '2024-02-18',
     category: 'Development',
     readTime: '5 min read',
     image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -107,7 +108,7 @@ export const articles: Article[] = [
       <br> <p>As classrooms continue to innovate, the goal remains clear: to create learning spaces that are inclusive, dynamic, and impactful. The future of education lies in embracing change, fostering creativity, and ensuring that every student is prepared for the challenges and opportunities of tomorrow.</p>
     `,
     author: 'Pranav Gujar',
-    date: '2025-07-09',
+    date: '2024-05-09',
     category: 'Education',
     readTime: '8 min read',
     image: 'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',

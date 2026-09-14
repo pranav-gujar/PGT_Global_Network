@@ -259,6 +259,272 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* ==========================================================================
+   Admin Portal Smooth Experience & Micro-Animations System
+   Hardware accelerated with cubic-bezier spring easing
+   ========================================================================== */
 
+@keyframes admin-page-enter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.995);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0px);
+  }
+}
 
+@keyframes admin-card-rise {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes admin-modal-backdrop-in {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes admin-modal-panel-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.96);
+  }
+  70% {
+    transform: translate3d(0, -2px, 0) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes admin-modal-drawer-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes admin-shimmer-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes admin-ambient-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+/* Base animation utility classes */
+.animate-admin-page {
+  animation: admin-page-enter 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity, filter;
+}
+
+.animate-admin-card {
+  animation: admin-card-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-admin-modal-backdrop {
+  animation: admin-modal-backdrop-in 0.28s ease-out forwards;
+}
+
+.animate-admin-modal-panel {
+  animation: admin-modal-panel-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-admin-modal-drawer {
+  animation: admin-modal-drawer-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-admin-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: admin-shimmer-sweep 1.8s infinite ease-in-out;
+}
+
+.animate-admin-ambient {
+  animation: admin-ambient-pulse 6s infinite ease-in-out;
+}
+
+/* Stagger delays for smooth sequential cascading card reveal */
+.stagger-1 { animation-delay: 0.04s; }
+.stagger-2 { animation-delay: 0.08s; }
+.stagger-3 { animation-delay: 0.12s; }
+.stagger-4 { animation-delay: 0.16s; }
+.stagger-5 { animation-delay: 0.20s; }
+.stagger-6 { animation-delay: 0.24s; }
+.stagger-7 { animation-delay: 0.28s; }
+.stagger-8 { animation-delay: 0.32s; }
+.stagger-9 { animation-delay: 0.36s; }
+
+/* Interactive micro-interaction utilities */
+.admin-card-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+.admin-card-hover:hover {
+  transform: translateY(-4px);
+}
+
+.admin-btn-press {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.2s ease,
+              background-color 0.2s ease;
+  will-change: transform;
+}
+
+.admin-btn-press:active {
+  transform: scale(0.96);
+}
+
+.admin-input-smooth {
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              background-color 0.2s ease;
+}
+
+.admin-input-smooth:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* ==========================================================================
+   Editorial Content & Paragraph Spacing (.blog-prose)
+   ========================================================================== */
+.blog-prose p {
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: var(--muted-foreground);
+  margin-top: 0 !important;
+  margin-bottom: 1.75rem !important;
+  font-weight: 400;
+}
+
+.blog-prose p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.blog-prose h1,
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4 {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  color: var(--foreground);
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.blog-prose h1 { font-size: 2.25rem; }
+.blog-prose h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.blog-prose h3 { font-size: 1.375rem; }
+
+.blog-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.blog-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+.blog-prose blockquote {
+  border-left: 4px solid #6366f1;
+  padding-left: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+  font-style: italic;
+  color: var(--foreground);
+}
+
+/* ==========================================================================
+   Editorial Drop Cap (First letter of 1st paragraph)
+   Refined serif styling so letters like 'I' look like proper editorial letters
+   rather than plain solid rectangles, with natural kerning to the rest of word.
+   ========================================================================== */
+.blog-prose > p:first-of-type::first-letter,
+.blog-prose p:first-of-type::first-letter,
+.article-drop-cap > p:first-of-type::first-letter,
+.article-drop-cap p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.15rem;
+  line-height: 0.82;
+  margin-top: 3px;
+  margin-right: 8px;
+  padding: 0;
+  font-weight: 700;
+  color: #6366f1;
+  font-family: 'Georgia', 'Cambria', 'Times New Roman', serif;
+  text-transform: uppercase;
+}
+
+/* Sleek Admin Modal Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.25);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.45);
+}
 

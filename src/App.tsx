@@ -44,6 +44,9 @@ import ResetPassword from './pages/auth/ResetPassword';
 import VerifyEmail from './pages/auth/VerifyEmail';
 import ProtectedRoute from './components/ProtectedRoute';
 
+// Admin Portal Root
+import AdminRoot from './admin/AdminRoot';
+
 const AppContent = () => {
   useScrollToTop();
   const loading = usePageLoading();
@@ -65,18 +68,22 @@ const AppContent = () => {
     };
   }, [navigate]);
 
+  const isAdminPage = location.pathname.startsWith('/admin');
   const isAuthPage = ['/signin', '/signup', '/forgot-password', '/reset-password', '/verify-email'].includes(location.pathname);
+  const isPublicChrome = !isAuthPage && !isAdminPage;
   
   return (
     <>
-      <a 
-        href="#main-content" 
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-      >
-        Skip to main content
-      </a>
-      {loading && <LoadingSpinner />}
-      {!isAuthPage && <Navbar />}
+      {!isAdminPage && (
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          Skip to main content
+        </a>
+      )}
+      {!isAdminPage && loading && <LoadingSpinner />}
+      {isPublicChrome && <Navbar />}
       <main id="main-content" tabIndex={-1} className="outline-none">
         <ErrorBoundary>
           <Routes>
@@ -108,16 +115,19 @@ const AppContent = () => {
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/apply" element={<ProtectedRoute><Apply /></ProtectedRoute>} />
 
+            {/* Stealth Admin Portal (Founder Only) */}
+            <Route path="/admin/*" element={<AdminRoot />} />
+
             {/* Error and fallback routes */}
             <Route path="/error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ErrorBoundary>
       </main>
-      {!isAuthPage && <Footer />}
-      {!isAuthPage && <ScrollToTop />}
-      <CookieConsent />
-      <PgtAssistant />
+      {isPublicChrome && <Footer />}
+      {isPublicChrome && <ScrollToTop />}
+      {!isAdminPage && <CookieConsent />}
+      {!isAdminPage && <PgtAssistant />}
       <Toaster 
         position="top-right"
         toastOptions={{
