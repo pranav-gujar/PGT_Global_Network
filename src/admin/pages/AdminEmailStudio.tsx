@@ -723,39 +723,6 @@ $$;`;
                   : ''
               }
 
-              <!-- Attached Documents Box (Invisible if no attachments) -->
-              ${
-                attachments.length > 0
-                  ? `<div style="margin: 30px 0 24px 0; padding: 16px 20px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;">
-                <table border="0" cellspacing="0" cellpadding="0" width="100%">
-                  <tr>
-                    <td style="padding-bottom: 10px; font-size: 11.5px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.6px;">
-                      &#128206; Attached Documents (${attachments.length})
-                    </td>
-                  </tr>
-                  ${attachments
-                    .map(
-                      (att) => `<tr>
-                    <td style="padding: 8px 0; font-size: 13px; color: #1e293b; border-top: 1px dashed #e2e8f0;">
-                      <table border="0" cellspacing="0" cellpadding="0" width="100%">
-                        <tr>
-                          <td style="color: #0f172a; font-weight: 600;">
-                            ${att.name}
-                          </td>
-                          <td align="right" style="color: #64748b; font-size: 11.5px; font-family: monospace;">
-                            ${formatFileSize(att.size)}
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>`
-                    )
-                    .join('')}
-                </table>
-              </div>`
-                  : ''
-              }
-
               <!-- Executive Sign-off Block (Invisible if all sign-off fields are empty) -->
               ${
                 hasSignoff
@@ -2119,7 +2086,14 @@ $$;`;
                     mail.pgtglobalnetwork.com/preview
                   </div>
                 </div>
-                <span className="text-[10px] font-mono text-muted-foreground">100%</span>
+                {attachments.length > 0 ? (
+                  <span className="inline-flex items-center space-x-1 text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/20">
+                    <Paperclip className="h-2.5 w-2.5" />
+                    <span>{attachments.length} file{attachments.length > 1 ? 's' : ''} attached</span>
+                  </span>
+                ) : (
+                  <span className="text-[10px] font-mono text-muted-foreground">100%</span>
+                )}
               </div>
 
               {/* Scrollable Email Canvas */}
@@ -2193,29 +2167,6 @@ $$;`;
                       </div>
                     )}
 
-                    {/* Attached Documents (Invisible if no attachments) */}
-                    {attachments.length > 0 && (
-                      <div className="my-3 rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-slate-700">
-                        <div className="flex items-center space-x-1.5 text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">
-                          <Paperclip className="h-3.5 w-3.5 text-indigo-600" />
-                          <span>Attachments ({attachments.length})</span>
-                        </div>
-                        <div className="space-y-1.5">
-                          {attachments.map((att) => (
-                            <div
-                              key={att.id}
-                              className="flex items-center justify-between py-1 px-2.5 rounded-lg bg-white border border-slate-200 text-[11.5px]"
-                            >
-                              <span className="font-semibold text-slate-800 truncate max-w-[210px]" title={att.name}>
-                                {att.name}
-                              </span>
-                              <span className="text-[10px] font-mono text-slate-500">{formatFileSize(att.size)}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
                     {/* Sign-off (Invisible if all sign-off fields are empty) */}
                     {(senderName.trim() || senderRole.trim() || companyName.trim() || officialWebsiteUrl.trim()) && (
                       <div className="pt-5 border-t border-slate-100 space-y-0.5 text-slate-600">
@@ -2259,12 +2210,21 @@ $$;`;
           ) : (
             /* Smartphone Frame */
             <div className="mx-auto w-[290px] sm:w-[320px] rounded-[38px] border-[6px] border-slate-800 bg-slate-900 shadow-2xl p-2 transition-all">
-              {/* Speaker Notch */}
-              <div className="flex justify-center mb-1">
-                <div className="h-3 w-20 rounded-full bg-slate-800 flex items-center justify-center">
-                  <span className="h-1.5 w-1.5 rounded-full bg-slate-700 mr-2" />
-                  <span className="h-1 w-6 rounded-full bg-slate-700" />
+              {/* Speaker Notch & Status Bar */}
+              <div className="flex justify-between items-center px-3 mb-1">
+                <span className="text-[9px] font-mono text-slate-400">9:41</span>
+                <div className="h-3 w-16 rounded-full bg-slate-800 flex items-center justify-center">
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-700 mr-1.5" />
+                  <span className="h-1 w-5 rounded-full bg-slate-700" />
                 </div>
+                {attachments.length > 0 ? (
+                  <span className="inline-flex items-center space-x-0.5 text-[9px] text-indigo-400 font-semibold" title={`${attachments.length} attached file(s)`}>
+                    <Paperclip className="h-2.5 w-2.5" />
+                    <span>{attachments.length}</span>
+                  </span>
+                ) : (
+                  <span className="text-[9px] text-slate-400 font-mono">5G</span>
+                )}
               </div>
 
               {/* Phone Screen Canvas */}
@@ -2328,29 +2288,6 @@ $$;`;
                       <span className="inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-4 py-2 text-[10.5px] font-bold text-white shadow-xs">
                         {ctaText.trim()} &nbsp;&rarr;
                       </span>
-                    </div>
-                  )}
-
-                  {/* Attachments for mobile frame */}
-                  {attachments.length > 0 && (
-                    <div className="my-2 rounded-lg border border-slate-200 bg-slate-50/80 p-2 text-slate-700">
-                      <div className="flex items-center space-x-1 text-[9.5px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        <Paperclip className="h-3 w-3 text-indigo-600" />
-                        <span>Attachments ({attachments.length})</span>
-                      </div>
-                      <div className="space-y-1">
-                        {attachments.map((att) => (
-                          <div
-                            key={att.id}
-                            className="flex items-center justify-between py-0.5 px-1.5 rounded bg-white border border-slate-200 text-[10px]"
-                          >
-                            <span className="font-semibold text-slate-800 truncate max-w-[140px]" title={att.name}>
-                              {att.name}
-                            </span>
-                            <span className="text-[9px] font-mono text-slate-500">{formatFileSize(att.size)}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   )}
 
