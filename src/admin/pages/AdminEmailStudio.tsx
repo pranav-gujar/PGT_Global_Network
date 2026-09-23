@@ -26,18 +26,54 @@ import {
   AlertCircle,
   ChevronDown,
   ChevronUp,
+  Paperclip,
+  UploadCloud,
+  File,
+  Download,
+  Image as ImageIcon,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { supabase } from '../../lib/supabase';
 import {
   EmailTemplate,
   EmailStudioLog,
+  EmailAttachmentItem,
 } from '../types';
 import {
   fetchEmailLogs,
   recordEmailLog,
   deleteEmailLog,
 } from '../services/adminDataService';
+
+// Format bytes into readable string (e.g. 245 KB, 1.2 MB)
+export const formatFileSize = (bytes: number): string => {
+  if (!bytes || bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
+};
+
+// Categorize attachment for icon rendering
+export const getAttachmentFileCategory = (filename: string, mimeType: string) => {
+  const ext = filename.split('.').pop()?.toLowerCase() || '';
+  if (['png', 'jpg', 'jpeg', 'webp', 'gif', 'svg'].includes(ext) || mimeType.startsWith('image/')) {
+    return 'image';
+  }
+  if (ext === 'pdf' || mimeType.includes('pdf')) {
+    return 'pdf';
+  }
+  if (['doc', 'docx', 'rtf', 'txt', 'odt'].includes(ext) || mimeType.includes('word') || mimeType.includes('document')) {
+    return 'doc';
+  }
+  if (['xls', 'xlsx', 'csv'].includes(ext) || mimeType.includes('excel') || mimeType.includes('spreadsheet')) {
+    return 'sheet';
+  }
+  if (['zip', 'rar', '7z', 'tar', 'gz'].includes(ext) || mimeType.includes('zip') || mimeType.includes('archive')) {
+    return 'archive';
+  }
+  return 'file';
+};
 
 interface AdminEmailStudioProps {
   initialRecipient?: {
@@ -165,7 +201,77 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
   const [ctaText, setCtaText] = useState<string>('');
   const [ctaUrl, setCtaUrl] = useState<string>('');
 
-  // Step 4: Sender Sign-off & Footer State (PGT Global Network Executive Office)
+  // Step 4: Attachments State (PDF, Docs, Images, etc.)
+  const [attachments, setAttachments] = useState<EmailAttachmentItem[]>([]);
+  const [isDraggingFile, setIsDraggingFile] = useState<boolean>(false);
+
+  // Add files to attachments state (reads as Base64)
+  const handleAddFiles = (fileList: FileList | null) => {
+    if (!fileList || fileList.length === 0) return;
+    const maxFiles = 10;
+    if (attachments.length + fileList.length > maxFiles) {
+      toast.error(`You can attach up to ${maxFiles} files per email.`);
+      return;
+    }
+
+    const filesArray = Array.from(fileList);
+    let countSuccess = 0;
+
+    filesArray.forEach((file) => {
+      // 10MB limit per file check
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error(`"${file.name}" exceeds 10MB limit.`);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64Data = e.target?.result as string;
+        const newAttachment: EmailAttachmentItem = {
+          id: `att_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+          name: file.name,
+          size: file.size,
+          type: file.type || 'application/octet-stream',
+          base64: base64Data,
+        };
+
+        setAttachments((prev) => [...prev, newAttachment]);
+        countSuccess++;
+        if (countSuccess === filesArray.length) {
+          toast.success(`Attached ${filesArray.length === 1 ? file.name : `${filesArray.length} files`}`);
+        }
+      };
+      reader.onerror = () => {
+        toast.error(`Failed to read "${file.name}"`);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleRemoveAttachment = (id: string) => {
+    setAttachments((prev) => prev.filter((a) => a.id !== id));
+    toast.success('Attachment removed', { duration: 1200 });
+  };
+
+  const handleClearAllAttachments = () => {
+    setAttachments([]);
+    toast.success('All attachments removed', { duration: 1200 });
+  };
+
+  const handleDownloadAttachmentItem = (att: EmailAttachmentItem) => {
+    if (!att.base64) {
+      toast.error('File content not available for download');
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = att.base64;
+    link.download = att.name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Step 5: Sender Sign-off & Footer State (PGT Global Network Executive Office)
   const [senderName, setSenderName] = useState<string>('PGT Global Network Team');
   const [senderRole, setSenderRole] = useState<string>('Executive Office & Secretariat');
   const [companyName, setCompanyName] = useState<string>('PGT Global Network');
@@ -221,6 +327,68 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
   const [selectedAuditLog, setSelectedAuditLog] = useState<EmailStudioLog | null>(null);
   const [auditTab, setAuditTab] = useState<'visual' | 'fields' | 'raw'>('visual');
   const [copiedAuditField, setCopiedAuditField] = useState<string | null>(null);
+  const [dbSyncPending, setDbSyncPending] = useState<boolean>(false);
+  const [copiedSetupSql, setCopiedSetupSql] = useState<boolean>(false);
+
+  const EMAIL_STUDIO_SQL_SETUP = `-- PGT GLOBAL NETWORK • COMPLETE EMAIL STUDIO LOGS SETUP
+CREATE TABLE IF NOT EXISTS public.pgt_email_logs (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  recipient_email text NOT NULL,
+  recipient_name text,
+  cc text,
+  bcc text,
+  subject text NOT NULL,
+  headline text,
+  body_paragraphs text NOT NULL,
+  cta_text text,
+  cta_url text,
+  template_used text DEFAULT 'Custom',
+  sender_name text DEFAULT 'PGT Global Network Team',
+  sender_role text DEFAULT 'Executive Management Office',
+  company_name text DEFAULT 'PGT Global Network',
+  website_url text DEFAULT 'https://pgtglobalnetwork.com',
+  footer_note text,
+  rendered_html text,
+  attachments jsonb DEFAULT '[]'::jsonb,
+  status text DEFAULT 'Delivered',
+  provider_message_id text,
+  created_at timestamptz DEFAULT now()
+);
+
+ALTER TABLE public.pgt_email_logs 
+ADD COLUMN IF NOT EXISTS attachments jsonb DEFAULT '[]'::jsonb;
+
+ALTER TABLE public.pgt_email_logs ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can view email logs" ON public.pgt_email_logs;
+DROP POLICY IF EXISTS "Public can insert email logs" ON public.pgt_email_logs;
+DROP POLICY IF EXISTS "Public can delete email logs" ON public.pgt_email_logs;
+DROP POLICY IF EXISTS "Allow anon all on email logs" ON public.pgt_email_logs;
+
+CREATE POLICY "Allow anon all on email logs"
+  ON public.pgt_email_logs
+  FOR ALL
+  TO public
+  USING (true)
+  WITH CHECK (true);
+
+CREATE INDEX IF NOT EXISTS idx_pgt_email_logs_created_at
+  ON public.pgt_email_logs (created_at DESC);
+
+CREATE OR REPLACE FUNCTION public.get_admin_email_logs()
+RETURNS SETOF public.pgt_email_logs
+LANGUAGE sql
+SECURITY DEFINER
+AS $$
+  SELECT * FROM public.pgt_email_logs ORDER BY created_at DESC;
+$$;`;
+
+  const handleCopySetupSql = () => {
+    navigator.clipboard.writeText(EMAIL_STUDIO_SQL_SETUP);
+    setCopiedSetupSql(true);
+    toast.success('SQL setup script copied! Paste and run in Supabase SQL Editor.', { duration: 4500 });
+    setTimeout(() => setCopiedSetupSql(false), 3000);
+  };
 
   // Load Email Logs
   const loadLogs = async () => {
@@ -228,6 +396,9 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     try {
       const res = await fetchEmailLogs();
       setLogs(res.data);
+      if (res.needsMigration !== undefined) {
+        setDbSyncPending(!!res.needsMigration);
+      }
     } catch (err) {
       console.error('Error fetching email logs:', err);
     } finally {
@@ -298,16 +469,35 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
       setBodyParagraphs('');
       setCtaText('');
       setCtaUrl('');
+      setSenderName('PGT Global Network Team');
+      setSenderRole('Executive Office & Secretariat');
+      setCompanyName('PGT Global Network');
+      setOfficialWebsiteUrl('https://www.pgtglobalnetwork.com/');
+      setFooterNote('PGT Global Network. Official executive communication. Confidential and privileged.');
+      setAttachments([]);
       toast.success('Selected Blank / Custom Email', { duration: 1500 });
       return;
     }
 
-    setSubject(tmpl.subject);
-    setHeadline(tmpl.headline);
-    setBodyParagraphs(tmpl.body);
+    setSubject(tmpl.subject || '');
+    setHeadline(tmpl.headline || '');
+    setBodyParagraphs(tmpl.body || '');
     setCtaText(tmpl.ctaText || '');
     setCtaUrl(tmpl.ctaUrl || '');
-    toast.success(`Applied template: ${tmpl.name}`, { duration: 1500 });
+    if (tmpl.senderName !== undefined) setSenderName(tmpl.senderName);
+    if (tmpl.senderRole !== undefined) setSenderRole(tmpl.senderRole);
+    if (tmpl.companyName !== undefined) setCompanyName(tmpl.companyName);
+    if (tmpl.officialWebsiteUrl !== undefined) setOfficialWebsiteUrl(tmpl.officialWebsiteUrl);
+    if (tmpl.footerNote !== undefined) setFooterNote(tmpl.footerNote);
+
+    // Restore attachments if any were saved with this template
+    if (tmpl.attachments && Array.isArray(tmpl.attachments) && tmpl.attachments.length > 0) {
+      setAttachments([...tmpl.attachments]);
+      toast.success(`Applied template: ${tmpl.name} (${tmpl.attachments.length} file${tmpl.attachments.length > 1 ? 's' : ''} restored)`, { duration: 2000 });
+    } else {
+      setAttachments([]);
+      toast.success(`Applied template: ${tmpl.name}`, { duration: 1500 });
+    }
   };
 
   // Save current as custom template
@@ -325,6 +515,12 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
       body: bodyParagraphs,
       ctaText,
       ctaUrl,
+      senderName,
+      senderRole,
+      companyName,
+      officialWebsiteUrl,
+      footerNote,
+      attachments: attachments.map((a) => ({ ...a })),
       isCustom: true,
     };
 
@@ -333,13 +529,24 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     try {
       localStorage.setItem(CUSTOM_TEMPLATES_STORAGE_KEY, JSON.stringify(updated));
     } catch (e) {
-      console.error(e);
+      console.warn('Storage quota warning when saving template:', e);
+      try {
+        const lightweight = updated.map((t) => ({
+          ...t,
+          attachments: t.attachments?.map((a) => ({ id: a.id, name: a.name, size: a.size, type: a.type, base64: a.base64 })),
+        }));
+        localStorage.setItem(CUSTOM_TEMPLATES_STORAGE_KEY, JSON.stringify(lightweight));
+      } catch (innerErr) {
+        toast.error('Template saved in active session, but browser storage limit reached for files.');
+      }
     }
     setSelectedTemplateId(newTmpl.id);
     setIsSavingTemplateModalOpen(false);
     setNewTemplateName('');
     setNewTemplateDesc('');
-    toast.success(`Saved custom template: ${newTmpl.name}`);
+    toast.success(
+      `Saved custom template: ${newTmpl.name}${attachments.length > 0 ? ` with ${attachments.length} attachment(s)` : ''}`
+    );
   };
 
   // Delete custom template
@@ -373,13 +580,14 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     setBodyParagraphs('');
     setCtaText('');
     setCtaUrl('');
+    setAttachments([]);
     toast.success('Composer fields reset');
   };
 
-  // Premium Corporate HTML Generator (Clean, Top-Tier, No "Official Dispatch" text, Logo Only)
+  // Premium Corporate HTML Generator (Clean, Top-Tier, Invisible Empty Fields & Branded Attachments)
   const generateEmailHtml = (targetName: string, isPreview = false) => {
-    const greeting = targetName ? `Dear ${targetName},` : '';
-    const rawParagraphs = (bodyParagraphs || (isPreview ? 'Enter your message here...' : ''))
+    const greeting = targetName.trim() ? `Dear ${targetName.trim()},` : '';
+    const rawParagraphs = (bodyParagraphs || '')
       .split(/\n\s*\n/)
       .map((p) => p.trim())
       .filter(Boolean);
@@ -423,13 +631,27 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
       ? '/PGT New Logo Transparent.png'
       : 'https://pgtglobalnetwork.com/PGT%20New%20Logo%20Transparent.png';
 
+    const hasSignoff = !!(
+      senderName.trim() ||
+      senderRole.trim() ||
+      companyName.trim() ||
+      officialWebsiteUrl.trim()
+    );
+
+    const websiteDisplay = officialWebsiteUrl.trim()
+      ? officialWebsiteUrl.trim().replace(/^https?:\/\//i, '')
+      : '';
+    const websiteHref = officialWebsiteUrl.trim()
+      ? (officialWebsiteUrl.startsWith('http') ? officialWebsiteUrl : `https://${officialWebsiteUrl}`)
+      : '';
+
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>${subject || 'PGT Global Network Executive Communication'}</title>
+  <title>${subject.trim() || 'PGT Global Network Executive Communication'}</title>
 </head>
 <body style="margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #1e293b; -webkit-font-smoothing: antialiased;">
   
@@ -457,13 +679,13 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
             </td>
           </tr>
 
-          <!-- Banner / Headline (Optional) -->
+          <!-- Banner / Headline (Invisible if empty) -->
           ${
-            headline
+            headline.trim()
               ? `<tr>
             <td align="center" style="padding: 24px 40px 8px 40px;">
               <h1 style="margin: 0; font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1.35; letter-spacing: -0.4px; text-align: center;">
-                ${headline}
+                ${headline.trim()}
               </h1>
             </td>
           </tr>`
@@ -472,7 +694,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
 
           <!-- Body Content Area -->
           <tr>
-            <td style="padding: ${headline ? '16px' : '28px'} 44px 34px 44px; font-size: 15px; line-height: 1.8; color: #334155;">
+            <td style="padding: ${headline.trim() ? '16px' : '28px'} 44px 34px 44px; font-size: 15px; line-height: 1.8; color: #334155;">
               ${
                 greeting
                   ? `<p style="margin: 0 0 18px 0; font-weight: 700; color: #0f172a; font-size: 15px; letter-spacing: -0.1px;">${greeting}</p>`
@@ -481,59 +703,100 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
 
               ${formattedParagraphsHtml}
 
-              <!-- Call to Action Button (Optional, Beautifully Centered) -->
+              <!-- Call to Action Button (Invisible if either ctaText or ctaUrl is empty) -->
               ${
-                ctaText && ctaUrl
+                ctaText.trim() && ctaUrl.trim()
                   ? `<div style="margin: 32px 0 28px 0; text-align: center;">
                 <table border="0" cellspacing="0" cellpadding="0" align="center">
                   <tr>
                     <td align="center" style="border-radius: 12px; background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%); box-shadow: 0 6px 18px rgba(79, 70, 229, 0.32);">
-                      <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="font-size: 14.5px; font-weight: 700; color: #ffffff; text-decoration: none; padding: 14px 32px; display: inline-block; letter-spacing: 0.2px;">
-                        ${ctaText} &nbsp;&rarr;
+                      <a href="${ctaUrl.trim()}" target="_blank" rel="noopener noreferrer" style="font-size: 14.5px; font-weight: 700; color: #ffffff; text-decoration: none; padding: 14px 32px; display: inline-block; letter-spacing: 0.2px;">
+                        ${ctaText.trim()} &nbsp;&rarr;
                       </a>
                     </td>
                   </tr>
                 </table>
                 <p style="margin: 12px 0 0 0; font-size: 11.5px; color: #94a3b8; text-align: center;">
-                  Direct link: <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline;">${ctaUrl}</a>
+                  Direct link: <a href="${ctaUrl.trim()}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline;">${ctaUrl.trim()}</a>
                 </p>
               </div>`
                   : ''
               }
 
-              <!-- Executive Sign-off Block -->
-              <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid #f1f5f9;">
+              <!-- Attached Documents Box (Invisible if no attachments) -->
+              ${
+                attachments.length > 0
+                  ? `<div style="margin: 30px 0 24px 0; padding: 16px 20px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px;">
+                <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                  <tr>
+                    <td style="padding-bottom: 10px; font-size: 11.5px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.6px;">
+                      &#128206; Attached Documents (${attachments.length})
+                    </td>
+                  </tr>
+                  ${attachments
+                    .map(
+                      (att) => `<tr>
+                    <td style="padding: 8px 0; font-size: 13px; color: #1e293b; border-top: 1px dashed #e2e8f0;">
+                      <table border="0" cellspacing="0" cellpadding="0" width="100%">
+                        <tr>
+                          <td style="color: #0f172a; font-weight: 600;">
+                            ${att.name}
+                          </td>
+                          <td align="right" style="color: #64748b; font-size: 11.5px; font-family: monospace;">
+                            ${formatFileSize(att.size)}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>`
+                    )
+                    .join('')}
+                </table>
+              </div>`
+                  : ''
+              }
+
+              <!-- Executive Sign-off Block (Invisible if all sign-off fields are empty) -->
+              ${
+                hasSignoff
+                  ? `<div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid #f1f5f9;">
                 <table border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td style="border-left: 3.5px solid #4f46e5; padding-left: 16px;">
                       <p style="margin: 0 0 4px 0; font-size: 13px; color: #64748b; font-weight: 500;">With regards,</p>
-                      <p style="margin: 0; font-size: 15.5px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px;">${senderName || 'PGT Global Network Team'}</p>
-                      <p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #4f46e5;">${senderRole || 'Executive Office & Secretariat'}</p>
-                      <p style="margin: 3px 0 0 0; font-size: 12.5px; color: #64748b;">${companyName || 'PGT Global Network'}</p>
+                      ${senderName.trim() ? `<p style="margin: 0; font-size: 15.5px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px;">${senderName.trim()}</p>` : ''}
+                      ${senderRole.trim() ? `<p style="margin: 2px 0 0 0; font-size: 13px; font-weight: 600; color: #4f46e5;">${senderRole.trim()}</p>` : ''}
+                      ${companyName.trim() ? `<p style="margin: 3px 0 0 0; font-size: 12.5px; color: #64748b;">${companyName.trim()}</p>` : ''}
                       ${
-                        officialWebsiteUrl
-                          ? `<p style="margin: 4px 0 0 0; font-size: 12px;"><a href="${officialWebsiteUrl.startsWith('http') ? officialWebsiteUrl : `https://${officialWebsiteUrl}`}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">${officialWebsiteUrl && !officialWebsiteUrl.includes('pgtglobalnetwork.com') ? officialWebsiteUrl.replace(/^https?:\/\//i, '') : 'www.pgtglobalnetwork.com'}</a></p>`
-                          : `<p style="margin: 4px 0 0 0; font-size: 12px;"><a href="https://www.pgtglobalnetwork.com/" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">www.pgtglobalnetwork.com</a></p>`
+                        websiteHref
+                          ? `<p style="margin: 4px 0 0 0; font-size: 12px;"><a href="${websiteHref}" target="_blank" rel="noopener noreferrer" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">${websiteDisplay}</a></p>`
+                          : ''
                       }
                     </td>
                   </tr>
                 </table>
-              </div>
+              </div>`
+                  : ''
+              }
             </td>
           </tr>
 
-          <!-- Corporate Legal Footer -->
+          <!-- Corporate Legal Footer (Invisible empty notes) -->
           <tr>
             <td align="center" style="padding: 26px 40px 30px 40px; background-color: #f8fafc; border-top: 1px solid #f1f5f9; text-align: center; font-size: 11px; line-height: 1.6; color: #94a3b8;">
               <p style="margin: 0 0 6px 0; font-weight: 700; color: #64748b; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase;">
                 PGT GLOBAL NETWORK
               </p>
               <p style="margin: 0 0 4px 0; font-size: 11px;">
-                &copy; ${new Date().getFullYear()} ${companyName || 'PGT Global Network'}. All rights reserved.
+                &copy; ${new Date().getFullYear()}${companyName.trim() ? ` ${companyName.trim()}` : ''}. All rights reserved.
               </p>
-              <p style="margin: 0; font-size: 10.5px; color: #94a3b8; max-width: 460px; display: inline-block;">
-                ${footerNote || 'Official executive communication. Privileged and confidential.'}
-              </p>
+              ${
+                footerNote.trim()
+                  ? `<p style="margin: 0; font-size: 10.5px; color: #94a3b8; max-width: 460px; display: inline-block;">
+                ${footerNote.trim()}
+              </p>`
+                  : ''
+              }
             </td>
           </tr>
         </table>
@@ -570,6 +833,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
     html: string;
     cc?: string;
     bcc?: string;
+    attachments?: EmailAttachmentItem[];
   }): Promise<{ isLive: boolean; messageId: string; error?: string }> => {
     const key = resendApiKey.trim();
     const sender = senderEmailAddress.trim() || 'PGT Global Network Team <office@pgtglobalnetwork.com>';
@@ -591,6 +855,12 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
           }
           if (params.bcc) {
             payload.bcc = params.bcc.split(',').map((s) => s.trim()).filter(Boolean);
+          }
+          if (params.attachments && params.attachments.length > 0) {
+            payload.attachments = params.attachments.map((att) => ({
+              filename: att.name,
+              content: att.base64 ? att.base64.replace(/^data:.*?;base64,/, '') : '',
+            }));
           }
 
           const res = await fetch(endpoint, {
@@ -634,6 +904,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
             html: params.html,
             cc: params.cc,
             bcc: params.bcc,
+            attachments: params.attachments,
             resendApiKey: key || undefined,
           },
         },
@@ -686,11 +957,12 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
         html: renderedHtml,
         cc: showCC && ccValue.trim() ? ccValue.trim() : undefined,
         bcc: showBCC && bccValue.trim() ? bccValue.trim() : undefined,
+        attachments: attachments.length > 0 ? attachments : undefined,
       });
 
       const logStatus = delivery.isLive ? 'Delivered (Live)' : 'Logged (Provider Key Pending)';
 
-      await recordEmailLog({
+      const logResult = await recordEmailLog({
         recipient_email: recipientEmail.trim(),
         recipient_name: recipientName.trim() || 'Client / Partner',
         cc: showCC ? ccValue.trim() : undefined,
@@ -708,9 +980,20 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
         website_url: officialWebsiteUrl,
         footer_note: footerNote,
         rendered_html: renderedHtml,
+        attachments: attachments.length > 0 ? attachments : undefined,
         status: logStatus,
         provider_message_id: delivery.messageId,
       });
+
+      if (logResult.data) {
+        setLogs((prev) => {
+          const exists = prev.some((l) => l.id === logResult.data!.id);
+          return exists ? prev : [logResult.data!, ...prev];
+        });
+      }
+      if (logResult.needsMigration !== undefined) {
+        setDbSyncPending(!!logResult.needsMigration);
+      }
 
       await loadLogs();
 
@@ -760,9 +1043,10 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
         to: testEmail,
         subject: testSubject,
         html: testHtml,
+        attachments: attachments.length > 0 ? attachments : undefined,
       });
 
-      await recordEmailLog({
+      const logResult = await recordEmailLog({
         recipient_email: testEmail,
         recipient_name: 'Executive Office (Test Copy)',
         subject: testSubject,
@@ -777,9 +1061,20 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
         website_url: officialWebsiteUrl,
         footer_note: footerNote,
         rendered_html: testHtml,
+        attachments: attachments.length > 0 ? attachments : undefined,
         status: delivery.isLive ? 'Delivered (Live)' : 'Logged (Provider Key Pending)',
         provider_message_id: delivery.messageId,
       });
+
+      if (logResult.data) {
+        setLogs((prev) => {
+          const exists = prev.some((l) => l.id === logResult.data!.id);
+          return exists ? prev : [logResult.data!, ...prev];
+        });
+      }
+      if (logResult.needsMigration !== undefined) {
+        setDbSyncPending(!!logResult.needsMigration);
+      }
 
       await loadLogs();
       toast.success(`Test preview logged to ${testEmail}!`, { duration: 3000 });
@@ -834,11 +1129,12 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
           html: itemHtml,
           cc: showCC && ccValue.trim() ? ccValue.trim() : undefined,
           bcc: showBCC && bccValue.trim() ? bccValue.trim() : undefined,
+          attachments: attachments.length > 0 ? attachments : undefined,
         });
 
         if (delivery.isLive) liveCount++;
 
-        await recordEmailLog({
+        const logResult = await recordEmailLog({
           recipient_email: item.email,
           recipient_name: item.name || 'Valued Recipient',
           cc: showCC ? ccValue.trim() : undefined,
@@ -855,9 +1151,17 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
           website_url: officialWebsiteUrl,
           footer_note: footerNote,
           rendered_html: itemHtml,
+          attachments: attachments.length > 0 ? attachments : undefined,
           status: delivery.isLive ? 'Delivered (Live)' : 'Logged (Provider Key Pending)',
           provider_message_id: delivery.messageId,
         });
+
+        if (logResult.data) {
+          setLogs((prev) => {
+            const exists = prev.some((l) => l.id === logResult.data!.id);
+            return exists ? prev : [logResult.data!, ...prev];
+          });
+        }
 
         await new Promise((resolve) => setTimeout(resolve, 200));
       }
@@ -1075,7 +1379,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                 </span>
                 <span>Recipient Configuration</span>
               </div>
-              <span className="text-[11px] font-semibold text-muted-foreground">Step 1 of 4</span>
+              <span className="text-[11px] font-semibold text-muted-foreground">Step 1 of 5</span>
             </div>
 
             {/* Recipient Mode Tabs */}
@@ -1320,7 +1624,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                   <Bookmark className="h-3 w-3" />
                   <span>Save Current as Template</span>
                 </button>
-                <span className="text-[11px] font-semibold text-muted-foreground">Step 2 of 4</span>
+                <span className="text-[11px] font-semibold text-muted-foreground">Step 2 of 5</span>
               </div>
             </div>
 
@@ -1384,7 +1688,7 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                 <FileText className="h-4 w-4 text-primary" />
                 <span>Message &amp; Call to Action</span>
               </div>
-              <span className="text-[11px] font-semibold text-muted-foreground">Step 3 of 4</span>
+              <span className="text-[11px] font-semibold text-muted-foreground">Step 3 of 5</span>
             </div>
 
             <div className="space-y-3.5">
@@ -1465,14 +1769,165 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
             </div>
           </div>
 
-          {/* STEP 4: Sender Sign-off & Footer */}
+          {/* STEP 4: File Attachments */}
+          <div className="rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs space-y-4">
+            <div className="flex items-center justify-between border-b border-border/60 pb-3">
+              <div className="flex items-center space-x-2 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">
+                <Paperclip className="h-4 w-4 text-primary" />
+                <span>File Attachments (PDF, Docs, Images)</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                {attachments.length > 0 && (
+                  <span className="rounded-full bg-indigo-500/10 px-2 py-0.5 text-[10px] font-bold text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                    {attachments.length} {attachments.length === 1 ? 'file' : 'files'} attached
+                  </span>
+                )}
+                <span className="text-[11px] font-semibold text-muted-foreground">Step 4 of 5</span>
+              </div>
+            </div>
+
+            {/* Dropzone & File Input */}
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                setIsDraggingFile(true);
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault();
+                setIsDraggingFile(false);
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                setIsDraggingFile(false);
+                handleAddFiles(e.dataTransfer.files);
+              }}
+              onClick={() => {
+                document.getElementById('email-studio-file-input')?.click();
+              }}
+              className={`group relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center cursor-pointer transition-all ${
+                isDraggingFile
+                  ? 'border-indigo-500 bg-indigo-500/10 ring-4 ring-indigo-500/20'
+                  : 'border-border/80 hover:border-indigo-500/60 bg-muted/20 hover:bg-muted/40'
+              }`}
+            >
+              <input
+                id="email-studio-file-input"
+                type="file"
+                multiple
+                accept=".pdf,.doc,.docx,.txt,.rtf,.xls,.xlsx,.csv,.ppt,.pptx,.png,.jpg,.jpeg,.webp,.svg,.zip"
+                className="hidden"
+                onChange={(e) => {
+                  handleAddFiles(e.target.files);
+                  e.target.value = '';
+                }}
+              />
+
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform shadow-xs mb-3">
+                <UploadCloud className="h-6 w-6" />
+              </div>
+
+              <p className="text-xs font-bold text-foreground">
+                Click to browse or drag &amp; drop files here
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1 max-w-sm">
+                Supports PDF, Word (.doc, .docx), Excel (.xls, .xlsx, .csv), Images (.png, .jpg), and Archives (.zip) up to 10MB each
+              </p>
+            </div>
+
+            {/* Attached Files List */}
+            {attachments.length > 0 && (
+              <div className="space-y-2 pt-1 animate-in fade-in-50 duration-200">
+                <div className="flex items-center justify-between text-xs font-semibold px-0.5">
+                  <span className="text-muted-foreground text-[11px]">
+                    Attached Files ({attachments.length})
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleClearAllAttachments}
+                    className="text-[11px] text-red-500 hover:text-red-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                    <span>Remove All</span>
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {attachments.map((att) => {
+                    const category = getAttachmentFileCategory(att.name, att.type);
+                    return (
+                      <div
+                        key={att.id}
+                        className="flex items-center justify-between gap-2 rounded-xl border border-border/90 bg-card p-3 shadow-xs hover:border-indigo-300 dark:hover:border-indigo-800/60 transition-all"
+                      >
+                        <div className="flex items-center space-x-2.5 min-w-0">
+                          <div
+                            className={`flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold shrink-0 ${
+                              category === 'pdf'
+                                ? 'bg-red-500/15 text-red-600 dark:text-red-400'
+                                : category === 'image'
+                                ? 'bg-violet-500/15 text-violet-600 dark:text-violet-400'
+                                : category === 'doc'
+                                ? 'bg-blue-500/15 text-blue-600 dark:text-blue-400'
+                                : category === 'sheet'
+                                ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
+                                : 'bg-amber-500/15 text-amber-600 dark:text-amber-400'
+                            }`}
+                          >
+                            {category === 'pdf' ? (
+                              'PDF'
+                            ) : category === 'image' ? (
+                              <ImageIcon className="h-4 w-4" />
+                            ) : (
+                              <File className="h-4 w-4" />
+                            )}
+                          </div>
+
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold text-foreground truncate max-w-[140px] sm:max-w-[170px]" title={att.name}>
+                              {att.name}
+                            </p>
+                            <p className="text-[10px] font-mono text-muted-foreground">
+                              {formatFileSize(att.size)}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center space-x-1 shrink-0">
+                          {att.base64 && (
+                            <button
+                              type="button"
+                              onClick={() => handleDownloadAttachmentItem(att)}
+                              className="p-1.5 rounded-lg text-muted-foreground hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-colors cursor-pointer"
+                              title="Download file"
+                            >
+                              <Download className="h-3.5 w-3.5" />
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveAttachment(att.id)}
+                            className="p-1.5 rounded-lg text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer"
+                            title="Remove attachment"
+                          >
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* STEP 5: Sender Sign-off & Footer */}
           <div className="rounded-2xl border border-border/80 bg-card p-4 sm:p-5 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <div className="flex items-center space-x-2 text-[11px] font-extrabold uppercase tracking-wider text-muted-foreground">
                 <ShieldCheck className="h-4 w-4 text-primary" />
                 <span>Sender Sign-off &amp; Footer</span>
               </div>
-              <span className="text-[11px] font-semibold text-muted-foreground">Step 4 of 4</span>
+              <span className="text-[11px] font-semibold text-muted-foreground">Step 5 of 5</span>
             </div>
 
             <div className="space-y-3.5">
@@ -1682,11 +2137,11 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                     />
                   </div>
 
-                  {/* Headline Banner */}
-                  {headline && (
+                  {/* Headline Banner (Invisible if empty) */}
+                  {headline.trim() && (
                     <div className="px-6 pt-5 text-center">
                       <h3 className="text-base font-extrabold text-slate-900 leading-snug tracking-tight">
-                        {headline}
+                        {headline.trim()}
                       </h3>
                     </div>
                   )}
@@ -1699,13 +2154,13 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                       </p>
                     )}
 
-                    {recipientMode === 'batch' && parsedBatchRecipients.length > 0 && parsedBatchRecipients[0].name && (
+                    {recipientMode === 'batch' && parsedBatchRecipients.length > 0 && parsedBatchRecipients[0].name?.trim() && (
                       <p className="font-bold text-slate-900 text-[13px]">
-                        Dear {parsedBatchRecipients[0].name},
+                        Dear {parsedBatchRecipients[0].name.trim()},
                       </p>
                     )}
 
-                    {bodyParagraphs.trim() ? (
+                    {bodyParagraphs.trim() && (
                       bodyParagraphs
                         .split(/\n\s*\n/)
                         .filter(Boolean)
@@ -1724,55 +2179,79 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                             })}
                           </div>
                         ))
-                    ) : (
-                      <p className="text-slate-400 text-xs italic py-2">
-                        Enter your message here...
-                      </p>
                     )}
 
-                    {/* CTA Button (Centered) */}
-                    {ctaText && (
+                    {/* CTA Button (Invisible if either ctaText or ctaUrl is empty) */}
+                    {ctaText.trim() && ctaUrl.trim() && (
                       <div className="pt-3 pb-1 text-center">
                         <span className="inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-6 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/25">
-                          {ctaText} &nbsp;&rarr;
+                          {ctaText.trim()} &nbsp;&rarr;
                         </span>
-                        {ctaUrl && (
-                          <p className="text-[10px] text-slate-400 mt-1.5 truncate text-center">
-                            Direct link: <span className="text-indigo-600 underline">{ctaUrl}</span>
-                          </p>
-                        )}
+                        <p className="text-[10px] text-slate-400 mt-1.5 truncate text-center">
+                          Direct link: <span className="text-indigo-600 underline">{ctaUrl.trim()}</span>
+                        </p>
                       </div>
                     )}
 
-                    {/* Sign-off */}
-                    <div className="pt-5 border-t border-slate-100 space-y-0.5 text-slate-600">
-                      <div className="border-l-[3px] border-indigo-500 pl-3.5 space-y-0.5">
-                        <p className="text-xs text-slate-400">With regards,</p>
-                        <p className="font-bold text-slate-900 text-sm">{senderName}</p>
-                        <p className="text-xs font-semibold text-indigo-600">{senderRole}</p>
-                        <p className="pt-0.5">
-                          <a
-                            href="https://www.pgtglobalnetwork.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs font-medium text-indigo-600 hover:underline inline-block"
-                          >
-                            www.pgtglobalnetwork.com
-                          </a>
-                        </p>
+                    {/* Attached Documents (Invisible if no attachments) */}
+                    {attachments.length > 0 && (
+                      <div className="my-3 rounded-xl border border-slate-200 bg-slate-50/80 p-3 text-slate-700">
+                        <div className="flex items-center space-x-1.5 text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-2">
+                          <Paperclip className="h-3.5 w-3.5 text-indigo-600" />
+                          <span>Attachments ({attachments.length})</span>
+                        </div>
+                        <div className="space-y-1.5">
+                          {attachments.map((att) => (
+                            <div
+                              key={att.id}
+                              className="flex items-center justify-between py-1 px-2.5 rounded-lg bg-white border border-slate-200 text-[11.5px]"
+                            >
+                              <span className="font-semibold text-slate-800 truncate max-w-[210px]" title={att.name}>
+                                {att.name}
+                              </span>
+                              <span className="text-[10px] font-mono text-slate-500">{formatFileSize(att.size)}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    )}
+
+                    {/* Sign-off (Invisible if all sign-off fields are empty) */}
+                    {(senderName.trim() || senderRole.trim() || companyName.trim() || officialWebsiteUrl.trim()) && (
+                      <div className="pt-5 border-t border-slate-100 space-y-0.5 text-slate-600">
+                        <div className="border-l-[3px] border-indigo-500 pl-3.5 space-y-0.5">
+                          <p className="text-xs text-slate-400">With regards,</p>
+                          {senderName.trim() && <p className="font-bold text-slate-900 text-sm">{senderName.trim()}</p>}
+                          {senderRole.trim() && <p className="text-xs font-semibold text-indigo-600">{senderRole.trim()}</p>}
+                          {companyName.trim() && <p className="text-xs text-slate-600">{companyName.trim()}</p>}
+                          {officialWebsiteUrl.trim() && (
+                            <p className="pt-0.5">
+                              <a
+                                href={officialWebsiteUrl.startsWith('http') ? officialWebsiteUrl : `https://${officialWebsiteUrl}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs font-medium text-indigo-600 hover:underline inline-block"
+                              >
+                                {officialWebsiteUrl.trim().replace(/^https?:\/\//i, '')}
+                              </a>
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Footer Box */}
+                  {/* Footer Box (Invisible empty notes) */}
                   <div className="bg-slate-50/80 p-4 border-t border-slate-100 text-center text-[10px] text-slate-400 space-y-1">
                     <p className="font-bold text-slate-500 uppercase text-[9px] tracking-wider">
                       PGT GLOBAL NETWORK
                     </p>
-                    <p>© 2026 {companyName}. All rights reserved.</p>
-                    <p className="text-[9px] leading-tight text-slate-400">
-                      {footerNote}
-                    </p>
+                    <p>&copy; {new Date().getFullYear()}{companyName.trim() ? ` ${companyName.trim()}` : ''}. All rights reserved.</p>
+                    {footerNote.trim() && (
+                      <p className="text-[9px] leading-tight text-slate-400">
+                        {footerNote.trim()}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1803,9 +2282,10 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                     />
                   </div>
 
-                  {headline && (
+                  {/* Headline Banner (Invisible if empty) */}
+                  {headline.trim() && (
                     <h4 className="font-extrabold text-slate-900 text-xs leading-snug text-center pt-1">
-                      {headline}
+                      {headline.trim()}
                     </h4>
                   )}
 
@@ -1815,13 +2295,13 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                     </p>
                   )}
 
-                  {recipientMode === 'batch' && parsedBatchRecipients.length > 0 && parsedBatchRecipients[0].name && (
+                  {recipientMode === 'batch' && parsedBatchRecipients.length > 0 && parsedBatchRecipients[0].name?.trim() && (
                     <p className="font-bold text-slate-900 text-xs">
-                      Dear {parsedBatchRecipients[0].name},
+                      Dear {parsedBatchRecipients[0].name.trim()},
                     </p>
                   )}
 
-                  {bodyParagraphs.trim() ? (
+                  {bodyParagraphs.trim() && (
                     bodyParagraphs
                       .split(/\n\s*\n/)
                       .filter(Boolean)
@@ -1840,44 +2320,73 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                           })}
                         </div>
                       ))
-                  ) : (
-                    <p className="text-slate-400 text-[10.5px] italic py-1">
-                      Enter your message here...
-                    </p>
                   )}
 
-                  {ctaText && (
+                  {/* CTA Button (Invisible if empty) */}
+                  {ctaText.trim() && ctaUrl.trim() && (
                     <div className="pt-2 pb-1 text-center">
                       <span className="inline-block rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-4 py-2 text-[10.5px] font-bold text-white shadow-xs">
-                        {ctaText} &nbsp;&rarr;
+                        {ctaText.trim()} &nbsp;&rarr;
                       </span>
                     </div>
                   )}
 
-                  <div className="pt-3 border-t border-slate-100 text-[10px] text-slate-600 space-y-0.5">
-                    <div className="border-l-2 border-indigo-500 pl-2 space-y-0.5">
-                      <p className="text-[9px] text-slate-400">With regards,</p>
-                      <p className="font-bold text-slate-900 text-xs">{senderName}</p>
-                      <p className="text-[9px] font-semibold text-indigo-600">{senderRole}</p>
-                      <p className="text-[9px] text-slate-600">{companyName}</p>
-                      <p className="pt-0.5">
-                        <a
-                          href="https://www.pgtglobalnetwork.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[9px] font-medium text-indigo-600 hover:underline block"
-                        >
-                          www.pgtglobalnetwork.com
-                        </a>
-                      </p>
+                  {/* Attachments for mobile frame */}
+                  {attachments.length > 0 && (
+                    <div className="my-2 rounded-lg border border-slate-200 bg-slate-50/80 p-2 text-slate-700">
+                      <div className="flex items-center space-x-1 text-[9.5px] font-bold text-slate-700 uppercase tracking-wider mb-1">
+                        <Paperclip className="h-3 w-3 text-indigo-600" />
+                        <span>Attachments ({attachments.length})</span>
+                      </div>
+                      <div className="space-y-1">
+                        {attachments.map((att) => (
+                          <div
+                            key={att.id}
+                            className="flex items-center justify-between py-0.5 px-1.5 rounded bg-white border border-slate-200 text-[10px]"
+                          >
+                            <span className="font-semibold text-slate-800 truncate max-w-[140px]" title={att.name}>
+                              {att.name}
+                            </span>
+                            <span className="text-[9px] font-mono text-slate-500">{formatFileSize(att.size)}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
+                  {/* Sign-off (Invisible if empty) */}
+                  {(senderName.trim() || senderRole.trim() || companyName.trim() || officialWebsiteUrl.trim()) && (
+                    <div className="pt-3 border-t border-slate-100 text-[10px] text-slate-600 space-y-0.5">
+                      <div className="border-l-2 border-indigo-500 pl-2 space-y-0.5">
+                        <p className="text-[9px] text-slate-400">With regards,</p>
+                        {senderName.trim() && <p className="font-bold text-slate-900 text-xs">{senderName.trim()}</p>}
+                        {senderRole.trim() && <p className="text-[9px] font-semibold text-indigo-600">{senderRole.trim()}</p>}
+                        {companyName.trim() && <p className="text-[9px] text-slate-600">{companyName.trim()}</p>}
+                        {officialWebsiteUrl.trim() && (
+                          <p className="pt-0.5">
+                            <a
+                              href={officialWebsiteUrl.startsWith('http') ? officialWebsiteUrl : `https://${officialWebsiteUrl}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[9px] font-medium text-indigo-600 hover:underline block"
+                            >
+                              {officialWebsiteUrl.trim().replace(/^https?:\/\//i, '')}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Footer Box */}
                   <div className="bg-slate-50 -mx-4 -mb-4 p-3 text-center text-[8.5px] text-slate-400 border-t border-slate-100 space-y-0.5">
                     <p className="font-semibold text-slate-500 uppercase text-[8px] tracking-wider">
                       PGT GLOBAL NETWORK
                     </p>
-                    <p>© 2026 {companyName}</p>
+                    <p>&copy; {new Date().getFullYear()}{companyName.trim() ? ` ${companyName.trim()}` : ''}</p>
+                    {footerNote.trim() && (
+                      <p className="text-[8px] text-slate-400">{footerNote.trim()}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1922,6 +2431,31 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
             </button>
           </div>
         </div>
+
+        {/* Supabase Cloud Sync Status Banner */}
+        {dbSyncPending && (
+          <div className="mx-4 sm:mx-5 my-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 sm:p-4 text-xs text-foreground flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-start sm:items-center space-x-2.5">
+              <AlertCircle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5 sm:mt-0" />
+              <div>
+                <p className="font-bold text-amber-800 dark:text-amber-400">
+                  Logs Active in Local Vault • Remote Supabase Cloud Sync Pending
+                </p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  Your dispatched emails and attachments are safely logged in this browser. To permanently sync dispatches across all team devices, run the one-time SQL setup in your Supabase SQL Editor.
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={handleCopySetupSql}
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shrink-0 shadow-xs admin-btn-press"
+            >
+              <Copy className="h-3.5 w-3.5" />
+              <span>{copiedSetupSql ? 'SQL Copied!' : 'Copy Supabase SQL'}</span>
+            </button>
+          </div>
+        )}
 
         {/* Logs Content */}
         {isLogsLoading ? (
@@ -1990,9 +2524,20 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                         </td>
                         <td className="py-3.5 px-4">
                           <p className="font-semibold text-foreground truncate max-w-xs">{log.subject}</p>
-                          <span className="inline-block mt-0.5 rounded bg-muted px-1.5 py-0.2 text-[10px] text-muted-foreground font-medium">
-                            {log.template_used || 'Email'}
-                          </span>
+                          <div className="flex flex-wrap items-center gap-1.5 mt-1">
+                            <span className="inline-block rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground font-medium">
+                              {log.template_used || 'Email'}
+                            </span>
+                            {log.attachments && log.attachments.length > 0 && (
+                              <span
+                                className="inline-flex items-center gap-1 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 px-1.5 py-0.5 text-[10px] font-semibold"
+                                title={`${log.attachments.length} file(s) attached`}
+                              >
+                                <Paperclip className="h-2.5 w-2.5" />
+                                <span>{log.attachments.length} {log.attachments.length === 1 ? 'file' : 'files'}</span>
+                              </span>
+                            )}
+                          </div>
                         </td>
                         <td className="py-3.5 px-4">
                           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
@@ -2193,6 +2738,68 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                                       )}
                                     </div>
 
+                                    {/* Visual Attachments Quick Access Bar */}
+                                    {log.attachments && log.attachments.length > 0 && (
+                                      <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-3">
+                                        <div className="flex items-center justify-between mb-2">
+                                          <div className="flex items-center space-x-1.5">
+                                            <Paperclip className="h-3.5 w-3.5 text-indigo-500" />
+                                            <span className="text-[11px] font-bold text-foreground">
+                                              Dispatched Files ({log.attachments.length})
+                                            </span>
+                                          </div>
+                                          <span className="text-[10px] text-muted-foreground font-mono">
+                                            {formatFileSize(log.attachments.reduce((sum, item) => sum + (item.size || 0), 0))}
+                                          </span>
+                                        </div>
+                                        <div className="flex flex-wrap gap-2">
+                                          {log.attachments.map((att, idx) => {
+                                            const cat = getAttachmentFileCategory(att.name, att.type);
+                                            return (
+                                              <div
+                                                key={att.id || `vis-att-${idx}`}
+                                                className="inline-flex items-center space-x-2 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs shadow-2xs hover:border-primary/40 transition-colors"
+                                              >
+                                                <div
+                                                  className={`h-5 w-5 rounded flex items-center justify-center shrink-0 ${
+                                                    cat === 'pdf'
+                                                      ? 'text-red-500 bg-red-500/10'
+                                                      : cat === 'doc'
+                                                      ? 'text-blue-500 bg-blue-500/10'
+                                                      : cat === 'sheet'
+                                                      ? 'text-emerald-500 bg-emerald-500/10'
+                                                      : cat === 'image'
+                                                      ? 'text-amber-500 bg-amber-500/10'
+                                                      : 'text-indigo-500 bg-indigo-500/10'
+                                                  }`}
+                                                >
+                                                  {cat === 'image' ? (
+                                                    <ImageIcon className="h-3 w-3" />
+                                                  ) : (
+                                                    <FileText className="h-3 w-3" />
+                                                  )}
+                                                </div>
+                                                <span className="font-semibold text-foreground max-w-[140px] truncate" title={att.name}>
+                                                  {att.name}
+                                                </span>
+                                                <span className="text-[10px] text-muted-foreground font-mono">
+                                                  ({formatFileSize(att.size)})
+                                                </span>
+                                                <button
+                                                  type="button"
+                                                  onClick={() => handleDownloadAttachmentItem(att)}
+                                                  className="p-1 rounded text-muted-foreground hover:text-primary hover:bg-muted"
+                                                  title={`Download ${att.name}`}
+                                                >
+                                                  <Download className="h-3.5 w-3.5" />
+                                                </button>
+                                              </div>
+                                            );
+                                          })}
+                                        </div>
+                                      </div>
+                                    )}
+
                                     <div className="rounded-xl border border-border bg-slate-100 dark:bg-slate-900 p-3 sm:p-4">
                                       {log.rendered_html ? (
                                         <iframe
@@ -2276,6 +2883,81 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                                       <div className="whitespace-pre-wrap leading-relaxed text-foreground bg-card p-3 rounded-lg border border-border/60">
                                         {log.body_paragraphs}
                                       </div>
+                                    </div>
+
+                                    {/* Attached Documents in Fields Tab */}
+                                    <div className="rounded-xl border border-border/70 bg-muted/30 p-3.5 space-y-2">
+                                      <div className="flex items-center justify-between">
+                                        <div className="flex items-center space-x-1.5">
+                                          <Paperclip className="h-3.5 w-3.5 text-primary" />
+                                          <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
+                                            Dispatched Attachments ({log.attachments?.length || 0})
+                                          </span>
+                                        </div>
+                                        {log.attachments && log.attachments.length > 0 && (
+                                          <span className="text-[10px] text-muted-foreground font-mono">
+                                            Total: {formatFileSize(log.attachments.reduce((sum, item) => sum + (item.size || 0), 0))}
+                                          </span>
+                                        )}
+                                      </div>
+
+                                      {log.attachments && log.attachments.length > 0 ? (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                                          {log.attachments.map((att, idx) => {
+                                            const cat = getAttachmentFileCategory(att.name, att.type);
+                                            return (
+                                              <div
+                                                key={att.id || `att-${idx}`}
+                                                className="flex items-center justify-between p-2.5 rounded-xl border border-border bg-card shadow-2xs hover:border-primary/40 transition-colors"
+                                              >
+                                                <div className="flex items-center space-x-2.5 min-w-0 pr-2">
+                                                  <div
+                                                    className={`h-8 w-8 rounded-lg flex items-center justify-center shrink-0 ${
+                                                      cat === 'pdf'
+                                                        ? 'bg-red-500/10 text-red-500 border border-red-500/20'
+                                                        : cat === 'doc'
+                                                        ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20'
+                                                        : cat === 'sheet'
+                                                        ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
+                                                        : cat === 'image'
+                                                        ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
+                                                        : 'bg-indigo-500/10 text-indigo-500 border border-indigo-500/20'
+                                                    }`}
+                                                  >
+                                                    {cat === 'image' ? (
+                                                      <ImageIcon className="h-4 w-4" />
+                                                    ) : (
+                                                      <FileText className="h-4 w-4" />
+                                                    )}
+                                                  </div>
+                                                  <div className="min-w-0">
+                                                    <p className="font-semibold text-foreground text-xs truncate" title={att.name}>
+                                                      {att.name}
+                                                    </p>
+                                                    <p className="text-[10px] text-muted-foreground font-mono">
+                                                      {formatFileSize(att.size)} • {att.type || 'Document'}
+                                                    </p>
+                                                  </div>
+                                                </div>
+
+                                                <button
+                                                  type="button"
+                                                  onClick={() => handleDownloadAttachmentItem(att)}
+                                                  className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg border border-border bg-background text-[11px] font-semibold text-foreground hover:bg-primary hover:text-primary-foreground transition-all shrink-0 admin-btn-press shadow-2xs"
+                                                  title={`Download ${att.name}`}
+                                                >
+                                                  <Download className="h-3 w-3" />
+                                                  <span>Download</span>
+                                                </button>
+                                              </div>
+                                            );
+                                          })}
+                                        </div>
+                                      ) : (
+                                        <p className="text-xs text-muted-foreground italic py-1">
+                                          No documents or files were attached to this email.
+                                        </p>
+                                      )}
                                     </div>
                                   </div>
                                 )}
@@ -2533,6 +3215,21 @@ export const AdminEmailStudio: React.FC<AdminEmailStudioProps> = ({
                   className="w-full rounded-xl border border-border bg-background px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
               </div>
+
+              {/* Attachments notice if any attached */}
+              {attachments.length > 0 && (
+                <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-3 flex items-start gap-2.5">
+                  <Paperclip className="h-4 w-4 text-indigo-500 shrink-0 mt-0.5" />
+                  <div className="text-xs">
+                    <p className="font-bold text-foreground">
+                      {attachments.length} attached {attachments.length === 1 ? 'file' : 'files'} included
+                    </p>
+                    <p className="text-[11px] text-muted-foreground mt-0.5">
+                      Attached documents will be permanently saved with this template and automatically restored when this template is selected.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex items-center justify-end space-x-2 pt-2 border-t border-border/70">

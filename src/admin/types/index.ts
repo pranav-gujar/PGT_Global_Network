@@ -95,6 +95,14 @@ export interface DbArticle {
   updated_at?: string;
 }
 
+export interface EmailAttachmentItem {
+  id: string;
+  name: string;
+  size: number;
+  type: string;
+  base64?: string; // Base64 data URI or string
+}
+
 export interface EmailTemplate {
   id: string;
   name: string;
@@ -104,6 +112,12 @@ export interface EmailTemplate {
   body: string;
   ctaText?: string;
   ctaUrl?: string;
+  senderName?: string;
+  senderRole?: string;
+  companyName?: string;
+  officialWebsiteUrl?: string;
+  footerNote?: string;
+  attachments?: EmailAttachmentItem[];
   isCustom?: boolean;
 }
 
@@ -125,7 +139,9 @@ export interface EmailStudioLog {
   website_url?: string;
   footer_note?: string;
   rendered_html?: string;
+  attachments?: EmailAttachmentItem[];
   status: 'Delivered' | 'Sent' | 'Failed' | string;
   provider_message_id?: string;
   created_at: string;
 }
+

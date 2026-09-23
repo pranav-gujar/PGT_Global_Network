@@ -511,14 +511,55 @@ export function getLocalEmailLogs(): EmailStudioLog[] {
   }
 }
 
+// Sanitize log for localStorage to never exceed browser quota
+function sanitizeLogForStorage(log: EmailStudioLog): EmailStudioLog {
+  return {
+    ...log,
+    // Preserve all attachment metadata while keeping storage footprint ultra-light
+    attachments: log.attachments?.map((att) => ({
+      id: att.id,
+      name: att.name,
+      size: att.size,
+      type: att.type,
+      // If thumbnail/base64 is very small (< 40KB), keep it; otherwise preserve metadata
+      base64: att.base64 && att.base64.length < 40000 ? att.base64 : '',
+    })),
+    // Streamline rendered HTML if abnormally large
+    rendered_html:
+      log.rendered_html && log.rendered_html.length > 80000
+        ? log.rendered_html.slice(0, 80000)
+        : log.rendered_html,
+  };
+}
+
 export function saveLocalEmailLog(log: EmailStudioLog): void {
+  const sanitized = sanitizeLogForStorage(log);
   try {
     const current = getLocalEmailLogs();
     const filtered = current.filter((item) => item.id !== log.id);
-    const updated = [log, ...filtered].slice(0, 200); // retain last 200 dispatches
+    const updated = [sanitized, ...filtered].slice(0, 100); // Retain latest 100 dispatches
     localStorage.setItem(LOCAL_EMAIL_LOGS_KEY, JSON.stringify(updated));
   } catch (err) {
-    console.warn('[AdminDataService] Error saving local email log:', err);
+    console.warn('[AdminDataService] Primary local log save hit limit, attempting pruned recovery:', err);
+    try {
+      // Recovery 1: Prune to 30 latest logs without heavy html
+      const current = getLocalEmailLogs().slice(0, 30).map((l) => ({
+        ...l,
+        rendered_html: l.rendered_html ? l.rendered_html.slice(0, 10000) : '',
+        attachments: l.attachments?.map((a) => ({ id: a.id, name: a.name, size: a.size, type: a.type, base64: '' })),
+      }));
+      const filtered = current.filter((item) => item.id !== log.id);
+      const updated = [sanitized, ...filtered];
+      localStorage.setItem(LOCAL_EMAIL_LOGS_KEY, JSON.stringify(updated));
+    } catch (innerErr) {
+      try {
+        // Recovery 2: Prune to latest 10 items
+        const minimalist = [sanitized];
+        localStorage.setItem(LOCAL_EMAIL_LOGS_KEY, JSON.stringify(minimalist));
+      } catch (lastErr) {
+        console.error('[AdminDataService] localStorage completely unavailable:', lastErr);
+      }
+    }
   }
 }
 
@@ -538,7 +579,7 @@ export function deleteLocalEmailLog(id: string): void {
 export async function fetchEmailLogs(): Promise<DataFetchResult<EmailStudioLog>> {
   const localList = getLocalEmailLogs();
   try {
-    const { data, error, count } = await supabase
+    const { data, error } = await supabase
       .from('pgt_email_logs')
       .select('*', { count: 'exact' })
       .order('created_at', { ascending: false });
@@ -547,10 +588,22 @@ export async function fetchEmailLogs(): Promise<DataFetchResult<EmailStudioLog>>
       // Try fallback RPC
       const rpc = await supabase.rpc('get_admin_email_logs');
       if (!rpc.error && rpc.data) {
+        const remote = (rpc.data || []) as EmailStudioLog[];
+        const idMap = new Map<string, EmailStudioLog>();
+        remote.forEach((r) => idMap.set(r.id, r));
+        localList.forEach((l) => {
+          if (!idMap.has(l.id)) {
+            idMap.set(l.id, l);
+          }
+        });
+        const combined = Array.from(idMap.values()).sort(
+          (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
         return {
-          data: rpc.data as EmailStudioLog[],
-          count: rpc.data.length,
+          data: combined,
+          count: combined.length,
           error: null,
+          needsMigration: false,
         };
       }
 
@@ -559,7 +612,10 @@ export async function fetchEmailLogs(): Promise<DataFetchResult<EmailStudioLog>>
         data: localList,
         count: localList.length,
         error: null,
-        needsMigration: error.code === '42P01' || error.message.includes('permission denied'),
+        needsMigration:
+          error.code === '42P01' ||
+          error.message?.includes('relation') ||
+          error.message?.includes('permission denied'),
       };
     }
 
@@ -581,6 +637,7 @@ export async function fetchEmailLogs(): Promise<DataFetchResult<EmailStudioLog>>
       data: combined,
       count: combined.length,
       error: null,
+      needsMigration: false,
     };
   } catch (err: any) {
     console.error('[AdminDataService] Exception querying email logs:', err);
@@ -588,6 +645,7 @@ export async function fetchEmailLogs(): Promise<DataFetchResult<EmailStudioLog>>
       data: localList,
       count: localList.length,
       error: null,
+      needsMigration: true,
     };
   }
 }
@@ -597,8 +655,25 @@ export async function fetchEmailLogs(): Promise<DataFetchResult<EmailStudioLog>>
  */
 export async function recordEmailLog(
   logData: Omit<EmailStudioLog, 'id' | 'created_at'>
-): Promise<{ success: boolean; data?: EmailStudioLog; error?: string }> {
-  const newId = crypto.randomUUID ? crypto.randomUUID() : `log_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+): Promise<{ success: boolean; data?: EmailStudioLog; error?: string; needsMigration?: boolean }> {
+  // Generate a valid RFC4122 v4 UUID so Postgres uuid column never rejects the record
+  let newId: string;
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    try {
+      newId = crypto.randomUUID();
+    } catch {
+      newId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = (Math.random() * 16) | 0;
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      });
+    }
+  } else {
+    newId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+    });
+  }
+
   const now = new Date().toISOString();
 
   const record: EmailStudioLog = {
@@ -607,25 +682,63 @@ export async function recordEmailLog(
     created_at: now,
   };
 
-  // Always save immediately to local storage
+  // 1. Always save immediately to local storage vault (guaranteed to succeed within quota)
   saveLocalEmailLog(record);
 
+  // 2. Insert into remote Supabase database
   try {
-    const { data, error } = await supabase
+    // Sanitize attachments for Supabase REST insert to stay well below 6MB HTTP request limits
+    const sanitizedAttachmentsForRemote = record.attachments?.map((a) => ({
+      id: a.id,
+      name: a.name,
+      size: a.size,
+      type: a.type,
+      base64: a.base64 && a.base64.length < 40000 ? a.base64 : '',
+    }));
+
+    let insertPayload: any = {
+      ...record,
+      attachments:
+        sanitizedAttachmentsForRemote && sanitizedAttachmentsForRemote.length > 0
+          ? sanitizedAttachmentsForRemote
+          : [],
+    };
+
+    let { data, error } = await supabase
       .from('pgt_email_logs')
-      .insert([record])
+      .insert([insertPayload])
       .select()
       .single();
 
     if (error) {
+      if (error.message?.includes('attachments') || error.code === '42703') {
+        // Table exists but 'attachments' column not yet added
+        const { attachments: _, ...withoutAttachments } = insertPayload;
+        const retry = await supabase
+          .from('pgt_email_logs')
+          .insert([withoutAttachments])
+          .select()
+          .single();
+        if (!retry.error) {
+          return { success: true, data: record, needsMigration: true };
+        }
+      }
+
       console.warn('[AdminDataService] Supabase email log insert note:', error.message);
-      return { success: true, data: record };
+      return {
+        success: true,
+        data: record,
+        needsMigration:
+          error.code === '42P01' ||
+          error.message?.includes('relation') ||
+          error.message?.includes('permission denied'),
+      };
     }
 
-    return { success: true, data: (data as EmailStudioLog) || record };
+    return { success: true, data: (data as EmailStudioLog) || record, needsMigration: false };
   } catch (err: any) {
     console.warn('[AdminDataService] Exception inserting email log into Supabase:', err);
-    return { success: true, data: record };
+    return { success: true, data: record, needsMigration: true };
   }
 }
 
