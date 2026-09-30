@@ -100,6 +100,15 @@ const Navbar = () => {
         <div className="w-full flex items-center text-[10px] sm:text-xs font-semibold text-slate-600 dark:text-slate-450">
           <div className="flex space-x-12 animate-marquee hover:[animation-play-state:paused] cursor-pointer">
             <a
+              href="https://hed8.pgtglobalnetwork.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors inline-flex items-center gap-1.5 font-bold text-purple-600 dark:text-purple-400"
+            >
+              <span className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full shadow-sm">NEW</span>
+              🎉 {t('navbar.announcementHed8') === 'navbar.announcementHed8' ? 'HED 8.0 is Launched & Live — Reimagine Hackathon is Live! Click here' : t('navbar.announcementHed8')} →
+            </a>
+            <a
               href="https://technologies.pgtglobalnetwork.com/"
               target="_blank"
               rel="noopener noreferrer"
@@ -125,7 +134,7 @@ const Navbar = () => {
           }
           .animate-marquee {
             display: inline-flex;
-            animation: marquee 16s linear infinite;
+            animation: marquee 22s linear infinite;
           }
         `}
       </style>
